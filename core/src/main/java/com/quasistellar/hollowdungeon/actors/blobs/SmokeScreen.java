@@ -1,0 +1,72 @@
+/*
+ * Pixel Dungeon
+ * Copyright (C) 2012-2015 Oleg Dolya
+ *
+ * Shattered Pixel Dungeon
+ * Copyright (C) 2014-2019 Evan Debenham
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
+
+package com.quasistellar.hollowdungeon.actors.blobs;
+
+import com.quasistellar.hollowdungeon.effects.BlobEmitter;
+import com.quasistellar.hollowdungeon.levels.Level;
+import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.effects.Speck;
+import com.quasistellar.hollowdungeon.levels.Terrain;
+import com.quasistellar.hollowdungeon.messages.Messages;
+
+public class SmokeScreen extends Blob {
+	
+	@Override
+	protected void evolve() {
+		super.evolve();
+		
+		int cell;
+		
+		com.quasistellar.hollowdungeon.levels.Level l = Dungeon.level;
+		for (int i = area.left; i < area.right; i++){
+			for (int j = area.top; j < area.bottom; j++){
+				cell = i + j*l.width();
+				l.losBlocking[cell] = off[cell] > 0 || (Terrain.flags[l.map[cell]] & Terrain.LOS_BLOCKING) != 0;
+			}
+		}
+	}
+	
+	@Override
+	public void use( BlobEmitter emitter ) {
+		super.use( emitter );
+		emitter.pour( Speck.factory( com.quasistellar.hollowdungeon.effects.Speck.SMOKE ), 0.1f );
+	}
+	
+	@Override
+	public void clear(int cell) {
+		super.clear(cell);
+		Level l = Dungeon.level;
+		l.losBlocking[cell] = cur[cell] > 0 || (Terrain.flags[l.map[cell]] & com.quasistellar.hollowdungeon.levels.Terrain.LOS_BLOCKING) != 0;
+	}
+	
+	@Override
+	public void fullyClear() {
+		super.fullyClear();
+		com.quasistellar.hollowdungeon.Dungeon.level.buildFlagMaps();
+	}
+	
+	@Override
+	public String tileDesc() {
+		return Messages.get(this, "desc");
+	}
+	
+}
