@@ -25,10 +25,10 @@
 		android:launchMode="singleInstance"
 		android:allowBackup="true"
 		android:fullBackupOnly="true"
-		android:backupAgent="com.quasistellar.shatteredpixeldungeon.android.AndroidBackupHandler">
+		android:backupAgent="com.quasistellar.hollowdungeon.android.AndroidBackupHandler">
 		<activity
 			android:label="${appName}"
-			android:name="com.quasistellar.shatteredpixeldungeon.android.AndroidLauncher">
+			android:name="com.quasistellar.hollowdungeon.android.AndroidLauncher">
 			<intent-filter >
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -36,7 +36,7 @@
 		</activity>
 		<activity
 			android:label="${appName}"
-			android:name="com.quasistellar.shatteredpixeldungeon.android.AndroidGame"
+			android:name="com.quasistellar.hollowdungeon.android.AndroidGame"
 			android:screenOrientation="nosensor"
 			android:configChanges="keyboard|keyboardHidden|orientation">
 		</activity>

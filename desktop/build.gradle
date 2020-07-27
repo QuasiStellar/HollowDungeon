@@ -3,7 +3,7 @@ apply plugin: "java"
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceCompatibility = targetCompatibility = appJavaCompatibility
 
-ext.appMainClass = "com.quasistellar.shatteredpixeldungeon.desktop.DesktopLauncher"
+ext.appMainClass = "com.quasistellar.hollowdungeon.desktop.DesktopLauncher"
 sourceSets.main.resources.srcDirs = [new File(project(':core').projectDir, "/src/main/assets"),
                                      new File(project(':desktop').projectDir,"/src/main/assets")]
 
