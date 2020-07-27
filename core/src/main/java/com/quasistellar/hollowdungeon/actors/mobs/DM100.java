@@ -49,11 +49,6 @@ public class DM100 extends Mob implements Callback {
 		properties.add(com.quasistellar.hollowdungeon.actors.Char.Property.ELECTRIC);
 		properties.add(com.quasistellar.hollowdungeon.actors.Char.Property.INORGANIC);
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 2, 8 );
-	}
 
 	@Override
 	protected boolean canAttack( com.quasistellar.hollowdungeon.actors.Char enemy ) {

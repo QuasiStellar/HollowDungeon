@@ -187,11 +187,7 @@ public class Mimic extends Mob {
 
 	@Override
 	public int damageRoll() {
-		if (alignment == Char.Alignment.NEUTRAL){
-			return Random.NormalIntRange( 2 + 2*level, 2 + 2*level);
-		} else {
-			return Random.NormalIntRange( 1 + level, 2 + 2*level);
-		}
+		return 1;
 	}
 
 	@Override

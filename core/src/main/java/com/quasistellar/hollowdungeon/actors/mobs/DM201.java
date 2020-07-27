@@ -48,11 +48,6 @@ public class DM201 extends DM200 {
 		HUNTING = new Mob.Hunting();
 	}
 
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 15, 25 );
-	}
-
 	private boolean threatened = false;
 
 	@Override

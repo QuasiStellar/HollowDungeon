@@ -89,7 +89,7 @@ public class RotLasher extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange(8, 15);
+		return 2;
 	}
 
 	{

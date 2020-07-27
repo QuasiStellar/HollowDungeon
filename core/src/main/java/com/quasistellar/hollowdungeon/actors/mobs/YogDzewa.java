@@ -150,7 +150,7 @@ public class YogDzewa extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 					Dungeon.observe();
 				}
 				for (com.quasistellar.hollowdungeon.actors.Char ch : affected) {
-					ch.damage(Random.NormalIntRange(20, 30), new Eye.DeathGaze());
+					ch.damage(2, new Eye.DeathGaze());
 
 					if (Dungeon.level.heroFOV[pos]) {
 						ch.sprite.flash();
@@ -466,11 +466,6 @@ public class YogDzewa extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 			viewDistance = Light.DISTANCE;
 
 			properties.add(Char.Property.DEMONIC);
-		}
-
-		@Override
-		public int damageRoll() {
-			return Random.NormalIntRange( 15, 25 );
 		}
 
 	}

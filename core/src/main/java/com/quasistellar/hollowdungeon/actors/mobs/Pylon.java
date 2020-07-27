@@ -101,7 +101,7 @@ public class Pylon extends Mob {
 	private void shockChar( com.quasistellar.hollowdungeon.actors.Char ch ){
 		if (ch != null && !(ch instanceof com.quasistellar.hollowdungeon.actors.mobs.NewDM300)){
 			ch.sprite.flash();
-			ch.damage(Random.NormalIntRange(10, 20), new com.quasistellar.hollowdungeon.actors.blobs.Electricity());
+			ch.damage(2, new com.quasistellar.hollowdungeon.actors.blobs.Electricity());
 
 			if (ch == Dungeon.hero && !ch.isAlive()){
 				Dungeon.fail(NewDM300.class);

@@ -49,11 +49,6 @@ public class Scorpio extends Mob {
 
 		properties.add(Char.Property.DEMONIC);
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 26, 36 );
-	}
 
 	@Override
 	protected boolean canAttack( com.quasistellar.hollowdungeon.actors.Char enemy ) {

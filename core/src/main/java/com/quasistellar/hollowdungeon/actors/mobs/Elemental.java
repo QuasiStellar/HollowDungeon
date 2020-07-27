@@ -53,11 +53,6 @@ public abstract class Elemental extends Mob {
 		
 		flying = true;
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 16, 26 );
-	}
 
 	private int rangedCooldown = Random.NormalIntRange( 3, 5 );
 	

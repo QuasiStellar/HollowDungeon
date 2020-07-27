@@ -55,11 +55,6 @@ public class Ghoul extends Mob {
 	}
 
 	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 16, 22 );
-	}
-
-	@Override
 	public float spawningWeight() {
 		return 0.5f;
 	}

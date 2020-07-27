@@ -68,11 +68,6 @@ public class Swarm extends Mob {
 		super.restoreFromBundle( bundle );
 		generation = bundle.getInt( GENERATION );
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 1, 4 );
-	}
 
 	private Swarm split() {
 		Swarm clone = new Swarm();

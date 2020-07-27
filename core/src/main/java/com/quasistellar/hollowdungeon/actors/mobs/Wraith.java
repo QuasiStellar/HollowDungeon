@@ -62,11 +62,6 @@ public class Wraith extends Mob {
 		level = bundle.getInt( LEVEL );
 		adjustStats( level );
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 1 + level/2, 2 + level );
-	}
 
 	public void adjustStats( int level ) {
 		this.level = level;

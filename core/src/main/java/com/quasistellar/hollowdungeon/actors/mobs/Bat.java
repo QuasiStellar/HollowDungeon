@@ -42,11 +42,6 @@ public class Bat extends Mob {
 		loot = new PotionOfHealing();
 		lootChance = 0.1667f; //by default, see rollToDropLoot()
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 5, 15 );
-	}
 
 	@Override
 	public int attackProc(Char enemy, int damage ) {

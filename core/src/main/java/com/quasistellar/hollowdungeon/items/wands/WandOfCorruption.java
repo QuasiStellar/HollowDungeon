@@ -111,10 +111,6 @@ public class WandOfCorruption extends Wand {
 			} else if (ch instanceof com.quasistellar.hollowdungeon.actors.mobs.Wraith) {
 				//divide by 5 as wraiths are always at full HP and are therefore ~5x harder to corrupt
 				enemyResist = (1f + Dungeon.depth/3f) / 5f;
-			} else if (ch instanceof com.quasistellar.hollowdungeon.actors.mobs.Yog.BurningFist || ch instanceof com.quasistellar.hollowdungeon.actors.mobs.Yog.RottingFist) {
-				enemyResist = 1 + 30;
-			} else if (ch instanceof com.quasistellar.hollowdungeon.actors.mobs.Yog.Larva || ch instanceof com.quasistellar.hollowdungeon.actors.mobs.King.Undead){
-				enemyResist = 1 + 5;
 			} else if (ch instanceof com.quasistellar.hollowdungeon.actors.mobs.Swarm){
 				//child swarms don't give exp, so we force this here.
 				enemyResist = 1 + 3;

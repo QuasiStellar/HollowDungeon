@@ -48,12 +48,7 @@ public class Skeleton extends Mob {
 		properties.add(Char.Property.UNDEAD);
 		properties.add(Char.Property.INORGANIC);
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 2, 10 );
-	}
-	
+
 	@Override
 	public void die( Object cause ) {
 		

@@ -72,7 +72,7 @@ public class NewDM300 extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 15, 25 );
+		return 2;
 	}
 
 	public int pylonsActivated = 0;

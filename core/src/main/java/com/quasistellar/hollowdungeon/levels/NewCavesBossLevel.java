@@ -33,7 +33,6 @@ import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.actors.blobs.Electricity;
-import com.quasistellar.hollowdungeon.actors.mobs.OldDM300;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.Pylon;
 import com.quasistellar.hollowdungeon.actors.mobs.NewDM300;
@@ -801,8 +800,6 @@ public class NewCavesBossLevel extends Level {
 						if (c instanceof Pylon && c.alignment != Char.Alignment.NEUTRAL){
 							energySourceSprite = c.sprite;
 							break;
-						} else if (c instanceof OldDM300){
-							energySourceSprite = c.sprite;
 						}
 					}
 					if (energySourceSprite == null){

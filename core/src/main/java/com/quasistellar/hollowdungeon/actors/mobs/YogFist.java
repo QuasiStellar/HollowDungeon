@@ -123,11 +123,6 @@ public abstract class YogFist extends Mob {
 	}
 
 	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 18, 36 );
-	}
-
-	@Override
 	public String description() {
 		return Messages.get(YogFist.class, "desc") + "\n\n" + Messages.get(this, "desc");
 	}
@@ -377,7 +372,7 @@ public abstract class YogFist extends Mob {
 
 		@Override
 		public int damageRoll() {
-			return Random.NormalIntRange( 22, 44 );
+			return 2;
 		}
 
 		@Override
@@ -412,7 +407,7 @@ public abstract class YogFist extends Mob {
 
 			if (Char.hit( this, enemy, true )) {
 
-				enemy.damage( Random.NormalIntRange(10, 20), new LightBeam() );
+				enemy.damage( 1, new LightBeam() );
 				com.quasistellar.hollowdungeon.actors.buffs.Buff.prolong( enemy, com.quasistellar.hollowdungeon.actors.buffs.Blindness.class, com.quasistellar.hollowdungeon.actors.buffs.Blindness.DURATION/2f );
 
 				if (!enemy.isAlive() && enemy == Dungeon.hero) {
@@ -475,7 +470,7 @@ public abstract class YogFist extends Mob {
 
 			if (Char.hit( this, enemy, true )) {
 
-				enemy.damage( Random.NormalIntRange(10, 20), new DarkBolt() );
+				enemy.damage( 1, new DarkBolt() );
 
 				com.quasistellar.hollowdungeon.actors.buffs.Light l = enemy.buff(com.quasistellar.hollowdungeon.actors.buffs.Light.class);
 				if (l != null){

@@ -32,9 +32,5 @@ public class Crab extends Mob {
 		HP = HT = 15;
 		baseSpeed = 2f;
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 1, 7 );
-	}
+
 }

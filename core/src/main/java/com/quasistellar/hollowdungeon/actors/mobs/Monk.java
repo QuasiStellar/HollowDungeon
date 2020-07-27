@@ -42,11 +42,6 @@ public class Monk extends Mob {
 
 		properties.add(Char.Property.UNDEAD);
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 12, 25 );
-	}
 
 	@Override
 	protected float attackDelay() {

@@ -65,7 +65,7 @@ public class Piranha extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 	
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( Dungeon.depth, 4 + Dungeon.depth * 2 );
+		return 2;
 	}
 	
 	@Override

@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Yog;
 import com.quasistellar.hollowdungeon.actors.mobs.YogFist;
 import com.quasistellar.hollowdungeon.effects.Beam;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
@@ -131,12 +130,7 @@ public abstract class FistSprite extends MobSprite {
 				new Callback() {
 					@Override
 					public void call() {
-						//pre-0.8.0 saves
-						if (ch instanceof Yog.BurningFist){
-							((Yog.BurningFist)ch).onZapComplete();
-						} else {
-							((YogFist)ch).onZapComplete();
-						}
+						((YogFist)ch).onZapComplete();
 					}
 				} );
 		Sample.INSTANCE.play( Assets.Sounds.ZAP );

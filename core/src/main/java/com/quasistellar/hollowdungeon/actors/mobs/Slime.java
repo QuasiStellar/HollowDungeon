@@ -39,11 +39,6 @@ public class Slime extends Mob {
 		
 		lootChance = 0.2f; //by default, see rollToDropLoot()
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 2, 5 );
-	}
 
 	@Override
 	public void damage(int dmg, Object src) {

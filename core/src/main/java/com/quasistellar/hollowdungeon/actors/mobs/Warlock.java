@@ -52,11 +52,6 @@ public class Warlock extends Mob implements Callback {
 
 		properties.add(Char.Property.UNDEAD);
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 12, 18 );
-	}
 
 	@Override
 	protected boolean canAttack( com.quasistellar.hollowdungeon.actors.Char enemy ) {

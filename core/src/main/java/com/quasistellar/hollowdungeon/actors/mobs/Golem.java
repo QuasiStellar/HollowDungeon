@@ -53,7 +53,7 @@ public class Golem extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 15, 35 );
+		return 2;
 	}
 
 	@Override

@@ -61,12 +61,7 @@ public class Succubus extends Mob {
 
 		properties.add(Char.Property.DEMONIC);
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 22, 30 );
-	}
-	
+
 	@Override
 	public int attackProc(com.quasistellar.hollowdungeon.actors.Char enemy, int damage ) {
 		damage = super.attackProc( enemy, damage );

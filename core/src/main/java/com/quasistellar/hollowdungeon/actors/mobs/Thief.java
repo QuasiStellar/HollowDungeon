@@ -78,11 +78,6 @@ public class Thief extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 	}
 
 	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 1, 10 );
-	}
-
-	@Override
 	protected float attackDelay() {
 		return super.attackDelay()*0.5f;
 	}

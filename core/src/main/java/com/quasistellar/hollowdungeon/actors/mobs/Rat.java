@@ -32,10 +32,5 @@ public class Rat extends Mob {
 		
 		HP = HT = 8;
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 1, 4 );
-	}
 
 }

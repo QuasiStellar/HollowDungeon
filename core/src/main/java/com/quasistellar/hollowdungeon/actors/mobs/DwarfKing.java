@@ -69,7 +69,7 @@ public class DwarfKing extends Mob {
 
 	@Override
 	public int damageRoll() {
-		return Random.NormalIntRange( 15, 25 );
+		return 2;
 	}
 
 	private int phase = 1;

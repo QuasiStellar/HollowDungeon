@@ -45,11 +45,6 @@ public class Spinner extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 		FLEEING = new Fleeing();
 	}
 
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange(10, 25);
-	}
-
 	private int webCoolDown = 0;
 	private int lastEnemyPos = -1;
 

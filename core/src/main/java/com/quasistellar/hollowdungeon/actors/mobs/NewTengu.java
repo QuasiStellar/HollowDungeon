@@ -88,11 +88,6 @@ public class NewTengu extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 		spend(-cooldown());
 		super.onAdd();
 	}
-	
-	@Override
-	public int damageRoll() {
-		return Random.NormalIntRange( 6, 12 );
-	}
 
 	//Tengu is immune to debuffs and damage when removed from the level
 	@Override
