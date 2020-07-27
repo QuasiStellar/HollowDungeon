@@ -96,7 +96,6 @@ public class PitRoom extends SpecialRoom {
 		return Generator.random( Random.oneOf(
 			Generator.Category.POTION,
 			Generator.Category.SCROLL,
-			Generator.Category.FOOD,
 			com.quasistellar.hollowdungeon.items.Generator.Category.GOLD
 		) );
 	}

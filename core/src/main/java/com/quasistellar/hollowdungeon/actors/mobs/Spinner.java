@@ -30,7 +30,6 @@ import com.quasistellar.hollowdungeon.sprites.SpinnerSprite;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
@@ -42,9 +41,6 @@ public class Spinner extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 		spriteClass = SpinnerSprite.class;
 
 		HP = HT = 50;
-
-		loot = new MysteryMeat();
-		lootChance = 0.125f;
 
 		FLEEING = new Fleeing();
 	}

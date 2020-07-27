@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Bleeding;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.sprites.AlbinoSprite;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.watabou.utils.Random;
 
 public class Albino extends Rat {
@@ -34,9 +33,6 @@ public class Albino extends Rat {
 		spriteClass = AlbinoSprite.class;
 		
 		HP = HT = 15;
-		
-		loot = new MysteryMeat();
-		lootChance = 1f;
 	}
 	
 	@Override

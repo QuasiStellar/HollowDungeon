@@ -28,7 +28,6 @@ import com.quasistellar.hollowdungeon.sprites.GreatCrabSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
@@ -82,8 +81,5 @@ public class GreatCrab extends Crab {
 		super.die( cause );
 
 		Ghost.Quest.process();
-
-		Dungeon.level.drop( new MysteryMeat(), pos );
-		com.quasistellar.hollowdungeon.Dungeon.level.drop( new MysteryMeat(), pos ).sprite.drop();
 	}
 }

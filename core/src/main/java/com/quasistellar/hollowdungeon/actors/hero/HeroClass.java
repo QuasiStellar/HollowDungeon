@@ -36,8 +36,6 @@ import com.quasistellar.hollowdungeon.items.artifacts.CloakOfShadows;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
 import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
-import com.quasistellar.hollowdungeon.items.food.Food;
-import com.quasistellar.hollowdungeon.items.food.SmallRation;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfInvisibility;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
@@ -95,12 +93,6 @@ public enum HeroClass {
 	}
 
 	private static void initCommon( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
-		Item i = new Food();
-		if (!Challenges.isItemBlocked(i)) i.collect();
-
-		if (Dungeon.isChallenged(com.quasistellar.hollowdungeon.Challenges.NO_FOOD)){
-			new SmallRation().collect();
-		}
 
 		new ScrollOfIdentify().identify();
 

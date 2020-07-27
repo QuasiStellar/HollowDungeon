@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.actors.mobs;
 
 import com.quasistellar.hollowdungeon.sprites.SeniorSprite;
-import com.quasistellar.hollowdungeon.items.food.Pasty;
 import com.watabou.utils.Random;
 
 public class Senior extends Monk {
@@ -30,8 +29,6 @@ public class Senior extends Monk {
 	{
 		spriteClass = SeniorSprite.class;
 
-		loot = new Pasty();
-		lootChance = 1f;
 	}
 	
 	@Override

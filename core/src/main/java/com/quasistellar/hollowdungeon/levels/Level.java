@@ -59,7 +59,6 @@ import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Torch;
 import com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight;
 import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
-import com.quasistellar.hollowdungeon.items.food.SmallRation;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfEnchantment;
@@ -177,12 +176,6 @@ public abstract class Level implements Bundlable {
 		Random.pushGenerator( Dungeon.seedCurDepth() );
 		
 		if (!(Dungeon.bossLevel())) {
-
-			if (Dungeon.isChallenged(Challenges.NO_FOOD)){
-				addItemToSpawn( new SmallRation() );
-			} else {
-				addItemToSpawn(Generator.random(Generator.Category.FOOD));
-			}
 
 			if (Dungeon.isChallenged(Challenges.DARKNESS)){
 				addItemToSpawn( new Torch() );

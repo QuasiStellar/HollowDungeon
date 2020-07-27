@@ -36,7 +36,6 @@ import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
 import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
-import com.quasistellar.hollowdungeon.items.food.Food;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
@@ -407,7 +406,6 @@ public class WndBag extends WndTabbed {
 						mode == Mode.WEAPON && (item instanceof MeleeWeapon) ||
 						mode == Mode.WAND && (item instanceof Wand) ||
 						mode == Mode.SEED && SandalsOfNature.canUseSeed(item) ||
-						mode == Mode.FOOD && (item instanceof Food) ||
 						mode == Mode.POTION && (item instanceof Potion) ||
 						mode == Mode.SCROLL && (item instanceof Scroll) ||
 						mode == Mode.UNIDED_POTION_OR_SCROLL && (!item.isIdentified() && (item instanceof Scroll || item instanceof Potion)) ||

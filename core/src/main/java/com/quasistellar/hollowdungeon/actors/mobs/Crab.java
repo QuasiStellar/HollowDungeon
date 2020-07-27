@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.actors.mobs;
 
 import com.quasistellar.hollowdungeon.sprites.CrabSprite;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.watabou.utils.Random;
 
 public class Crab extends Mob {
@@ -32,9 +31,6 @@ public class Crab extends Mob {
 		
 		HP = HT = 15;
 		baseSpeed = 2f;
-
-		loot = new MysteryMeat();
-		lootChance = 0.167f;
 	}
 	
 	@Override

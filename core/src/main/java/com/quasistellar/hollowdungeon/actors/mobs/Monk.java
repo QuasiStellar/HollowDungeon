@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.sprites.MonkSprite;
 import com.quasistellar.hollowdungeon.ui.BuffIndicator;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.items.food.Food;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Sample;
@@ -40,9 +39,6 @@ public class Monk extends Mob {
 		spriteClass = MonkSprite.class;
 		
 		HP = HT = 70;
-		
-		loot = new Food();
-		lootChance = 0.083f;
 
 		properties.add(Char.Property.UNDEAD);
 	}

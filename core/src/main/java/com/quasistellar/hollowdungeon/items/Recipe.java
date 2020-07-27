@@ -24,9 +24,6 @@ package com.quasistellar.hollowdungeon.items;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.items.artifacts.AlchemistsToolkit;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.items.food.Blandfruit;
-import com.quasistellar.hollowdungeon.items.food.MeatPie;
-import com.quasistellar.hollowdungeon.items.food.StewedMeat;
 import com.quasistellar.hollowdungeon.items.potions.AlchemicalCatalyst;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.brews.BlizzardBrew;
@@ -166,12 +163,10 @@ public abstract class Recipe {
 	
 	private static Recipe[] oneIngredientRecipes = new Recipe[]{
 		new AlchemistsToolkit.upgradeKit(),
-		new Scroll.ScrollToStone(),
-		new StewedMeat.oneMeat()
+		new Scroll.ScrollToStone()
 	};
 	
 	private static Recipe[] twoIngredientRecipes = new Recipe[]{
-		new Blandfruit.CookFruit(),
 		new Bomb.EnhanceBomb(),
 		new AlchemicalCatalyst.Recipe(),
 		new ArcaneCatalyst.Recipe(),
@@ -196,16 +191,13 @@ public abstract class Recipe {
 		new PhaseShift.Recipe(),
 		new ReclaimTrap.Recipe(),
 		new Recycle.Recipe(),
-		new WildEnergy.Recipe(),
-		new StewedMeat.twoMeat()
+		new WildEnergy.Recipe()
 	};
 	
 	private static Recipe[] threeIngredientRecipes = new Recipe[]{
 		new Potion.SeedToPotion(),
 		new ExoticPotion.PotionToExotic(),
-		new ExoticScroll.ScrollToExotic(),
-		new StewedMeat.threeMeat(),
-		new MeatPie.Recipe()
+		new ExoticScroll.ScrollToExotic()
 	};
 	
 	public static Recipe findRecipe(ArrayList<com.quasistellar.hollowdungeon.items.Item> ingredients){

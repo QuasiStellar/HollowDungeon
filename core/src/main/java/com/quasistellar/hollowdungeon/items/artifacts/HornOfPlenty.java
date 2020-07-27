@@ -33,8 +33,6 @@ import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndBag;
-import com.quasistellar.hollowdungeon.items.food.Blandfruit;
-import com.quasistellar.hollowdungeon.items.food.Food;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
@@ -136,12 +134,6 @@ public class HornOfPlenty extends com.quasistellar.hollowdungeon.items.artifacts
 		return this;
 	}
 	
-	public void gainFoodValue( Food food ){
-		if (level() >= 10) return;
-
-		GLog.i( Messages.get(this, "feed") );
-	}
-	
 	private static final String STORED = "stored";
 	
 	@Override
@@ -167,20 +159,7 @@ public class HornOfPlenty extends com.quasistellar.hollowdungeon.items.artifacts
 	protected static com.quasistellar.hollowdungeon.windows.WndBag.Listener itemSelector = new com.quasistellar.hollowdungeon.windows.WndBag.Listener() {
 		@Override
 		public void onSelect( com.quasistellar.hollowdungeon.items.Item item ) {
-			if (item != null && item instanceof Food) {
-				if (item instanceof Blandfruit && ((Blandfruit) item).potionAttrib == null){
-					com.quasistellar.hollowdungeon.utils.GLog.w( Messages.get(HornOfPlenty.class, "reject") );
-				} else {
-					Hero hero = com.quasistellar.hollowdungeon.Dungeon.hero;
-					hero.sprite.operate( hero.pos );
-					hero.busy();
-					hero.spend( Food.TIME_TO_EAT );
 
-					((HornOfPlenty) com.quasistellar.hollowdungeon.items.Item.curItem).gainFoodValue(((Food)item));
-					item.detach(hero.belongings.backpack);
-				}
-
-			}
 		}
 	};
 }

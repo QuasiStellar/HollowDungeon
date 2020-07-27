@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.ui.changelist;
 import com.quasistellar.hollowdungeon.items.DewVial;
 import com.quasistellar.hollowdungeon.items.Torch;
 import com.quasistellar.hollowdungeon.items.artifacts.EtherealChains;
-import com.quasistellar.hollowdungeon.items.food.Food;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.items.rings.RingOfMight;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfAugmentation;
@@ -852,7 +851,7 @@ public class v0_6_X_Changes {
 				"_-_ Slightly increased visibility on floor 22+\n" +
 				"_-_ Floor 21 shop now sells 3 torches, up from 2"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Food()), "Food Buffs",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Torch()), "Food Buffs",
 				"_-_ Meat and small rations are 50% more filling\n" +
 				"_-_ Pasties and blandfruit are 12.5% more filling"));
 		

@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.plants;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.food.Blandfruit;
 
 public class BlandfruitBush extends Plant {
 
@@ -34,7 +33,7 @@ public class BlandfruitBush extends Plant {
 
 	@Override
 	public void activate( Char ch ) {
-		Dungeon.level.drop( new Blandfruit(), pos ).sprite.drop();
+
 	}
 
 	//This seed no longer drops, but has a sprite as it did drop prior to 0.7.0

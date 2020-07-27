@@ -26,9 +26,6 @@ import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.plants.BlandfruitBush;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.food.ChargrilledMeat;
-import com.quasistellar.hollowdungeon.items.food.Food;
-import com.quasistellar.hollowdungeon.items.food.Pasty;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 

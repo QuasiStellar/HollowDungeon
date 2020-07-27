@@ -29,8 +29,6 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Thief;
-import com.quasistellar.hollowdungeon.items.food.FrozenCarpaccio;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -62,8 +60,7 @@ public class Frost extends FlavourBuff {
 				ArrayList<com.quasistellar.hollowdungeon.items.Item> freezable = new ArrayList<>();
 				//does not reach inside of containers
 				for (com.quasistellar.hollowdungeon.items.Item i : hero.belongings.backpack.items){
-					if ((i instanceof Potion && !(i instanceof PotionOfStrength))
-						|| i instanceof MysteryMeat){
+					if ((i instanceof Potion && !(i instanceof PotionOfStrength))){
 						freezable.add(i);
 					}
 				}
@@ -73,11 +70,6 @@ public class Frost extends FlavourBuff {
 					GLog.w( Messages.get(this, "freezes", toFreeze.toString()) );
 					if (toFreeze instanceof Potion){
 						((Potion) toFreeze).shatter(hero.pos);
-					} else if (toFreeze instanceof MysteryMeat){
-						FrozenCarpaccio carpaccio = new FrozenCarpaccio();
-						if (!carpaccio.collect( hero.belongings.backpack )) {
-							Dungeon.level.drop( carpaccio, target.pos ).sprite.drop();
-						}
 					}
 				}
 				
@@ -88,8 +80,6 @@ public class Frost extends FlavourBuff {
 				if (item instanceof Potion && !(item instanceof PotionOfStrength)) {
 					((Potion) ((Thief) target).item).shatter(target.pos);
 					((Thief) target).item = null;
-				} else if (item instanceof MysteryMeat){
-					((Thief) target).item = new FrozenCarpaccio();
 				}
 
 			}

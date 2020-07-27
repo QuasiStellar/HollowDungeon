@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.ui.changelist;
 
 import com.quasistellar.hollowdungeon.items.Ankh;
-import com.quasistellar.hollowdungeon.items.food.Blandfruit;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.ui.Icons;
@@ -54,7 +53,7 @@ public class v0_1_X_Changes {
 						"\n" +
 						"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Blandfruit(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Ankh(),
 				"Players who chance upon gardens or who get lucky while trampling grass may come across a new plant: the _Blandfruit._\n\n" +
 						"As the name implies, the fruit from this plant is pretty unexceptional, and will barely do anything for you on its own. Perhaps there is some way to prepare the fruit with another ingredient..."));
 		

@@ -32,9 +32,6 @@ import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
 import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.items.food.ChargrilledMeat;
-import com.quasistellar.hollowdungeon.items.food.FrozenCarpaccio;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.quasistellar.hollowdungeon.items.journal.DocumentPage;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
@@ -204,9 +201,6 @@ public class Heap implements Bundlable {
 			} else if (item instanceof Dewdrop) {
 				items.remove( item );
 				evaporated = true;
-			} else if (item instanceof MysteryMeat) {
-				replace( item, ChargrilledMeat.cook( (MysteryMeat)item ) );
-				burnt = true;
 			} else if (item instanceof Bomb) {
 				items.remove( item );
 				((Bomb) item).explode( pos );
@@ -295,10 +289,7 @@ public class Heap implements Bundlable {
 		
 		boolean frozen = false;
 		for (Item item : items.toArray( new Item[0] )) {
-			if (item instanceof MysteryMeat) {
-				replace( item, FrozenCarpaccio.cook( (MysteryMeat)item ) );
-				frozen = true;
-			} else if (item instanceof Potion && !(item instanceof PotionOfStrength)) {
+			if (item instanceof Potion && !(item instanceof PotionOfStrength)) {
 				items.remove(item);
 				((Potion) item).shatter(pos);
 				frozen = true;

@@ -36,8 +36,6 @@ import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.actors.blobs.Fire;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Thief;
-import com.quasistellar.hollowdungeon.items.food.ChargrilledMeat;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -99,8 +97,7 @@ public class Burning extends Buff implements Hero.Doom {
 					ArrayList<com.quasistellar.hollowdungeon.items.Item> burnable = new ArrayList<>();
 					//does not reach inside of containers
 					for (com.quasistellar.hollowdungeon.items.Item i : hero.belongings.backpack.items){
-						if ((i instanceof Scroll && !(i instanceof ScrollOfUpgrade))
-								|| i instanceof MysteryMeat){
+						if ((i instanceof Scroll && !(i instanceof ScrollOfUpgrade))){
 							burnable.add(i);
 						}
 					}
@@ -108,12 +105,6 @@ public class Burning extends Buff implements Hero.Doom {
 					if (!burnable.isEmpty()){
 						com.quasistellar.hollowdungeon.items.Item toBurn = Random.element(burnable).detach(hero.belongings.backpack);
 						GLog.w( Messages.get(this, "burnsup", Messages.capitalize(toBurn.toString())) );
-						if (toBurn instanceof MysteryMeat){
-							ChargrilledMeat steak = new ChargrilledMeat();
-							if (!steak.collect( hero.belongings.backpack )) {
-								Dungeon.level.drop( steak, hero.pos ).sprite.drop();
-							}
-						}
 						Heap.burnFX( hero.pos );
 					}
 				}
@@ -130,9 +121,6 @@ public class Burning extends Buff implements Hero.Doom {
 						!(item instanceof ScrollOfUpgrade)) {
 					target.sprite.emitter().burst( ElmoParticle.FACTORY, 6 );
 					((Thief)target).item = null;
-				} else if (item instanceof MysteryMeat) {
-					target.sprite.emitter().burst( com.quasistellar.hollowdungeon.effects.particles.ElmoParticle.FACTORY, 6 );
-					((Thief)target).item = new ChargrilledMeat();
 				}
 
 			}

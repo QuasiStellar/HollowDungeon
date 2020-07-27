@@ -38,9 +38,6 @@ import com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight;
 import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.artifacts.UnstableSpellbook;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
-import com.quasistellar.hollowdungeon.items.food.Food;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
-import com.quasistellar.hollowdungeon.items.food.Pasty;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfExperience;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfFrost;
@@ -177,8 +174,6 @@ public class Generator {
 		WAND	( 2,    Wand.class ),
 		RING	( 1,    Ring.class ),
 		ARTIFACT( 1,    Artifact.class),
-		
-		FOOD	( 0,    Food.class ),
 		
 		POTION	( 16,   Potion.class ),
 		SEED	( 2,    com.quasistellar.hollowdungeon.plants.Plant.Seed.class ),
@@ -390,12 +385,6 @@ public class Generator {
 					ForceCube.class
 			};
 			MIS_T5.probs = new float[]{ 6, 5, 4 };
-			
-			FOOD.classes = new Class<?>[]{
-					Food.class,
-					Pasty.class,
-					MysteryMeat.class };
-			FOOD.probs = new float[]{ 4, 1, 0 };
 			
 			RING.classes = new Class<?>[]{
 					RingOfAccuracy.class,

@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Burning;
 import com.quasistellar.hollowdungeon.sprites.PiranhaSprite;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
@@ -37,9 +36,6 @@ public class Piranha extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 		spriteClass = PiranhaSprite.class;
 
 		baseSpeed = 2f;
-
-		loot = MysteryMeat.class;
-		lootChance = 1f;
 		
 		SLEEPING = new Sleeping();
 		WANDERING = new Wandering();

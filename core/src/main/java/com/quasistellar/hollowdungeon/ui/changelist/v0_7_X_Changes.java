@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.items.Honeypot;
 import com.quasistellar.hollowdungeon.items.artifacts.AlchemistsToolkit;
 import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
 import com.quasistellar.hollowdungeon.items.artifacts.UnstableSpellbook;
-import com.quasistellar.hollowdungeon.items.food.Blandfruit;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.items.rings.RingOfWealth;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMirrorImage;
@@ -795,7 +794,7 @@ public class v0_7_X_Changes {
 				"_-_ Goo and DM-300 now drop unique alchemy ingredients instead.\n\n" +
 				"_-_ Lloyd's beacon has been replaced by alchemy recipes, Cape of Thorns will likely return in some form in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Blandfruit(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new UnstableSpellbook(),
 				"Blandfruit has been changed to be more consistent with potions.\n\n" +
 				"All blandfruit types now exactly mimic their potion counterparts, there are now no blandfruit-exclusive effects.\n\n" +
 				"When a thrown blandfruit shatters, it will now leave behind blandfruit chunks, which can be eaten. This allows offensive blandfruits to be used without losing their food value.\n\n" +

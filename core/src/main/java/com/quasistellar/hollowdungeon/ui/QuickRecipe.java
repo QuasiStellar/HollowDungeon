@@ -33,12 +33,6 @@ import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.items.food.Blandfruit;
-import com.quasistellar.hollowdungeon.items.food.Food;
-import com.quasistellar.hollowdungeon.items.food.MeatPie;
-import com.quasistellar.hollowdungeon.items.food.MysteryMeat;
-import com.quasistellar.hollowdungeon.items.food.Pasty;
-import com.quasistellar.hollowdungeon.items.food.StewedMeat;
 import com.quasistellar.hollowdungeon.items.potions.AlchemicalCatalyst;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.brews.BlizzardBrew;
@@ -262,28 +256,7 @@ public class QuickRecipe extends Component {
 				}
 				return result;
 			case 2:
-				result.add(new QuickRecipe( new StewedMeat.oneMeat() ));
-				result.add(new QuickRecipe( new StewedMeat.twoMeat() ));
-				result.add(new QuickRecipe( new StewedMeat.threeMeat() ));
-				result.add(null);
-				result.add(null);
-				result.add(new QuickRecipe( new MeatPie.Recipe(),
-						new ArrayList<com.quasistellar.hollowdungeon.items.Item>(Arrays.asList(new Pasty(), new Food(), new MysteryMeat.PlaceHolder())),
-						new MeatPie()));
-				result.add(null);
-				result.add(null);
-				result.add(new QuickRecipe( new Blandfruit.CookFruit(),
-						new ArrayList<>(Arrays.asList(new Blandfruit(), new com.quasistellar.hollowdungeon.plants.Plant.Seed.PlaceHolder())),
-						new Blandfruit(){
-							{
-								name = Messages.get(Blandfruit.class, "cooked");
-							}
-							
-							@Override
-							public String info() {
-								return "";
-							}
-						}));
+
 				return result;
 			case 3:
 				r = new Bomb.EnhanceBomb();

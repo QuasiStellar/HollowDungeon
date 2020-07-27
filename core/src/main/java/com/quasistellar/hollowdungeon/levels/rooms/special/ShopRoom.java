@@ -36,7 +36,6 @@ import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
 import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.items.food.SmallRation;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
@@ -192,10 +191,6 @@ public class ShopRoom extends SpecialRoom {
 					com.quasistellar.hollowdungeon.items.Generator.randomUsingDefaults( com.quasistellar.hollowdungeon.items.Generator.Category.POTION ) :
 					com.quasistellar.hollowdungeon.items.Generator.randomUsingDefaults( com.quasistellar.hollowdungeon.items.Generator.Category.SCROLL ) );
 
-
-		itemsToSpawn.add( new SmallRation() );
-		itemsToSpawn.add( new SmallRation() );
-		
 		switch (Random.Int(4)){
 			case 0:
 				itemsToSpawn.add( new Bomb() );
