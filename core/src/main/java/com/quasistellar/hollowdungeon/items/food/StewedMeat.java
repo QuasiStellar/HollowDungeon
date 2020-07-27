@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.items.food;
 
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.items.Recipe;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
@@ -29,7 +28,6 @@ public class StewedMeat extends Food {
 	
 	{
 		image = ItemSpriteSheet.STEWED;
-		energy = Hunger.HUNGRY/2f;
 	}
 	
 	@Override

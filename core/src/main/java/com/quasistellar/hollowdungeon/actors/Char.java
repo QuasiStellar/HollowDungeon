@@ -43,7 +43,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.FireImbue;
 import com.quasistellar.hollowdungeon.actors.buffs.Frost;
 import com.quasistellar.hollowdungeon.actors.buffs.FrostImbue;
 import com.quasistellar.hollowdungeon.actors.buffs.Haste;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.actors.buffs.LifeLink;
 import com.quasistellar.hollowdungeon.actors.buffs.MagicalSleep;
 import com.quasistellar.hollowdungeon.actors.buffs.Ooze;
@@ -429,13 +428,7 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 		}
 
 		int shielded = dmg;
-		//FIXME: when I add proper damage properties, should add an IGNORES_SHIELDS property to use here.
-		if (!(src instanceof Hunger)){
-			for (ShieldBuff s : buffs(ShieldBuff.class)){
-				dmg = s.absorbDamage(dmg);
-				if (dmg == 0) break;
-			}
-		}
+
 		shielded -= dmg;
 		HP -= dmg;
 		

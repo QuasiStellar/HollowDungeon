@@ -21,14 +21,12 @@
 
 package com.quasistellar.hollowdungeon.items.food;
 
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
 public class ChargrilledMeat extends com.quasistellar.hollowdungeon.items.food.Food {
 
 	{
 		image = ItemSpriteSheet.STEAK;
-		energy = Hunger.HUNGRY/2f;
 	}
 	
 	@Override

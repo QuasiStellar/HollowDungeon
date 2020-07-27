@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.items.artifacts;
 
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.actors.buffs.LockedFloor;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
@@ -250,11 +249,6 @@ public class TimekeepersHourglass extends com.quasistellar.hollowdungeon.items.a
 				//buffs always act last, so the stasis buff should end a turn early.
 				spend((5*usedCharge) - 1);
 				((com.quasistellar.hollowdungeon.actors.hero.Hero) target).spendAndNext(5*usedCharge);
-
-				//shouldn't punish the player for going into stasis frequently
-				com.quasistellar.hollowdungeon.actors.buffs.Hunger hunger = com.quasistellar.hollowdungeon.actors.buffs.Buff.affect(target, Hunger.class);
-				if (hunger != null && !hunger.isStarving())
-					hunger.satisfy(5*usedCharge);
 
 				charge -= usedCharge;
 

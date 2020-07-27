@@ -30,7 +30,6 @@ import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Healing;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Bee;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
@@ -46,7 +45,6 @@ public class ElixirOfHoneyedHealing extends Elixir {
 	public void apply(Hero hero) {
 		Buff.affect( hero, Healing.class ).setHeal((int)(0.8f*hero.HT + 14), 0.25f, 0);
 		PotionOfHealing.cure(hero);
-		Buff.affect(hero, Hunger.class).satisfy(Hunger.STARVING/5f);
 	}
 	
 	@Override

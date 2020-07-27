@@ -31,7 +31,6 @@ import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRecharging;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.effects.SpellSprite;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -44,8 +43,7 @@ public class Food extends Item {
 	public static final float TIME_TO_EAT	= 3f;
 	
 	public static final String AC_EAT	= "EAT";
-	
-	public float energy = Hunger.HUNGRY;
+
 	public String message = Messages.get(this, "eat_msg");
 	
 	{
@@ -90,7 +88,6 @@ public class Food extends Item {
 	}
 	
 	protected void satisfy( com.quasistellar.hollowdungeon.actors.hero.Hero hero ){
-		Buff.affect(hero, com.quasistellar.hollowdungeon.actors.buffs.Hunger.class).satisfy( energy );
 	}
 	
 	public static void foodProc( Hero hero ){

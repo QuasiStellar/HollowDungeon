@@ -116,9 +116,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	public HeroClass heroClass = HeroClass.ROGUE;
 	public HeroSubClass subClass = HeroSubClass.NONE;
-	
-	private int attackSkill = 10;
-	private int defenseSkill = 5;
 
 	public boolean ready = false;
 	private boolean damageInterrupt = true;
@@ -227,8 +224,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	}
 
 	public void live() {
-		com.quasistellar.hollowdungeon.actors.buffs.Buff.affect( this, com.quasistellar.hollowdungeon.actors.buffs.Regeneration.class );
-		com.quasistellar.hollowdungeon.actors.buffs.Buff.affect( this, com.quasistellar.hollowdungeon.actors.buffs.Hunger.class );
 	}
 
 	public boolean shoot(com.quasistellar.hollowdungeon.actors.Char enemy, com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon wep ) {
@@ -860,7 +855,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		if (buff(TimekeepersHourglass.timeStasis.class) != null)
 			return;
 
-		if (!(src instanceof com.quasistellar.hollowdungeon.actors.buffs.Hunger) && damageInterrupt) {
+		if (damageInterrupt) {
 			interrupt();
 			resting = false;
 		}
@@ -1129,10 +1124,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		return true;
 	}
 
-	public boolean isStarving() {
-		return com.quasistellar.hollowdungeon.actors.buffs.Buff.affect(this, com.quasistellar.hollowdungeon.actors.buffs.Hunger.class).isStarving();
-	}
-	
 	@Override
 	public void add( com.quasistellar.hollowdungeon.actors.buffs.Buff buff ) {
 
@@ -1488,9 +1479,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			if (!Dungeon.level.locked) {
 				if (cursed) {
 					GLog.n(Messages.get(this, "search_distracted"));
-					Buff.affect(this, com.quasistellar.hollowdungeon.actors.buffs.Hunger.class).reduceHunger(TIME_TO_SEARCH - (2 * HUNGER_FOR_SEARCH));
-				} else {
-					com.quasistellar.hollowdungeon.actors.buffs.Buff.affect(this, com.quasistellar.hollowdungeon.actors.buffs.Hunger.class).reduceHunger(TIME_TO_SEARCH - HUNGER_FOR_SEARCH);
 				}
 			}
 			spendAndNext(TIME_TO_SEARCH);

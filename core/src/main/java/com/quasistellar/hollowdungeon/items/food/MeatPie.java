@@ -22,8 +22,6 @@
 package com.quasistellar.hollowdungeon.items.food;
 
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
-import com.quasistellar.hollowdungeon.actors.buffs.WellFed;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
@@ -34,13 +32,11 @@ public class MeatPie extends com.quasistellar.hollowdungeon.items.food.Food {
 	
 	{
 		image = ItemSpriteSheet.MEAT_PIE;
-		energy = Hunger.STARVING*2f;
 	}
 	
 	@Override
 	protected void satisfy(Hero hero) {
 		super.satisfy( hero );
-		Buff.affect(hero, WellFed.class).reset();
 	}
 	
 	@Override

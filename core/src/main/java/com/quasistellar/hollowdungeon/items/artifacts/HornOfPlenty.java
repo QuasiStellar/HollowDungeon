@@ -28,7 +28,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.effects.SpellSprite;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
@@ -79,46 +78,6 @@ public class HornOfPlenty extends com.quasistellar.hollowdungeon.items.artifacts
 
 		super.execute(hero, action);
 
-		if (action.equals(AC_EAT)){
-
-			if (!isEquipped(hero)) GLog.i( Messages.get(Artifact.class, "need_to_equip") );
-			else if (charge == 0)  GLog.i( Messages.get(this, "no_food") );
-			else {
-				//consume as much food as it takes to be full, to a minimum of 1
-				com.quasistellar.hollowdungeon.actors.buffs.Hunger hunger = Buff.affect(Dungeon.hero, com.quasistellar.hollowdungeon.actors.buffs.Hunger.class);
-				int chargesToUse = Math.max( 1, hunger.hunger() / (int)(Hunger.STARVING/10));
-				if (chargesToUse > charge) chargesToUse = charge;
-				hunger.satisfy((Hunger.STARVING/10) * chargesToUse);
-
-				Food.foodProc( hero );
-
-				Statistics.foodEaten++;
-
-				charge -= chargesToUse;
-
-				hero.sprite.operate(hero.pos);
-				hero.busy();
-				SpellSprite.show(hero, com.quasistellar.hollowdungeon.effects.SpellSprite.FOOD);
-				Sample.INSTANCE.play(Assets.Sounds.EAT);
-				GLog.i( Messages.get(this, "eat") );
-
-				hero.spend(Food.TIME_TO_EAT);
-
-				Badges.validateFoodEaten();
-
-				if (charge >= 15)       image = ItemSpriteSheet.ARTIFACT_HORN4;
-				else if (charge >= 10)  image = ItemSpriteSheet.ARTIFACT_HORN3;
-				else if (charge >= 5)   image = ItemSpriteSheet.ARTIFACT_HORN2;
-				else                    image = ItemSpriteSheet.ARTIFACT_HORN1;
-
-				Item.updateQuickslot();
-			}
-
-		} else if (action.equals(AC_STORE)){
-
-			GameScene.selectItem(itemSelector, mode, Messages.get(this, "prompt"));
-
-		}
 	}
 
 	@Override
@@ -179,22 +138,8 @@ public class HornOfPlenty extends com.quasistellar.hollowdungeon.items.artifacts
 	
 	public void gainFoodValue( Food food ){
 		if (level() >= 10) return;
-		
-		storedFoodEnergy += food.energy;
-		if (storedFoodEnergy >= Hunger.HUNGRY){
-			int upgrades = storedFoodEnergy / (int) Hunger.HUNGRY;
-			upgrades = Math.min(upgrades, 10 - level());
-			upgrade(upgrades);
-			storedFoodEnergy -= upgrades * Hunger.HUNGRY;
-			if (level() == 10){
-				storedFoodEnergy = 0;
-				GLog.p( Messages.get(this, "maxlevel") );
-			} else {
-				GLog.p( Messages.get(this, "levelup") );
-			}
-		} else {
-			GLog.i( Messages.get(this, "feed") );
-		}
+
+		GLog.i( Messages.get(this, "feed") );
 	}
 	
 	private static final String STORED = "stored";
@@ -216,37 +161,6 @@ public class HornOfPlenty extends com.quasistellar.hollowdungeon.items.artifacts
 	}
 
 	public class hornRecharge extends ArtifactBuff{
-
-		public void gainCharge(float levelPortion) {
-			if (cursed) return;
-			
-			if (charge < chargeCap) {
-
-				//generates 0.25x max hunger value every hero level, +0.125x max value per horn level
-				//to a max of 1.5x max hunger value per hero level
-				//This means that a standard ration will be recovered in ~5.333 hero levels
-				partialCharge += Hunger.STARVING * levelPortion * (0.25f + (0.125f*level()));
-
-				//charge is in increments of 1/10 max hunger value.
-				while (partialCharge >= Hunger.STARVING/10) {
-					charge++;
-					partialCharge -= com.quasistellar.hollowdungeon.actors.buffs.Hunger.STARVING/10;
-
-					if (charge >= 15)       image = ItemSpriteSheet.ARTIFACT_HORN4;
-					else if (charge >= 10)  image = ItemSpriteSheet.ARTIFACT_HORN3;
-					else if (charge >= 5)   image = ItemSpriteSheet.ARTIFACT_HORN2;
-					else                    image = com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.ARTIFACT_HORN1;
-
-					if (charge == chargeCap){
-						GLog.p( Messages.get(HornOfPlenty.class, "full") );
-						partialCharge = 0;
-					}
-
-					Item.updateQuickslot();
-				}
-			} else
-				partialCharge = 0;
-		}
 
 	}
 

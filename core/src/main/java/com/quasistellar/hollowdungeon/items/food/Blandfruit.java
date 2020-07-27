@@ -32,7 +32,6 @@ import com.quasistellar.hollowdungeon.plants.Sungrass;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
@@ -48,9 +47,6 @@ public class Blandfruit extends Food {
 	{
 		stackable = true;
 		image = ItemSpriteSheet.BLANDFRUIT;
-
-		//only applies when blandfruit is cooked
-		energy = Hunger.STARVING;
 
 		bones = true;
 	}
@@ -281,8 +277,6 @@ public class Blandfruit extends Food {
 		{
 			stackable = true;
 			image = com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.BLAND_CHUNKS;
-
-			energy = com.quasistellar.hollowdungeon.actors.buffs.Hunger.STARVING;
 
 			bones = true;
 		}

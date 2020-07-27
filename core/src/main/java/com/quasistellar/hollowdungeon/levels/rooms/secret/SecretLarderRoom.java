@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.plants.BlandfruitBush;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.items.food.ChargrilledMeat;
 import com.quasistellar.hollowdungeon.items.food.Food;
 import com.quasistellar.hollowdungeon.items.food.Pasty;
@@ -57,24 +56,6 @@ public class SecretLarderRoom extends SecretRoom {
 		
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD)) {
 			level.plant(new BlandfruitBush.Seed(), level.pointToCell(c));
-		}
-		
-		int extraFood = (int)(Hunger.STARVING - Hunger.HUNGRY) * (1 + com.quasistellar.hollowdungeon.Dungeon.depth / 5);
-		
-		while (extraFood > 0){
-			Food food;
-			if (extraFood >= Hunger.STARVING){
-				food = new Pasty();
-				extraFood -= Hunger.STARVING;
-			} else {
-				food = new ChargrilledMeat();
-				extraFood -= (Hunger.STARVING - Hunger.HUNGRY);
-			}
-			int foodPos;
-			do {
-				foodPos = level.pointToCell(random());
-			} while (level.map[foodPos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_SP || level.heaps.get(foodPos) != null);
-			level.drop(food, foodPos);
 		}
 		
 		entrance().set(Door.Type.HIDDEN);

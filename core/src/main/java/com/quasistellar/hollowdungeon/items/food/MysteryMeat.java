@@ -33,7 +33,6 @@ public class MysteryMeat extends Food {
 
 	{
 		image = ItemSpriteSheet.MEAT;
-		energy = com.quasistellar.hollowdungeon.actors.buffs.Hunger.HUNGRY/2f;
 	}
 	
 	@Override

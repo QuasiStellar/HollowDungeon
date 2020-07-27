@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.actors.blobs;
 
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.effects.BlobEmitter;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShaftParticle;
@@ -54,7 +53,6 @@ public class WaterOfHealth extends WellWater {
 
 		PotionOfHealing.cure( hero );
 		hero.belongings.uncurseEquipped();
-		hero.buff( com.quasistellar.hollowdungeon.actors.buffs.Hunger.class ).satisfy( Hunger.STARVING );
 		
 		CellEmitter.get( hero.pos ).start( ShaftParticle.FACTORY, 0.2f, 3 );
 

@@ -28,7 +28,6 @@ import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Corruption;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.watabou.noosa.audio.Sample;
 
@@ -66,9 +65,6 @@ public class PotionOfCleansing extends ExoticPotion {
 		for (Buff b : ch.buffs()){
 			if (b.type == Buff.buffType.NEGATIVE && !(b instanceof Corruption)){
 				b.detach();
-			}
-			if (b instanceof Hunger){
-				((Hunger) b).satisfy(Hunger.STARVING);
 			}
 		}
 	}

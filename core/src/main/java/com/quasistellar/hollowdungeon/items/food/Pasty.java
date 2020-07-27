@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.items.food;
 
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.actors.buffs.Recharging;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRecharging;
@@ -73,7 +72,6 @@ public class Pasty extends Food {
 	{
 		reset();
 
-		energy = Hunger.STARVING;
 
 		bones = true;
 	}

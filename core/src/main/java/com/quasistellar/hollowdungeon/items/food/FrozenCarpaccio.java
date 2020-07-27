@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.items.food;
 
 import com.quasistellar.hollowdungeon.actors.buffs.Barkskin;
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
@@ -37,7 +36,6 @@ public class FrozenCarpaccio extends com.quasistellar.hollowdungeon.items.food.F
 
 	{
 		image = ItemSpriteSheet.CARPACCIO;
-		energy = Hunger.HUNGRY/2f;
 	}
 	
 	@Override

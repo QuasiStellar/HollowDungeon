@@ -21,14 +21,12 @@
 
 package com.quasistellar.hollowdungeon.items.food;
 
-import com.quasistellar.hollowdungeon.actors.buffs.Hunger;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
 public class SmallRation extends Food {
 
 	{
 		image = ItemSpriteSheet.OVERPRICED;
-		energy = Hunger.HUNGRY/2f;
 	}
 	
 	@Override
