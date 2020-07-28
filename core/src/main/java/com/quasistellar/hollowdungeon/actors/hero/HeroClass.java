@@ -105,18 +105,18 @@ public enum HeroClass {
 	public String spritesheet() {
 		switch (this) {
 			case KNIGHT: default:
-				return Assets.Sprites.WARRIOR;
+				return Assets.Sprites.KNIGHT;
 			case HORNET:
-				return Assets.Sprites.HUNTRESS;
+				return Assets.Sprites.HORNET;
 		}
 	}
 
 	public String splashArt(){
 		switch (this) {
 			case KNIGHT: default:
-				return Assets.Splashes.WARRIOR;
+				return Assets.Splashes.KNIGHT;
 			case HORNET:
-				return com.quasistellar.hollowdungeon.Assets.Splashes.HUNTRESS;
+				return Assets.Splashes.HORNET;
 		}
 	}
 	

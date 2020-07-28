@@ -286,7 +286,7 @@ public class HeroSelectScene extends PixelScene {
 
 			this.cl = cl;
 
-			icon(new Image(cl.spritesheet(), 0, 0, 12, 15));
+			icon(new Image(cl.spritesheet(), 0, cl == HeroClass.KNIGHT ? 4 : 0, 14, cl == HeroClass.KNIGHT ? 18 : 20));
 
 		}
 
