@@ -21,13 +21,13 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Levitation;
 import com.quasistellar.hollowdungeon.actors.buffs.Vertigo;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 
 public class Stormvine extends com.quasistellar.hollowdungeon.plants.Plant {
 
@@ -40,7 +40,7 @@ public class Stormvine extends com.quasistellar.hollowdungeon.plants.Plant {
 	public void activate( Char ch ) {
 
 		if (ch != null) {
-			if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+			if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HORNET){
 				Buff.affect(ch, Levitation.class, Levitation.DURATION/2f);
 			} else {
 				Buff.affect(ch, Vertigo.class, Vertigo.DURATION);

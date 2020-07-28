@@ -126,7 +126,6 @@ public enum Catalog {
 				Journal.saveNeeded = true;
 			}
 		}
-		Badges.validateItemsIdentified();
 	}
 	
 	private static final String CATALOGS = "catalogs";
@@ -138,16 +137,14 @@ public enum Catalog {
 		ArrayList<String> seen = new ArrayList<>();
 		
 		//if we have identified all items of a set, we use the badge to keep track instead.
-		if (!Badges.isUnlocked(Badges.Badge.ALL_ITEMS_IDENTIFIED)) {
-			for (Catalog cat : values()) {
-				if (!Badges.isUnlocked(catalogBadges.get(cat))) {
-					for (Class<? extends Item> item : cat.items()) {
-						if (cat.seen.get(item)) seen.add(item.getSimpleName());
-					}
+		for (Catalog cat : values()) {
+			if (!Badges.isUnlocked(catalogBadges.get(cat))) {
+				for (Class<? extends Item> item : cat.items()) {
+					if (cat.seen.get(item)) seen.add(item.getSimpleName());
 				}
 			}
 		}
-		
+
 		bundle.put( CATALOGS, seen.toArray(new String[0]) );
 		
 	}
@@ -155,16 +152,6 @@ public enum Catalog {
 	public static void restore( Bundle bundle ){
 		
 		Badges.loadGlobal();
-		
-		//logic for if we have all badges
-		if (Badges.isUnlocked(Badges.Badge.ALL_ITEMS_IDENTIFIED)){
-			for ( Catalog cat : values()){
-				for (Class<? extends Item> item : cat.items()){
-					cat.seen.put(item, true);
-				}
-			}
-			return;
-		}
 		
 		//catalog-specific badge logic
 		for (Catalog cat : values()){

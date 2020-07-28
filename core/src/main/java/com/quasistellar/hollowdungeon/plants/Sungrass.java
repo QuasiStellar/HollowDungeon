@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.effects.Speck;
@@ -29,7 +30,6 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Healing;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.effects.particles.ShaftParticle;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.BuffIndicator;
@@ -46,7 +46,7 @@ public class Sungrass extends com.quasistellar.hollowdungeon.plants.Plant {
 	public void activate( Char ch ) {
 		
 		if (ch == Dungeon.hero) {
-			if (Dungeon.hero.subClass == HeroSubClass.WARDEN) {
+			if (Dungeon.hero.heroClass == HeroClass.HORNET) {
 				Buff.affect(ch, Healing.class).setHeal(ch.HT, 0, 1);
 			} else {
 				Buff.affect(ch, Health.class).boost(ch.HT);

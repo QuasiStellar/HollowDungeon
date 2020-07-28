@@ -185,25 +185,6 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 			}
 		}
 		
-		//give classes to people with saves that have previously unlocked them
-		if (previousVersion <= ShatteredPixelDungeon.v0_7_0c){
-			Badges.loadGlobal();
-			Badges.addGlobal(Badges.Badge.UNLOCK_MAGE);
-			Badges.addGlobal(Badges.Badge.UNLOCK_ROGUE);
-			if (Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_3)){
-				Badges.addGlobal(Badges.Badge.UNLOCK_HUNTRESS);
-			}
-			Badges.saveGlobal();
-		}
-		
-		if (previousVersion <= ShatteredPixelDungeon.v0_6_5c){
-			Journal.loadGlobal();
-			Document.ALCHEMY_GUIDE.addPage("Potions");
-			Document.ALCHEMY_GUIDE.addPage("Stones");
-			com.quasistellar.hollowdungeon.journal.Document.ALCHEMY_GUIDE.addPage("Energy_Food");
-			com.quasistellar.hollowdungeon.journal.Journal.saveGlobal();
-		}
-		
 		SPDSettings.version(ShatteredPixelDungeon.versionCode);
 	}
 

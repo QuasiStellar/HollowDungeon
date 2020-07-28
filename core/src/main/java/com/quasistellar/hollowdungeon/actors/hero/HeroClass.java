@@ -21,40 +21,29 @@
 
 package com.quasistellar.hollowdungeon.actors.hero;
 
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
-import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
-import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfInvisibility;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfMindVision;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfLullaby;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
 
 public enum HeroClass {
 
-	WARRIOR( "warrior", HeroSubClass.BERSERKER, HeroSubClass.GLADIATOR ),
-	MAGE( "mage", HeroSubClass.BATTLEMAGE, HeroSubClass.WARLOCK ),
-	ROGUE( "rogue", HeroSubClass.ASSASSIN, HeroSubClass.FREERUNNER ),
-	HUNTRESS( "huntress", HeroSubClass.SNIPER, HeroSubClass.WARDEN );
+	KNIGHT( "knight" ),
+	HORNET( "hornet" );
 
 	private String title;
-	private HeroSubClass[] subClasses;
 
-	HeroClass( String title, HeroSubClass...subClasses ) {
+	HeroClass( String title ) {
 		this.title = title;
-		this.subClasses = subClasses;
 	}
 
 	public void initHero( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
@@ -64,20 +53,12 @@ public enum HeroClass {
 		initCommon( hero );
 
 		switch (this) {
-			case WARRIOR:
-				initWarrior( hero );
+			case KNIGHT:
+				initKnight( hero );
 				break;
 
-			case MAGE:
-				initMage( hero );
-				break;
-
-			case ROGUE:
-				initRogue( hero );
-				break;
-
-			case HUNTRESS:
-				initHuntress( hero );
+			case HORNET:
+				initHornet( hero );
 				break;
 		}
 
@@ -91,19 +72,15 @@ public enum HeroClass {
 
 	public com.quasistellar.hollowdungeon.Badges.Badge masteryBadge() {
 		switch (this) {
-			case WARRIOR:
-				return Badges.Badge.MASTERY_WARRIOR;
-			case MAGE:
-				return Badges.Badge.MASTERY_MAGE;
-			case ROGUE:
-				return Badges.Badge.MASTERY_ROGUE;
-			case HUNTRESS:
-				return Badges.Badge.MASTERY_HUNTRESS;
+			case KNIGHT:
+				return Badges.Badge.MASTERY_KNIGHT;
+			case HORNET:
+				return Badges.Badge.MASTERY_HORNET;
 		}
 		return null;
 	}
 
-	private static void initWarrior( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
+	private static void initKnight(com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
 
 		new PotionBandolier().collect();
 		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
@@ -112,25 +89,7 @@ public enum HeroClass {
 		new ScrollOfRage().identify();
 	}
 
-	private static void initMage( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
-
-		new ScrollHolder().collect();
-		Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
-
-		new ScrollOfUpgrade().identify();
-		new PotionOfLiquidFlame().identify();
-	}
-
-	private static void initRogue( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
-
-		new VelvetPouch().collect();
-		Dungeon.LimitedDrops.VELVET_POUCH.drop();
-
-		new ScrollOfMagicMapping().identify();
-		new PotionOfInvisibility().identify();
-	}
-
-	private static void initHuntress( Hero hero ) {
+	private static void initHornet(Hero hero ) {
 
 		new VelvetPouch().collect();
 		com.quasistellar.hollowdungeon.Dungeon.LimitedDrops.VELVET_POUCH.drop();
@@ -143,39 +102,27 @@ public enum HeroClass {
 		return Messages.get(HeroClass.class, title);
 	}
 
-	public HeroSubClass[] subClasses() {
-		return subClasses;
-	}
-
 	public String spritesheet() {
 		switch (this) {
-			case WARRIOR: default:
+			case KNIGHT: default:
 				return Assets.Sprites.WARRIOR;
-			case MAGE:
-				return Assets.Sprites.MAGE;
-			case ROGUE:
-				return Assets.Sprites.ROGUE;
-			case HUNTRESS:
+			case HORNET:
 				return Assets.Sprites.HUNTRESS;
 		}
 	}
 
 	public String splashArt(){
 		switch (this) {
-			case WARRIOR: default:
+			case KNIGHT: default:
 				return Assets.Splashes.WARRIOR;
-			case MAGE:
-				return Assets.Splashes.MAGE;
-			case ROGUE:
-				return Assets.Splashes.ROGUE;
-			case HUNTRESS:
+			case HORNET:
 				return com.quasistellar.hollowdungeon.Assets.Splashes.HUNTRESS;
 		}
 	}
 	
 	public String[] perks() {
 		switch (this) {
-			case WARRIOR: default:
+			case KNIGHT: default:
 				return new String[]{
 						Messages.get(HeroClass.class, "warrior_perk1"),
 						Messages.get(HeroClass.class, "warrior_perk2"),
@@ -183,23 +130,7 @@ public enum HeroClass {
 						Messages.get(HeroClass.class, "warrior_perk4"),
 						Messages.get(HeroClass.class, "warrior_perk5"),
 				};
-			case MAGE:
-				return new String[]{
-						Messages.get(HeroClass.class, "mage_perk1"),
-						Messages.get(HeroClass.class, "mage_perk2"),
-						Messages.get(HeroClass.class, "mage_perk3"),
-						Messages.get(HeroClass.class, "mage_perk4"),
-						Messages.get(HeroClass.class, "mage_perk5"),
-				};
-			case ROGUE:
-				return new String[]{
-						Messages.get(HeroClass.class, "rogue_perk1"),
-						Messages.get(HeroClass.class, "rogue_perk2"),
-						Messages.get(HeroClass.class, "rogue_perk3"),
-						Messages.get(HeroClass.class, "rogue_perk4"),
-						Messages.get(HeroClass.class, "rogue_perk5"),
-				};
-			case HUNTRESS:
+			case HORNET:
 				return new String[]{
 						Messages.get(HeroClass.class, "huntress_perk1"),
 						Messages.get(HeroClass.class, "huntress_perk2"),
@@ -215,26 +146,18 @@ public enum HeroClass {
 		if (DeviceCompat.isDebug()) return true;
 		
 		switch (this){
-			case WARRIOR: default:
+			case KNIGHT: default:
 				return true;
-			case MAGE:
-				return Badges.isUnlocked(Badges.Badge.UNLOCK_MAGE);
-			case ROGUE:
-				return Badges.isUnlocked(Badges.Badge.UNLOCK_ROGUE);
-			case HUNTRESS:
-				return Badges.isUnlocked(com.quasistellar.hollowdungeon.Badges.Badge.UNLOCK_HUNTRESS);
+			case HORNET:
+				return Badges.isUnlocked(com.quasistellar.hollowdungeon.Badges.Badge.UNLOCK_HORNET);
 		}
 	}
 	
 	public String unlockMsg() {
 		switch (this){
-			case WARRIOR: default:
+			case KNIGHT: default:
 				return "";
-			case MAGE:
-				return Messages.get(HeroClass.class, "mage_unlock");
-			case ROGUE:
-				return Messages.get(HeroClass.class, "rogue_unlock");
-			case HUNTRESS:
+			case HORNET:
 				return Messages.get(HeroClass.class, "huntress_unlock");
 		}
 	}
@@ -247,6 +170,6 @@ public enum HeroClass {
 	
 	public static HeroClass restoreInBundle( Bundle bundle ) {
 		String value = bundle.getString( CLASS );
-		return value.length() > 0 ? valueOf( value ) : ROGUE;
+		return value.length() > 0 ? valueOf( value ) : KNIGHT;
 	}
 }

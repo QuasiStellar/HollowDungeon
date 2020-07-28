@@ -53,7 +53,7 @@ public abstract class SecretRoom extends SpecialRoom {
 		
 		float[] regionChances = baseRegionSecrets.clone();
 		
-		if (GamesInProgress.selectedClass == HeroClass.ROGUE){
+		if (GamesInProgress.selectedClass == HeroClass.HORNET){
 			for (int i = 0; i < regionChances.length; i++){
 				regionChances[i] += 0.6f;
 			}

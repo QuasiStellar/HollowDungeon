@@ -32,7 +32,6 @@ import com.quasistellar.hollowdungeon.windows.WndQuest;
 import com.quasistellar.hollowdungeon.windows.WndWandmaker;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.journal.Notes;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
@@ -133,16 +132,10 @@ public class Wandmaker extends NPC {
 			String msg1 = "";
 			String msg2 = "";
 			switch(Dungeon.hero.heroClass){
-				case WARRIOR:
+				case KNIGHT:
 					msg1 += Messages.get(this, "intro_warrior");
 					break;
-				case ROGUE:
-					msg1 += Messages.get(this, "intro_rogue");
-					break;
-				case MAGE:
-					msg1 += Messages.get(this, "intro_mage", Dungeon.hero.name());
-					break;
-				case HUNTRESS:
+				case HORNET:
 					msg1 += Messages.get(this, "intro_huntress");
 					break;
 			}

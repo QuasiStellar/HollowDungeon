@@ -93,8 +93,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	private static final float TIME_TO_REST		    = 1f;
 	private static final float TIME_TO_SEARCH	    = 2f;
 	
-	public HeroClass heroClass = HeroClass.ROGUE;
-	public HeroSubClass subClass = HeroSubClass.NONE;
+	public HeroClass heroClass = HeroClass.KNIGHT;
 
 	public boolean ready = false;
 	private boolean damageInterrupt = true;
@@ -151,7 +150,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		super.storeInBundle( bundle );
 		
 		heroClass.storeInBundle( bundle );
-		subClass.storeInBundle( bundle );
 		
 		bundle.put( HTBOOST, HTBoost );
 
@@ -163,7 +161,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		super.restoreFromBundle( bundle );
 		
 		heroClass = HeroClass.restoreInBundle( bundle );
-		subClass = HeroSubClass.restoreInBundle( bundle );
 		
 		HTBoost = bundle.getInt(HTBOOST);
 		
@@ -175,12 +172,11 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		info.ht = bundle.getInt( Char.TAG_HT );
 		info.shld = bundle.getInt( Char.TAG_SHLD );
 		info.heroClass = HeroClass.restoreInBundle( bundle );
-		info.subClass = HeroSubClass.restoreInBundle( bundle );
 		Belongings.preview( info, bundle );
 	}
 	
 	public String className() {
-		return subClass == null || subClass == HeroSubClass.NONE ? heroClass.title() : subClass.title();
+		return heroClass.title();
 	}
 
 	@Override
@@ -908,10 +904,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			justMoved = true;
 			
 			search(false);
-			
-			if (subClass == HeroSubClass.FREERUNNER){
-				com.quasistellar.hollowdungeon.actors.buffs.Buff.affect(this, com.quasistellar.hollowdungeon.actors.buffs.Momentum.class).gainStack();
-			}
 
 			//FIXME this is a fairly sloppy fix for a crash involving pitfall traps.
 			//really there should be a way for traps to specify whether action should continue or
@@ -1242,7 +1234,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		
 		boolean smthFound = false;
 
-		int distance = heroClass == HeroClass.ROGUE ? 2 : 1;
+		int distance = heroClass == HeroClass.HORNET ? 2 : 1;
 		
 		boolean foresight = buff(com.quasistellar.hollowdungeon.actors.buffs.Foresight.class) != null;
 		

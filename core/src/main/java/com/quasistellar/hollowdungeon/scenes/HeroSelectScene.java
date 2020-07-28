@@ -36,7 +36,6 @@ import com.quasistellar.hollowdungeon.GamesInProgress;
 import com.quasistellar.hollowdungeon.SPDSettings;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.ActionIndicator;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
@@ -75,7 +74,7 @@ public class HeroSelectScene extends PixelScene {
 		Badges.loadGlobal();
 		Journal.loadGlobal();
 
-		background = new Image(HeroClass.WARRIOR.splashArt()){
+		background = new Image(HeroClass.KNIGHT.splashArt()){
 			@Override
 			public void update() {
 				if (rm > 1f){
@@ -287,7 +286,7 @@ public class HeroSelectScene extends PixelScene {
 
 			this.cl = cl;
 
-			icon(new Image(cl.spritesheet(), 0, 90, 12, 15));
+			icon(new Image(cl.spritesheet(), 0, 0, 12, 15));
 
 		}
 
@@ -332,28 +331,14 @@ public class HeroSelectScene extends PixelScene {
 			Tab tab;
 			Image[] tabIcons;
 			switch (cl){
-				case WARRIOR: default:
+				case KNIGHT: default:
 					tabIcons = new Image[]{
 							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SEAL, null),
 							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD, null),
 							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RATION, null)
 					};
 					break;
-				case MAGE:
-					tabIcons = new Image[]{
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.MAGES_STAFF, null),
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.HOLDER, null),
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.WAND_MAGIC_MISSILE, null)
-					};
-					break;
-				case ROGUE:
-					tabIcons = new Image[]{
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.ARTIFACT_CLOAK, null),
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.DAGGER, null),
-							Icons.get(Icons.DEPTH)
-					};
-					break;
-				case HUNTRESS:
+				case HORNET:
 					tabIcons = new Image[]{
 							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SPIRIT_BOW, null),
 							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.GLOVES, null),
@@ -390,21 +375,6 @@ public class HeroSelectScene extends PixelScene {
 					super.select(value);
 					if (value){
 						info.text(Messages.get(cl, cl.name() + "_desc_misc"), INFO_WIDTH);
-					}
-				}
-			};
-			add(tab);
-
-			tab = new IconTab(new ItemSprite(com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.MASTERY, null)){
-				@Override
-				protected void select(boolean value) {
-					super.select(value);
-					if (value){
-						String msg = Messages.get(cl, cl.name() + "_desc_subclasses");
-						for (HeroSubClass sub : cl.subClasses()){
-							msg += "\n\n" + sub.desc();
-						}
-						info.text(msg, INFO_WIDTH);
 					}
 				}
 			};

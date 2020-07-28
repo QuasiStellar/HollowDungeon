@@ -77,8 +77,7 @@ public class BadgesScene extends PixelScene {
 
 		int blankBadges = 36;
 		blankBadges -= badges.size();
-		if (badges.contains(Badges.Badge.ALL_ITEMS_IDENTIFIED))	blankBadges -= 6;
-		if (badges.contains(Badges.Badge.YASD)) 				blankBadges -= 5;
+		if (badges.contains(Badges.Badge.YASD)) 				blankBadges -= 2;
 		blankBadges = Math.max(0, blankBadges);
 
 		//guarantees a max of 5 rows in landscape, and 8 in portrait, assuming a max of 40 buttons

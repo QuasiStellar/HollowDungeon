@@ -76,7 +76,6 @@ public class WaterOfAwareness extends WellWater {
 			return null;
 		} else {
 			item.identify();
-			Badges.validateItemLevelAquired( item );
 			
 			Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.DRINK );
 			emitter.parent.add( new Identification( DungeonTilemap.tileCenterToWorld( pos ) ) );

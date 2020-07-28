@@ -133,12 +133,4 @@ public class Chasm {
 			return true;
 		}
 	}
-	
-	public static class FallBleed extends Bleeding implements Hero.Doom {
-		
-		@Override
-		public void onDeath() {
-			com.quasistellar.hollowdungeon.Badges.validateDeathFromFalling();
-		}
-	}
 }

@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon;
 
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.FileUtils;
@@ -132,7 +131,6 @@ public class GamesInProgress {
 		info.ht = hero.HT;
 		info.shld = hero.shielding();
 		info.heroClass = hero.heroClass;
-		info.subClass = hero.subClass;
 		
 		info.goldCollected = Statistics.goldCollected;
 		info.maxDepth = Statistics.deepestFloor;
@@ -162,7 +160,6 @@ public class GamesInProgress {
 		public int ht;
 		public int shld;
 		public HeroClass heroClass;
-		public HeroSubClass subClass;
 		public int armorTier;
 		
 		public int goldCollected;

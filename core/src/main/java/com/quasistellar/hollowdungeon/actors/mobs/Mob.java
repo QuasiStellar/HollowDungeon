@@ -538,7 +538,7 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
 
         if (hitWithRanged) {
             com.quasistellar.hollowdungeon.Statistics.thrownAssists++;
-            com.quasistellar.hollowdungeon.Badges.validateHuntressUnlock();
+            com.quasistellar.hollowdungeon.Badges.validateHornetUnlock();
         }
 
         if (alignment == Alignment.ENEMY) {

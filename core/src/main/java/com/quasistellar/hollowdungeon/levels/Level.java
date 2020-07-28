@@ -45,7 +45,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.MindVision;
 import com.quasistellar.hollowdungeon.actors.buffs.Shadows;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.actors.mobs.Bestiary;
 import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
@@ -951,21 +950,11 @@ public abstract class Level implements Bundlable {
 		boolean sighted = c.buff( Blindness.class ) == null && c.buff( Shadows.class ) == null && c.isAlive();
 		if (sighted) {
 			boolean[] blocking;
-			
-			if ((c instanceof Hero && ((Hero) c).subClass == HeroSubClass.WARDEN)
-				|| c instanceof YogFist.SoiledFist) {
-				blocking = Dungeon.level.losBlocking.clone();
-				for (int i = 0; i < blocking.length; i++){
-					if (blocking[i] && (Dungeon.level.map[i] == Terrain.HIGH_GRASS || Dungeon.level.map[i] == Terrain.FURROWED_GRASS)){
-						blocking[i] = false;
-					}
-				}
-			} else {
-				blocking = Dungeon.level.losBlocking;
-			}
+
+			blocking = Dungeon.level.losBlocking;
 			
 			int viewDist = c.viewDistance;
-			if (c instanceof Hero && ((Hero) c).subClass == HeroSubClass.SNIPER) viewDist *= 1.5f;
+			if (c instanceof Hero && ((Hero) c).heroClass == HeroClass.HORNET) viewDist *= 1.5f;
 			
 			ShadowCaster.castShadow( cx, cy, fieldOfView, blocking, viewDist );
 		} else {
@@ -981,7 +970,7 @@ public abstract class Level implements Bundlable {
 			if (c.buff(MagicalSight.class) != null){
 				sense = 8;
 			}
-			if (((Hero)c).subClass == HeroSubClass.SNIPER){
+			if (((Hero)c).heroClass == HeroClass.HORNET){
 				sense *= 1.5f;
 			}
 		}
@@ -1022,7 +1011,7 @@ public abstract class Level implements Bundlable {
 					}
 
 				}
-			} else if (((Hero)c).heroClass == HeroClass.HUNTRESS) {
+			} else if (((Hero)c).heroClass == HeroClass.HORNET) {
 				for (Mob mob : mobs) {
 					int p = mob.pos;
 					if (distance( c.pos, p) == 2) {

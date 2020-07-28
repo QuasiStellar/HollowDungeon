@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.GamesInProgress;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
@@ -161,12 +160,8 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 					level = null;
 				}
 			} else {
-				
-				if (info.subClass != HeroSubClass.NONE){
-					name.text(Messages.titleCase(info.subClass.title()));
-				} else {
-					name.text(Messages.titleCase(info.heroClass.title()));
-				}
+
+				name.text(Messages.titleCase(info.heroClass.title()));
 				
 				if (hero == null){
 					hero = new Image(info.heroClass.spritesheet(), 0, 15*info.armorTier, 12, 15);

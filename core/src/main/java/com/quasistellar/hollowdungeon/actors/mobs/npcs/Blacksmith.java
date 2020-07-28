@@ -176,7 +176,6 @@ public class Blacksmith extends NPC {
 		first.level(level+1); //prevents on-upgrade effects like enchant/glyph removal
 
 		Dungeon.hero.spendAndNext( 2f );
-		Badges.validateItemLevelAquired( first );
 		com.quasistellar.hollowdungeon.items.Item.updateQuickslot();
 		
 		Quest.reforged = true;

@@ -200,10 +200,6 @@ public class Item implements Bundlable {
 			}
 		}
 
-		if (Dungeon.hero != null && Dungeon.hero.isAlive()) {
-			Badges.validateItemLevelAquired( this );
-		}
-
 		items.add( this );
 		Dungeon.quickslot.replacePlaceholder(this);
 		updateQuickslot();

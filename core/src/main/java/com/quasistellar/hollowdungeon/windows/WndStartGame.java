@@ -28,7 +28,6 @@ import com.quasistellar.hollowdungeon.GamesInProgress;
 import com.quasistellar.hollowdungeon.SPDSettings;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.journal.Journal;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.InterlevelScene;
@@ -261,20 +260,6 @@ public class WndStartGame extends Window {
 			heroMisc.setSize(BTN_SIZE, BTN_SIZE);
 			add(heroMisc);
 			
-			heroSubclass = new IconButton(new ItemSprite(ItemSpriteSheet.MASTERY, null)){
-				@Override
-				protected void onClick() {
-					if (cl == null) return;
-					String msg = Messages.get(cl, cl.name() + "_desc_subclasses");
-					for (HeroSubClass sub : cl.subClasses()){
-						msg += "\n\n" + sub.desc();
-					}
-					ShatteredPixelDungeon.scene().addToFront(new WndMessage(msg));
-				}
-			};
-			heroSubclass.setSize(BTN_SIZE, BTN_SIZE);
-			add(heroSubclass);
-			
 			name = PixelScene.renderTextBlock(12);
 			add(name);
 			
@@ -312,22 +297,12 @@ public class WndStartGame extends Window {
 					name.text(Messages.capitalize(cl.title()));
 					
 					switch(cl){
-						case WARRIOR:
+						case KNIGHT:
 							heroItem.icon(new ItemSprite(ItemSpriteSheet.SEAL, null));
 							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD, null));
 							heroMisc.icon(new ItemSprite(ItemSpriteSheet.RATION, null));
 							break;
-						case MAGE:
-							heroItem.icon(new ItemSprite(ItemSpriteSheet.MAGES_STAFF, null));
-							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.HOLDER, null));
-							heroMisc.icon(new ItemSprite(ItemSpriteSheet.WAND_MAGIC_MISSILE, null));
-							break;
-						case ROGUE:
-							heroItem.icon(new ItemSprite(ItemSpriteSheet.ARTIFACT_CLOAK, null));
-							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.DAGGER, null));
-							heroMisc.icon(Icons.get(Icons.DEPTH));
-							break;
-						case HUNTRESS:
+						case HORNET:
 							heroItem.icon(new ItemSprite(ItemSpriteSheet.SPIRIT_BOW, null));
 							heroLoadout.icon(new ItemSprite(ItemSpriteSheet.GLOVES, null));
 							heroMisc.icon(new Image(Assets.Environment.TILES_SEWERS, 112, 96, 16, 16 ));

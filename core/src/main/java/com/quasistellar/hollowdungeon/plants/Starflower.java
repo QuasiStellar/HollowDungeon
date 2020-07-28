@@ -21,13 +21,13 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Bless;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Recharging;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 
 public class Starflower extends com.quasistellar.hollowdungeon.plants.Plant {
 
@@ -41,7 +41,7 @@ public class Starflower extends com.quasistellar.hollowdungeon.plants.Plant {
 
 		if (ch != null) {
 			Buff.prolong(ch, Bless.class, Bless.DURATION);
-			if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+			if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HORNET){
 				Buff.prolong(ch, Recharging.class, Recharging.DURATION);
 			}
 		}

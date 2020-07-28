@@ -30,7 +30,6 @@ import com.quasistellar.hollowdungeon.effects.particles.BlastParticle;
 import com.quasistellar.hollowdungeon.effects.particles.FlameParticle;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.TomeOfMastery;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.sprites.MissileSprite;
 import com.quasistellar.hollowdungeon.sprites.TenguSprite;
@@ -50,7 +49,6 @@ import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.ui.BossHealthBar;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -159,10 +157,6 @@ public class NewTengu extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 
 	@Override
 	public void die( Object cause ) {
-		
-		if (Dungeon.hero.subClass == HeroSubClass.NONE) {
-			Dungeon.level.drop( new TomeOfMastery(), pos ).sprite.drop();
-		}
 		
 		GameScene.bossSlain();
 		super.die( cause );

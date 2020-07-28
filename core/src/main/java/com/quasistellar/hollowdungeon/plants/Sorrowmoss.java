@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.Dungeon;
@@ -29,7 +30,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Poison;
 import com.quasistellar.hollowdungeon.actors.buffs.ToxicImbue;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.effects.particles.PoisonParticle;
 
 public class Sorrowmoss extends com.quasistellar.hollowdungeon.plants.Plant {
@@ -41,7 +41,7 @@ public class Sorrowmoss extends com.quasistellar.hollowdungeon.plants.Plant {
 	
 	@Override
 	public void activate( Char ch ) {
-		if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+		if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HORNET){
 			Buff.affect(ch, ToxicImbue.class).set(ToxicImbue.DURATION*0.3f);
 		}
 		

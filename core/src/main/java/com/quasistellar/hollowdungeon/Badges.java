@@ -53,85 +53,36 @@ public class Badges {
 		GOLD_COLLECTED_2( 5 ),
 		GOLD_COLLECTED_3( 6 ),
 		GOLD_COLLECTED_4( 7 ),
-		LEVEL_REACHED_1( 8 ),
-		LEVEL_REACHED_2( 9 ),
-		LEVEL_REACHED_3( 10 ),
-		LEVEL_REACHED_4( 11 ),
-		ALL_WEAPONS_IDENTIFIED( 16 ),
-		ALL_ARMOR_IDENTIFIED( 17 ),
-		ALL_WANDS_IDENTIFIED( 18 ),
-		ALL_RINGS_IDENTIFIED( 19 ),
-		ALL_ARTIFACTS_IDENTIFIED( 20 ),
 		ALL_POTIONS_IDENTIFIED( 21 ),
 		ALL_SCROLLS_IDENTIFIED( 22 ),
-		ALL_ITEMS_IDENTIFIED( 23, true ),
 		//these names are a bit outdated, but it doesn't really matter.
-		BAG_BOUGHT_SEED_POUCH,
-		BAG_BOUGHT_SCROLL_HOLDER,
-		BAG_BOUGHT_POTION_BANDOLIER,
-		BAG_BOUGHT_WAND_HOLSTER,
-		ALL_BAGS_BOUGHT( 24 ),
 		DEATH_FROM_FIRE( 25 ),
 		DEATH_FROM_POISON( 26 ),
 		DEATH_FROM_GAS( 27 ),
-		DEATH_FROM_HUNGER( 28 ),
-		DEATH_FROM_GLYPH( 29 ),
-		DEATH_FROM_FALLING( 30 ),
 		YASD( 31, true ),
-		BOSS_SLAIN_1_WARRIOR,
-		BOSS_SLAIN_1_MAGE,
-		BOSS_SLAIN_1_ROGUE,
-		BOSS_SLAIN_1_HUNTRESS,
+		BOSS_SLAIN_1_KNIGHT,
+		BOSS_SLAIN_1_HORNET,
 		BOSS_SLAIN_1( 12 ),
 		BOSS_SLAIN_2( 13 ),
 		BOSS_SLAIN_3( 14 ),
 		BOSS_SLAIN_4( 15 ),
-		BOSS_SLAIN_1_ALL_CLASSES( 32, true ),
-		BOSS_SLAIN_3_GLADIATOR,
-		BOSS_SLAIN_3_BERSERKER,
-		BOSS_SLAIN_3_WARLOCK,
-		BOSS_SLAIN_3_BATTLEMAGE,
-		BOSS_SLAIN_3_FREERUNNER,
-		BOSS_SLAIN_3_ASSASSIN,
-		BOSS_SLAIN_3_SNIPER,
-		BOSS_SLAIN_3_WARDEN,
-		BOSS_SLAIN_3_ALL_SUBCLASSES( 33, true ),
-		VICTORY_WARRIOR,
-		VICTORY_MAGE,
-		VICTORY_ROGUE,
-		VICTORY_HUNTRESS,
+		VICTORY_KNIGHT,
+		VICTORY_HORNET,
 		VICTORY( 34 ),
 		VICTORY_ALL_CLASSES( 35, true ),
 		HAPPY_END( 36 ),
 		CHAMPION_1( 37, true ),
 		CHAMPION_2( 38, true ),
 		CHAMPION_3( 39, true ),
-		STRENGTH_ATTAINED_1( 40 ),
-		STRENGTH_ATTAINED_2( 41 ),
-		STRENGTH_ATTAINED_3( 42 ),
-		STRENGTH_ATTAINED_4( 43 ),
-		FOOD_EATEN_1( 44 ),
-		FOOD_EATEN_2( 45 ),
-		FOOD_EATEN_3( 46 ),
-		FOOD_EATEN_4( 47 ),
-		MASTERY_WARRIOR,
-		MASTERY_MAGE,
-		MASTERY_ROGUE,
-		MASTERY_HUNTRESS,
-		UNLOCK_MAGE( 65 ),
-		UNLOCK_ROGUE( 66 ),
-		UNLOCK_HUNTRESS( 67 ),
-		ITEM_LEVEL_1( 48 ),
-		ITEM_LEVEL_2( 49 ),
-		ITEM_LEVEL_3( 50 ),
-		ITEM_LEVEL_4( 51 ),
+		MASTERY_KNIGHT,
+		MASTERY_HORNET,
+		UNLOCK_HORNET( 67 ),
 		POTIONS_COOKED_1( 52 ),
 		POTIONS_COOKED_2( 53 ),
 		POTIONS_COOKED_3( 54 ),
 		POTIONS_COOKED_4( 55 ),
 		MASTERY_COMBO( 56 ),
 		NO_MONSTERS_SLAIN( 57 ),
-		GRIM_WEAPON( 58 ),
 		PIRANHAS( 59 ),
 		GAMES_PLAYED_1( 60, true ),
 		GAMES_PLAYED_2( 61, true ),
@@ -298,29 +249,6 @@ public class Badges {
 		displayBadge( badge );
 	}
 	
-	public static void validateFoodEaten() {
-		Badge badge = null;
-		
-		if (!local.contains( Badge.FOOD_EATEN_1 ) && Statistics.foodEaten >= 10) {
-			badge = Badge.FOOD_EATEN_1;
-			local.add( badge );
-		}
-		if (!local.contains( Badge.FOOD_EATEN_2 ) && Statistics.foodEaten >= 20) {
-			badge = Badge.FOOD_EATEN_2;
-			local.add( badge );
-		}
-		if (!local.contains( Badge.FOOD_EATEN_3 ) && Statistics.foodEaten >= 30) {
-			badge = Badge.FOOD_EATEN_3;
-			local.add( badge );
-		}
-		if (!local.contains( Badge.FOOD_EATEN_4 ) && Statistics.foodEaten >= 40) {
-			badge = Badge.FOOD_EATEN_4;
-			local.add( badge );
-		}
-		
-		displayBadge( badge );
-	}
-	
 	public static void validatePotionsCooked() {
 		Badge badge = null;
 		
@@ -354,94 +282,7 @@ public class Badges {
 		
 		displayBadge( badge );
 	}
-	
-	public static void validateItemLevelAquired( com.quasistellar.hollowdungeon.items.Item item ) {
-		
-		// This method should be called:
-		// 1) When an item is obtained (Item.collect)
-		// 2) When an item is upgraded (ScrollOfUpgrade, ScrollOfWeaponUpgrade, ShortSword, WandOfMagicMissile)
-		// 3) When an item is identified
 
-		// Note that artifacts should never trigger this badge as they are alternatively upgraded
-		if (!item.levelKnown) {
-			return;
-		}
-		
-		Badge badge = null;
-		if (!local.contains( Badge.ITEM_LEVEL_1 ) && item.level() >= 3) {
-			badge = Badge.ITEM_LEVEL_1;
-			local.add( badge );
-		}
-		if (!local.contains( Badge.ITEM_LEVEL_2 ) && item.level() >= 6) {
-			badge = Badge.ITEM_LEVEL_2;
-			local.add( badge );
-		}
-		if (!local.contains( Badge.ITEM_LEVEL_3 ) && item.level() >= 9) {
-			badge = Badge.ITEM_LEVEL_3;
-			local.add( badge );
-		}
-		if (!local.contains( Badge.ITEM_LEVEL_4 ) && item.level() >= 12) {
-			badge = Badge.ITEM_LEVEL_4;
-			local.add( badge );
-		}
-		
-		displayBadge( badge );
-	}
-	
-	public static void validateAllBagsBought( Item bag ) {
-		
-		Badge badge = null;
-		if (bag instanceof VelvetPouch) {
-			badge = Badge.BAG_BOUGHT_SEED_POUCH;
-		} else if (bag instanceof ScrollHolder) {
-			badge = Badge.BAG_BOUGHT_SCROLL_HOLDER;
-		} else if (bag instanceof PotionBandolier) {
-			badge = Badge.BAG_BOUGHT_POTION_BANDOLIER;
-		} else if (bag instanceof MagicalHolster) {
-			badge = Badge.BAG_BOUGHT_WAND_HOLSTER;
-		}
-		
-		if (badge != null) {
-			
-			local.add( badge );
-			
-			if (!local.contains( Badge.ALL_BAGS_BOUGHT ) &&
-				local.contains( Badge.BAG_BOUGHT_SEED_POUCH ) &&
-				local.contains( Badge.BAG_BOUGHT_SCROLL_HOLDER ) &&
-				local.contains( Badge.BAG_BOUGHT_POTION_BANDOLIER ) &&
-				local.contains( Badge.BAG_BOUGHT_WAND_HOLSTER )) {
-						
-					badge = Badge.ALL_BAGS_BOUGHT;
-					local.add( badge );
-					displayBadge( badge );
-			}
-		}
-	}
-	
-	public static void validateItemsIdentified() {
-		
-		for (com.quasistellar.hollowdungeon.journal.Catalog cat : Catalog.values()){
-			if (cat.allSeen()){
-				Badge b = com.quasistellar.hollowdungeon.journal.Catalog.catalogBadges.get(cat);
-				if (!global.contains(b)){
-					displayBadge(b);
-				}
-			}
-		}
-		
-		if (!global.contains( Badge.ALL_ITEMS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_WEAPONS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_ARMOR_IDENTIFIED ) &&
-			global.contains( Badge.ALL_WANDS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_RINGS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_ARTIFACTS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_POTIONS_IDENTIFIED ) &&
-			global.contains( Badge.ALL_SCROLLS_IDENTIFIED )) {
-			
-			displayBadge( Badge.ALL_ITEMS_IDENTIFIED );
-		}
-	}
-	
 	public static void validateDeathFromFire() {
 		Badge badge = Badge.DEATH_FROM_FIRE;
 		local.add( badge );
@@ -465,38 +306,11 @@ public class Badges {
 		
 		validateYASD();
 	}
-	
-	public static void validateDeathFromHunger() {
-		Badge badge = Badge.DEATH_FROM_HUNGER;
-		local.add( badge );
-		displayBadge( badge );
-		
-		validateYASD();
-	}
-	
-	public static void validateDeathFromGlyph() {
-		Badge badge = Badge.DEATH_FROM_GLYPH;
-		local.add( badge );
-		displayBadge( badge );
 
-		validateYASD();
-	}
-	
-	public static void validateDeathFromFalling() {
-		Badge badge = Badge.DEATH_FROM_FALLING;
-		local.add( badge );
-		displayBadge( badge );
-
-		validateYASD();
-	}
-	
 	private static void validateYASD() {
 		if (global.contains( Badge.DEATH_FROM_FIRE ) &&
 			global.contains( Badge.DEATH_FROM_POISON ) &&
-			global.contains( Badge.DEATH_FROM_GAS ) &&
-			global.contains( Badge.DEATH_FROM_HUNGER) &&
-			global.contains( Badge.DEATH_FROM_GLYPH) &&
-			global.contains( Badge.DEATH_FROM_FALLING)) {
+			global.contains( Badge.DEATH_FROM_GAS )) {
 			
 			Badge badge = Badge.YASD;
 			local.add( badge );
@@ -527,88 +341,17 @@ public class Badges {
 			
 			if (badge == Badge.BOSS_SLAIN_1) {
 				switch (Dungeon.hero.heroClass) {
-				case WARRIOR:
-					badge = Badge.BOSS_SLAIN_1_WARRIOR;
+				case KNIGHT:
+					badge = Badge.BOSS_SLAIN_1_KNIGHT;
 					break;
-				case MAGE:
-					badge = Badge.BOSS_SLAIN_1_MAGE;
-					break;
-				case ROGUE:
-					badge = Badge.BOSS_SLAIN_1_ROGUE;
-					break;
-				case HUNTRESS:
-					badge = Badge.BOSS_SLAIN_1_HUNTRESS;
+				case HORNET:
+					badge = Badge.BOSS_SLAIN_1_HORNET;
 					break;
 				}
 				local.add( badge );
 				if (!global.contains( badge )) {
 					global.add( badge );
 					saveNeeded = true;
-				}
-				
-				if (global.contains( Badge.BOSS_SLAIN_1_WARRIOR ) &&
-					global.contains( Badge.BOSS_SLAIN_1_MAGE ) &&
-					global.contains( Badge.BOSS_SLAIN_1_ROGUE ) &&
-					global.contains( Badge.BOSS_SLAIN_1_HUNTRESS)) {
-					
-					badge = Badge.BOSS_SLAIN_1_ALL_CLASSES;
-					if (!global.contains( badge )) {
-						displayBadge( badge );
-						global.add( badge );
-						saveNeeded = true;
-					}
-				}
-			} else
-			if (badge == Badge.BOSS_SLAIN_3) {
-				switch (Dungeon.hero.subClass) {
-				case GLADIATOR:
-					badge = Badge.BOSS_SLAIN_3_GLADIATOR;
-					break;
-				case BERSERKER:
-					badge = Badge.BOSS_SLAIN_3_BERSERKER;
-					break;
-				case WARLOCK:
-					badge = Badge.BOSS_SLAIN_3_WARLOCK;
-					break;
-				case BATTLEMAGE:
-					badge = Badge.BOSS_SLAIN_3_BATTLEMAGE;
-					break;
-				case FREERUNNER:
-					badge = Badge.BOSS_SLAIN_3_FREERUNNER;
-					break;
-				case ASSASSIN:
-					badge = Badge.BOSS_SLAIN_3_ASSASSIN;
-					break;
-				case SNIPER:
-					badge = Badge.BOSS_SLAIN_3_SNIPER;
-					break;
-				case WARDEN:
-					badge = Badge.BOSS_SLAIN_3_WARDEN;
-					break;
-				default:
-					return;
-				}
-				local.add( badge );
-				if (!global.contains( badge )) {
-					global.add( badge );
-					saveNeeded = true;
-				}
-				
-				if (global.contains( Badge.BOSS_SLAIN_3_GLADIATOR ) &&
-					global.contains( Badge.BOSS_SLAIN_3_BERSERKER ) &&
-					global.contains( Badge.BOSS_SLAIN_3_WARLOCK ) &&
-					global.contains( Badge.BOSS_SLAIN_3_BATTLEMAGE ) &&
-					global.contains( Badge.BOSS_SLAIN_3_FREERUNNER ) &&
-					global.contains( Badge.BOSS_SLAIN_3_ASSASSIN ) &&
-					global.contains( Badge.BOSS_SLAIN_3_SNIPER ) &&
-					global.contains( Badge.BOSS_SLAIN_3_WARDEN )) {
-					
-					badge = Badge.BOSS_SLAIN_3_ALL_SUBCLASSES;
-					if (!global.contains( badge )) {
-						displayBadge( badge );
-						global.add( badge );
-						saveNeeded = true;
-					}
 				}
 			}
 		}
@@ -618,17 +361,11 @@ public class Badges {
 		
 		Badge badge = null;
 		switch (Dungeon.hero.heroClass) {
-		case WARRIOR:
-			badge = Badge.MASTERY_WARRIOR;
+		case KNIGHT:
+			badge = Badge.MASTERY_KNIGHT;
 			break;
-		case MAGE:
-			badge = Badge.MASTERY_MAGE;
-			break;
-		case ROGUE:
-			badge = Badge.MASTERY_ROGUE;
-			break;
-		case HUNTRESS:
-			badge = Badge.MASTERY_HUNTRESS;
+		case HORNET:
+			badge = Badge.MASTERY_HORNET;
 			break;
 		}
 		
@@ -637,22 +374,10 @@ public class Badges {
 			saveNeeded = true;
 		}
 	}
-	
-	public static void validateMageUnlock(){
-		if (Statistics.upgradesUsed >= 2 && !global.contains(Badge.UNLOCK_MAGE)){
-			displayBadge( Badge.UNLOCK_MAGE );
-		}
-	}
-	
-	public static void validateRogueUnlock(){
-		if (Statistics.sneakAttacks >= 20 && !global.contains(Badge.UNLOCK_ROGUE)){
-			displayBadge( Badge.UNLOCK_ROGUE );
-		}
-	}
-	
-	public static void validateHuntressUnlock(){
-		if (Statistics.thrownAssists >= 20 && !global.contains(Badge.UNLOCK_HUNTRESS)){
-			displayBadge( Badge.UNLOCK_HUNTRESS );
+
+	public static void validateHornetUnlock(){
+		if (Statistics.thrownAssists >= 20 && !global.contains(Badge.UNLOCK_HORNET)){
+			displayBadge( Badge.UNLOCK_HORNET);
 		}
 	}
 	
@@ -670,17 +395,11 @@ public class Badges {
 		displayBadge( badge );
 
 		switch (Dungeon.hero.heroClass) {
-		case WARRIOR:
-			badge = Badge.VICTORY_WARRIOR;
+		case KNIGHT:
+			badge = Badge.VICTORY_KNIGHT;
 			break;
-		case MAGE:
-			badge = Badge.VICTORY_MAGE;
-			break;
-		case ROGUE:
-			badge = Badge.VICTORY_ROGUE;
-			break;
-		case HUNTRESS:
-			badge = Badge.VICTORY_HUNTRESS;
+		case HORNET:
+			badge = Badge.VICTORY_HORNET;
 			break;
 		}
 		local.add( badge );
@@ -689,10 +408,8 @@ public class Badges {
 			saveNeeded = true;
 		}
 		
-		if (global.contains( Badge.VICTORY_WARRIOR ) &&
-			global.contains( Badge.VICTORY_MAGE ) &&
-			global.contains( Badge.VICTORY_ROGUE ) &&
-			global.contains( Badge.VICTORY_HUNTRESS )) {
+		if (global.contains( Badge.VICTORY_KNIGHT) &&
+			global.contains( Badge.VICTORY_HORNET)) {
 			
 			badge = Badge.VICTORY_ALL_CLASSES;
 			displayBadge( badge );
@@ -706,15 +423,7 @@ public class Badges {
 			displayBadge( badge );
 		}
 	}
-	
-	public static void validateGrimWeapon() {
-		if (!local.contains( Badge.GRIM_WEAPON )) {
-			Badge badge = Badge.GRIM_WEAPON;
-			local.add( badge );
-			displayBadge( badge );
-		}
-	}
-	
+
 	public static void validateGamesPlayed() {
 		Badge badge = null;
 		if (Rankings.INSTANCE.totalNumber >= 10) {
@@ -821,24 +530,10 @@ public class Badges {
 		leaveBest( filtered, Badge.MONSTERS_SLAIN_1, Badge.MONSTERS_SLAIN_2, Badge.MONSTERS_SLAIN_3, Badge.MONSTERS_SLAIN_4 );
 		leaveBest( filtered, Badge.GOLD_COLLECTED_1, Badge.GOLD_COLLECTED_2, Badge.GOLD_COLLECTED_3, Badge.GOLD_COLLECTED_4 );
 		leaveBest( filtered, Badge.BOSS_SLAIN_1, Badge.BOSS_SLAIN_2, Badge.BOSS_SLAIN_3, Badge.BOSS_SLAIN_4 );
-		leaveBest( filtered, Badge.LEVEL_REACHED_1, Badge.LEVEL_REACHED_2, Badge.LEVEL_REACHED_3, Badge.LEVEL_REACHED_4 );
-		leaveBest( filtered, Badge.STRENGTH_ATTAINED_1, Badge.STRENGTH_ATTAINED_2, Badge.STRENGTH_ATTAINED_3, Badge.STRENGTH_ATTAINED_4 );
-		leaveBest( filtered, Badge.FOOD_EATEN_1, Badge.FOOD_EATEN_2, Badge.FOOD_EATEN_3, Badge.FOOD_EATEN_4 );
-		leaveBest( filtered, Badge.ITEM_LEVEL_1, Badge.ITEM_LEVEL_2, Badge.ITEM_LEVEL_3, Badge.ITEM_LEVEL_4 );
 		leaveBest( filtered, Badge.POTIONS_COOKED_1, Badge.POTIONS_COOKED_2, Badge.POTIONS_COOKED_3, Badge.POTIONS_COOKED_4 );
 		leaveBest( filtered, Badge.DEATH_FROM_FIRE, Badge.YASD );
 		leaveBest( filtered, Badge.DEATH_FROM_GAS, Badge.YASD );
-		leaveBest( filtered, Badge.DEATH_FROM_HUNGER, Badge.YASD );
 		leaveBest( filtered, Badge.DEATH_FROM_POISON, Badge.YASD );
-		leaveBest( filtered, Badge.DEATH_FROM_GLYPH, Badge.YASD );
-		leaveBest( filtered, Badge.DEATH_FROM_FALLING, Badge.YASD );
-		leaveBest( filtered, Badge.ALL_WEAPONS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
-		leaveBest( filtered, Badge.ALL_ARMOR_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
-		leaveBest( filtered, Badge.ALL_WANDS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
-		leaveBest( filtered, Badge.ALL_RINGS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
-		leaveBest( filtered, Badge.ALL_ARTIFACTS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
-		leaveBest( filtered, Badge.ALL_POTIONS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
-		leaveBest( filtered, Badge.ALL_SCROLLS_IDENTIFIED, Badge.ALL_ITEMS_IDENTIFIED );
 		leaveBest( filtered, Badge.GAMES_PLAYED_1, Badge.GAMES_PLAYED_2, Badge.GAMES_PLAYED_3, Badge.GAMES_PLAYED_4 );
 		leaveBest( filtered, Badge.CHAMPION_1, Badge.CHAMPION_2, Badge.CHAMPION_3 );
 		

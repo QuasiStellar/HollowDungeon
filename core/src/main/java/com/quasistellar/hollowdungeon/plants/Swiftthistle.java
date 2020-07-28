@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
@@ -28,7 +29,6 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Haste;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.BuffIndicator;
@@ -47,7 +47,7 @@ public class Swiftthistle extends com.quasistellar.hollowdungeon.plants.Plant {
 	public void activate( Char ch ) {
 		if (ch == Dungeon.hero) {
 			Buff.affect(ch, TimeBubble.class).reset();
-			if (Dungeon.hero.subClass == HeroSubClass.WARDEN){
+			if (Dungeon.hero.heroClass == HeroClass.HORNET){
 				Buff.affect(ch, Haste.class, 1f);
 			}
 		}

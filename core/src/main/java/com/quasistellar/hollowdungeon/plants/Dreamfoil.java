@@ -21,13 +21,13 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.BlobImmunity;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.MagicalSleep;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -50,7 +50,7 @@ public class Dreamfoil extends Plant {
 				GLog.i( Messages.get(this, "refreshed") );
 				PotionOfHealing.cure(ch);
 				
-				if (((Hero) ch).subClass == HeroSubClass.WARDEN){
+				if (((Hero) ch).heroClass == HeroClass.HORNET){
 					Buff.affect(ch, BlobImmunity.class, BlobImmunity.DURATION/2f);
 				}
 				

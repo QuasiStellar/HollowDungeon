@@ -30,7 +30,6 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.effects.particles.LeafParticle;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
@@ -130,17 +129,6 @@ public abstract class Plant implements Bundlable {
 				super.onThrow( cell );
 			} else {
 				Dungeon.level.plant( this, cell );
-				if (Dungeon.hero.subClass == HeroSubClass.WARDEN) {
-					for (int i : PathFinder.NEIGHBOURS8) {
-						int c = Dungeon.level.map[cell + i];
-						if ( c == Terrain.EMPTY || c == Terrain.EMPTY_DECO
-								|| c == Terrain.EMBERS || c == Terrain.GRASS){
-							Level.set(cell + i, Terrain.FURROWED_GRASS);
-							GameScene.updateMap(cell + i);
-							com.quasistellar.hollowdungeon.effects.CellEmitter.get( cell + i ).burst( LeafParticle.LEVEL_SPECIFIC, 4 );
-						}
-					}
-				}
 			}
 		}
 		

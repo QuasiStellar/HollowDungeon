@@ -44,8 +44,6 @@ public class MagicalInfusion extends InventorySpell {
 		item.upgrade();
 		
 		GLog.p( Messages.get(this, "infuse", item.name()) );
-		
-		Badges.validateItemLevelAquired(item);
 
 		Item.curUser.sprite.emitter().start(Speck.factory(com.quasistellar.hollowdungeon.effects.Speck.UP), 0.2f, 3);
 		Statistics.upgradesUsed++;

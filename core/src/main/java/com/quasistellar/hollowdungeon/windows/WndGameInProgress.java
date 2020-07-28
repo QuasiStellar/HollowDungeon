@@ -24,8 +24,6 @@ package com.quasistellar.hollowdungeon.windows;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.GamesInProgress;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.InterlevelScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
@@ -55,13 +53,8 @@ public class WndGameInProgress extends Window {
 	public WndGameInProgress(final int slot){
 		
 		final GamesInProgress.Info info = GamesInProgress.check(slot);
-		
-		String className = null;
-		if (info.subClass != HeroSubClass.NONE){
-			className = info.subClass.title();
-		} else {
-			className = info.heroClass.title();
-		}
+
+		String className = info.heroClass.title();
 		
 		com.quasistellar.hollowdungeon.windows.IconTitle title = new IconTitle();
 		title.icon( HeroSprite.avatar(info.heroClass, info.armorTier) );

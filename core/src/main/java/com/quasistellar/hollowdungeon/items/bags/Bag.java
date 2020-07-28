@@ -85,9 +85,7 @@ public class Bag extends com.quasistellar.hollowdungeon.items.Item implements It
 		if (super.collect( container )) {
 			
 			owner = container.owner;
-			
-			Badges.validateAllBagsBought( this );
-			
+
 			return true;
 		} else {
 			return false;

@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.effects.Speck;
@@ -31,7 +32,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Cripple;
 import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 
 public class Blindweed extends Plant {
@@ -45,7 +45,7 @@ public class Blindweed extends Plant {
 	public void activate( Char ch ) {
 		
 		if (ch != null) {
-			if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+			if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HORNET){
 				Buff.affect(ch, Invisibility.class, Invisibility.DURATION/2f);
 			} else {
 				Buff.prolong(ch, Blindness.class, Blindness.DURATION);

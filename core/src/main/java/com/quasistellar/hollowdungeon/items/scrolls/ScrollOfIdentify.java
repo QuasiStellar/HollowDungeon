@@ -68,8 +68,6 @@ public class ScrollOfIdentify extends InventoryScroll {
 		
 		item.identify();
 		GLog.i( Messages.get(this, "it_is", item) );
-		
-		Badges.validateItemLevelAquired( item );
 	}
 	
 	@Override

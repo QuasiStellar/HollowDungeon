@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.ui.BuffIndicator;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 
 public class Invisibility extends FlavourBuff {
@@ -43,9 +42,6 @@ public class Invisibility extends FlavourBuff {
 	public boolean attachTo( Char target ) {
 		if (super.attachTo( target )) {
 			target.invisible++;
-			if (target instanceof Hero && ((Hero) target).subClass == HeroSubClass.ASSASSIN){
-				com.quasistellar.hollowdungeon.actors.buffs.Buff.affect(target, Preparation.class);
-			}
 			return true;
 		} else {
 			return false;

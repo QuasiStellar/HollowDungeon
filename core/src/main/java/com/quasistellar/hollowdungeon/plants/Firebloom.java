@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
@@ -31,7 +32,6 @@ import com.quasistellar.hollowdungeon.actors.blobs.Fire;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.FireImbue;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.effects.particles.FlameParticle;
 
 public class Firebloom extends Plant {
@@ -44,7 +44,7 @@ public class Firebloom extends Plant {
 	@Override
 	public void activate( Char ch ) {
 		
-		if (ch instanceof Hero && ((Hero) ch).subClass == HeroSubClass.WARDEN){
+		if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HORNET){
 			Buff.affect(ch, FireImbue.class).set( FireImbue.DURATION*0.3f );
 		}
 		

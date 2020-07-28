@@ -51,10 +51,8 @@ public class ScrollOfUpgrade extends InventoryScroll {
 		//logic for telling the user when item properties change from upgrades
 		//...yes this is rather messy
 		item.upgrade();
-		
-		Badges.validateItemLevelAquired( item );
+
 		Statistics.upgradesUsed++;
-		com.quasistellar.hollowdungeon.Badges.validateMageUnlock();
 	}
 	
 	public static void upgrade( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {

@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.levels.features;
 
-import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -33,11 +32,8 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
 public class HighGrass {
@@ -53,7 +49,7 @@ public class HighGrass {
 		Char ch = Actor.findChar(pos);
 		
 		if (level.map[pos] == Terrain.FURROWED_GRASS){
-			if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HUNTRESS){
+			if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HORNET){
 				//Do nothing
 				freezeTrample = true;
 			} else {
@@ -61,7 +57,7 @@ public class HighGrass {
 			}
 			
 		} else {
-			if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HUNTRESS){
+			if (ch instanceof Hero && ((Hero) ch).heroClass == HeroClass.HORNET){
 				Level.set(pos, Terrain.FURROWED_GRASS);
 				freezeTrample = true;
 			} else {
