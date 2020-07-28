@@ -96,11 +96,7 @@ public class MirrorImage extends NPC {
 	@Override
 	public int damageRoll() {
 		int damage;
-		if (hero.belongings.weapon != null){
-			damage = hero.belongings.weapon.damageRoll(this);
-		} else {
-			damage = hero.damageRoll(); //handles ring of force
-		}
+		damage = hero.damageRoll(); //handles ring of force
 		return (damage+1)/2; //half hero damage, rounded up
 	}
 	
@@ -111,7 +107,7 @@ public class MirrorImage extends NPC {
 	
 	@Override
 	protected boolean canAttack(com.quasistellar.hollowdungeon.actors.Char enemy) {
-		return super.canAttack(enemy) || (hero.belongings.weapon != null && hero.belongings.weapon.canReach(this, enemy.pos));
+		return super.canAttack(enemy);
 	}
 	
 	@Override
@@ -126,16 +122,7 @@ public class MirrorImage extends NPC {
 		if (enemy instanceof Mob) {
 			((Mob)enemy).aggro( this );
 		}
-		if (hero.belongings.weapon != null){
-			damage = hero.belongings.weapon.proc( this, enemy, damage );
-			if (!enemy.isAlive() && enemy == Dungeon.hero){
-				Dungeon.fail(getClass());
-				GLog.n( Messages.capitalize(Messages.get(com.quasistellar.hollowdungeon.actors.Char.class, "kill", name())) );
-			}
-			return damage;
-		} else {
-			return damage;
-		}
+		return damage;
 	}
 	
 	@Override

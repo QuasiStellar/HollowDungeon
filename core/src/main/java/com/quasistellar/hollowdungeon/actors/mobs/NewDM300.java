@@ -42,10 +42,7 @@ import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.ui.BossHealthBar;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.artifacts.LloydsBeacon;
 import com.quasistellar.hollowdungeon.items.quest.MetalShard;
-import com.quasistellar.hollowdungeon.items.wands.WandOfBlastWave;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Camera;
@@ -296,11 +293,6 @@ public class NewDM300 extends Mob {
 			BossHealthBar.assignBoss(this);
 			turnsSinceLastAbility = 0;
 			yell(Messages.get(this, "notice"));
-			for (com.quasistellar.hollowdungeon.actors.Char ch : Actor.chars()){
-				if (ch instanceof DriedRose.GhostHero){
-					((DriedRose.GhostHero) ch).sayBoss();
-				}
-			}
 		}
 	}
 
@@ -346,7 +338,6 @@ public class NewDM300 extends Mob {
 		if (Dungeon.level.adjacent(pos, target.pos)){
 			int oppositeAdjacent = target.pos + (target.pos - pos);
 			Ballistica trajectory = new Ballistica(target.pos, oppositeAdjacent, Ballistica.MAGIC_BOLT);
-			WandOfBlastWave.throwChar(target, trajectory, 2, false);
 			if (target == Dungeon.hero){
 				Dungeon.hero.interrupt();
 			}
@@ -482,11 +473,6 @@ public class NewDM300 extends Mob {
 		}
 
 		Badges.validateBossSlain();
-
-		LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
-		if (beacon != null) {
-			beacon.upgrade();
-		}
 
 		yell( Messages.get(this, "defeated") );
 	}

@@ -43,9 +43,7 @@ public abstract class Shaman extends Mob {
 	
 	{
 		HP = HT = 35;
-		
-		loot = Generator.Category.WAND;
-		lootChance = 0.03f; //initially, see rollToDropLoot
+
 	}
 	
 	@Override
@@ -56,20 +54,6 @@ public abstract class Shaman extends Mob {
 	@Override
 	protected boolean canAttack( com.quasistellar.hollowdungeon.actors.Char enemy ) {
 		return new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
-	}
-
-	@Override
-	public void rollToDropLoot() {
-		//each drop makes future drops 1/3 as likely
-		// so loot chance looks like: 1/33, 1/100, 1/300, 1/900, etc.
-		lootChance *= Math.pow(1/3f, Dungeon.LimitedDrops.SHAMAN_WAND.count);
-		super.rollToDropLoot();
-	}
-
-	@Override
-	protected Item createLoot() {
-		Dungeon.LimitedDrops.SHAMAN_WAND.count++;
-		return super.createLoot();
 	}
 
 	protected boolean doAttack(com.quasistellar.hollowdungeon.actors.Char enemy ) {

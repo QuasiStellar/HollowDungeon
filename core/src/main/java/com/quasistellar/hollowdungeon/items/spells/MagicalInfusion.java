@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Statistics;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndBag;
@@ -42,11 +41,7 @@ public class MagicalInfusion extends InventorySpell {
 	@Override
 	protected void onItemSelected( com.quasistellar.hollowdungeon.items.Item item ) {
 
-		if (item instanceof com.quasistellar.hollowdungeon.items.weapon.Weapon && ((com.quasistellar.hollowdungeon.items.weapon.Weapon) item).enchantment != null && !((com.quasistellar.hollowdungeon.items.weapon.Weapon) item).hasCurseEnchant()) {
-			((Weapon) item).upgrade(true);
-		} else {
-			item.upgrade();
-		}
+		item.upgrade();
 		
 		GLog.p( Messages.get(this, "infuse", item.name()) );
 		

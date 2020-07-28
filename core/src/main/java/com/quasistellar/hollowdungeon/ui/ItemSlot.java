@@ -27,8 +27,6 @@ import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Image;
@@ -191,25 +189,12 @@ public class ItemSlot extends Button {
 
 		status.text( item.status() );
 
-		if (item.icon != -1 && (item.isIdentified() || (item instanceof Ring && ((Ring) item).isKnown()))){
+		if (item.icon != -1 && (item.isIdentified())){
 			extra.text( null );
 
 			itemIcon = new Image(Assets.Sprites.ITEM_ICONS);
 			itemIcon.frame(com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.Icons.film.get(item.icon));
 			add(itemIcon);
-
-		} else if (item instanceof Weapon) {
-
-			if (item.levelKnown){
-				int str = ((Weapon)item).STRReq();
-				extra.text( Messages.format( TXT_STRENGTH, str ) );
-				extra.resetColor();
-			} else {
-				int str = ((Weapon)item).STRReq(0);
-				extra.text( Messages.format( TXT_TYPICAL_STR, str ) );
-				extra.hardlight( WARNING );
-			}
-			extra.measure();
 
 		} else {
 

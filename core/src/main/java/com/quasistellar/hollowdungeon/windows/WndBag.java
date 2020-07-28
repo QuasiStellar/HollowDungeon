@@ -26,11 +26,9 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.SPDAction;
 import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.items.Gold;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Recipe;
-import com.quasistellar.hollowdungeon.items.artifacts.SandalsOfNature;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
 import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
@@ -41,10 +39,6 @@ import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTransmutation;
 import com.quasistellar.hollowdungeon.items.spells.Recycle;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.SpiritBow;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
@@ -213,9 +207,6 @@ public class WndBag extends WndTabbed {
 		
 		// Equipped items
 		Belongings stuff = Dungeon.hero.belongings;
-		placeItem( stuff.weapon != null ? stuff.weapon : new Placeholder( ItemSpriteSheet.WEAPON_HOLDER ) );
-		placeItem( stuff.misc1 != null ? stuff.misc1 : new Placeholder( ItemSpriteSheet.RING_HOLDER ) );
-		placeItem( stuff.misc2 != null ? stuff.misc2 : new Placeholder( ItemSpriteSheet.RING_HOLDER ) );
 
 		//the container itself if it's not the root backpack
 		if (container != Dungeon.hero.belongings.backpack){
@@ -385,12 +376,8 @@ public class WndBag extends WndTabbed {
 					bg.ra = +0.3f;
 					bg.ga = -0.15f;
 				} else if (!item.isIdentified()) {
-					if ((item instanceof EquipableItem || item instanceof Wand) && item.cursedKnown){
-						bg.ba = 0.3f;
-					} else {
-						bg.ra = 0.3f;
-						bg.ba = 0.3f;
-					}
+					bg.ra = 0.3f;
+					bg.ba = 0.3f;
 				}
 				
 				if (item.name() == null) {
@@ -401,15 +388,10 @@ public class WndBag extends WndTabbed {
 						mode == Mode.UPGRADEABLE && item.isUpgradable() ||
 						mode == Mode.UNIDENTIFED && !item.isIdentified() ||
 						mode == Mode.UNCURSABLE && ScrollOfRemoveCurse.uncursable(item) ||
-						mode == Mode.CURSABLE && ((item instanceof EquipableItem && !(item instanceof MissileWeapon)) || item instanceof Wand) ||
 						mode == Mode.QUICKSLOT && (item.defaultAction != null) ||
-						mode == Mode.WEAPON && (item instanceof MeleeWeapon) ||
-						mode == Mode.WAND && (item instanceof Wand) ||
-						mode == Mode.SEED && SandalsOfNature.canUseSeed(item) ||
 						mode == Mode.POTION && (item instanceof Potion) ||
 						mode == Mode.SCROLL && (item instanceof Scroll) ||
 						mode == Mode.UNIDED_POTION_OR_SCROLL && (!item.isIdentified() && (item instanceof Scroll || item instanceof Potion)) ||
-						mode == Mode.EQUIPMENT && (item instanceof EquipableItem || item instanceof Wand) ||
 						mode == Mode.ALCHEMY && Recipe.usableInRecipe(item) ||
 						mode == Mode.TRANMSUTABLE && ScrollOfTransmutation.canTransmute(item) ||
 						mode == Mode.NOT_EQUIPPED && !item.isEquipped(Dungeon.hero) ||

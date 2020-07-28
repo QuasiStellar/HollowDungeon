@@ -28,7 +28,6 @@ import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.ItemStatusHandler;
 import com.quasistellar.hollowdungeon.items.Recipe;
-import com.quasistellar.hollowdungeon.items.artifacts.UnstableSpellbook;
 import com.quasistellar.hollowdungeon.items.scrolls.exotic.ScrollOfAntiMagic;
 import com.quasistellar.hollowdungeon.journal.Catalog;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
@@ -38,13 +37,11 @@ import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.items.stones.Runestone;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfAffection;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfAggression;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAugmentation;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfBlast;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfBlink;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfClairvoyance;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfDeepenedSleep;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfDisarming;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfEnchantment;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfFlock;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfIntuition;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfShock;
@@ -175,10 +172,6 @@ public abstract class Scroll extends com.quasistellar.hollowdungeon.items.Item {
 				GLog.w( Messages.get(this, "no_magic") );
 			} else if (hero.buff( Blindness.class ) != null) {
 				GLog.w( Messages.get(this, "blinded") );
-			} else if (hero.buff(com.quasistellar.hollowdungeon.items.artifacts.UnstableSpellbook.bookRecharge.class) != null
-					&& hero.buff(UnstableSpellbook.bookRecharge.class).isCursed()
-					&& !(this instanceof ScrollOfRemoveCurse || this instanceof ScrollOfAntiMagic)){
-				com.quasistellar.hollowdungeon.utils.GLog.n( Messages.get(this, "cursed") );
 			} else {
 				curUser = hero;
 				curItem = detach( hero.belongings.backpack );
@@ -316,12 +309,6 @@ public abstract class Scroll extends com.quasistellar.hollowdungeon.items.Item {
 			
 			stones.put(ScrollOfTerror.class,        StoneOfAffection.class);
 			amnts.put(ScrollOfTerror.class,         3);
-			
-			stones.put(ScrollOfTransmutation.class, StoneOfAugmentation.class);
-			amnts.put(ScrollOfTransmutation.class,  2);
-			
-			stones.put(ScrollOfUpgrade.class,       StoneOfEnchantment.class);
-			amnts.put(ScrollOfUpgrade.class,        2);
 		}
 		
 		@Override

@@ -51,8 +51,6 @@ import com.quasistellar.hollowdungeon.ui.BossHealthBar;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.artifacts.LloydsBeacon;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -171,11 +169,6 @@ public class NewTengu extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 		
 		Badges.validateBossSlain();
 		
-		LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
-		if (beacon != null) {
-			beacon.upgrade();
-		}
-		
 		yell( Messages.get(this, "defeated") );
 	}
 	
@@ -282,11 +275,6 @@ public class NewTengu extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 			if (HP <= HT/2) BossHealthBar.bleed(true);
 			if (HP == HT) {
 				yell(Messages.get(this, "notice_gotcha", Dungeon.hero.name()));
-				for (com.quasistellar.hollowdungeon.actors.Char ch : Actor.chars()){
-					if (ch instanceof DriedRose.GhostHero){
-						((DriedRose.GhostHero) ch).sayBoss();
-					}
-				}
 			} else {
 				yell(Messages.get(this, "notice_have", Dungeon.hero.name()));
 			}

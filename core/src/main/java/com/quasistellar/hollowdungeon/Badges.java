@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.journal.Catalog;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
 import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
 import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
@@ -364,7 +363,7 @@ public class Badges {
 		// 3) When an item is identified
 
 		// Note that artifacts should never trigger this badge as they are alternatively upgraded
-		if (!item.levelKnown || item instanceof Artifact) {
+		if (!item.levelKnown) {
 			return;
 		}
 		

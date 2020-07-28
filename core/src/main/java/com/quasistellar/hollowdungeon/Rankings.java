@@ -32,7 +32,6 @@ import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundlable;
@@ -151,10 +150,6 @@ public enum Rankings {
 		Bundle handler = new Bundle();
 		Scroll.saveSelectively(handler, belongings.backpack.items);
 		Potion.saveSelectively(handler, belongings.backpack.items);
-		//include worn rings
-		if (belongings.misc1 != null) belongings.backpack.items.add(belongings.misc1);
-		if (belongings.misc2 != null) belongings.backpack.items.add(belongings.misc2);
-		Ring.saveSelectively(handler, belongings.backpack.items);
 		rec.gameData.put( HANDLERS, handler);
 
 		//restore items now that we're done saving
@@ -178,7 +173,6 @@ public enum Rankings {
 		Bundle handler = data.getBundle(HANDLERS);
 		Scroll.restore(handler);
 		Potion.restore(handler);
-		Ring.restore(handler);
 
 		Badges.loadLocal(data.getBundle(BADGES));
 

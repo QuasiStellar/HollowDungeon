@@ -26,14 +26,9 @@ import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
-import com.quasistellar.hollowdungeon.items.weapon.SpiritBow;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.windows.WndBag;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.items.quest.MetalShard;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.watabou.noosa.audio.Sample;
 
 public class CurseInfusion extends InventorySpell {
@@ -50,21 +45,6 @@ public class CurseInfusion extends InventorySpell {
 		Sample.INSTANCE.play(Assets.Sounds.CURSED);
 		
 		item.cursed = true;
-		if (item instanceof MeleeWeapon || item instanceof SpiritBow) {
-			com.quasistellar.hollowdungeon.items.weapon.Weapon w = (com.quasistellar.hollowdungeon.items.weapon.Weapon) item;
-			if (w.enchantment != null) {
-				w.enchant(Weapon.Enchantment.randomCurse(w.enchantment.getClass()));
-			} else {
-				w.enchant(com.quasistellar.hollowdungeon.items.weapon.Weapon.Enchantment.randomCurse());
-			}
-			w.curseInfusionBonus = true;
-			if (w instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff){
-				((MagesStaff) w).updateWand(true);
-			}
-		} else if (item instanceof Wand){
-			((Wand) item).curseInfusionBonus = true;
-			((Wand) item).updateLevel();
-		}
 		updateQuickslot();
 	}
 	

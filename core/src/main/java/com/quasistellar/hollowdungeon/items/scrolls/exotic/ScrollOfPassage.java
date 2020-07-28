@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.scenes.InterlevelScene;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Game;
@@ -49,10 +48,8 @@ public class ScrollOfPassage extends ExoticScroll {
 			return;
 			
 		}
-		
-		Buff buff = Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
-		if (buff != null) buff.detach();
-		buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+
+		Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 		if (buff != null) buff.detach();
 		
 		InterlevelScene.mode = InterlevelScene.Mode.RETURN;

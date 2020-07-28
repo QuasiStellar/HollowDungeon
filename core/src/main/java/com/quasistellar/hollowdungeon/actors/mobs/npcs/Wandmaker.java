@@ -39,7 +39,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.items.quest.CeremonialCandle;
 import com.quasistellar.hollowdungeon.items.quest.CorpseDust;
 import com.quasistellar.hollowdungeon.items.quest.Embers;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Game;
@@ -196,16 +195,10 @@ public class Wandmaker extends NPC {
 		private static boolean spawned;
 		
 		private static boolean given;
-		
-		public static Wand wand1;
-		public static Wand wand2;
-		
+
 		public static void reset() {
 			spawned = false;
 			type = 0;
-
-			wand1 = null;
-			wand2 = null;
 		}
 		
 		private static final String NODE		= "wandmaker";
@@ -229,9 +222,6 @@ public class Wandmaker extends NPC {
 				node.put( TYPE, type );
 				
 				node.put( GIVEN, given );
-				
-				node.put( WAND1, wand1 );
-				node.put( WAND2, wand2 );
 
 				if (type == 2){
 					node.put( RITUALPOS, CeremonialCandle.ritualPos );
@@ -251,9 +241,6 @@ public class Wandmaker extends NPC {
 				type = node.getInt(TYPE);
 				
 				given = node.getBoolean( GIVEN );
-				
-				wand1 = (Wand)node.get( WAND1 );
-				wand2 = (Wand)node.get( WAND2 );
 
 				if (type == 2){
 					CeremonialCandle.ritualPos = node.getInt( RITUALPOS );
@@ -291,15 +278,6 @@ public class Wandmaker extends NPC {
 				spawned = true;
 
 				given = false;
-				wand1 = (Wand) Generator.random(Generator.Category.WAND);
-				wand1.cursed = false;
-				wand1.upgrade();
-
-				do {
-					wand2 = (Wand) Generator.random(com.quasistellar.hollowdungeon.items.Generator.Category.WAND);
-				} while (wand2.getClass().equals(wand1.getClass()));
-				wand2.cursed = false;
-				wand2.upgrade();
 				
 			}
 		}
@@ -330,8 +308,6 @@ public class Wandmaker extends NPC {
 		}
 		
 		public static void complete() {
-			wand1 = null;
-			wand2 = null;
 			
 			Notes.remove( com.quasistellar.hollowdungeon.journal.Notes.Landmark.WANDMAKER );
 		}

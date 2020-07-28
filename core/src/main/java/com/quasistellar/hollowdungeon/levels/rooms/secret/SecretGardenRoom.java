@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.levels.Patch;
 import com.quasistellar.hollowdungeon.plants.Starflower;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.actors.blobs.Foliage;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Random;
 
@@ -49,14 +48,6 @@ public class SecretGardenRoom extends SecretRoom {
 		entrance().set( Door.Type.HIDDEN );
 		
 		level.plant(new Starflower.Seed(), plantPos(level));
-		level.plant(new WandOfRegrowth.Seedpod.Seed(), plantPos( level ));
-		level.plant(new WandOfRegrowth.Dewcatcher.Seed(), plantPos( level ));
-		
-		if (Random.Int(2) == 0){
-			level.plant(new WandOfRegrowth.Seedpod.Seed(), plantPos( level ));
-		} else {
-			level.plant(new WandOfRegrowth.Dewcatcher.Seed(), plantPos( level ));
-		}
 		
 		Foliage light = (Foliage)level.blobs.get( Foliage.class );
 		if (light == null) {

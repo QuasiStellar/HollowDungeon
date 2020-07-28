@@ -26,10 +26,7 @@ import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.actors.blobs.Fire;
 import com.quasistellar.hollowdungeon.actors.buffs.Burning;
 import com.quasistellar.hollowdungeon.actors.buffs.Poison;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Ghost;
 import com.quasistellar.hollowdungeon.items.Generator;
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.GnollTricksterSprite;
 import com.quasistellar.hollowdungeon.Dungeon;
@@ -46,10 +43,6 @@ public class GnollTrickster extends Gnoll {
 		HP = HT = 20;
 
 		state = WANDERING;
-
-		//at half quantity, see createLoot()
-		loot = Generator.Category.MISSILE;
-		lootChance = 1f;
 
 		properties.add(com.quasistellar.hollowdungeon.actors.Char.Property.MINIBOSS);
 	}
@@ -93,20 +86,11 @@ public class GnollTrickster extends Gnoll {
 			return super.getCloser( target );
 		}
 	}
-	
-	@Override
-	protected Item createLoot() {
-		com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon drop = (MissileWeapon)super.createLoot();
-		//half quantity, rounded up
-		drop.quantity((drop.quantity()+1)/2);
-		return drop;
-	}
-	
+
 	@Override
 	public void die( Object cause ) {
 		super.die( cause );
 
-		Ghost.Quest.process();
 	}
 
 	private static final String COMBO = "combo";

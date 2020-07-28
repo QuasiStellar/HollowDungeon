@@ -32,9 +32,6 @@ import com.quasistellar.hollowdungeon.effects.CheckedCell;
 import com.quasistellar.hollowdungeon.effects.Flare;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfMight;
-import com.quasistellar.hollowdungeon.items.weapon.enchantments.Blocking;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Flail;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.messages.Languages;
 import com.quasistellar.hollowdungeon.plants.Earthroot;
@@ -60,13 +57,6 @@ import com.quasistellar.hollowdungeon.ui.AttackIndicator;
 import com.quasistellar.hollowdungeon.ui.BuffIndicator;
 import com.quasistellar.hollowdungeon.ui.QuickSlotButton;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.artifacts.AlchemistsToolkit;
-import com.quasistellar.hollowdungeon.items.artifacts.CapeOfThorns;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.artifacts.EtherealChains;
-import com.quasistellar.hollowdungeon.items.artifacts.HornOfPlenty;
-import com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.keys.CrystalKey;
 import com.quasistellar.hollowdungeon.items.keys.GoldenKey;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
@@ -76,20 +66,9 @@ import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfExperience;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.rings.RingOfAccuracy;
-import com.quasistellar.hollowdungeon.items.rings.RingOfEvasion;
-import com.quasistellar.hollowdungeon.items.rings.RingOfForce;
-import com.quasistellar.hollowdungeon.items.rings.RingOfFuror;
-import com.quasistellar.hollowdungeon.items.rings.RingOfHaste;
-import com.quasistellar.hollowdungeon.items.rings.RingOfMight;
-import com.quasistellar.hollowdungeon.items.rings.RingOfTenacity;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.wands.WandOfLivingEarth;
-import com.quasistellar.hollowdungeon.items.wands.WandOfWarding;
-import com.quasistellar.hollowdungeon.items.weapon.SpiritBow;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
@@ -106,16 +85,13 @@ import java.util.Collections;
 public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 	{
-		actPriority = com.quasistellar.hollowdungeon.actors.Actor.HERO_PRIO;
+		actPriority = Actor.HERO_PRIO;
 		
 		alignment = Alignment.ALLY;
 	}
-
-	public static final int STARTING_STR = 10;
 	
 	private static final float TIME_TO_REST		    = 1f;
 	private static final float TIME_TO_SEARCH	    = 2f;
-	private static final float HUNGER_FOR_SEARCH	= 6f;
 	
 	public HeroClass heroClass = HeroClass.ROGUE;
 	public HeroSubClass subClass = HeroSubClass.NONE;
@@ -155,8 +131,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		int curHT = HT;
 		
 		HT = 5 + HTBoost;
-		float multiplier = RingOfMight.HTMultiplier(this);
-		HT = Math.round(multiplier * HT);
 		
 		if (buff(com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfMight.HTBoost.class) != null){
 			HT += buff(com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfMight.HTBoost.class).boost();
@@ -216,44 +190,15 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 	@Override
 	public void hitSound(float pitch) {
-		if ( belongings.weapon != null ){
-			belongings.weapon.hitSound(pitch);
-		} else if (RingOfForce.getBuffedBonus(this, RingOfForce.Force.class) > 0) {
-			//pitch deepens by 2.5% (additive) per point of strength, down to 75%
-			super.hitSound( pitch * GameMath.gate( 0.75f, 1.25f, 1f) );
-		} else {
-			super.hitSound(pitch * 1.1f);
-		}
+		super.hitSound(pitch * 1.1f);
 	}
 
 	public void live() {
 	}
 
-	public boolean shoot(com.quasistellar.hollowdungeon.actors.Char enemy, com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon wep ) {
-
-		//temporarily set the hero's weapon to the missile weapon being used
-		com.quasistellar.hollowdungeon.items.KindOfWeapon equipped = belongings.weapon;
-		belongings.weapon = wep;
-		boolean hit = attack( enemy );
-		com.quasistellar.hollowdungeon.actors.buffs.Invisibility.dispel();
-		belongings.weapon = equipped;
-
-		return hit;
-	}
-
 	@Override
 	public int damageRoll() {
-		com.quasistellar.hollowdungeon.items.KindOfWeapon wep = belongings.weapon;
-		int dmg;
-
-		if (wep != null) {
-			dmg = wep.damageRoll( this );
-			if (!(wep instanceof com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon)) dmg += RingOfForce.armedDamageBonus(this);
-		} else {
-			dmg = RingOfForce.damageRoll(this);
-		}
-		if (dmg < 0) dmg = 0;
-		
+		int dmg = 5;
 		return buff( com.quasistellar.hollowdungeon.actors.buffs.Fury.class ) != null ? (int)(dmg * 1.5f) : dmg;
 	}
 	
@@ -261,8 +206,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public float speed() {
 
 		float speed = super.speed();
-
-		speed *= RingOfHaste.speedMultiplier(this);
 		
 		com.quasistellar.hollowdungeon.actors.buffs.Momentum momentum = buff(com.quasistellar.hollowdungeon.actors.buffs.Momentum.class);
 		if (momentum != null){
@@ -272,13 +215,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		
 		return speed;
 		
-	}
-
-	public boolean canSurpriseAttack(){
-		if (belongings.weapon == null || !(belongings.weapon instanceof Weapon))    return true;
-		if (belongings.weapon instanceof Flail)                                     return false;
-
-		return true;
 	}
 
 	public boolean canAttack(com.quasistellar.hollowdungeon.actors.Char enemy){
@@ -291,36 +227,16 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			return true;
 		}
 
-		com.quasistellar.hollowdungeon.items.KindOfWeapon wep = com.quasistellar.hollowdungeon.Dungeon.hero.belongings.weapon;
-
-		if (wep != null){
-			return wep.canReach(this, enemy.pos);
-		} else {
-			return false;
-		}
+		return false;
 	}
 	
 	public float attackDelay() {
-		if (belongings.weapon != null) {
-			
-			return belongings.weapon.speedFactor( this );
-			
-		} else {
-			//Normally putting furor speed on unarmed attacks would be unnecessary
-			//But there's going to be that one guy who gets a furor+force ring combo
-			//This is for that one guy, you shall get your fists of fury!
-			return RingOfFuror.attackDelayMultiplier(this);
-		}
+		return 1;
 	}
 
 	@Override
 	public void spend( float time ) {
 		justMoved = false;
-		TimekeepersHourglass.timeFreeze freeze = buff(TimekeepersHourglass.timeFreeze.class);
-		if (freeze != null) {
-			freeze.processTime(time);
-			return;
-		}
 		
 		com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble bubble = buff(com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble.class);
 		if (bubble != null){
@@ -524,12 +440,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 			ready();
 			
-			AlchemistsToolkit.kitEnergy kit = buff(AlchemistsToolkit.kitEnergy.class);
-			if (kit != null && kit.isCursed()){
-				GLog.w( Messages.get(AlchemistsToolkit.class, "cursed"));
-				return false;
-			}
-			
 			com.quasistellar.hollowdungeon.actors.blobs.Alchemy alch = (com.quasistellar.hollowdungeon.actors.blobs.Alchemy) com.quasistellar.hollowdungeon.Dungeon.level.blobs.get(Alchemy.class);
 			//TODO logic for a well having dried up?
 			if (alch != null) {
@@ -559,10 +469,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				if (item.doPickUp( this )) {
 					heap.pickUp();
 
-					if (item instanceof com.quasistellar.hollowdungeon.items.Dewdrop
-							|| item instanceof TimekeepersHourglass.sandBag
-							|| item instanceof DriedRose.Petal
-							|| item instanceof Key) {
+					if (item instanceof com.quasistellar.hollowdungeon.items.Dewdrop || item instanceof Key) {
 						//Do Nothing
 					} else {
 
@@ -579,10 +486,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 					curAction = null;
 				} else {
 
-					if (item instanceof com.quasistellar.hollowdungeon.items.Dewdrop
-							|| item instanceof TimekeepersHourglass.sandBag
-							|| item instanceof DriedRose.Petal
-							|| item instanceof Key) {
+					if (item instanceof com.quasistellar.hollowdungeon.items.Dewdrop || item instanceof Key) {
 						//Do Nothing
 					} else {
 						//TODO temporary until 0.8.0a, when all languages will get this phrase
@@ -712,9 +616,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 			curAction = null;
 
-			com.quasistellar.hollowdungeon.actors.buffs.Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
-			if (buff != null) buff.detach();
-			buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble.class);
+			com.quasistellar.hollowdungeon.actors.buffs.Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble.class);
 			if (buff != null) buff.detach();
 			
 			InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
@@ -765,9 +667,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				
 				curAction = null;
 
-				com.quasistellar.hollowdungeon.actors.buffs.Buff buff = buff(TimekeepersHourglass.timeFreeze.class);
-				if (buff != null) buff.detach();
-				buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+				Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 				if (buff != null) buff.detach();
 
 				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
@@ -821,40 +721,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		}
 		resting = fullRest;
 	}
-	
-	@Override
-	public int attackProc(final com.quasistellar.hollowdungeon.actors.Char enemy, int damage ) {
-		damage = super.attackProc( enemy, damage );
-		
-		com.quasistellar.hollowdungeon.items.KindOfWeapon wep = belongings.weapon;
-
-		if (wep != null) damage = wep.proc( this, enemy, damage );
-		
-		switch (subClass) {
-		case SNIPER:
-			if (wep instanceof MissileWeapon && !(wep instanceof SpiritBow.SpiritArrow)) {
-				Actor.add(new com.quasistellar.hollowdungeon.actors.Actor() {
-					
-					{
-						actPriority = VFX_PRIO;
-					}
-					
-					@Override
-					protected boolean act() {
-						if (enemy.isAlive()) {
-							com.quasistellar.hollowdungeon.actors.buffs.Buff.prolong(Hero.this, com.quasistellar.hollowdungeon.actors.buffs.SnipersMark.class, com.quasistellar.hollowdungeon.actors.buffs.SnipersMark.DURATION).object = enemy.id();
-						}
-						Actor.remove(this);
-						return true;
-					}
-				});
-			}
-			break;
-		default:
-		}
-		
-		return damage;
-	}
 
 	public static class Invulnerable extends Buff {
 		//does nothing
@@ -862,8 +728,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 	@Override
 	public void damage( int dmg, Object src ) {
-		if (buff(TimekeepersHourglass.timeStasis.class) != null)
-			return;
 
 		if (this.buff(Invulnerable.class) != null)
 			return;
@@ -877,13 +741,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			com.quasistellar.hollowdungeon.actors.buffs.Buff.detach(this, com.quasistellar.hollowdungeon.actors.buffs.Drowsy.class);
 			GLog.w( Messages.get(this, "pain_resist") );
 		}
-
-		CapeOfThorns.Thorns thorns = buff( CapeOfThorns.Thorns.class );
-		if (thorns != null) {
-			dmg = thorns.proc(dmg, (src instanceof com.quasistellar.hollowdungeon.actors.Char ? (com.quasistellar.hollowdungeon.actors.Char)src : null),  this);
-		}
-
-		dmg = (int)Math.ceil(dmg * RingOfTenacity.damageMultiplier( this ));
 
 		int preHP = HP + shielding();
 		super.damage( dmg, src );
@@ -938,8 +795,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		com.quasistellar.hollowdungeon.actors.Char lastTarget = QuickSlotButton.lastTarget;
 		if (target != null && (lastTarget == null ||
 							!lastTarget.isAlive() ||
-							!fieldOfView[lastTarget.pos]) ||
-							(lastTarget instanceof WandOfWarding.Ward && mindVisionEnemies.contains(lastTarget))){
+							!fieldOfView[lastTarget.pos])){
 			com.quasistellar.hollowdungeon.ui.QuickSlotButton.target(target);
 		}
 		
@@ -1143,9 +999,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	@Override
 	public void add( Buff buff ) {
 
-		if (buff(TimekeepersHourglass.timeStasis.class) != null)
-			return;
-
 		super.add( buff );
 
 		if (sprite != null) {
@@ -1202,13 +1055,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.TELEPORT );
 			GLog.w( Messages.get(this, "revive") );
 			com.quasistellar.hollowdungeon.Statistics.ankhsUsed++;
-			
-			for (com.quasistellar.hollowdungeon.actors.Char ch : Actor.chars()){
-				if (ch instanceof DriedRose.GhostHero){
-					((DriedRose.GhostHero) ch).sayAnhk();
-					return;
-				}
-			}
 
 			return;
 		}
@@ -1420,9 +1266,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		if (by >= com.quasistellar.hollowdungeon.Dungeon.level.height()) {
 			by = com.quasistellar.hollowdungeon.Dungeon.level.height() - 1;
 		}
-
-		TalismanOfForesight.Foresight talisman = buff( TalismanOfForesight.Foresight.class );
-		boolean cursed = talisman != null && talisman.isCursed();
 		
 		for (int y = ay; y <= by; y++) {
 			for (int x = ax, p = ax + y * com.quasistellar.hollowdungeon.Dungeon.level.width(); x <= bx; x++, p++) {
@@ -1449,10 +1292,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 						//intentional searches always succeed against regular traps and doors
 						} else if (intentional){
 							chance = 1f;
-						
-						//unintentional searches always fail with a cursed talisman
-						} else if (cursed) {
-							chance = 0f;
 							
 						//unintentional trap detection scales from 40% at floor 0 to 30% at floor 25
 						} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[p] == Terrain.SECRET_TRAP) {
@@ -1474,14 +1313,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 							ScrollOfMagicMapping.discover( p );
 							
 							smthFound = true;
-	
-							if (talisman != null){
-								if (oldValue == Terrain.SECRET_TRAP){
-									talisman.charge(2);
-								} else if (oldValue == com.quasistellar.hollowdungeon.levels.Terrain.SECRET_DOOR){
-									talisman.charge(10);
-								}
-							}
 						}
 					}
 				}
@@ -1492,11 +1323,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		if (intentional) {
 			sprite.showStatus( com.quasistellar.hollowdungeon.sprites.CharSprite.DEFAULT, Messages.get(this, "search") );
 			sprite.operate( pos );
-			if (!Dungeon.level.locked) {
-				if (cursed) {
-					GLog.n(Messages.get(this, "search_distracted"));
-				}
-			}
 			spendAndNext(TIME_TO_SEARCH);
 			
 		}

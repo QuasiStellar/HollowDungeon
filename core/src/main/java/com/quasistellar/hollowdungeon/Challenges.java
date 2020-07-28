@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon;
 
 import com.quasistellar.hollowdungeon.items.Dewdrop;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.artifacts.HornOfPlenty;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 
 public class Challenges {
@@ -54,11 +53,6 @@ public class Challenges {
 	};
 
 	public static boolean isItemBlocked( Item item ){
-		if (Dungeon.isChallenged(NO_FOOD)){
-			if (item instanceof HornOfPlenty){
-				return true;
-			}
-		}
 
 		if (Dungeon.isChallenged(NO_HEALING)){
 			if (item instanceof PotionOfHealing){

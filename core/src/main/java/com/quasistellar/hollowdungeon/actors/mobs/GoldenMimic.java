@@ -25,19 +25,13 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.items.Heap;
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.quasistellar.hollowdungeon.sprites.MimicSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.effects.Speck;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Random;
 
 public class GoldenMimic extends Mimic {
 
@@ -78,23 +72,5 @@ public class GoldenMimic extends Mimic {
 	@Override
 	public void setLevel(int level) {
 		super.setLevel(Math.round(level*1.33f));
-	}
-
-	@Override
-	protected void generatePrize() {
-		super.generatePrize();
-		//all existing prize items are guaranteed uncursed, and have a 50% chance to be +1 if they were +0
-		for (Item i : items){
-			if (i instanceof EquipableItem || i instanceof Wand){
-				i.cursed = false;
-				i.cursedKnown = true;
-				if (i instanceof Weapon && ((Weapon) i).hasCurseEnchant()){
-					((Weapon) i).enchant(null);
-				}
-				if (!(i instanceof MissileWeapon) && i.level() == 0 && Random.Int(2) == 0){
-					i.upgrade();
-				}
-			}
-		}
 	}
 }

@@ -28,11 +28,9 @@ import com.quasistellar.hollowdungeon.effects.BlobEmitter;
 import com.quasistellar.hollowdungeon.effects.particles.SparkParticle;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
@@ -77,16 +75,6 @@ public class Electricity extends Blob {
 								Dungeon.fail( getClass() );
 								GLog.n( Messages.get(this, "ondeath") );
 							}
-						}
-					}
-					
-					Heap h = Dungeon.level.heaps.get( cell );
-					if (h != null){
-						Item toShock = h.peek();
-						if (toShock instanceof Wand){
-							((Wand) toShock).gainCharge(0.333f);
-						} else if (toShock instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff){
-							((MagesStaff) toShock).gainCharge(0.333f);
 						}
 					}
 					

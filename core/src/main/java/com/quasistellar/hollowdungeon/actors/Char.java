@@ -58,17 +58,9 @@ import com.quasistellar.hollowdungeon.actors.buffs.Terror;
 import com.quasistellar.hollowdungeon.actors.buffs.Vertigo;
 import com.quasistellar.hollowdungeon.actors.buffs.Weakness;
 import com.quasistellar.hollowdungeon.actors.mobs.Elemental;
-import com.quasistellar.hollowdungeon.items.rings.RingOfElements;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRetribution;
 import com.quasistellar.hollowdungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfAggression;
-import com.quasistellar.hollowdungeon.items.wands.WandOfFireblast;
-import com.quasistellar.hollowdungeon.items.wands.WandOfFrost;
-import com.quasistellar.hollowdungeon.items.wands.WandOfLightning;
-import com.quasistellar.hollowdungeon.items.weapon.enchantments.Blazing;
-import com.quasistellar.hollowdungeon.items.weapon.enchantments.Grim;
-import com.quasistellar.hollowdungeon.items.weapon.enchantments.Shocking;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.darts.ShockingDart;
 import com.quasistellar.hollowdungeon.levels.features.Chasm;
 import com.quasistellar.hollowdungeon.levels.features.Door;
 import com.quasistellar.hollowdungeon.levels.traps.GrimTrap;
@@ -629,7 +621,7 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 				result *= 0.5f;
 			}
 		}
-		return result * RingOfElements.resist(this, effect);
+		return result;
 	}
 	
 	protected final HashSet<Class> immunities = new HashSet<>();
@@ -664,7 +656,7 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 	}
 
 	public enum Property{
-		BOSS ( new HashSet<Class>( Arrays.asList(Grim.class, GrimTrap.class, ScrollOfRetribution.class, ScrollOfPsionicBlast.class)),
+		BOSS ( new HashSet<Class>( Arrays.asList(GrimTrap.class, ScrollOfRetribution.class, ScrollOfPsionicBlast.class)),
 				new HashSet<Class>( Arrays.asList(Corruption.class, StoneOfAggression.Aggression.class) )),
 		MINIBOSS ( new HashSet<Class>(),
 				new HashSet<Class>( Arrays.asList(Corruption.class) )),
@@ -674,13 +666,13 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 				new HashSet<Class>( Arrays.asList(Bleeding.class, ToxicGas.class, Poison.class) )),
 		BLOB_IMMUNE ( new HashSet<Class>(),
 				new HashSet<Class>( Arrays.asList(Blob.class) )),
-		FIERY ( new HashSet<Class>( Arrays.asList(WandOfFireblast.class, Elemental.FireElemental.class)),
-				new HashSet<Class>( Arrays.asList(Burning.class, Blazing.class))),
-		ICY ( new HashSet<Class>( Arrays.asList(WandOfFrost.class, Elemental.FrostElemental.class)),
+		FIERY ( new HashSet<Class>( Arrays.asList(Elemental.FireElemental.class)),
+				new HashSet<Class>( Arrays.asList(Burning.class))),
+		ICY ( new HashSet<Class>( Arrays.asList(Elemental.FrostElemental.class)),
 				new HashSet<Class>( Arrays.asList(Frost.class, Chill.class))),
 		ACIDIC ( new HashSet<Class>( Arrays.asList(Corrosion.class)),
 				new HashSet<Class>( Arrays.asList(Ooze.class))),
-		ELECTRIC ( new HashSet<Class>( Arrays.asList(WandOfLightning.class, Shocking.class, Electricity.class, ShockingDart.class, Elemental.ShockElemental.class )),
+		ELECTRIC ( new HashSet<Class>( Arrays.asList(Electricity.class, Elemental.ShockElemental.class )),
 				new HashSet<Class>()),
 		LARGE,
 		IMMOVABLE;

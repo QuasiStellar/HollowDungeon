@@ -26,15 +26,12 @@ import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.effects.Flare;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.windows.WndBag;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.buffs.Degrade;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 
@@ -83,16 +80,6 @@ public class ScrollOfRemoveCurse extends InventoryScroll {
 					item.cursed = false;
 				}
 			}
-			if (item instanceof Weapon){
-				Weapon w = (Weapon) item;
-				if (w.hasCurseEnchant()){
-					w.enchant(null);
-					procced = true;
-				}
-			}
-			if (item instanceof Wand){
-				((Wand) item).updateLevel();
-			}
 		}
 		
 		if (procced && hero != null) {
@@ -107,10 +94,6 @@ public class ScrollOfRemoveCurse extends InventoryScroll {
 	public static boolean uncursable( com.quasistellar.hollowdungeon.items.Item item ){
 		if (item.isEquipped(Dungeon.hero) && com.quasistellar.hollowdungeon.Dungeon.hero.buff(com.quasistellar.hollowdungeon.actors.buffs.Degrade.class) != null) {
 			return true;
-		} if ((item instanceof EquipableItem || item instanceof Wand) && (!item.isIdentified() || item.cursed)){
-			return true;
-		} else if (item instanceof Weapon){
-			return ((Weapon)item).hasCurseEnchant();
 		} else if (item.level() != item.buffedLvl()) {
 			return true;
 		} else {

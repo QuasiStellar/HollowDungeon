@@ -25,11 +25,9 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Shopkeeper;
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.items.Gold;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.artifacts.MasterThievesArmband;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.RedButton;
 
@@ -116,39 +114,6 @@ public class WndTradeItem extends WndInfoItem {
 
 		pos = btnBuy.bottom();
 
-		final MasterThievesArmband.Thievery thievery = Dungeon.hero.buff(MasterThievesArmband.Thievery.class);
-		if (thievery != null && !thievery.isCursed()) {
-			final float chance = thievery.stealChance(price);
-			RedButton btnSteal = new RedButton(Messages.get(this, "steal", Math.min(100, (int) (chance * 100)))) {
-				@Override
-				protected void onClick() {
-					if (thievery.steal(price)) {
-						Hero hero = Dungeon.hero;
-						Item item = heap.pickUp();
-						hide();
-
-						if (!item.doPickUp(hero)) {
-							Dungeon.level.drop(item, heap.pos).sprite.drop();
-						}
-					} else {
-						for (Mob mob : Dungeon.level.mobs) {
-							if (mob instanceof Shopkeeper) {
-								mob.yell(Messages.get(mob, "thief"));
-								((Shopkeeper) mob).flee();
-								break;
-							}
-						}
-						hide();
-					}
-				}
-			};
-			btnSteal.setRect(0, pos + 1, width, BTN_HEIGHT);
-			add(btnSteal);
-
-			pos = btnSteal.bottom();
-
-		}
-
 		resize(width, (int) pos);
 	}
 	
@@ -166,10 +131,7 @@ public class WndTradeItem extends WndInfoItem {
 	private void sell( Item item ) {
 		
 		Hero hero = Dungeon.hero;
-		
-		if (item.isEquipped( hero ) && !((EquipableItem)item).doUnequip( hero, false )) {
-			return;
-		}
+
 		item.detachAll( hero.belongings.backpack );
 		
 		new Gold( item.price() ).doPickUp( hero );

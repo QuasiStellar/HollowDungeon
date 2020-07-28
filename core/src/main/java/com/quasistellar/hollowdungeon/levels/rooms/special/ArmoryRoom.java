@@ -22,6 +22,7 @@
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.items.Ankh;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
@@ -68,13 +69,6 @@ public class ArmoryRoom extends SpecialRoom {
 	}
 	
 	private static Item prize(Level level ) {
-		switch (Random.Int( 4 )){
-			case 0:
-				return new Bomb().random();
-			case 1: case 2:
-				return Generator.randomWeapon();
-			case 3: default:
-				return com.quasistellar.hollowdungeon.items.Generator.randomMissile();
-		}
+		return new Bomb();
 	}
 }

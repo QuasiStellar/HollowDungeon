@@ -21,15 +21,9 @@
 
 package com.quasistellar.hollowdungeon.items.scrolls;
 
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
 import com.quasistellar.hollowdungeon.items.potions.brews.Brew;
 import com.quasistellar.hollowdungeon.items.potions.elixirs.Elixir;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.darts.Dart;
 import com.quasistellar.hollowdungeon.journal.Catalog;
 import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
@@ -42,10 +36,7 @@ import com.quasistellar.hollowdungeon.items.scrolls.exotic.ExoticScroll;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.items.potions.AlchemicalCatalyst;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
 import com.quasistellar.hollowdungeon.items.stones.Runestone;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
@@ -60,15 +51,10 @@ public class ScrollOfTransmutation extends InventoryScroll {
 	}
 	
 	public static boolean canTransmute(com.quasistellar.hollowdungeon.items.Item item){
-		return item instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon ||
-				(item instanceof com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon && !(item instanceof Dart)) ||
-				(item instanceof Potion && !(item instanceof Elixir || item instanceof Brew || item instanceof AlchemicalCatalyst)) ||
+		return (item instanceof Potion && !(item instanceof Elixir || item instanceof Brew || item instanceof AlchemicalCatalyst)) ||
 				item instanceof com.quasistellar.hollowdungeon.items.scrolls.Scroll ||
-				item instanceof Ring ||
-				item instanceof Wand ||
 				item instanceof com.quasistellar.hollowdungeon.plants.Plant.Seed ||
-				item instanceof Runestone ||
-				item instanceof com.quasistellar.hollowdungeon.items.artifacts.Artifact;
+				item instanceof Runestone;
 	}
 	
 	@Override
@@ -76,24 +62,14 @@ public class ScrollOfTransmutation extends InventoryScroll {
 		
 		com.quasistellar.hollowdungeon.items.Item result;
 		
-		if (item instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff) {
-			result = changeStaff( (com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff)item );
-		} else if (item instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon || item instanceof com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon) {
-			result = changeWeapon( (Weapon)item );
-		} else if (item instanceof com.quasistellar.hollowdungeon.items.scrolls.Scroll) {
+		if (item instanceof com.quasistellar.hollowdungeon.items.scrolls.Scroll) {
 			result = changeScroll( (com.quasistellar.hollowdungeon.items.scrolls.Scroll)item );
 		} else if (item instanceof Potion) {
 			result = changePotion( (Potion)item );
-		} else if (item instanceof Ring) {
-			result = changeRing( (Ring)item );
-		} else if (item instanceof Wand) {
-			result = changeWand( (Wand)item );
 		} else if (item instanceof com.quasistellar.hollowdungeon.plants.Plant.Seed) {
 			result = changeSeed((com.quasistellar.hollowdungeon.plants.Plant.Seed) item);
 		} else if (item instanceof Runestone) {
 			result = changeStone((Runestone) item);
-		} else if (item instanceof com.quasistellar.hollowdungeon.items.artifacts.Artifact) {
-			result = changeArtifact( (com.quasistellar.hollowdungeon.items.artifacts.Artifact)item );
 		} else {
 			result = null;
 		}
@@ -103,15 +79,9 @@ public class ScrollOfTransmutation extends InventoryScroll {
 			GLog.n( Messages.get(this, "nothing") );
 			com.quasistellar.hollowdungeon.items.Item.curItem.collect( com.quasistellar.hollowdungeon.items.Item.curUser.belongings.backpack );
 		} else {
-			if (item.isEquipped(Dungeon.hero)){
-				item.cursed = false; //to allow it to be unequipped
-				((com.quasistellar.hollowdungeon.items.EquipableItem)item).doUnequip(Dungeon.hero, false);
-				((EquipableItem)result).doEquip(Dungeon.hero);
-			} else {
-				item.detach(Dungeon.hero.belongings.backpack);
-				if (!result.collect()){
-					com.quasistellar.hollowdungeon.Dungeon.level.drop(result, Item.curUser.pos).sprite.drop();
-				}
+			item.detach(Dungeon.hero.belongings.backpack);
+			if (!result.collect()){
+				com.quasistellar.hollowdungeon.Dungeon.level.drop(result, Item.curUser.pos).sprite.drop();
 			}
 			if (result.isIdentified()){
 				Catalog.setSeen(result.getClass());
@@ -120,113 +90,6 @@ public class ScrollOfTransmutation extends InventoryScroll {
 			com.quasistellar.hollowdungeon.utils.GLog.p( Messages.get(this, "morph") );
 		}
 		
-	}
-	
-	private com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff changeStaff(MagesStaff staff ){
-		Class<?extends Wand> wandClass = staff.wandClass();
-		
-		if (wandClass == null){
-			return null;
-		} else {
-			Wand n;
-			do {
-				n = (Wand) Generator.random(Generator.Category.WAND);
-			} while (Challenges.isItemBlocked(n) || n.getClass() == wandClass);
-			n.level(0);
-			n.identify();
-			staff.imbueWand(n, null);
-		}
-		
-		return staff;
-	}
-	
-	private Weapon changeWeapon( Weapon w ) {
-		
-		Weapon n;
-		com.quasistellar.hollowdungeon.items.Generator.Category c;
-		if (w instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon) {
-			c = Generator.wepTiers[((MeleeWeapon)w).tier - 1];
-		} else {
-			c = Generator.misTiers[((MissileWeapon)w).tier - 1];
-		}
-		
-		do {
-			n = (Weapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
-		} while (Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
-		
-		int level = w.level();
-		if (w.curseInfusionBonus) level--;
-		if (level > 0) {
-			n.upgrade( level );
-		} else if (level < 0) {
-			n.degrade( -level );
-		}
-		
-		n.enchantment = w.enchantment;
-		n.curseInfusionBonus = w.curseInfusionBonus;
-		n.levelKnown = w.levelKnown;
-		n.cursedKnown = w.cursedKnown;
-		n.cursed = w.cursed;
-		n.augment = w.augment;
-		
-		return n;
-		
-	}
-	
-	private Ring changeRing( Ring r ) {
-		Ring n;
-		do {
-			n = (Ring) Generator.random( Generator.Category.RING );
-		} while (Challenges.isItemBlocked(n) || n.getClass() == r.getClass());
-		
-		n.level(0);
-		
-		int level = r.level();
-		if (level > 0) {
-			n.upgrade( level );
-		} else if (level < 0) {
-			n.degrade( -level );
-		}
-		
-		n.levelKnown = r.levelKnown;
-		n.cursedKnown = r.cursedKnown;
-		n.cursed = r.cursed;
-		
-		return n;
-	}
-	
-	private com.quasistellar.hollowdungeon.items.artifacts.Artifact changeArtifact(com.quasistellar.hollowdungeon.items.artifacts.Artifact a ) {
-		Artifact n = Generator.randomArtifact();
-		
-		if (n != null && !Challenges.isItemBlocked(n)){
-			n.cursedKnown = a.cursedKnown;
-			n.cursed = a.cursed;
-			n.levelKnown = a.levelKnown;
-			n.transferUpgrade(a.visiblyUpgraded());
-			return n;
-		}
-		
-		return null;
-	}
-	
-	private Wand changeWand( Wand w ) {
-		
-		Wand n;
-		do {
-			n = (Wand) Generator.random( Generator.Category.WAND );
-		} while ( com.quasistellar.hollowdungeon.Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
-		
-		n.level( 0 );
-		int level = w.level();
-		if (w.curseInfusionBonus) level--;
-		n.upgrade( level );
-		
-		n.levelKnown = w.levelKnown;
-		n.cursedKnown = w.cursedKnown;
-		n.cursed = w.cursed;
-		n.curseInfusionBonus = w.curseInfusionBonus;
-		
-		return n;
 	}
 	
 	private com.quasistellar.hollowdungeon.plants.Plant.Seed changeSeed(com.quasistellar.hollowdungeon.plants.Plant.Seed s ) {

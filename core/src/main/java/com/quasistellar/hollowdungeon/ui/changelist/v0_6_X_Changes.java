@@ -23,18 +23,7 @@ package com.quasistellar.hollowdungeon.ui.changelist;
 
 import com.quasistellar.hollowdungeon.items.DewVial;
 import com.quasistellar.hollowdungeon.items.Torch;
-import com.quasistellar.hollowdungeon.items.artifacts.EtherealChains;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.rings.RingOfMight;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAugmentation;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfEnchantment;
-import com.quasistellar.hollowdungeon.items.wands.WandOfCorrosion;
-import com.quasistellar.hollowdungeon.items.wands.WandOfCorruption;
-import com.quasistellar.hollowdungeon.items.weapon.curses.Wayward;
-import com.quasistellar.hollowdungeon.items.weapon.enchantments.Lucky;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Dagger;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Flail;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Greataxe;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.Assets;
@@ -75,7 +64,7 @@ public class v0_6_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new StoneOfAugmentation(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Stone of Augmentation",
 				"The weightstone is now the runestone of augmentation!\n\n" +
 				"Usability on weapons unchanged, can still be used to enhance either speed or damage at the cost of the other.\n\n" +
 				"Can now be used on armor! Armor can be modified to enhance either defense or evasion, at the cost of the other.\n\n" +
@@ -150,7 +139,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SWORD, new Lucky().glowing()), "Lucky Enchantment",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Lucky Enchantment",
 				"The Lucky enchant is a nice overall DPS increase, but comes at the cost of consistency. The problem is that with a bit of bad luck it's possible to do 0x damage many times in a row.\n\n" +
 				"Lucky has been adjusted to reign in the extremes of bad luck, and to give a little more strategy to using it.\n\n" +
 				"_-_ Base chance to deal 2x damage reduced to 50% from 60%\n" +
@@ -169,7 +158,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SHORTSWORD, new Wayward().glowing()), "Wayward curse",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wayward curse",
 				"Wayward's accuracy penalty was very extreme, often making it impossible to win fights without doors. Wayward should punish non-guaranteed attacks, but this extent of this has been lessened.\n\n" +
 				"_-_ Reduced wayward accuracy penalty by 50%"));
 		
@@ -278,7 +267,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Timekeeper's Hourglass",
 				"The timekeeper's hourglass has been adjusted to cap at 10 charges, instead of 20, and to have a bit more power without upgrades:\n" +
 				"\n" +
 				"_-_ Number of charges halved\n" +
@@ -286,7 +275,7 @@ public class v0_6_X_Changes {
 				"_-_ 5x stasis duration per charge\n" +
 				"_-_ Overall recharge speed increased at +0, unchanged at +10"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Talisman of Foresight",
 				"The talisman of foresight now builds power for scrying slightly faster\n" +
 				"\n" +
 				"_-_ Charge speed increased by 20% at +0, scaling to 50% increased at +10\n" +
@@ -364,13 +353,13 @@ public class v0_6_X_Changes {
 				"_-_ Tipped dart effects are similar to their potion/seed counterparts.\n\n" +
 				"_-_ Curare darts are now paralytic darts, and paralyze for 5 turns, up from 3\n\n" +
 				"_-_ Alchemy interface now features a recipes button to show you what you can create."));
-		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_TOPAZ, null), Messages.get(com.quasistellar.hollowdungeon.items.rings.RingOfSharpshooting.class, "name"),
+
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( Icons.get(Icons.PREFS), "Ring of Sharpshooting",
 				"Ring of Sharpshooting overhauled\n\n" +
 				"_-_ No longer grants bonus accuracy\n\n" +
 				"_-_ Now increases ranged weapon durability, instead of giving a chance to not consume them\n\n" +
 				"_-_ Now increases ranged weapon damage, scaling based on the weapon's initial damage."));
-		
+
 		changes = new com.quasistellar.hollowdungeon.ui.changelist.ChangeInfo(Messages.get(com.quasistellar.hollowdungeon.scenes.ChangesScene.class, "changes"), false, null);
 		changes.hardlight( CharSprite.WARNING );
 		changeInfos.add(changes);
@@ -385,7 +374,7 @@ public class v0_6_X_Changes {
 				"_-_ Psionic blast now deals 100% of current HP, instead of 100% of max HP.\n" +
 				"_-_ Damage from fire now scales with max HP, and is slightly lower below 40 max HP."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new WandOfCorrosion(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Corrosion",
 				"Wand of venom is now wand of corrosion. This is primarily a visual rework, with only some changes to functionality:\n\n" +
 				"_-_ Wand now shoots bolts of caustic gas, instead of venom gas\n" +
 				"_-_ Venom debuff is now corrosion debuff, functionality unchanged\n\n" +
@@ -421,7 +410,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_EMERALD, null), Messages.get(com.quasistellar.hollowdungeon.items.rings.RingOfElements.class, "name"),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Ring of Elements",
 				"Thanks to the increased flexibility of the improved resistance system, buffing the ring of elements is now possible!\n\n" +
 				"_-_ Now reduces the duration and damage of harmful effects significantly more at higher levels.\n\n" +
 				"_-_ Rather than granting a chance to resist elemental/magic damage, ring now grants a set percentage resistance to these effects, which increases each level.\n\n" +
@@ -463,7 +452,7 @@ public class v0_6_X_Changes {
 				"_-_ Decreased lvls to recover rage to 2 from 3\n" +
 				"_-_ Berserking now reduces max health by 20%"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_ONYX, null), new com.quasistellar.hollowdungeon.items.rings.RingOfEvasion().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Ring of Evasion",
 				"The ring of evasion has always been a very powerful ring, but the recent freerunner rework has increased the power of evasiveness in general, making the ring overbearingly strong.\n\n" +
 				"Evasion synergy has been adjusted:\n" +
 				"_-_ Ring of evasion no longer synergizes as strongly with freerunner or armor of swiftness.\n" +
@@ -546,7 +535,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.WARNING );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new WandOfCorruption(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Corruption",
 				"The Wand of Corruption has been reworked!\n\n" +
 				"_-_ Corruption resistance is now based on enemy exp values, not max HP. Low HP and debuffs still reduce enemy corruption resistance.\n\n" +
 				"_-_ Wand now only spends 1 charge per shot, and inflicts debuffs on enemies if it fails to corrupt. Debuffs become stronger the closer the wand got to corrupting.\n\n" +
@@ -613,7 +602,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.artifacts.CloakOfShadows(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Cloak of Shadows",
 				"As part of the rogue rework, the cloak of shadows has been significantly buffed:\n\n" +
 				"_-_ Max charges have been halved, however each charge is roughly twice as useful.\n" +
 				"_-_ As there are half as many charges total, charge rate is effectively increased.\n" +
@@ -621,14 +610,14 @@ public class v0_6_X_Changes {
 				"_-_ Cloak levelling progression changed, it is now much more dependant on hero level\n\n" +
 				"These changes should let the rogue go invisible more often, and with more flexibility."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Dagger(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Dagger",
 				"As part of the rogue rework, sneak attack weapons have been buffed:\n\n" +
 				"_-_ Dagger sneak attack minimum damage increased to 75% from 50%.\n" +
 				"_-_ Dirk sneak attack minimum damage increased to 67% from 50%\n" +
 				"_-_ Assassin's blade sneak attack minimum damage unchanged at 50%\n\n" +
 				"This change should hopefully give the rogue some needed earlygame help, and give him a more clear choice as to what item he should upgrade, if no items were found in the dungeon."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Flail(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Flail",
 				"The flail's downsides were too harsh, so one of them has been changed both to make its weaknesses more centralized and to hopefully increase its power.\n\n" +
 				"_-_ Flail no longer attacks at 0.8x speed, instead it has 20% reduced accuracy."));
 		
@@ -691,7 +680,7 @@ public class v0_6_X_Changes {
 				"_-_ Tunnels will now appear more consistently.\n\n" +
 				"_-_ Ascending stairs, descending stairs, and mining no longer increase hunger."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_TOPAZ, null), new com.quasistellar.hollowdungeon.items.rings.RingOfEnergy().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Ring of Energy",
 				"_-_ Added the ring of energy."));
 		
 		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.CHEST, null), "Sprites",
@@ -712,7 +701,7 @@ public class v0_6_X_Changes {
 				"_-_ Cursed rings are now always harmful regardless of their level, until the curse is cleansed.\n\n" +
 				"_-_ Scrolls of upgrade have a chance to remove curses on a ring, scrolls of remove curse will always remove the curse."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_AMETHYST, null), new com.quasistellar.hollowdungeon.items.rings.RingOfWealth().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_AMETHYST, null), "Ring of Wealth",
 				"The ring of wealth is getting a change in emphasis, moving away from affecting items generally, and instead affecting item drops more strongly.\n\n" +
 				"_-_ No longer grants any benefit to item spawns when levels are generated.\n\n" +
 				"_-_ Now has a chance to generate extra loot when defeating enemies.\n\n" +
@@ -783,14 +772,14 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.items.artifacts.UnstableSpellbook(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Unstable Spellbook",
 				"The Unstable spellbook wasn't really worth upgrading, so it's getting some new effects to make it worth investing in!\n\n" +
 				"_-_ Infusing a scroll into the unstable spellbook will now grant a unique empowered effect whenever that scroll's spell is cast from the book.\n\n" +
 				"To compensate, charge mechanics have been adjusted:\n\n" +
 				"_-_ Max charges reduced from 3-8 to 2-6\n\n" +
 				"_-_ Recharge speed has been reduced slightly" ));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.items.artifacts.DriedRose().upgrade(10),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Dried Rose",
 				"The ghost hero summoned by the rose is now much more capable and is also much less temporary:\n\n" +
 				"_-_ Ghost can now be equipped with a weapon and armor and uses them just like the hero.\n" +
 				"_-_ Ghost no longer takes damage over time as long as the rose remains equipped.\n" +
@@ -810,17 +799,17 @@ public class v0_6_X_Changes {
 		changes.hardlight( com.quasistellar.hollowdungeon.sprites.CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.items.artifacts.HornOfPlenty(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( Icons.get(Icons.PREFS), "Horn of Plenty",
 				"The Horn of Plenty was providing a bit too much value in the earlygame, especially without upgrades:\n\n" +
 				"_-_ Charge Speed reduced, primarily at lower levels:\n-20% at +0\n-7.5% at +10\n\n" +
 				"_-_ Upgrade rate adjusted, Food now contributes towards upgrades exactly in line with how much hunger it restores. This means smaller food items will contribute more, larger ones will contribute less. Rations still grant exactly 1 upgrade each."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.RING_GARNET, null), new RingOfMight().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Ring of Might",
 				"The Ring of Might's strength bonus is already extremely valuable, having it also provide an excellent health boost was simply too much:\n\n" +
 				"_-_ Health granted reduced from +5 per upgrade to +3.5% of max hp per upgrade.\n\n" +
 				"This is a massive reduction to its earlygame health boosting power, however as the player levels up this will improve. By hero level 26 it will be as strong as before this change."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new EtherealChains(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( Icons.get(Icons.PREFS), "Ethernal Chains",
 				"The ability for Ethereal Chains to pull you literally anywhere limits design possibilities for future updates, so I've added a limitation.\n\n" +
 				"_-_ Ethereal chains now cannot reach locations the player cannot reach by walking or flying. e.g. the chains can no longer reach into a locked room.\n\n" +
 				"_-_ Ethereal chains can now reach through walls on boss floors, but the above limitation still applies."));
@@ -855,11 +844,11 @@ public class v0_6_X_Changes {
 				"_-_ Meat and small rations are 50% more filling\n" +
 				"_-_ Pasties and blandfruit are 12.5% more filling"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Greataxe()), "Tier-5 Weapon Buffs",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Tier-5 Weapon Buffs",
 				"_-_ Greataxe base damage increased by ~22%\n" +
 				"_-_ Greatshield base damage increased by ~17%"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new ItemSprite(new StoneOfEnchantment()), "Enchant and Glyph Balance Changes",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Enchant and Glyph Balance Changes",
 				"_-_ Vampiric enchant lifesteal reduced by 20%\n\n" +
 				"Lucky enchant rebalanced:\n" +
 				"_-_ now deals 2x/0x damage, instead of min/max\n" +

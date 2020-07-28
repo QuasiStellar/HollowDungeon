@@ -42,7 +42,6 @@ import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Honeypot;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
 import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
 import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
@@ -420,12 +419,6 @@ public class GameScene extends PixelScene {
 					&& (InterlevelScene.mode == InterlevelScene.Mode.DESCEND || InterlevelScene.mode == InterlevelScene.Mode.FALL)) {
 				GLog.h(Messages.get(this, "descend"), Dungeon.depth);
 				Sample.INSTANCE.play(Assets.Sounds.DESCEND);
-				
-				for (Char ch : Actor.chars()){
-					if (ch instanceof DriedRose.GhostHero){
-						((DriedRose.GhostHero) ch).sayAppeared();
-					}
-				}
 
 				int spawnersAbove = Statistics.spawnersAlive;
 				if (spawnersAbove > 0 && Dungeon.depth <= 25) {

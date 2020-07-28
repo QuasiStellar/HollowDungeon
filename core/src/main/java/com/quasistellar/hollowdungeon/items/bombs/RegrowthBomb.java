@@ -29,7 +29,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Healing;
 import com.quasistellar.hollowdungeon.effects.Splash;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
 import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.plants.Starflower;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
@@ -101,17 +100,7 @@ public class RegrowthBomb extends Bomb {
 		Integer plantPos = Random.element(plantCandidates);
 		if (plantPos != null){
 			Plant.Seed plant;
-			switch (Random.chances(new float[]{0, 6, 3, 1})){
-				case 1: default:
-					plant = new com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth.Dewcatcher.Seed();
-					break;
-				case 2:
-					plant = new WandOfRegrowth.Seedpod.Seed();
-					break;
-				case 3:
-					plant = new Starflower.Seed();
-					break;
-			}
+			plant = new Starflower.Seed();
 			com.quasistellar.hollowdungeon.Dungeon.level.plant( plant, plantPos);
 		}
 	}

@@ -35,10 +35,6 @@ public class ArmoredBrute extends Brute {
 
 	{
 		spriteClass = ShieldedSprite.class;
-		
-		//see rollToDropLoot
-		loot = Generator.Category.WEAPON;
-		lootChance = 1f;
 	}
 
 	@Override

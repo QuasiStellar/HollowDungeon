@@ -35,7 +35,6 @@ import com.quasistellar.hollowdungeon.sprites.EyeSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Generator;
-import com.quasistellar.hollowdungeon.items.wands.WandOfDisintegration;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
@@ -221,10 +220,6 @@ public class Eye extends Mob {
 			beamTarget = bundle.getInt(BEAM_TARGET);
 		beamCooldown = bundle.getInt(BEAM_COOLDOWN);
 		beamCharged = bundle.getBoolean(BEAM_CHARGED);
-	}
-
-	{
-		resistances.add( WandOfDisintegration.class );
 	}
 	
 	{

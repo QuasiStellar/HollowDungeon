@@ -25,6 +25,7 @@ import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
+import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
@@ -61,22 +62,7 @@ public class PitRoom extends SpecialRoom {
 		}
 		
 		level.drop( new IronKey( Dungeon.depth ), remains ).type = Heap.Type.SKELETON;
-		com.quasistellar.hollowdungeon.items.Item mainLoot = null;
-		do {
-			switch (Random.Int(3)){
-				case 0:
-					mainLoot = Generator.random(Generator.Category.RING);
-					break;
-				case 1:
-					mainLoot = Generator.random(Generator.Category.ARTIFACT);
-					break;
-				case 2:
-					mainLoot = Generator.random(Random.oneOf(
-							Generator.Category.WEAPON,
-							Generator.Category.ARTIFACT));
-					break;
-			}
-		} while ( mainLoot == null || Challenges.isItemBlocked(mainLoot));
+		Item mainLoot = new Bomb();
 		level.drop(mainLoot, remains);
 		
 		int n = Random.IntRange( 1, 2 );

@@ -32,8 +32,6 @@ import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
 import com.quasistellar.hollowdungeon.items.journal.GuidePage;
 import com.quasistellar.hollowdungeon.items.keys.GoldenKey;
 import com.quasistellar.hollowdungeon.levels.builders.Builder;
@@ -323,26 +321,11 @@ public abstract class RegularLevel extends Level {
 				break;
 			}
 
-			if ((toDrop instanceof Artifact && Random.Int(2) == 0) ||
-					(toDrop.isUpgradable() && Random.Int(4 - toDrop.level()) == 0)){
-
-				if (Dungeon.depth > 1 && Random.Int(10) == 0 && findMob(cell) == null){
-					mobs.add(Mimic.spawnAt(cell, toDrop, GoldenMimic.class));
-				} else {
-					Heap dropped = drop(toDrop, cell);
-					if (heaps.get(cell) == dropped) {
-						dropped.type = Heap.Type.LOCKED_CHEST;
-						addItemToSpawn(new GoldenKey(Dungeon.depth));
-					}
-				}
-			} else {
-				Heap dropped = drop( toDrop, cell );
-				dropped.type = type;
-				if (type == Heap.Type.SKELETON){
-					dropped.setHauntedIfCursed();
-				}
+			Heap dropped = drop( toDrop, cell );
+			dropped.type = type;
+			if (type == Heap.Type.SKELETON){
+				dropped.setHauntedIfCursed();
 			}
-			
 		}
 
 		for (Item item : itemsToSpawn) {
@@ -365,26 +348,6 @@ public abstract class RegularLevel extends Level {
 				losBlocking[cell] = false;
 			}
 			drop( item, cell ).setHauntedIfCursed().type = Heap.Type.REMAINS;
-		}
-
-		DriedRose rose = Dungeon.hero.belongings.getItem( DriedRose.class );
-		if (rose != null && rose.isIdentified() && !rose.cursed){
-			//aim to drop 1 petal every 2 floors
-			int petalsNeeded = (int) Math.ceil((float)((Dungeon.depth / 2) - rose.droppedPetals) / 3);
-
-			for (int i=1; i <= petalsNeeded; i++) {
-				//the player may miss a single petal and still max their rose.
-				if (rose.droppedPetals < 11) {
-					item = new DriedRose.Petal();
-					int cell = randomDropCell();
-					drop( item, cell ).type = Heap.Type.HEAP;
-					if (map[cell] == Terrain.HIGH_GRASS || map[cell] == Terrain.FURROWED_GRASS) {
-						map[cell] = Terrain.GRASS;
-						losBlocking[cell] = false;
-					}
-					rose.droppedPetals++;
-				}
-			}
 		}
 
 		//guide pages

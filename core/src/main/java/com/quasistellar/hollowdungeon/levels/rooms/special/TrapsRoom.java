@@ -24,6 +24,7 @@ package com.quasistellar.hollowdungeon.levels.rooms.special;
 import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
+import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Generator;
@@ -123,13 +124,7 @@ public class TrapsRoom extends SpecialRoom {
 		}
 		
 		//1 floor set higher in probability, never cursed
-		do {
-			if (Random.Int(2) == 0) {
-				prize = Generator.randomWeapon((Dungeon.depth / 5) + 1);
-			} else {
-				prize = com.quasistellar.hollowdungeon.items.Generator.randomWeapon((com.quasistellar.hollowdungeon.Dungeon.depth / 5) + 1);
-			}
-		} while (prize.cursed || Challenges.isItemBlocked(prize));
+		prize = new Bomb();
 		prize.cursedKnown = true;
 
 		//33% chance for an extra update.

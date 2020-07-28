@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.levels.traps;
 
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.KindOfWeapon;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
@@ -61,36 +60,6 @@ public class DisarmingTrap extends Trap{
 			}
 		}
 
-		if (Dungeon.hero.pos == pos && !Dungeon.hero.flying){
-			Hero hero = Dungeon.hero;
-			KindOfWeapon weapon = hero.belongings.weapon;
 
-			if (weapon != null && !weapon.cursed) {
-
-				int cell;
-				int tries = 20;
-				do {
-					cell = Dungeon.level.randomRespawnCell( null );
-					if (tries-- < 0 && cell != -1) break;
-
-					PathFinder.buildDistanceMap(pos, Dungeon.level.passable);
-				} while (cell == -1 || PathFinder.distance[cell] < 10 || PathFinder.distance[cell] > 20);
-
-				hero.belongings.weapon = null;
-				Dungeon.quickslot.clearItem(weapon);
-				weapon.updateQuickslot();
-
-				Dungeon.level.drop(weapon, cell).seen = true;
-				for (int i : PathFinder.NEIGHBOURS9)
-					com.quasistellar.hollowdungeon.Dungeon.level.mapped[cell+i] = true;
-				com.quasistellar.hollowdungeon.scenes.GameScene.updateFog(cell, 1);
-
-				GLog.w( Messages.get(this, "disarm") );
-
-				Sample.INSTANCE.play(com.quasistellar.hollowdungeon.Assets.Sounds.TELEPORT);
-				com.quasistellar.hollowdungeon.effects.CellEmitter.get(pos).burst(Speck.factory(com.quasistellar.hollowdungeon.effects.Speck.LIGHT), 4);
-
-			}
-		}
 	}
 }

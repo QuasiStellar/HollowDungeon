@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.darts.ParalyticDart;
+import com.quasistellar.hollowdungeon.items.potions.PotionOfParalyticGas;
 import com.watabou.noosa.MovieClip;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.utils.Callback;
@@ -61,7 +61,7 @@ public class GnollTricksterSprite extends MobSprite {
 		if (!Dungeon.level.adjacent(cell, ch.pos)) {
 
 			((MissileSprite)parent.recycle( MissileSprite.class )).
-					reset( ch.pos, cell, new ParalyticDart(), new Callback() {
+					reset( ch.pos, cell, new PotionOfParalyticGas(), new Callback() {
 						@Override
 						public void call() {
 							ch.onAttackComplete();

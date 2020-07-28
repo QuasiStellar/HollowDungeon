@@ -22,8 +22,6 @@
 package com.quasistellar.hollowdungeon.ui.changelist;
 
 import com.quasistellar.hollowdungeon.items.Honeypot;
-import com.quasistellar.hollowdungeon.items.artifacts.HornOfPlenty;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.Assets;
@@ -102,7 +100,7 @@ public class v0_2_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new TimekeepersHourglass()), "Artifact Changes",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Artifact Changes",
 				"Added 4 new artifacts:\n" +
 				"_-_ Alchemist's Toolkit\n" +
 				"_-_ Unstable Spellbook\n" +
@@ -204,7 +202,7 @@ public class v0_2_X_Changes {
 				"_-_ Released September 15th, 2014\n" +
 				"_-_ 31 days after Shattered v0.1.1"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new HornOfPlenty()), "Artifacts!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Artifacts!",
 				"Added artifacts to the game!\n\n" +
 				"Artifacts are unique items which offer new gameplay opportunities and grow stronger through unique means.\n\n" +
 				"Removed 7 Rings... And Replaced them with 7 Artifacts!\n" +

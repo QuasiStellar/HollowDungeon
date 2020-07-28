@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.effects.Ripple;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Ghost;
 import com.quasistellar.hollowdungeon.items.DewVial;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.painters.SewerPainter;

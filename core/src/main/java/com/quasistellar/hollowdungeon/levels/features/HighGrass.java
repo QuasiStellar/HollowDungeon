@@ -37,7 +37,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
-import com.quasistellar.hollowdungeon.items.artifacts.SandalsOfNature;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
@@ -70,18 +69,6 @@ public class HighGrass {
 			}
 			
 			int naturalismLevel = 0;
-			
-			if (ch != null) {
-				SandalsOfNature.Naturalism naturalism = ch.buff( SandalsOfNature.Naturalism.class );
-				if (naturalism != null) {
-					if (!naturalism.isCursed()) {
-						naturalismLevel = naturalism.itemLevel() + 1;
-						naturalism.charge();
-					} else {
-						naturalismLevel = -1;
-					}
-				}
-			}
 			
 			if (naturalismLevel >= 0) {
 				// Seed, scales from 1/25 to 1/5

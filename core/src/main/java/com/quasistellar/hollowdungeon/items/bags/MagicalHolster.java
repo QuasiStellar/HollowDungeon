@@ -21,10 +21,7 @@
 
 package com.quasistellar.hollowdungeon.items.bags;
 
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
 public class MagicalHolster extends Bag {
@@ -32,13 +29,10 @@ public class MagicalHolster extends Bag {
 	{
 		image = ItemSpriteSheet.HOLSTER;
 	}
-
-	public static final float HOLSTER_SCALE_FACTOR = 0.85f;
-	public static final float HOLSTER_DURABILITY_FACTOR = 1.2f;
 	
 	@Override
 	public boolean canHold( com.quasistellar.hollowdungeon.items.Item item ) {
-		if (item instanceof com.quasistellar.hollowdungeon.items.wands.Wand || item instanceof com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon || item instanceof Bomb){
+		if (item instanceof Bomb){
 			return super.canHold(item);
 		} else {
 			return false;
@@ -51,32 +45,7 @@ public class MagicalHolster extends Bag {
 	
 	@Override
 	public boolean collect( Bag container ) {
-		if (super.collect( container )) {
-			if (owner != null) {
-				for (com.quasistellar.hollowdungeon.items.Item item : items) {
-					if (item instanceof com.quasistellar.hollowdungeon.items.wands.Wand) {
-						((com.quasistellar.hollowdungeon.items.wands.Wand) item).charge(owner, HOLSTER_SCALE_FACTOR);
-					} else if (item instanceof com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon){
-						((com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon) item).holster = true;
-					}
-				}
-			}
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public void onDetach( ) {
-		super.onDetach();
-		for (Item item : items) {
-			if (item instanceof com.quasistellar.hollowdungeon.items.wands.Wand) {
-				((Wand)item).stopCharging();
-			} else if (item instanceof com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon){
-				((MissileWeapon) item).holster = false;
-			}
-		}
+		return super.collect(container);
 	}
 	
 	@Override

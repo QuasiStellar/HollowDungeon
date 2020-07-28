@@ -46,9 +46,7 @@ public class WaterOfAwareness extends WellWater {
 		
 		Sample.INSTANCE.play( Assets.Sounds.DRINK );
 		emitter.parent.add( new com.quasistellar.hollowdungeon.effects.Identification( hero.sprite.center() ) );
-		
-		hero.belongings.observe();
-		
+
 		for (int i = 0; i < Dungeon.level.length(); i++) {
 			
 			int terr = Dungeon.level.map[i];

@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.ui;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Image;

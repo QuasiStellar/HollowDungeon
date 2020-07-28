@@ -21,14 +21,8 @@
 
 package com.quasistellar.hollowdungeon.actors.mobs;
 
-import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.Generator;
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon;
 import com.quasistellar.hollowdungeon.sprites.SlimeSprite;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.watabou.utils.Random;
-import com.watabou.utils.Reflection;
 
 public class Slime extends Mob {
 	
@@ -55,15 +49,5 @@ public class Slime extends Mob {
 		// so loot chance looks like: 1/5, 1/15, 1/45, 1/135, etc.
 		lootChance *= Math.pow(1/3f, Dungeon.LimitedDrops.SLIME_WEP.count);
 		super.rollToDropLoot();
-	}
-	
-	@Override
-	protected Item createLoot() {
-		com.quasistellar.hollowdungeon.Dungeon.LimitedDrops.SLIME_WEP.count++;
-		com.quasistellar.hollowdungeon.items.Generator.Category c = Generator.Category.WEP_T2;
-		com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon w = (MeleeWeapon) Reflection.newInstance(c.classes[Random.chances(c.probs)]);
-		w.random();
-		w.level(0);
-		return w;
 	}
 }

@@ -40,7 +40,6 @@ import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.ui.BossHealthBar;
 import com.quasistellar.hollowdungeon.utils.BArray;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
 import com.quasistellar.hollowdungeon.items.keys.SkeletonKey;
 import com.quasistellar.hollowdungeon.items.quest.GooBlob;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -245,11 +244,6 @@ public class Goo extends Mob {
 		if (!BossHealthBar.isAssigned()) {
 			BossHealthBar.assignBoss(this);
 			yell(Messages.get(this, "notice"));
-			for (Char ch : Actor.chars()){
-				if (ch instanceof DriedRose.GhostHero){
-					((DriedRose.GhostHero) ch).sayBoss();
-				}
-			}
 		}
 	}
 

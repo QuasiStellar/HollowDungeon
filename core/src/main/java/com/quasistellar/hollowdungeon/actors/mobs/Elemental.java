@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.effects.Lightning;
-import com.quasistellar.hollowdungeon.items.weapon.enchantments.Shocking;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.sprites.ElementalSprite;
@@ -37,7 +36,6 @@ import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
 import com.quasistellar.hollowdungeon.items.quest.Embers;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRecharging;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTransmutation;
-import com.quasistellar.hollowdungeon.items.wands.CursedWand;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
@@ -245,7 +243,6 @@ public abstract class Elemental extends Mob {
 		protected void meleeProc(com.quasistellar.hollowdungeon.actors.Char enemy, int damage ) {
 			ArrayList<com.quasistellar.hollowdungeon.actors.Char> affected = new ArrayList<>();
 			ArrayList<com.quasistellar.hollowdungeon.effects.Lightning.Arc> arcs = new ArrayList<>();
-			Shocking.arc( this, enemy, 2, affected, arcs );
 			
 			if (!Dungeon.level.water[enemy.pos]) {
 				affected.remove( enemy );
@@ -268,41 +265,7 @@ public abstract class Elemental extends Mob {
 		}
 	}
 	
-	public static class ChaosElemental extends Elemental {
-		
-		{
-			spriteClass = ElementalSprite.Chaos.class;
-			
-			loot = new ScrollOfTransmutation();
-			lootChance = 1f;
-		}
-		
-		@Override
-		protected void meleeProc(com.quasistellar.hollowdungeon.actors.Char enemy, int damage ) {
-			CursedWand.cursedZap( null, this, new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT ), new Callback() {
-				@Override
-				public void call() {
-					next();
-				}
-			} );
-		}
-		
-		@Override
-		protected void rangedProc( Char enemy ) {
-			CursedWand.cursedZap( null, this, new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT ), new Callback() {
-				@Override
-				public void call() {
-					next();
-				}
-			} );
-		}
-	}
-	
 	public static Class<? extends Elemental> random(){
-		if (Random.Int( 50 ) == 0){
-			return ChaosElemental.class;
-		}
-		
 		float roll = Random.Float();
 		if (roll < 0.4f){
 			return FireElemental.class;

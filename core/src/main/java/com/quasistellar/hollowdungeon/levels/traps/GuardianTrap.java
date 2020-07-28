@@ -22,6 +22,7 @@
 package com.quasistellar.hollowdungeon.levels.traps;
 
 import com.quasistellar.hollowdungeon.Assets;
+import com.quasistellar.hollowdungeon.actors.mobs.Gnoll;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.StatueSprite;
@@ -29,7 +30,6 @@ import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.actors.mobs.Statue;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 
@@ -64,30 +64,12 @@ public class GuardianTrap extends Trap {
 
 	}
 
-	public static class Guardian extends Statue {
+	public static class Guardian extends Gnoll {
 
 		{
 			spriteClass = GuardianSprite.class;
 
 			state = WANDERING;
-		}
-
-		public Guardian(){
-			super();
-
-			weapon.enchant(null);
-			weapon.degrade(weapon.level());
-		}
-
-		@Override
-		public void beckon(int cell) {
-			//Beckon works on these ones, unlike their superclass.
-			notice();
-
-			if (state != HUNTING) {
-				state = WANDERING;
-			}
-			target = cell;
 		}
 
 	}

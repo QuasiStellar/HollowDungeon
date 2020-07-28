@@ -48,9 +48,6 @@ public class Thief extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 		
 		HP = HT = 20;
 
-		loot = Random.oneOf(Generator.Category.RING, com.quasistellar.hollowdungeon.items.Generator.Category.ARTIFACT);
-		lootChance = 0.03f; //initially, see rollToDropLoot
-
 		WANDERING = new Wandering();
 		FLEEING = new Fleeing();
 

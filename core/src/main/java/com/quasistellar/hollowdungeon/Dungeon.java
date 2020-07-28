@@ -40,15 +40,11 @@ import com.quasistellar.hollowdungeon.actors.buffs.MindVision;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Blacksmith;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Ghost;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Imp;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Wandmaker;
-import com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.weapon.SpiritBow;
 import com.quasistellar.hollowdungeon.levels.rooms.secret.SecretRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
 import com.quasistellar.hollowdungeon.mechanics.ShadowCaster;
@@ -170,7 +166,6 @@ public class Dungeon {
 
 			Scroll.initLabels();
 			Potion.initColors();
-			Ring.initGems();
 
 			SpecialRoom.initForRun();
 			SecretRoom.initForRun();
@@ -193,8 +188,7 @@ public class Dungeon {
 			a.count = 0;
 		
 		chapters = new HashSet<>();
-		
-		Ghost.Quest.reset();
+
 		Wandmaker.Quest.reset();
 		Blacksmith.Quest.reset();
 		Imp.Quest.reset();
@@ -378,35 +372,6 @@ public class Dungeon {
 		
 		hero.curAction = hero.lastAction = null;
 		
-		//pre-0.7.1 saves. Adjusting for spirit bows in weapon slot or with upgrades.
-		SpiritBow bow;
-		if (hero.belongings.weapon instanceof SpiritBow){
-			bow = (SpiritBow)hero.belongings.weapon;
-			hero.belongings.weapon = null;
-			
-			if (!bow.collect()){
-				level.drop(bow, hero.pos);
-			}
-		} else {
-			bow = hero.belongings.getItem(SpiritBow.class);
-		}
-		
-		//pre-0.7.1 saves. refunding upgrades previously spend on a boomerang
-		if (bow != null && bow.spentUpgrades() > 0){
-			ScrollOfUpgrade refund = new ScrollOfUpgrade();
-			refund.quantity(bow.spentUpgrades());
-			bow.level(0);
-			
-			//to prevent exploits, some SoU are lost in the conversion of a boomerang higher than +1
-			if (refund.quantity() > 1){
-				refund.quantity(1 + (int)Math.floor((refund.quantity()-1)*0.8f));
-			}
-			
-			if (!refund.collect()){
-				level.drop(refund, hero.pos);
-			}
-		}
-		
 		observe();
 		try {
 			saveAll();
@@ -515,7 +480,6 @@ public class Dungeon {
 			bundle.put( CHAPTERS, ids );
 			
 			Bundle quests = new Bundle();
-			Ghost		.Quest.storeInBundle( quests );
 			Wandmaker	.Quest.storeInBundle( quests );
 			Blacksmith	.Quest.storeInBundle( quests );
 			Imp			.Quest.storeInBundle( quests );
@@ -530,7 +494,6 @@ public class Dungeon {
 			
 			Scroll.save( bundle );
 			Potion.save( bundle );
-			Ring.save( bundle );
 
 			Actor.storeNextID( bundle );
 			
@@ -589,7 +552,6 @@ public class Dungeon {
 		
 		Scroll.restore( bundle );
 		Potion.restore( bundle );
-		Ring.restore( bundle );
 
 		quickslot.restorePlaceholders( bundle );
 		
@@ -607,12 +569,10 @@ public class Dungeon {
 			
 			Bundle quests = bundle.getBundle( QUESTS );
 			if (!quests.isNull()) {
-				Ghost.Quest.restoreFromBundle( quests );
 				Wandmaker.Quest.restoreFromBundle( quests );
 				Blacksmith.Quest.restoreFromBundle( quests );
 				Imp.Quest.restoreFromBundle( quests );
 			} else {
-				Ghost.Quest.reset();
 				Wandmaker.Quest.reset();
 				Blacksmith.Quest.reset();
 				Imp.Quest.reset();
@@ -785,24 +745,6 @@ public class Dungeon {
 				BArray.or( level.visited, level.heroFOV, h.pos - 1 + level.width(), 3, level.visited );
 				GameScene.updateFog(h.pos, 2);
 			}
-		}
-
-		for (TalismanOfForesight.CharAwareness c : hero.buffs(TalismanOfForesight.CharAwareness.class)){
-			if (Dungeon.depth != c.depth) continue;
-			com.quasistellar.hollowdungeon.actors.Char ch = (com.quasistellar.hollowdungeon.actors.Char) Actor.findById(c.charID);
-			if (ch == null) continue;
-			BArray.or( level.visited, level.heroFOV, ch.pos - 1 - level.width(), 3, level.visited );
-			BArray.or( level.visited, level.heroFOV, ch.pos - 1, 3, level.visited );
-			BArray.or( level.visited, level.heroFOV, ch.pos - 1 + level.width(), 3, level.visited );
-			GameScene.updateFog(ch.pos, 2);
-		}
-
-		for (TalismanOfForesight.HeapAwareness h : hero.buffs(TalismanOfForesight.HeapAwareness.class)){
-			if (Dungeon.depth != h.depth) continue;
-			BArray.or( level.visited, level.heroFOV, h.pos - 1 - level.width(), 3, level.visited );
-			BArray.or( level.visited, level.heroFOV, h.pos - 1, 3, level.visited );
-			BArray.or( level.visited, level.heroFOV, h.pos - 1 + level.width(), 3, level.visited );
-			GameScene.updateFog(h.pos, 2);
 		}
 
 		com.quasistellar.hollowdungeon.scenes.GameScene.afterObserve();

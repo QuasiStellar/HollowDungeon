@@ -42,12 +42,7 @@ public class SecretArtilleryRoom extends SecretRoom {
 				itemPos = level.pointToCell(random());
 			} while ( level.map[itemPos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_SP
 					|| level.heaps.get(itemPos) != null);
-			
-			if( i == 0 ){
-				level.drop(new Bomb.DoubleBomb(), itemPos);
-			} else {
-				level.drop(Generator.randomMissile(), itemPos);
-			}
+			level.drop(new Bomb.DoubleBomb(), itemPos);
 		}
 		
 		entrance().set(Door.Type.HIDDEN);

@@ -53,18 +53,12 @@ import com.quasistellar.hollowdungeon.actors.mobs.YogFist;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Sheep;
 import com.quasistellar.hollowdungeon.effects.particles.FlowParticle;
 import com.quasistellar.hollowdungeon.effects.particles.WindParticle;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Torch;
-import com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfEnchantment;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfIntuition;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
-import com.quasistellar.hollowdungeon.items.wands.WandOfWarding;
 import com.quasistellar.hollowdungeon.levels.features.Chasm;
 import com.quasistellar.hollowdungeon.levels.features.Door;
 import com.quasistellar.hollowdungeon.levels.features.HighGrass;
@@ -188,12 +182,6 @@ public abstract class Level implements Bundlable {
 			if (Dungeon.souNeeded()) {
 				addItemToSpawn( new ScrollOfUpgrade() );
 				Dungeon.LimitedDrops.UPGRADE_SCROLLS.count++;
-			}
-			//one scroll of transmutation is guaranteed to spawn somewhere on chapter 2-4
-			int enchChapter = (int)((Dungeon.seed / 10) % 3) + 1;
-			if ( Dungeon.depth / 5 == enchChapter &&
-					Dungeon.seed % 4 + 1 == Dungeon.depth % 5){
-				addItemToSpawn( new StoneOfEnchantment() );
 			}
 			
 			if ( Dungeon.depth == ((Dungeon.seed % 3) + 1)){
@@ -780,15 +768,6 @@ public abstract class Level implements Bundlable {
 		plants.put( pos, plant );
 		
 		GameScene.plantSeed( pos );
-
-		for (Char ch : Actor.chars()){
-			if (ch instanceof WandOfRegrowth.Lotus
-					&& ((WandOfRegrowth.Lotus) ch).inRange(pos)
-					&& Actor.findChar(pos) != null){
-				plant.trigger();
-				return null;
-			}
-		}
 		
 		return plant;
 	}
@@ -932,9 +911,6 @@ public abstract class Level implements Bundlable {
 
 		if (trap != null) {
 			
-			TimekeepersHourglass.timeFreeze timeFreeze =
-					Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
-			
 			com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble bubble =
 					Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 			
@@ -945,14 +921,6 @@ public abstract class Level implements Bundlable {
 				discover(cell);
 				
 				bubble.setDelayedPress(cell);
-				
-			} else if (timeFreeze != null){
-				
-				Sample.INSTANCE.play(Assets.Sounds.TRAP);
-				
-				discover(cell);
-				
-				timeFreeze.setDelayedPress(cell);
 				
 			} else {
 
@@ -980,8 +948,7 @@ public abstract class Level implements Bundlable {
 		int cx = c.pos % width();
 		int cy = c.pos / width();
 		
-		boolean sighted = c.buff( Blindness.class ) == null && c.buff( Shadows.class ) == null
-						&& c.buff( TimekeepersHourglass.timeStasis.class ) == null && c.isAlive();
+		boolean sighted = c.buff( Blindness.class ) == null && c.buff( Shadows.class ) == null && c.isAlive();
 		if (sighted) {
 			boolean[] blocking;
 			
@@ -1078,40 +1045,6 @@ public abstract class Level implements Bundlable {
 					int p = heap.pos;
 					for (int i : PathFinder.NEIGHBOURS9)
 						fieldOfView[p+i] = true;
-				}
-			}
-
-			for (TalismanOfForesight.CharAwareness a : c.buffs(TalismanOfForesight.CharAwareness.class)){
-				if (Dungeon.depth != a.depth) continue;
-				Char ch = (Char) Actor.findById(a.charID);
-				if (ch == null) {
-					a.detach();
-					continue;
-				}
-				int p = ch.pos;
-				for (int i : PathFinder.NEIGHBOURS9)
-					fieldOfView[p+i] = true;
-			}
-
-			for (TalismanOfForesight.HeapAwareness h : c.buffs(TalismanOfForesight.HeapAwareness.class)){
-				if (Dungeon.depth != h.depth) continue;
-				for (int i : PathFinder.NEIGHBOURS9)
-					fieldOfView[h.pos+i] = true;
-			}
-
-			for (Mob m : mobs){
-				if (m instanceof WandOfWarding.Ward || m instanceof WandOfRegrowth.Lotus){
-					if (m.fieldOfView == null || m.fieldOfView.length != length()){
-						m.fieldOfView = new boolean[length()];
-						Dungeon.level.updateFieldOfView( m, m.fieldOfView );
-					}
-					for (Mob m1 : mobs){
-						if (m.fieldOfView[m1.pos] && !fieldOfView[m1.pos] &&
-								!Dungeon.hero.mindVisionEnemies.contains(m1)){
-							Dungeon.hero.mindVisionEnemies.add(m1);
-						}
-					}
-					BArray.or(fieldOfView, m.fieldOfView, fieldOfView);
 				}
 			}
 		}

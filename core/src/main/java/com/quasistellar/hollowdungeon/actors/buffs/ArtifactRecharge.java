@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.ui.BuffIndicator;
 import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Image;
 import com.watabou.utils.Bundle;
@@ -42,17 +41,6 @@ public class ArtifactRecharge extends Buff {
 	
 	@Override
 	public boolean act() {
-		
-		if (target instanceof Hero){
-			Belongings b = ((Hero) target).belongings;
-			
-			if (b.misc1 instanceof Artifact){
-				((Artifact)b.misc1).charge((Hero)target);
-			}
-			if (b.misc2 instanceof Artifact){
-				((Artifact)b.misc2).charge((Hero)target);
-			}
-		}
 		
 		left--;
 		if (left <= 0){

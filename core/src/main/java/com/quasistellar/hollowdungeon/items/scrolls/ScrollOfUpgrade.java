@@ -32,9 +32,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Degrade;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 
 public class ScrollOfUpgrade extends InventoryScroll {
@@ -53,35 +50,7 @@ public class ScrollOfUpgrade extends InventoryScroll {
 
 		//logic for telling the user when item properties change from upgrades
 		//...yes this is rather messy
-		if (item instanceof Weapon){
-			Weapon w = (Weapon) item;
-			boolean wasCursed = w.cursed;
-			boolean hadCursedEnchant = w.hasCurseEnchant();
-			boolean hadGoodEnchant = w.hasGoodEnchant();
-
-			w.upgrade();
-
-			if (w.cursedKnown && hadCursedEnchant && !w.hasCurseEnchant()){
-				removeCurse( Dungeon.hero );
-			} else if (w.cursedKnown && wasCursed && !w.cursed){
-				weakenCurse( Dungeon.hero );
-			}
-			if (hadGoodEnchant && !w.hasGoodEnchant()){
-				GLog.w( Messages.get(Weapon.class, "incompatible") );
-			}
-
-		} else if (item instanceof Wand || item instanceof Ring) {
-			boolean wasCursed = item.cursed;
-
-			item.upgrade();
-
-			if (wasCursed && !item.cursed){
-				removeCurse( com.quasistellar.hollowdungeon.Dungeon.hero );
-			}
-
-		} else {
-			item.upgrade();
-		}
+		item.upgrade();
 		
 		Badges.validateItemLevelAquired( item );
 		Statistics.upgradesUsed++;

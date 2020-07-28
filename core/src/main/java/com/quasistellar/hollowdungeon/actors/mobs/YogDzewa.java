@@ -39,7 +39,6 @@ import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.ui.BossHealthBar;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
@@ -378,11 +377,6 @@ public class YogDzewa extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 		if (!BossHealthBar.isAssigned()) {
 			BossHealthBar.assignBoss(this);
 			yell(Messages.get(this, "notice"));
-			for (com.quasistellar.hollowdungeon.actors.Char ch : com.quasistellar.hollowdungeon.actors.Actor.chars()){
-				if (ch instanceof DriedRose.GhostHero){
-					((DriedRose.GhostHero) ch).sayBoss();
-				}
-			}
 			if (phase == 0) {
 				phase = 1;
 				summonCooldown = Random.NormalFloat(MIN_SUMMON_CD, MAX_SUMMON_CD);

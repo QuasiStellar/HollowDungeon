@@ -38,7 +38,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Cripple;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.spells.FeatherFall;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -80,9 +79,7 @@ public class Chasm {
 				
 		Sample.INSTANCE.play( Assets.Sounds.FALLING );
 
-		Buff buff = Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
-		if (buff != null) buff.detach();
-		buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+		Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 		if (buff != null) buff.detach();
 		
 		if (Dungeon.hero.isAlive()) {
@@ -115,20 +112,6 @@ public class Chasm {
 		Camera.main.shake( 4, 1f );
 
 		Dungeon.level.occupyCell(hero );
-		Buff.prolong( hero, Cripple.class, Cripple.DURATION );
-
-		//The lower the hero's HP, the more bleed and the less upfront damage.
-		//Hero has a 50% chance to bleed out at 66% HP, and begins to risk instant-death at 25%
-		Buff.affect( hero, FallBleed.class).set( Math.round(hero.HT / (6f + (6f*(hero.HP/(float)hero.HT)))));
-		hero.damage( Math.max( hero.HP / 2, Random.NormalIntRange( hero.HP / 2, hero.HT / 4 )), new Hero.Doom() {
-			@Override
-			public void onDeath() {
-				Badges.validateDeathFromFalling();
-				
-				com.quasistellar.hollowdungeon.Dungeon.fail( Chasm.class );
-				GLog.n( Messages.get(Chasm.class, "ondeath") );
-			}
-		} );
 	}
 
 	public static void mobFall( Mob mob ) {

@@ -59,12 +59,6 @@ public class DM200 extends Mob {
 		super.rollToDropLoot();
 	}
 
-	protected Item createLoot() {
-		com.quasistellar.hollowdungeon.Dungeon.LimitedDrops.DM200_EQUIP.count++;
-		//uses probability tables for dwarf city
-		return Generator.randomWeapon(4);
-	}
-
 	private int ventCooldown = 0;
 
 	private static final String VENT_COOLDOWN = "vent_cooldown";

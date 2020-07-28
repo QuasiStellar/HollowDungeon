@@ -39,7 +39,6 @@ import com.quasistellar.hollowdungeon.actors.mobs.NewTengu;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.HeavyBoomerang;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.traps.TenguDartTrap;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
@@ -300,12 +299,6 @@ public class NewPrisonBossLevel extends com.quasistellar.hollowdungeon.levels.Le
 			if (safeArea == null || !safeArea.inside(cellToPoint(heap.pos))){
 				storedItems.addAll(heap.items);
 				heap.destroy();
-			}
-		}
-		
-		for (HeavyBoomerang.CircleBack b : Dungeon.hero.buffs(HeavyBoomerang.CircleBack.class)){
-			if (safeArea == null || !safeArea.inside(cellToPoint(b.returnPos()))){
-				storedItems.add(b.cancel());
 			}
 		}
 		

@@ -21,9 +21,6 @@
 
 package com.quasistellar.hollowdungeon.ui.changelist;
 
-import com.quasistellar.hollowdungeon.items.weapon.melee.Glaive;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Longsword;
-import com.quasistellar.hollowdungeon.items.weapon.melee.RunicBlade;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
@@ -94,7 +91,7 @@ public class v0_4_X_Changes {
 				"_-_ Framerate improvements for older devices\n" +
 				"_-_ Game size reduced by ~10%"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Glaive()), "Balance Changes",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Balance Changes",
 				"_-_ Spear and Glaive damage reduced\n" +
 				"_-_ Runic blade damage reduced\n" +
 				"_-_ Grim enchant now procs more often\n" +
@@ -117,7 +114,7 @@ public class v0_4_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Glaive()), "Item Changes pt.1",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Item Changes pt.1",
 				"Armor and Enemy Balance Changes:\n" +
 				"_-_ Armor now has a min damage block value\n" +
 				"_-_ Armor gains more blocking from upgrades\n" +
@@ -141,7 +138,7 @@ public class v0_4_X_Changes {
 				"_-_ Corrupted enemies live longer & no longer attack eachother\n" +
 				"_-_ Wands in the holster now charge faster"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new RunicBlade()), "Item Changes pt.2",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Item Changes pt.2",
 				"Ring Balance Changes:\n" +
 				"_-_ Ring of Force weaker at 18+ strength, stronger otherwise\n" +
 				"_-_ Ring of Tenacity reduces more damage\n" +
@@ -185,7 +182,7 @@ public class v0_4_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Longsword()), "Equipment Overhaul!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Equipment Overhaul!",
 				"_-_ 13 new weapons, 12 rebalanced weapons\n" +
 				"\n" +
 				"Equipment Balance:\n" +
@@ -204,7 +201,7 @@ public class v0_4_X_Changes {
 				"_-_ Arcane styli slightly more common\n" +
 				"_-_ Better item drops on floors 22-24"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new ItemSprite(new Glaive()), "Curse, Enchant, & Glyph Overhaul!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Curse, Enchant, & Glyph Overhaul!",
 				"_-_ 3 new enchants, 10 rebalanced enchants\n" +
 				"_-_ 8 new glyphs, 5 rebalanced glyphs\n" +
 				"_-_ 12 new curse effects\n" +

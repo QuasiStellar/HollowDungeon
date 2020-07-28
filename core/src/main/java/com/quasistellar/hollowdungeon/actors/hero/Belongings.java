@@ -22,15 +22,9 @@
 package com.quasistellar.hollowdungeon.actors.hero;
 
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.KindOfWeapon;
-import com.quasistellar.hollowdungeon.items.KindofMisc;
-import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
 import com.quasistellar.hollowdungeon.items.keys.Key;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -43,10 +37,6 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 	private com.quasistellar.hollowdungeon.actors.hero.Hero owner;
 	
 	public Bag backpack;
-
-	public com.quasistellar.hollowdungeon.items.KindOfWeapon weapon = null;
-	public com.quasistellar.hollowdungeon.items.KindofMisc misc1 = null;
-	public com.quasistellar.hollowdungeon.items.KindofMisc misc2 = null;
 	
 	public Belongings( Hero owner ) {
 		this.owner = owner;
@@ -76,31 +66,14 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 	public void storeInBundle( Bundle bundle ) {
 		
 		backpack.storeInBundle( bundle );
-		
-		bundle.put( WEAPON, weapon );
-		bundle.put( MISC1, misc1);
-		bundle.put( MISC2, misc2);
+
 	}
 	
 	public void restoreFromBundle( Bundle bundle ) {
 		
 		backpack.clear();
 		backpack.restoreFromBundle( bundle );
-		
-		weapon = (KindOfWeapon) bundle.get(WEAPON);
-		if (weapon != null) {
-			weapon.activate(owner);
-		}
-		
-		misc1 = (com.quasistellar.hollowdungeon.items.KindofMisc)bundle.get(MISC1);
-		if (misc1 != null) {
-			misc1.activate( owner );
-		}
-		
-		misc2 = (KindofMisc)bundle.get(MISC2);
-		if (misc2 != null) {
-			misc2.activate( owner );
-		}
+
 	}
 	
 	public static void preview(GamesInProgress.Info info, Bundle bundle ) {
@@ -158,31 +131,7 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 			item.identify();
 		}
 	}
-	
-	public void observe() {
-		if (weapon != null) {
-			weapon.identify();
-			Badges.validateItemLevelAquired( weapon );
-		}
-		if (misc1 != null) {
-			misc1.identify();
-			Badges.validateItemLevelAquired(misc1);
-		}
-		if (misc2 != null) {
-			misc2.identify();
-			com.quasistellar.hollowdungeon.Badges.validateItemLevelAquired(misc2);
-		}
-		for (com.quasistellar.hollowdungeon.items.Item item : backpack) {
-			if (item instanceof EquipableItem || item instanceof Wand) {
-				item.cursedKnown = true;
-			}
-		}
-	}
-	
-	public void uncurseEquipped() {
-		ScrollOfRemoveCurse.uncurse( owner, weapon, misc1, misc2);
-	}
-	
+
 	public com.quasistellar.hollowdungeon.items.Item randomUnequipped() {
 		return Random.element( backpack.items );
 	}
@@ -205,32 +154,6 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 				item.detachAll( backpack );
 			}
 		}
-		
-		if (weapon != null) {
-			weapon.cursed = false;
-			weapon.activate( owner );
-		}
-
-		if (misc1 != null) {
-			misc1.cursed = false;
-			misc1.activate( owner );
-		}
-		if (misc2 != null) {
-			misc2.cursed = false;
-			misc2.activate( owner );
-		}
-	}
-	
-	public int charge( float charge ) {
-		
-		int count = 0;
-		
-		for (Wand.Charger charger : owner.buffs(Wand.Charger.class)){
-			charger.gainCharge(charge);
-			count++;
-		}
-		
-		return count;
 	}
 
 	@Override
@@ -243,19 +166,19 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 		private int index = 0;
 		
 		private Iterator<com.quasistellar.hollowdungeon.items.Item> backpackIterator = backpack.iterator();
-		
-		private com.quasistellar.hollowdungeon.items.Item[] equipped = {weapon, misc1, misc2};
+
+		private com.quasistellar.hollowdungeon.items.Item[] equipped = {};
 		private int backpackIndex = equipped.length;
-		
+
 		@Override
 		public boolean hasNext() {
-			
+
 			for (int i=index; i < backpackIndex; i++) {
 				if (equipped[i] != null) {
 					return true;
 				}
 			}
-			
+
 			return backpackIterator.hasNext();
 		}
 
@@ -274,20 +197,7 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 
 		@Override
 		public void remove() {
-			switch (index) {
-			case 0:
-				equipped[0] = weapon = null;
-				break;
-			//TODO: case 1 replace armor with smth
-			case 2:
-				equipped[2] = misc1 = null;
-				break;
-			case 3:
-				equipped[3] = misc2 = null;
-				break;
-			default:
-				backpackIterator.remove();
-			}
+			backpackIterator.remove();
 		}
 	}
 }

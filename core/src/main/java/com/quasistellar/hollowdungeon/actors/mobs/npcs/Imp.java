@@ -35,7 +35,6 @@ import com.quasistellar.hollowdungeon.actors.mobs.Golem;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.Monk;
 import com.quasistellar.hollowdungeon.items.quest.DwarfToken;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
@@ -144,12 +143,8 @@ public class Imp extends NPC {
 		private static boolean given;
 		private static boolean completed;
 		
-		public static Ring reward;
-		
 		public static void reset() {
 			spawned = false;
-
-			reward = null;
 		}
 		
 		private static final String NODE		= "demon";
@@ -171,7 +166,6 @@ public class Imp extends NPC {
 				
 				node.put( GIVEN, given );
 				node.put( COMPLETED, completed );
-				node.put( REWARD, reward );
 			}
 			
 			bundle.put( NODE, node );
@@ -186,7 +180,6 @@ public class Imp extends NPC {
 				
 				given = node.getBoolean( GIVEN );
 				completed = node.getBoolean( COMPLETED );
-				reward = (Ring)node.get( REWARD );
 			}
 		}
 		
@@ -222,12 +215,6 @@ public class Imp extends NPC {
 				}
 				
 				given = false;
-				
-				do {
-					reward = (Ring) Generator.random( com.quasistellar.hollowdungeon.items.Generator.Category.RING );
-				} while (reward.cursed);
-				reward.upgrade( 2 );
-				reward.cursed = true;
 			}
 		}
 		
@@ -242,7 +229,6 @@ public class Imp extends NPC {
 		}
 		
 		public static void complete() {
-			reward = null;
 			completed = true;
 			
 			Notes.remove( com.quasistellar.hollowdungeon.journal.Notes.Landmark.IMP );

@@ -30,10 +30,6 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
-import com.quasistellar.hollowdungeon.items.rings.RingOfWealth;
 import com.quasistellar.hollowdungeon.items.stones.StoneOfAggression;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
@@ -459,8 +455,7 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
     @Override
     public void updateSpriteState() {
         super.updateSpriteState();
-        if (com.quasistellar.hollowdungeon.Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class) != null
-                || com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class) != null)
+        if (com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class) != null)
             sprite.add(CharSprite.State.PARALYSED);
     }
 
@@ -560,25 +555,11 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
     public void rollToDropLoot() {
 
         float lootChance = this.lootChance;
-        lootChance *= RingOfWealth.dropChanceMultiplier(com.quasistellar.hollowdungeon.Dungeon.hero);
 
         if (Random.Float() < lootChance) {
             com.quasistellar.hollowdungeon.items.Item loot = createLoot();
             if (loot != null) {
                 com.quasistellar.hollowdungeon.Dungeon.level.drop(loot, pos).sprite.drop();
-            }
-        }
-
-        //ring of wealth logic
-        if (Ring.getBuffedBonus(com.quasistellar.hollowdungeon.Dungeon.hero, RingOfWealth.Wealth.class) > 0) {
-            int rolls = 1;
-            if (properties.contains(Property.BOSS)) rolls = 15;
-            else if (properties.contains(Property.MINIBOSS)) rolls = 5;
-            ArrayList<com.quasistellar.hollowdungeon.items.Item> bonus = RingOfWealth.tryForBonusDrop(com.quasistellar.hollowdungeon.Dungeon.hero, rolls);
-            if (bonus != null && !bonus.isEmpty()) {
-                for (com.quasistellar.hollowdungeon.items.Item b : bonus)
-                    com.quasistellar.hollowdungeon.Dungeon.level.drop(b, pos).sprite.drop();
-                RingOfWealth.showFlareForBonusDrop(sprite);
             }
         }
     }
@@ -838,13 +819,7 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
         heldAllies.clear();
         for (Mob mob : level.mobs.toArray(new Mob[0])) {
             //preserve the ghost no matter where they are
-            if (mob instanceof DriedRose.GhostHero) {
-                ((DriedRose.GhostHero) mob).clearDefensingPos();
-                level.mobs.remove(mob);
-                heldAllies.add(mob);
-
-                //preserve intelligent allies if they are near the hero
-            } else if (mob.alignment == Alignment.ALLY
+            if (mob.alignment == Alignment.ALLY
                     && mob.intelligentAlly
                     && com.quasistellar.hollowdungeon.Dungeon.level.distance(Dungeon.hero.pos, mob.pos) <= 3) {
                 level.mobs.remove(mob);

@@ -37,7 +37,6 @@ import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
@@ -144,8 +143,7 @@ public class Mimic extends Mob {
 		Dungeon.hero.busy();
 		Dungeon.hero.sprite.operate(pos);
 		if (Dungeon.hero.invisible <= 0
-				&& Dungeon.hero.buff(Swiftthistle.TimeBubble.class) == null
-				&& Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class) == null){
+				&& Dungeon.hero.buff(Swiftthistle.TimeBubble.class) == null){
 			return doAttack(Dungeon.hero);
 		} else {
 			sprite.idle();
@@ -246,8 +244,6 @@ public class Mimic extends Mob {
 		Mimic m;
 		if (mimicType == com.quasistellar.hollowdungeon.actors.mobs.GoldenMimic.class){
 			m = new GoldenMimic();
-		} else if (mimicType == com.quasistellar.hollowdungeon.actors.mobs.CrystalMimic.class) {
-			m = new CrystalMimic();
 		} else {
 			m = new Mimic();
 		}
@@ -265,20 +261,7 @@ public class Mimic extends Mob {
 	protected void generatePrize(){
 		Item reward = null;
 		do {
-			switch (Random.Int(5)) {
-				case 0:
-					reward = new Gold().random();
-					break;
-				case 1: case 2:
-					reward = Generator.randomMissile();
-					break;
-				case 3:
-					reward = Generator.randomWeapon();
-					break;
-				case 4:
-					reward = Generator.random(com.quasistellar.hollowdungeon.items.Generator.Category.RING);
-					break;
-			}
+			reward = new Gold().random();
 		} while (reward == null || Challenges.isItemBlocked(reward));
 		items.add(reward);
 	}

@@ -41,8 +41,6 @@ import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.ui.BossHealthBar;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.artifacts.LloydsBeacon;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -324,11 +322,6 @@ public class DwarfKing extends Mob {
 		if (!BossHealthBar.isAssigned()) {
 			com.quasistellar.hollowdungeon.ui.BossHealthBar.assignBoss(this);
 			yell(Messages.get(this, "notice"));
-			for (com.quasistellar.hollowdungeon.actors.Char ch : Actor.chars()){
-				if (ch instanceof DriedRose.GhostHero){
-					((DriedRose.GhostHero) ch).sayBoss();
-				}
-			}
 		}
 	}
 
@@ -411,11 +404,6 @@ public class DwarfKing extends Mob {
 
 		for (Mob m : getSubjects()){
 			m.die(null);
-		}
-
-		LloydsBeacon beacon = Dungeon.hero.belongings.getItem(LloydsBeacon.class);
-		if (beacon != null) {
-			beacon.upgrade();
 		}
 
 		yell( Messages.get(this, "defeated") );

@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.items;
 
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.items.artifacts.AlchemistsToolkit;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.items.potions.AlchemicalCatalyst;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
@@ -52,7 +51,6 @@ import com.quasistellar.hollowdungeon.items.spells.PhaseShift;
 import com.quasistellar.hollowdungeon.items.spells.ReclaimTrap;
 import com.quasistellar.hollowdungeon.items.spells.Recycle;
 import com.quasistellar.hollowdungeon.items.spells.WildEnergy;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
@@ -162,7 +160,6 @@ public abstract class Recipe {
 	//*******
 	
 	private static Recipe[] oneIngredientRecipes = new Recipe[]{
-		new AlchemistsToolkit.upgradeKit(),
 		new Scroll.ScrollToStone()
 	};
 	
@@ -228,9 +225,7 @@ public abstract class Recipe {
 	}
 	
 	public static boolean usableInRecipe(Item item){
-		return !item.cursed
-				&& (!(item instanceof EquipableItem) || (item instanceof AlchemistsToolkit && item.isIdentified()))
-				&& !(item instanceof Wand);
+		return !item.cursed;
 	}
 }
 

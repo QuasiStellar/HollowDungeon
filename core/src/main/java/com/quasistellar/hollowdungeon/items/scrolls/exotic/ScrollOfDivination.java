@@ -34,7 +34,6 @@ import com.quasistellar.hollowdungeon.windows.IconTitle;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
@@ -63,9 +62,8 @@ public class ScrollOfDivination extends ExoticScroll {
 		
 		HashSet<Class<? extends Potion>> potions = Potion.getUnknown();
 		HashSet<Class<? extends Scroll>> scrolls = Scroll.getUnknown();
-		HashSet<Class<? extends Ring>> rings = Ring.getUnknown();
 		
-		int total = potions.size() + scrolls.size() + rings.size();
+		int total = potions.size() + scrolls.size();
 		
 		if (total == 0){
 			GLog.n( Messages.get(this, "nothing_left") );
@@ -75,7 +73,7 @@ public class ScrollOfDivination extends ExoticScroll {
 		ArrayList<com.quasistellar.hollowdungeon.items.Item> IDed = new ArrayList<>();
 		int left = 4;
 		
-		float[] baseProbs = new float[]{3, 3, 3};
+		float[] baseProbs = new float[]{2, 2};
 		float[] probs = baseProbs.clone();
 		
 		while (left > 0 && total > 0) {
@@ -104,17 +102,6 @@ public class ScrollOfDivination extends ExoticScroll {
 					s.setKnown();
 					IDed.add(s);
 					scrolls.remove(s.getClass());
-					break;
-				case 2:
-					if (rings.isEmpty()) {
-						probs[2] = 0;
-						continue;
-					}
-					probs[2]--;
-					Ring r = Reflection.newInstance(Random.element(rings));
-					r.setKnown();
-					IDed.add(r);
-					rings.remove(r.getClass());
 					break;
 			}
 			left --;

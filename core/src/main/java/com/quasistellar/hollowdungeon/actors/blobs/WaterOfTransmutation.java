@@ -24,22 +24,16 @@ package com.quasistellar.hollowdungeon.actors.blobs;
 import com.quasistellar.hollowdungeon.effects.BlobEmitter;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon;
 import com.quasistellar.hollowdungeon.journal.Catalog;
 import com.quasistellar.hollowdungeon.journal.Notes;
 import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
@@ -49,22 +43,12 @@ public class WaterOfTransmutation extends WellWater {
 	@Override
 	protected com.quasistellar.hollowdungeon.items.Item affectItem(Item item, int pos ) {
 		
-		if (item instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff) {
-			item = changeStaff( (com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff)item );
-		} else if (item instanceof com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon) {
-			item = changeWeapon( (com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon)item );
-		} else if (item instanceof Scroll) {
+		if (item instanceof Scroll) {
 			item = changeScroll( (Scroll)item );
 		} else if (item instanceof Potion) {
 			item = changePotion( (Potion)item );
-		} else if (item instanceof Ring) {
-			item = changeRing( (Ring)item );
-		} else if (item instanceof Wand) {
-			item = changeWand( (Wand)item );
 		} else if (item instanceof com.quasistellar.hollowdungeon.plants.Plant.Seed) {
 			item = changeSeed( (com.quasistellar.hollowdungeon.plants.Plant.Seed)item );
-		} else if (item instanceof Artifact) {
-			item = changeArtifact( (Artifact)item );
 		} else {
 			item = null;
 		}
@@ -92,108 +76,6 @@ public class WaterOfTransmutation extends WellWater {
 	@Override
 	protected com.quasistellar.hollowdungeon.journal.Notes.Landmark record() {
 		return Notes.Landmark.WELL_OF_TRANSMUTATION;
-	}
-
-	private com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff changeStaff(MagesStaff staff ){
-		Class<?extends Wand> wandClass = staff.wandClass();
-
-		if (wandClass == null){
-			return null;
-		} else {
-			Wand n;
-			do {
-				n = (Wand) Generator.random(Generator.Category.WAND);
-			} while (Challenges.isItemBlocked(n) || n.getClass() == wandClass);
-			n.level(0);
-			n.identify();
-			staff.imbueWand(n, null);
-		}
-
-		return staff;
-	}
-	
-	private Weapon changeWeapon( com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon w ) {
-		
-		Weapon n;
-		Generator.Category c = Generator.wepTiers[w.tier-1];
-
-		do {
-			n = (MeleeWeapon)Reflection.newInstance(c.classes[Random.chances(c.probs)]);
-		} while (Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
-
-		int level = w.level();
-		if (w.curseInfusionBonus) level--;
-		if (level > 0) {
-			n.upgrade( level );
-		} else if (level < 0) {
-			n.degrade( -level );
-		}
-
-		n.enchantment = w.enchantment;
-		n.curseInfusionBonus = w.curseInfusionBonus;
-		n.levelKnown = w.levelKnown;
-		n.cursedKnown = w.cursedKnown;
-		n.cursed = w.cursed;
-		n.augment = w.augment;
-
-		return n;
-
-	}
-	
-	private Ring changeRing( Ring r ) {
-		Ring n;
-		do {
-			n = (Ring) Generator.random( Generator.Category.RING );
-		} while (Challenges.isItemBlocked(n) || n.getClass() == r.getClass());
-		
-		n.level(0);
-		
-		int level = r.level();
-		if (level > 0) {
-			n.upgrade( level );
-		} else if (level < 0) {
-			n.degrade( -level );
-		}
-		
-		n.levelKnown = r.levelKnown;
-		n.cursedKnown = r.cursedKnown;
-		n.cursed = r.cursed;
-		
-		return n;
-	}
-
-	private Artifact changeArtifact( Artifact a ) {
-		Artifact n = Generator.randomArtifact();
-
-		if (n != null && !Challenges.isItemBlocked(n)){
-			n.cursedKnown = a.cursedKnown;
-			n.cursed = a.cursed;
-			n.levelKnown = a.levelKnown;
-			n.transferUpgrade(a.visiblyUpgraded());
-			return n;
-		}
-
-		return null;
-	}
-	
-	private Wand changeWand( Wand w ) {
-		
-		Wand n;
-		do {
-			n = (Wand) Generator.random( Generator.Category.WAND );
-		} while ( com.quasistellar.hollowdungeon.Challenges.isItemBlocked(n) || n.getClass() == w.getClass());
-		
-		n.level( 0 );
-		int level = w.level();
-		if (w.curseInfusionBonus) level--;
-		n.upgrade( level );
-		
-		n.levelKnown = w.levelKnown;
-		n.cursedKnown = w.cursedKnown;
-		n.cursed = w.cursed;
-		n.curseInfusionBonus = w.curseInfusionBonus;
-		
-		return n;
 	}
 	
 	private com.quasistellar.hollowdungeon.plants.Plant.Seed changeSeed(com.quasistellar.hollowdungeon.plants.Plant.Seed s ) {

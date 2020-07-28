@@ -23,17 +23,6 @@ package com.quasistellar.hollowdungeon.journal;
 
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.artifacts.AlchemistsToolkit;
-import com.quasistellar.hollowdungeon.items.artifacts.ChaliceOfBlood;
-import com.quasistellar.hollowdungeon.items.artifacts.CloakOfShadows;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.artifacts.EtherealChains;
-import com.quasistellar.hollowdungeon.items.artifacts.HornOfPlenty;
-import com.quasistellar.hollowdungeon.items.artifacts.MasterThievesArmband;
-import com.quasistellar.hollowdungeon.items.artifacts.SandalsOfNature;
-import com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
-import com.quasistellar.hollowdungeon.items.artifacts.UnstableSpellbook;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfExperience;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfFrost;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHaste;
@@ -46,17 +35,6 @@ import com.quasistellar.hollowdungeon.items.potions.PotionOfParalyticGas;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfPurity;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfToxicGas;
-import com.quasistellar.hollowdungeon.items.rings.RingOfAccuracy;
-import com.quasistellar.hollowdungeon.items.rings.RingOfElements;
-import com.quasistellar.hollowdungeon.items.rings.RingOfEnergy;
-import com.quasistellar.hollowdungeon.items.rings.RingOfEvasion;
-import com.quasistellar.hollowdungeon.items.rings.RingOfForce;
-import com.quasistellar.hollowdungeon.items.rings.RingOfFuror;
-import com.quasistellar.hollowdungeon.items.rings.RingOfHaste;
-import com.quasistellar.hollowdungeon.items.rings.RingOfMight;
-import com.quasistellar.hollowdungeon.items.rings.RingOfSharpshooting;
-import com.quasistellar.hollowdungeon.items.rings.RingOfTenacity;
-import com.quasistellar.hollowdungeon.items.rings.RingOfWealth;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfLullaby;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
@@ -69,46 +47,6 @@ import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTerror;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTransmutation;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.wands.WandOfBlastWave;
-import com.quasistellar.hollowdungeon.items.wands.WandOfCorrosion;
-import com.quasistellar.hollowdungeon.items.wands.WandOfCorruption;
-import com.quasistellar.hollowdungeon.items.wands.WandOfDisintegration;
-import com.quasistellar.hollowdungeon.items.wands.WandOfFireblast;
-import com.quasistellar.hollowdungeon.items.wands.WandOfFrost;
-import com.quasistellar.hollowdungeon.items.wands.WandOfLightning;
-import com.quasistellar.hollowdungeon.items.wands.WandOfLivingEarth;
-import com.quasistellar.hollowdungeon.items.wands.WandOfMagicMissile;
-import com.quasistellar.hollowdungeon.items.wands.WandOfPrismaticLight;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
-import com.quasistellar.hollowdungeon.items.wands.WandOfTransfusion;
-import com.quasistellar.hollowdungeon.items.wands.WandOfWarding;
-import com.quasistellar.hollowdungeon.items.weapon.melee.AssassinsBlade;
-import com.quasistellar.hollowdungeon.items.weapon.melee.BattleAxe;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Crossbow;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Dagger;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Dirk;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Flail;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Gauntlet;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Glaive;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Gloves;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Greataxe;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Greatshield;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Greatsword;
-import com.quasistellar.hollowdungeon.items.weapon.melee.HandAxe;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Longsword;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Mace;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Quarterstaff;
-import com.quasistellar.hollowdungeon.items.weapon.melee.RoundShield;
-import com.quasistellar.hollowdungeon.items.weapon.melee.RunicBlade;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Sai;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Scimitar;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Shortsword;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Spear;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Sword;
-import com.quasistellar.hollowdungeon.items.weapon.melee.WarHammer;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Whip;
-import com.quasistellar.hollowdungeon.items.weapon.melee.WornShortsword;
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
@@ -118,12 +56,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public enum Catalog {
-	
-	WEAPONS,
-	ARMOR,
-	WANDS,
-	RINGS,
-	ARTIFACTS,
+
 	POTIONS,
 	SCROLLS;
 	
@@ -143,74 +76,6 @@ public enum Catalog {
 	}
 	
 	static {
-		WEAPONS.seen.put( WornShortsword.class,             false);
-		WEAPONS.seen.put( Gloves.class,                     false);
-		WEAPONS.seen.put( Dagger.class,                     false);
-		WEAPONS.seen.put( MagesStaff.class,                 false);
-		//WEAPONS.seen.put( Boomerang.class,                  false);
-		WEAPONS.seen.put( Shortsword.class,                 false);
-		WEAPONS.seen.put( HandAxe.class,                    false);
-		WEAPONS.seen.put( Spear.class,                      false);
-		WEAPONS.seen.put( Quarterstaff.class,               false);
-		WEAPONS.seen.put( Dirk.class,                       false);
-		WEAPONS.seen.put( Sword.class,                      false);
-		WEAPONS.seen.put( Mace.class,                       false);
-		WEAPONS.seen.put( Scimitar.class,                   false);
-		WEAPONS.seen.put( RoundShield.class,                false);
-		WEAPONS.seen.put( Sai.class,                        false);
-		WEAPONS.seen.put( Whip.class,                       false);
-		WEAPONS.seen.put( Longsword.class,                  false);
-		WEAPONS.seen.put( BattleAxe.class,                  false);
-		WEAPONS.seen.put( Flail.class,                      false);
-		WEAPONS.seen.put( RunicBlade.class,                 false);
-		WEAPONS.seen.put( AssassinsBlade.class,             false);
-		WEAPONS.seen.put( Crossbow.class,                   false);
-		WEAPONS.seen.put( Greatsword.class,                 false);
-		WEAPONS.seen.put( WarHammer.class,                  false);
-		WEAPONS.seen.put( Glaive.class,                     false);
-		WEAPONS.seen.put( Greataxe.class,                   false);
-		WEAPONS.seen.put( Greatshield.class,                false);
-		WEAPONS.seen.put( Gauntlet.class,                   false);
-	
-		WANDS.seen.put( WandOfMagicMissile.class,           false);
-		WANDS.seen.put( WandOfLightning.class,              false);
-		WANDS.seen.put( WandOfDisintegration.class,         false);
-		WANDS.seen.put( WandOfFireblast.class,              false);
-		WANDS.seen.put( WandOfCorrosion.class,              false);
-		WANDS.seen.put( WandOfBlastWave.class,              false);
-		WANDS.seen.put( WandOfLivingEarth.class,            false);
-		WANDS.seen.put( WandOfFrost.class,                  false);
-		WANDS.seen.put( WandOfPrismaticLight.class,         false);
-		WANDS.seen.put( WandOfWarding.class,                false);
-		WANDS.seen.put( WandOfTransfusion.class,            false);
-		WANDS.seen.put( WandOfCorruption.class,             false);
-		WANDS.seen.put( WandOfRegrowth.class,               false);
-	
-		RINGS.seen.put( RingOfAccuracy.class,               false);
-		RINGS.seen.put( RingOfEnergy.class,                 false);
-		RINGS.seen.put( RingOfElements.class,               false);
-		RINGS.seen.put( RingOfEvasion.class,                false);
-		RINGS.seen.put( RingOfForce.class,                  false);
-		RINGS.seen.put( RingOfFuror.class,                  false);
-		RINGS.seen.put( RingOfHaste.class,                  false);
-		RINGS.seen.put( RingOfMight.class,                  false);
-		RINGS.seen.put( RingOfSharpshooting.class,          false);
-		RINGS.seen.put( RingOfTenacity.class,               false);
-		RINGS.seen.put( RingOfWealth.class,                 false);
-	
-		ARTIFACTS.seen.put( AlchemistsToolkit.class,        false);
-		//ARTIFACTS.seen.put( CapeOfThorns.class,             false);
-		ARTIFACTS.seen.put( ChaliceOfBlood.class,           false);
-		ARTIFACTS.seen.put( CloakOfShadows.class,           false);
-		ARTIFACTS.seen.put( DriedRose.class,                false);
-		ARTIFACTS.seen.put( EtherealChains.class,           false);
-		ARTIFACTS.seen.put( HornOfPlenty.class,             false);
-		//ARTIFACTS.seen.put( LloydsBeacon.class,             false);
-		ARTIFACTS.seen.put( MasterThievesArmband.class,     false);
-		ARTIFACTS.seen.put( SandalsOfNature.class,          false);
-		ARTIFACTS.seen.put( TalismanOfForesight.class,      false);
-		ARTIFACTS.seen.put( TimekeepersHourglass.class,     false);
-		ARTIFACTS.seen.put( UnstableSpellbook.class,        false);
 	
 		POTIONS.seen.put( PotionOfHealing.class,            false);
 		POTIONS.seen.put( PotionOfStrength.class,           false);
@@ -241,11 +106,6 @@ public enum Catalog {
 	
 	public static LinkedHashMap<Catalog, Badges.Badge> catalogBadges = new LinkedHashMap<>();
 	static {
-		catalogBadges.put(WEAPONS, Badges.Badge.ALL_WEAPONS_IDENTIFIED);
-		catalogBadges.put(ARMOR, Badges.Badge.ALL_ARMOR_IDENTIFIED);
-		catalogBadges.put(WANDS, Badges.Badge.ALL_WANDS_IDENTIFIED);
-		catalogBadges.put(RINGS, Badges.Badge.ALL_RINGS_IDENTIFIED);
-		catalogBadges.put(ARTIFACTS, Badges.Badge.ALL_ARTIFACTS_IDENTIFIED);
 		catalogBadges.put(POTIONS, Badges.Badge.ALL_POTIONS_IDENTIFIED);
 		catalogBadges.put(SCROLLS, Badges.Badge.ALL_SCROLLS_IDENTIFIED);
 	}

@@ -21,13 +21,9 @@
 
 package com.quasistellar.hollowdungeon.actors.mobs;
 
-import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.actors.blobs.StenchGas;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Ooze;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Ghost;
-import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.FetidRatSprite;
 import com.watabou.utils.Random;
 
@@ -58,7 +54,6 @@ public class FetidRat extends Rat {
 	public void die( Object cause ) {
 		super.die( cause );
 
-		Ghost.Quest.process();
 	}
 	
 	{

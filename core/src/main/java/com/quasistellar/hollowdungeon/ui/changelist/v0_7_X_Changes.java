@@ -24,20 +24,11 @@ package com.quasistellar.hollowdungeon.ui.changelist;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.effects.BadgeBanner;
 import com.quasistellar.hollowdungeon.items.Honeypot;
-import com.quasistellar.hollowdungeon.items.artifacts.AlchemistsToolkit;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.artifacts.UnstableSpellbook;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.rings.RingOfWealth;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMirrorImage;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRetribution;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTerror;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Gauntlet;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.Shuriken;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.Tomahawk;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.darts.Dart;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.Assets;
@@ -160,13 +151,13 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.wands.WandOfLivingEarth(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Living Earth",
 				"I'm adjusting the wand of living earth to make it less able to stand on its own as a run-winning item. It should excel at providing defensive power, but shouldn't also give good offense.\n\n" +
 				"_-_ Guardian average damage decreased by 33%\n" +
 				"_-_ Base wand damage up to 4-6 from 3-6\n" +
 				"_-_ Wand damage scaling down to 0-2 from 1-2"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.wands.WandOfCorruption(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Corruption",
 				"Corruption is performing extremely well when invested in, so I'm buffing its base power but reducing its upgraded power. I'm also putting more emphasis on debuffs helping corruption chances:\n\n" +
 				"_-_ Corruption resistance reduction from minor debuffs up to 25% from 20%\n" +
 				"_-_ Corruption resistance reduction from major debuffs up to 50% from 33%\n" +
@@ -190,11 +181,11 @@ public class v0_7_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.wands.WandOfWarding(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Warding",
 				"This brand new wand spawns autonomous wards which attack enemies. Wards can be upgraded by being zapped again, and eventually form up into sentry turrets.\n\n" +
 				"The Wand of Warding does very consistent damage, but requires some setup first."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.wands.WandOfLivingEarth(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Living Earth",
 				"This new wand has a lower damage output, but grants significant defensive power. The rocks the wand shoots at enemies reform around the hero and absorb damage. If enough rock is built, it will form up into a rock guardian which fights with the player.\n\n" +
 				"The Wand of Living Earth is lacking in offensive output, but does a great job of pulling focus and damage away from the player."));
 		
@@ -247,7 +238,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new DriedRose(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Dried Rose",
 				"The Dried Rose's ghost hero has received some buffs and adjustments to go along with other ally improvements:\n\n" +
 				"_-_ The ghost hero can now be given instructions by using the rose after summoning them, and tapping on a location.\n\n" +
 				"_-_ Ghost HP scaling increased to 8 per petal, from 4.\n" +
@@ -339,7 +330,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.WARNING );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Dart(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Dart",
 				"Dart tipping has been removed from the alchemy system. Darts can instead be tipped right from the inventory.\n\n" +
 				"Tipped darts have had their shop price reduced by 33%, and can now be cleaned if you don't wish to use the effect.\n\n" +
 				"The alchemy guide has been adjusted due to the removal of dart tipping from alchemy. It now has 9 pages (down from 10), and the order of pages have been adjusted to put some simpler recipes earlier."));
@@ -405,7 +396,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Tomahawk(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Tomahawk",
 				"The Tomahawk has been adjusted to make its damage more upfront, but also to reduce its extreme damage scaling with upgrades.\n\n" +
 				"_-_ Tomahawk damage scaling increased to 2-4 per level, up from 2-2\n" +
 				"_-_ Tomahawk bleed damage now starts at 60% of damage, down from 100%"));
@@ -546,12 +537,12 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.wands.WandOfTransfusion(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Transfusion",
 				"Wand of Transfusion changed significantly when used on enemies:\n" +
 				"_-_ No longer self-harms, now grants a mild self-shield instead\n" +
 				"_-_ Charm duration no longer scales with level, damage to undead enemies reduced"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_AMETHYST, null), Messages.get(RingOfWealth.class, "name"),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Ring of Wealth",
 				"Ring of Wealth significantly buffed:\n" +
 				"_-_ Special item drops now happen ~50% more often\n" +
 				"_-_ The ring of wealth now awards a greater variety of items from special drops\n" +
@@ -708,12 +699,12 @@ public class v0_7_X_Changes {
 				"The ring of force's equipped weapon bonus was always meant as a small boost so it wasn't useless if the player already had a better weapon. It wasn't intended to be used to both replace melee and then boost thrown weapons.\n" +
 				"_-_ The ring of force no longer gives bonus damage to thrown weapons."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Gauntlet(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( Icons.get(Icons.PREFS), "Gauntlet",
 				"As furor now works much better with fast weapons, I've taken the opportunity to very slightly nerf sai and gauntlets\n\n" +
 				"_-_ Sai blocking down to 0-2 from 0-3\n" +
 				"_-_ Gauntlet blocking down to 0-4 from 0-5"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Shuriken(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( Icons.get(Icons.PREFS), "Shuriken",
 				"Shuriken have been adjusted due to the new upgrade system:\n\n" +
 				"_-_ Base damage increased to 4-8 from 4-6\n" +
 				"_-_ Durability reduced to 5 from 10"));
@@ -741,7 +732,7 @@ public class v0_7_X_Changes {
 				"There is also a new resource: alchemical energy. Every alchemy pot has some energy within it. Some recipes require this energy, so make sure to use it wisely!\n\n" +
 				"All of this is explained in a new guidebook specifically for alchemy. Pages of it can be found in alchemy rooms. Existing players will be given some pages automatically to get started."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new AlchemistsToolkit(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Alchemist's Toolkit",
 				"The Alchemist's Toolkit returns!\n\n" +
 				"The toolkit can be found like any other artifact, and acts as a sort of horn of plenty for the new alchemical energy resource."));
 		
@@ -794,13 +785,13 @@ public class v0_7_X_Changes {
 				"_-_ Goo and DM-300 now drop unique alchemy ingredients instead.\n\n" +
 				"_-_ Lloyd's beacon has been replaced by alchemy recipes, Cape of Thorns will likely return in some form in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new UnstableSpellbook(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Unstable Spellbook",
 				"Blandfruit has been changed to be more consistent with potions.\n\n" +
 				"All blandfruit types now exactly mimic their potion counterparts, there are now no blandfruit-exclusive effects.\n\n" +
 				"When a thrown blandfruit shatters, it will now leave behind blandfruit chunks, which can be eaten. This allows offensive blandfruits to be used without losing their food value.\n\n" +
 				"The previous unique mechanics of earthfruit, sorrowfruit, and firefruit have been recycled into the new alchemy system."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new UnstableSpellbook(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Unstable Spellbook",
 				"The unstable spellbook has received a mini-rework to go along with the new exotic scrolls.\n\n" +
 				"_-_ Previous enhanced scroll mechanic removed.\n\n" +
 				"_-_ Feeding a scroll to the spellbook now allows you to use either that scroll, or its exotic equivalent.\n\n" +
@@ -863,7 +854,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.wands.WandOfTransfusion(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Transfusion",
 				"Wand of transfusion has been rebalanced, with an emphasis on making it much more useful in conjunction with weaker allies:\n\n" +
 				"_-_ Using the wand still costs 10% max hp\n\n" +
 				"_-_ Ally healing adjusted to 10% of user max HP + a flat 3 per level, from 30% + 3%/lvl missing hp\n\n" +
@@ -890,7 +881,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( com.quasistellar.hollowdungeon.sprites.CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new WandOfRegrowth(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Regrowth",
 				"Wand of regrowth will now cease producing plants if it is overused. Charges spent before it begins degrading will increase if the wand is upgraded. At +12 the wand will function infinitely.\n\n" +
 				"This change is made to combat farming with low-levelled wands of regrowth. Especially with the alchemy changes this would be far too powerful. Infinite farming is still possible, but requires upgrades."));
 		

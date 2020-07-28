@@ -62,7 +62,7 @@ public class HeroSprite extends CharSprite {
 
 	public void updateArmor() {
 
-		TextureFilm film = new TextureFilm( tiers(), 1, FRAME_WIDTH, FRAME_HEIGHT );
+		TextureFilm film = new TextureFilm( tiers(), 0, FRAME_WIDTH, FRAME_HEIGHT );
 
 		idle = new Animation( 1, true );
 		idle.frames( film, 0, 0, 0, 1, 0, 0, 1, 1 );
@@ -70,22 +70,22 @@ public class HeroSprite extends CharSprite {
 		run = new Animation( RUN_FRAMERATE, true );
 		run.frames( film, 2, 3, 4, 5, 6, 7 );
 
-		die = new Animation( 20, false );
-		die.frames( film, 8, 9, 10, 11, 12, 11 );
+		die = new Animation( 10, false );
+		die.frames( film, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 );
 
 		attack = new Animation( 15, false );
-		attack.frames( film, 13, 14, 15, 0 );
+		attack.frames( film, 20, 21, 22, 0 );
 
 		zap = attack.clone();
 
 		operate = new Animation( 8, false );
-		operate.frames( film, 16, 17, 16, 17 );
+		operate.frames( film, 23, 24, 23, 24 );
 
 		fly = new Animation( 1, true );
-		fly.frames( film, 18 );
+		fly.frames( film, 25 );
 
 		read = new Animation( 20, false );
-		read.frames( film, 19, 20, 20, 20, 20, 20, 20, 20, 20, 19 );
+		read.frames( film, 26, 27, 27, 27, 27, 27, 27, 27, 27, 26 );
 
 		if (Dungeon.hero.isAlive())
 			idle();
@@ -150,7 +150,7 @@ public class HeroSprite extends CharSprite {
 
 	public static TextureFilm tiers() {
 		if (tiers == null) {
-			SmartTexture texture = TextureCache.get( Assets.Sprites.ROGUE );
+			SmartTexture texture = TextureCache.get( Assets.Sprites.WARRIOR );
 			tiers = new TextureFilm( texture, texture.width, FRAME_HEIGHT );
 		}
 

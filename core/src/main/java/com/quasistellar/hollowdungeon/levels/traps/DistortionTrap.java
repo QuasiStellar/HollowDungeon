@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.actors.mobs.npcs.RatKing;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Acidic;
 import com.quasistellar.hollowdungeon.actors.mobs.Albino;
 import com.quasistellar.hollowdungeon.actors.mobs.ArmoredBrute;
@@ -39,7 +38,6 @@ import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.Piranha;
 import com.quasistellar.hollowdungeon.actors.mobs.Senior;
-import com.quasistellar.hollowdungeon.actors.mobs.Statue;
 import com.quasistellar.hollowdungeon.actors.mobs.Wraith;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.watabou.utils.PathFinder;
@@ -62,7 +60,7 @@ public class DistortionTrap extends Trap{
 			Albino.class, CausticSlime.class,
 			Bandit.class,
 			ArmoredBrute.class, DM201.class,
-			Elemental.ChaosElemental.class, Senior.class,
+			Senior.class,
 			Acidic.class));
 
 	@Override
@@ -126,9 +124,6 @@ public class DistortionTrap extends Trap{
 							mob = Mimic.spawnAt(point, new ArrayList<>());
 							((Mimic)mob).stopHiding();
 							mob.alignment = Char.Alignment.ENEMY;
-							break;
-						case 3:
-							mob = Statue.random();
 							break;
 					}
 					break;

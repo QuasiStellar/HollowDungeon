@@ -26,10 +26,6 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
-import com.quasistellar.hollowdungeon.items.artifacts.DriedRose;
-import com.quasistellar.hollowdungeon.items.wands.WandOfLivingEarth;
-import com.quasistellar.hollowdungeon.items.wands.WandOfWarding;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.RedButton;
@@ -147,38 +143,6 @@ public class SurfaceScene extends PixelScene {
 		//allies. Attempts to pick highest level, but prefers rose > earth > ward.
 		//Rose level is halved because it's easier to upgrade
 		com.quasistellar.hollowdungeon.sprites.CharSprite allySprite = null;
-		
-		//picks the highest between ghost's weapon, armor, and rose level/2
-		int roseLevel = 0;
-		DriedRose rose = Dungeon.hero.belongings.getItem(DriedRose.class);
-		if (rose != null){
-			roseLevel = rose.level()/2;
-			if (rose.ghostWeapon() != null){
-				roseLevel = Math.max(roseLevel, rose.ghostWeapon().level());
-			}
-		}
-		
-		int earthLevel = Dungeon.hero.belongings.getItem(WandOfLivingEarth.class) == null ? 0 : Dungeon.hero.belongings.getItem(WandOfLivingEarth.class).level();
-		int wardLevel = Dungeon.hero.belongings.getItem(WandOfWarding.class) == null ? 0 : Dungeon.hero.belongings.getItem(WandOfWarding.class).level();
-		
-		MagesStaff staff = Dungeon.hero.belongings.getItem(MagesStaff.class);
-		if (staff != null){
-			if (staff.wandClass() == WandOfLivingEarth.class){
-				earthLevel = Math.max(earthLevel, staff.level());
-			} else if (staff.wandClass() == WandOfWarding.class){
-				wardLevel = Math.max(wardLevel, staff.level());
-			}
-		}
-		
-		if (roseLevel >= 3 && roseLevel >= earthLevel && roseLevel >= wardLevel){
-			allySprite = new com.quasistellar.hollowdungeon.sprites.GhostSprite();
-			if (dayTime) allySprite.alpha(0.4f);
-		} else if (earthLevel >= 3 && earthLevel >= wardLevel){
-			allySprite = new com.quasistellar.hollowdungeon.sprites.EarthGuardianSprite();
-		} else if (wardLevel >= 3){
-			allySprite = new com.quasistellar.hollowdungeon.sprites.WardSprite();
-			((com.quasistellar.hollowdungeon.sprites.WardSprite) allySprite).updateTier(Math.min(wardLevel+2, 6));
-		}
 		
 		if (allySprite != null){
 			allySprite.add(com.quasistellar.hollowdungeon.sprites.CharSprite.State.PARALYSED);

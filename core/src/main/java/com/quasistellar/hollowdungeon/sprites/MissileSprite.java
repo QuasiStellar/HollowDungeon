@@ -23,18 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.weapon.SpiritBow;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Crossbow;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.Bolas;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.FishingSpear;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.HeavyBoomerang;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.Javelin;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.Kunai;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.Shuriken;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.ThrowingKnife;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.ThrowingSpear;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.Trident;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.darts.Dart;
 import com.quasistellar.hollowdungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.tweeners.PosTweener;
@@ -82,23 +70,8 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 	
 	private static final HashMap<Class<?extends Item>, Integer> ANGULAR_SPEEDS = new HashMap<>();
 	static {
-		ANGULAR_SPEEDS.put(Dart.class,          0);
-		ANGULAR_SPEEDS.put(ThrowingKnife.class, 0);
-		ANGULAR_SPEEDS.put(FishingSpear.class,  0);
-		ANGULAR_SPEEDS.put(ThrowingSpear.class, 0);
-		ANGULAR_SPEEDS.put(Kunai.class,         0);
-		ANGULAR_SPEEDS.put(Javelin.class,       0);
-		ANGULAR_SPEEDS.put(Trident.class,       0);
-		
-		ANGULAR_SPEEDS.put(SpiritBow.SpiritArrow.class,       0);
+
 		ANGULAR_SPEEDS.put(ScorpioSprite.ScorpioShot.class,   0);
-		
-		//720 is default
-		
-		ANGULAR_SPEEDS.put(HeavyBoomerang.class,1440);
-		ANGULAR_SPEEDS.put(Bolas.class,         1440);
-		
-		ANGULAR_SPEEDS.put(Shuriken.class,      2160);
 		
 		ANGULAR_SPEEDS.put(TenguSprite.TenguShuriken.class,      2160);
 	}
@@ -135,18 +108,8 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 			flipHorizontal = true;
 			updateFrame();
 		}
-		
-		float speed = SPEED;
-		if (item instanceof Dart && Dungeon.hero.belongings.weapon instanceof Crossbow){
-			speed *= 3f;
-			
-		} else if (item instanceof SpiritBow.SpiritArrow
-				|| item instanceof ScorpioSprite.ScorpioShot
-				|| item instanceof TenguSprite.TenguShuriken){
-			speed *= 1.5f;
-		}
-		
-		PosTweener tweener = new PosTweener( this, to, d.length() / speed );
+
+		PosTweener tweener = new PosTweener( this, to, d.length() / SPEED);
 		tweener.listener = this;
 		parent.add( tweener );
 	}

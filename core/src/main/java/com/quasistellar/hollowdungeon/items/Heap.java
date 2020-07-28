@@ -30,15 +30,12 @@ import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Wraith;
 import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
 import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.items.journal.DocumentPage;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.rings.RingOfWealth;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
@@ -97,11 +94,6 @@ public class Heap implements Bundlable {
 
 		if (type != Type.MIMIC) {
 			type = Type.HEAP;
-			ArrayList<Item> bonus = RingOfWealth.tryForBonusDrop(hero, 1);
-			if (bonus != null && !bonus.isEmpty()) {
-				items.addAll(0, bonus);
-				RingOfWealth.showFlareForBonusDrop(sprite);
-			}
 			sprite.link();
 			sprite.drop();
 		}
@@ -357,13 +349,6 @@ public class Heap implements Bundlable {
 				return Messages.get(this, "chest_desc");
 			case LOCKED_CHEST:
 				return Messages.get(this, "locked_chest_desc");
-			case CRYSTAL_CHEST:
-				if (peek() instanceof Artifact)
-					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "artifact") );
-				else if (peek() instanceof Wand)
-					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "wand") );
-				else
-					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "ring") );
 			case TOMB:
 				return Messages.get(this, "tomb_desc");
 			case SKELETON:

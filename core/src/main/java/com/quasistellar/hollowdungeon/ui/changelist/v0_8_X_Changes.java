@@ -23,13 +23,6 @@ package com.quasistellar.hollowdungeon.ui.changelist;
 
 import com.quasistellar.hollowdungeon.actors.mobs.DwarfKing;
 import com.quasistellar.hollowdungeon.actors.mobs.NewDM300;
-import com.quasistellar.hollowdungeon.items.artifacts.TalismanOfForesight;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAugmentation;
-import com.quasistellar.hollowdungeon.items.wands.WandOfCorruption;
-import com.quasistellar.hollowdungeon.items.wands.WandOfMagicMissile;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
-import com.quasistellar.hollowdungeon.items.wands.WandOfWarding;
-import com.quasistellar.hollowdungeon.items.weapon.SpiritBow;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.Assets;
@@ -113,7 +106,7 @@ public class v0_8_X_Changes {
 				"_Buff icons now have a new fading behaviour_ that much more accurately communicates how much of their duration is left. Several duplicated buff icons have also been recolored so they are distinct.\n\n" +
 				"_Item icons have been added to rings!_ To accommodate this, item icons now appear in the top-right of an item's inventory slot. Several existing item icons have also been improved."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new TalismanOfForesight(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Talisman of Foresight",
 				"The _Talisman of Foresight_ has received a rework to make its active ability more useful and interactive!\n\n" +
 				"A few changes have been made to passive trap detection:\n" +
 				"_-_ Talisman no longer gains EXP from the hero finding secrets\n" +
@@ -126,7 +119,7 @@ public class v0_8_X_Changes {
 				"_-_ The talisman gains exp based on what it reveals. Secrets are worth the most EXP.\n" +
 				"_-_ As the talisman levels, max scry distance and mind vision duration increase."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new WandOfRegrowth(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Regrowth",
 				"The _Wand of Regrowth_ has been reworked, with the goal of making it useful for more than just farming:\n\n" +
 				"_-_ Initial charges increased to 2 from 1.\n" +
 				"_-_ Regrowth now attacks in the same pattern as fireblast, no longer consumes all charges at once.\n" +
@@ -136,7 +129,7 @@ public class v0_8_X_Changes {
 				"_-_ Starflower no longer has a 1/5 chance to drop its own seed.\n" +
 				"_-_ Starflower is now 2.5x as rare as other seeds, down from 10x."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new WandOfMagicMissile(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Magic Missile",
 				"The _Wand of Magic Missile_ has received a new ability that lets it better synergize with other wands!\n\n" +
 				"After zapping with an upgraded magic missile wand, the hero becomes 'magically charged' for a few turns. When the hero zaps with another lower-level wand, the charge is consumed and that wand will act as if it is the same level as the wand of magic missile!\n\n" +
 				"My hope with this change is to make magic missile more worthy of upgrades if the player is going for a sort of 'wandslinger' build, while still maintaining the wands weakness when used solo.\n\n" +
@@ -222,7 +215,7 @@ public class v0_8_X_Changes {
 				"_-_ Sniper's mark now lasts 4 turns, up from 2.\n" +
 				"_-_ Sniper shot damage scaling with distance increased, now caps at 3x damage, up from 2.5x."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new WandOfWarding(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Warding",
 				"The _Wand of Warding_ has received a variety of changes focused around making it more powerful and easier to use:\n" +
 				"_-_ Wards/sentries are now inorganic\n" +
 				"_-_ Ward/sentry energy cost and warding energy capacity reduced by 1\n" +
@@ -497,12 +490,12 @@ public class v0_8_X_Changes {
 		changes.hardlight( com.quasistellar.hollowdungeon.sprites.CharSprite.POSITIVE );
 		changeInfos.add(changes);
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new SpiritBow(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Spirit Bow",
 				"Sniper shot is currently performing quite poorly versus the sniper's other abilities, so I'm giving it a significant buff:\n\n" +
 				"_-_ Base sniper shot damage increased by 20%\n" +
 				"_-_ Sniper shot damage scaling with distance increased. At high distance sniper shot will deal up to 40% more total damage."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new WandOfCorruption(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Wand of Corruption",
 				"This is actually a bugfix, but is so significant that I'm listing it as a buff for clarity:\n\n" +
 				"_-_ Fixed Wand of corruption acting as if it were one level weaker than it was in some cases.\n\n" +
 				"_-_ Doubled corruption resistance reduction from debuffs, as it was 50% weaker than intended. It is now as strong as listed in 0.7.5 changelog (50% for major debuffs, 25% for minor)\n\n" +
@@ -511,7 +504,7 @@ public class v0_8_X_Changes {
 		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(com.quasistellar.hollowdungeon.Assets.Interfaces.BUFFS_LARGE, 80, 32, 16, 16), "Bless changes",
 				"Accuracy and evasion bonuses from blessed buff increased to 25% from 20%." ));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.items.stones.StoneOfAugmentation(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Stone of Augmentation",
 				"The Evasion armor augment has been underperforming verses the defence augment, so I'm adjusting the stat tradeoff they provide:\n" +
 				"_-_ Evasion now grants 33% more evasion\n" +
 				"_-_ Defense now costs 33% more evasion"));
@@ -524,7 +517,7 @@ public class v0_8_X_Changes {
 		changes.hardlight( com.quasistellar.hollowdungeon.sprites.CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new StoneOfAugmentation(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Stone of Augmentation",
 				"The Defense armor augment has been overperforming verses the evasion augment, so I'm adjusting the stat tradeoff they provide:\n" +
 				"_-_ Defense now costs 33% more evasion\n" +
 				"_-_ Evasion now grants 33% more evasion"));

@@ -33,7 +33,6 @@ import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.effects.particles.LeafParticle;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -77,14 +76,6 @@ public abstract class Plant implements Bundlable {
 		}
 
 		float seedChance = 0f;
-		for (Char c : Actor.chars()){
-			if (c instanceof WandOfRegrowth.Lotus){
-				WandOfRegrowth.Lotus l = (WandOfRegrowth.Lotus) c;
-				if (l.inRange(pos)){
-					seedChance = Math.max(seedChance, l.seedPreservation());
-				}
-			}
-		}
 
 		if (Random.Float() < seedChance){
 			if (seedClass != null && seedClass != Rotberry.Seed.class) {

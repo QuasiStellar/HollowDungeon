@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.actors.mobs.npcs;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.BlacksmithRoom;
 import com.quasistellar.hollowdungeon.sprites.BlacksmithSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
@@ -36,11 +35,7 @@ import com.quasistellar.hollowdungeon.journal.Notes;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.items.quest.DarkGold;
-import com.quasistellar.hollowdungeon.items.quest.Pickaxe;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Game;
@@ -88,13 +83,6 @@ public class Blacksmith extends NPC {
 							
 							Quest.given = true;
 							Quest.completed = false;
-							
-							Pickaxe pick = new Pickaxe();
-							if (pick.doPickUp( Dungeon.hero )) {
-								GLog.i( Messages.get(Dungeon.hero, "you_now_have", pick.name() ));
-							} else {
-								Dungeon.level.drop( pick, Dungeon.hero.pos ).sprite.drop();
-							}
 						}
 					} );
 				}
@@ -104,42 +92,10 @@ public class Blacksmith extends NPC {
 			
 		} else if (!Quest.completed) {
 			if (Quest.alternative) {
-				
-				Pickaxe pick = Dungeon.hero.belongings.getItem( Pickaxe.class );
-				if (pick == null) {
-					tell( Messages.get(this, "lost_pick") );
-				} else if (!pick.bloodStained) {
-					tell( Messages.get(this, "blood_2") );
-				} else {
-					if (pick.isEquipped( Dungeon.hero )) {
-						pick.doUnequip( Dungeon.hero, false );
-					}
-					pick.detach( Dungeon.hero.belongings.backpack );
-					tell( Messages.get(this, "completed") );
-					
-					Quest.completed = true;
-					Quest.reforged = false;
-				}
+
 				
 			} else {
-				
-				Pickaxe pick = Dungeon.hero.belongings.getItem( Pickaxe.class );
-				DarkGold gold = Dungeon.hero.belongings.getItem( DarkGold.class );
-				if (pick == null) {
-					tell( Messages.get(this, "lost_pick") );
-				} else if (gold == null || gold.quantity() < 15) {
-					tell( Messages.get(this, "gold_2") );
-				} else {
-					if (pick.isEquipped( Dungeon.hero )) {
-						pick.doUnequip( Dungeon.hero, false );
-					}
-					pick.detach( Dungeon.hero.belongings.backpack );
-					gold.detachAll( Dungeon.hero.belongings.backpack );
-					tell( Messages.get(this, "completed") );
-					
-					Quest.completed = true;
-					Quest.reforged = false;
-				}
+
 				
 			}
 		} else if (!Quest.reforged) {
@@ -213,27 +169,12 @@ public class Blacksmith extends NPC {
 		ScrollOfUpgrade.upgrade( Dungeon.hero );
 		Item.evoke( Dungeon.hero );
 
-		if (second.isEquipped( Dungeon.hero )) {
-			((com.quasistellar.hollowdungeon.items.EquipableItem)second).doUnequip( Dungeon.hero, false );
-		}
 		second.detach( Dungeon.hero.belongings.backpack );
-		
-		if (first.isEquipped( Dungeon.hero )) {
-			((EquipableItem)first).doUnequip( Dungeon.hero, true );
-		}
-		if (first instanceof MissileWeapon && first.quantity() > 1){
-			first = first.split(1);
-		}
+
 		int level = first.level();
 		//adjust for curse infusion
-		if (first instanceof Weapon && ((Weapon) first).curseInfusionBonus) level--;
-		if (first instanceof Wand && ((Wand) first).curseInfusionBonus) level--;
 		first.level(level+1); //prevents on-upgrade effects like enchant/glyph removal
-		if (first instanceof MissileWeapon && !Dungeon.hero.belongings.contains(first)) {
-			if (!first.collect()){
-				Dungeon.level.drop( first, Dungeon.hero.pos );
-			}
-		}
+
 		Dungeon.hero.spendAndNext( 2f );
 		Badges.validateItemLevelAquired( first );
 		com.quasistellar.hollowdungeon.items.Item.updateQuickslot();

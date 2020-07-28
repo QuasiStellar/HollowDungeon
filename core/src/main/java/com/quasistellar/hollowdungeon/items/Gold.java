@@ -29,7 +29,6 @@ import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.Statistics;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.artifacts.MasterThievesArmband;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -64,10 +63,6 @@ public class Gold extends Item {
 		Dungeon.gold += quantity;
 		Statistics.goldCollected += quantity;
 		Badges.validateGoldCollected();
-
-		MasterThievesArmband.Thievery thievery = hero.buff(MasterThievesArmband.Thievery.class);
-		if (thievery != null)
-			thievery.collect(quantity);
 
 		GameScene.pickUp( this, hero.pos );
 		hero.sprite.showStatus( CharSprite.NEUTRAL, TXT_VALUE, quantity );

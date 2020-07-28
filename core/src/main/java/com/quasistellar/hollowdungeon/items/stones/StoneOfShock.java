@@ -71,8 +71,6 @@ public class StoneOfShock extends Runestone {
 			com.quasistellar.hollowdungeon.items.Item.curUser.sprite.parent.addToFront( new Lightning( arcs, null ) );
 			com.quasistellar.hollowdungeon.items.Item.curUser.sprite.centerEmitter().burst(EnergyParticle.FACTORY, 10);
 			Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.LIGHTNING );
-			
-			Item.curUser.belongings.charge(1f + hits);
 		}
 	
 	}

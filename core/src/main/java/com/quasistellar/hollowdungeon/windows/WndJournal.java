@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.windows;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.rings.Ring;
 import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.journal.Catalog;
 import com.quasistellar.hollowdungeon.journal.Document;
@@ -541,20 +540,15 @@ public class WndJournal extends WndTabbed {
 	private static class CatalogTab extends Component{
 		
 		private RedButton[] itemButtons;
-		private static final int NUM_BUTTONS = 7;
+		private static final int NUM_BUTTONS = 2;
 		
 		private static int currentItemIdx   = 0;
 		
 		//sprite locations
-		private static final int WEAPON_IDX = 0;
-		private static final int ARMOR_IDX  = 1;
-		private static final int WAND_IDX   = 2;
-		private static final int RING_IDX   = 3;
-		private static final int ARTIF_IDX  = 4;
-		private static final int POTION_IDX = 5;
-		private static final int SCROLL_IDX = 6;
+		private static final int POTION_IDX = 0;
+		private static final int SCROLL_IDX = 1;
 		
-		private static final int spriteIndexes[] = {1, 2, 4, 5, 6, 9, 11};
+		private static final int spriteIndexes[] = {9, 11};
 		
 		private ScrollPane list;
 		
@@ -625,22 +619,7 @@ public class WndJournal extends WndTabbed {
 			
 			ArrayList<Class<? extends Item>> itemClasses;
 			final HashMap<Class<?  extends Item>, Boolean> known = new HashMap<>();
-			if (currentItemIdx == WEAPON_IDX) {
-				itemClasses = new ArrayList<>(Catalog.WEAPONS.items());
-				for (Class<? extends Item> cls : itemClasses) known.put(cls, true);
-			} else if (currentItemIdx == ARMOR_IDX){
-				itemClasses = new ArrayList<>(Catalog.ARMOR.items());
-				for (Class<? extends Item> cls : itemClasses) known.put(cls, true);
-			} else if (currentItemIdx == WAND_IDX){
-				itemClasses = new ArrayList<>(Catalog.WANDS.items());
-				for (Class<? extends Item> cls : itemClasses) known.put(cls, true);
-			} else if (currentItemIdx == RING_IDX){
-				itemClasses = new ArrayList<>(Catalog.RINGS.items());
-				for (Class<? extends Item> cls : itemClasses) known.put(cls, Ring.getKnown().contains(cls));
-			} else if (currentItemIdx == ARTIF_IDX){
-				itemClasses = new ArrayList<>(Catalog.ARTIFACTS.items());
-				for (Class<? extends Item> cls : itemClasses) known.put(cls, true);
-			} else if (currentItemIdx == POTION_IDX){
+			if (currentItemIdx == POTION_IDX){
 				itemClasses = new ArrayList<>(Catalog.POTIONS.items());
 				for (Class<? extends Item> cls : itemClasses) known.put(cls, Potion.getKnown().contains(cls));
 			} else if (currentItemIdx == SCROLL_IDX) {
@@ -691,9 +670,7 @@ public class WndJournal extends WndTabbed {
 				this.seen = seen;
 
 				if ( seen && !IDed ){
-					if (item instanceof Ring){
-						((Ring) item).anonymize();
-					} else if (item instanceof Potion){
+					if (item instanceof Potion){
 						((Potion) item).anonymize();
 					} else if (item instanceof Scroll){
 						((Scroll) item).anonymize();

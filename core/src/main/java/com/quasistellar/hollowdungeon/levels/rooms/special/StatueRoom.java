@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.levels.rooms.special;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Statue;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
@@ -66,9 +65,5 @@ public class StatueRoom extends SpecialRoom {
 			cy = top + 2;
 			
 		}
-		
-		Statue statue = Statue.random();
-		statue.pos = cx + cy * level.width();
-		level.mobs.add( statue );
 	}
 }

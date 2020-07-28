@@ -66,12 +66,6 @@ public class Golem extends Mob {
 		super.rollToDropLoot();
 	}
 
-	protected Item createLoot() {
-		Dungeon.LimitedDrops.GOLEM_EQUIP.count++;
-		//uses probability tables for demon halls
-		return Generator.randomWeapon(5);
-	}
-
 	private boolean teleporting = false;
 	private int selfTeleCooldown = 0;
 	private int enemyTeleCooldown = 0;

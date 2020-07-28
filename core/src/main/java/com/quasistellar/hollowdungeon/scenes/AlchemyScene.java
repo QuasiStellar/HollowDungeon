@@ -36,8 +36,6 @@ import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Recipe;
-import com.quasistellar.hollowdungeon.items.artifacts.AlchemistsToolkit;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.darts.Dart;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
 import com.quasistellar.hollowdungeon.ui.IconButton;
@@ -141,10 +139,8 @@ public class AlchemyScene extends PixelScene {
 					protected void onClick() {
 						super.onClick();
 						if (item != null) {
-							if (!(item instanceof AlchemistsToolkit)) {
-								if (!item.collect()) {
-									Dungeon.level.drop(item, Dungeon.hero.pos);
-								}
+							if (!item.collect()) {
+								Dungeon.level.drop(item, Dungeon.hero.pos);
 							}
 							item = null;
 							slot.item(new com.quasistellar.hollowdungeon.windows.WndBag.Placeholder(ItemSpriteSheet.SOMETHING));
@@ -312,14 +308,7 @@ public class AlchemyScene extends PixelScene {
 				if (item != null && inputs[0] != null) {
 					for (int i = 0; i < inputs.length; i++) {
 						if (inputs[i].item == null) {
-							if (item instanceof Dart) {
-								inputs[i].item(item.detachAll(Dungeon.hero.belongings.backpack));
-							} else if (item instanceof AlchemistsToolkit) {
-								clearSlots();
-								inputs[i].item(item);
-							} else {
-								inputs[i].item(item.detach(Dungeon.hero.belongings.backpack));
-							}
+							inputs[i].item(item.detach(Dungeon.hero.belongings.backpack));
 							break;
 						}
 					}
@@ -399,10 +388,8 @@ public class AlchemyScene extends PixelScene {
 			Sample.INSTANCE.play( Assets.Sounds.PUFF );
 			
 			output.item(result);
-			if (!(result instanceof AlchemistsToolkit)) {
-				if (!result.collect()){
-					Dungeon.level.drop(result, Dungeon.hero.pos);
-				}
+			if (!result.collect()){
+				Dungeon.level.drop(result, Dungeon.hero.pos);
 			}
 			
 			try {
@@ -414,7 +401,7 @@ public class AlchemyScene extends PixelScene {
 			synchronized (inputs) {
 				for (int i = 0; i < inputs.length; i++) {
 					if (inputs[i] != null && inputs[i].item != null) {
-						if (inputs[i].item.quantity() <= 0 || inputs[i].item instanceof AlchemistsToolkit) {
+						if (inputs[i].item.quantity() <= 0) {
 							inputs[i].slot.item(new com.quasistellar.hollowdungeon.windows.WndBag.Placeholder(ItemSpriteSheet.SOMETHING));
 							inputs[i].item = null;
 						} else {
@@ -438,11 +425,7 @@ public class AlchemyScene extends PixelScene {
 			ArrayList<Item> found = inventory.getAllSimilar(finding);
 			while (!found.isEmpty() && needed > 0){
 				Item detached;
-				if (finding instanceof Dart) {
-					detached = found.get(0).detachAll(inventory.backpack);
-				} else {
-					detached = found.get(0).detach(inventory.backpack);
-				}
+				detached = found.get(0).detach(inventory.backpack);
 				inputs[curslot].item(detached);
 				curslot++;
 				needed -= detached.quantity();
@@ -477,10 +460,8 @@ public class AlchemyScene extends PixelScene {
 		synchronized ( inputs ) {
 			for (int i = 0; i < inputs.length; i++) {
 				if (inputs[i] != null && inputs[i].item != null) {
-					if (!(inputs[i].item instanceof AlchemistsToolkit)) {
-						if (!inputs[i].item.collect()) {
-							Dungeon.level.drop(inputs[i].item, Dungeon.hero.pos);
-						}
+					if (!inputs[i].item.collect()) {
+						Dungeon.level.drop(inputs[i].item, Dungeon.hero.pos);
 					}
 					inputs[i].item(null);
 					inputs[i].slot.item(new com.quasistellar.hollowdungeon.windows.WndBag.Placeholder(com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.SOMETHING));
@@ -548,10 +529,6 @@ public class AlchemyScene extends PixelScene {
 	
 	public static int availableEnergy(){
 		return provider == null ? 0 : provider.getEnergy();
-	}
-	
-	public static boolean providerIsToolkit(){
-		return provider instanceof AlchemistsToolkit.kitEnergy;
 	}
 	
 	public interface AlchemyProvider {

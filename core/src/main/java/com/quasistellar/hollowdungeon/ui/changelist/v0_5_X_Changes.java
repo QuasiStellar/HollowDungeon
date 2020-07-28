@@ -21,8 +21,6 @@
 
 package com.quasistellar.hollowdungeon.ui.changelist;
 
-import com.quasistellar.hollowdungeon.items.weapon.melee.Glaive;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Quarterstaff;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.ui.Window;
@@ -55,13 +53,13 @@ public class v0_5_X_Changes {
 				"_-_ Characters & items are raised & cast shadows\n" +
 				"_-_ Added a visible tile grid in the settings menu"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Quarterstaff()), "Equipment Balance Changes",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Equipment Balance Changes",
 				"_-_ Quarterstaff armor bonus increased from 2 to 3\n\n" +
 				"_-_ Wand of Frost damage against chilled enemies reduced from -7.5% per turn of chill to -10%\n\n" +
 				"_-_ Wand of Transfusion self-damage reduced from 15% max hp to 10% max hp per zap\n\n" +
 				"_-_ Dried Rose charges 20% faster and the ghost hero is stronger, especially at low levels"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new ItemSprite(new Glaive()), "Glyph Balance Changes",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(Icons.get(Icons.PREFS), "Glyph Balance Changes",
 				"_-_ Glyph of Entanglement activates less often but grants significantly more herbal armor\n\n" +
 				"_-_ Glyph of Stone armor bonus reduced from 2+level to 0+level\n\n" +
 				"_-_ Glyph of Antimagic magical damage resist reduced from 50% of armor to 33% of armor\n\n" +

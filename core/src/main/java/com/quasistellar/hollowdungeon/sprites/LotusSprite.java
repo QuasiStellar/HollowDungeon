@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.particles.LeafParticle;
-import com.quasistellar.hollowdungeon.items.wands.WandOfRegrowth;
 import com.watabou.noosa.MovieClip;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.particles.Emitter;
@@ -66,18 +65,6 @@ public class LotusSprite extends MobSprite {
 		super.link( ch );
 
 		renderShadow = false;
-
-		if (grassVfx == null && ch instanceof WandOfRegrowth.Lotus){
-			WandOfRegrowth.Lotus l = (WandOfRegrowth.Lotus) ch;
-			grassVfx = new ArrayList<>();
-			for (int i = 0; i < Dungeon.level.length(); i++){
-				if (!Dungeon.level.solid[i] && l.inRange(i)) {
-					Emitter e = CellEmitter.get(i);
-					e.pour(LeafParticle.LEVEL_SPECIFIC, 0.5f);
-					grassVfx.add(e);
-				}
-			}
-		}
 	}
 
 	@Override

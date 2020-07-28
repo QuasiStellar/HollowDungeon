@@ -22,17 +22,10 @@
 package com.quasistellar.hollowdungeon.actors.hero;
 
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Dagger;
-import com.quasistellar.hollowdungeon.items.weapon.melee.Gloves;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
-import com.quasistellar.hollowdungeon.items.weapon.melee.WornShortsword;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.ThrowingKnife;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.ThrowingStone;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.artifacts.CloakOfShadows;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
 import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
@@ -45,8 +38,6 @@ import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfLullaby;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRage;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.wands.WandOfMagicMissile;
-import com.quasistellar.hollowdungeon.items.weapon.SpiritBow;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
@@ -113,10 +104,6 @@ public enum HeroClass {
 	}
 
 	private static void initWarrior( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
-		(hero.belongings.weapon = new WornShortsword()).identify();
-		com.quasistellar.hollowdungeon.items.weapon.missiles.ThrowingStone stones = new ThrowingStone();
-		stones.quantity(3).collect();
-		Dungeon.quickslot.setSlot(0, stones);
 
 		new PotionBandolier().collect();
 		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
@@ -126,14 +113,6 @@ public enum HeroClass {
 	}
 
 	private static void initMage( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
-		com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff staff;
-
-		staff = new MagesStaff(new WandOfMagicMissile());
-
-		(hero.belongings.weapon = staff).identify();
-		hero.belongings.weapon.activate(hero);
-
-		Dungeon.quickslot.setSlot(0, staff);
 
 		new ScrollHolder().collect();
 		Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
@@ -143,17 +122,6 @@ public enum HeroClass {
 	}
 
 	private static void initRogue( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
-		(hero.belongings.weapon = new Dagger()).identify();
-
-		CloakOfShadows cloak = new CloakOfShadows();
-		(hero.belongings.misc1 = cloak).identify();
-		hero.belongings.misc1.activate( hero );
-
-		com.quasistellar.hollowdungeon.items.weapon.missiles.ThrowingKnife knives = new ThrowingKnife();
-		knives.quantity(3).collect();
-
-		Dungeon.quickslot.setSlot(0, cloak);
-		Dungeon.quickslot.setSlot(1, knives);
 
 		new VelvetPouch().collect();
 		Dungeon.LimitedDrops.VELVET_POUCH.drop();
@@ -163,12 +131,6 @@ public enum HeroClass {
 	}
 
 	private static void initHuntress( Hero hero ) {
-
-		(hero.belongings.weapon = new Gloves()).identify();
-		SpiritBow bow = new SpiritBow();
-		bow.identify().collect();
-
-		Dungeon.quickslot.setSlot(0, bow);
 
 		new VelvetPouch().collect();
 		com.quasistellar.hollowdungeon.Dungeon.LimitedDrops.VELVET_POUCH.drop();

@@ -22,14 +22,12 @@
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
 import com.quasistellar.hollowdungeon.items.Generator;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.darts.TippedDart;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Shopkeeper;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
 import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
 import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
@@ -40,8 +38,6 @@ import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAugmentation;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MeleeWeapon;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
@@ -139,39 +135,6 @@ public class ShopRoom extends SpecialRoom {
 
 		ArrayList<com.quasistellar.hollowdungeon.items.Item> itemsToSpawn = new ArrayList<>();
 
-		MeleeWeapon w;
-		switch (Dungeon.depth) {
-		case 6: default:
-			w = (MeleeWeapon) com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.wepTiers[1]);
-			itemsToSpawn.add( com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.misTiers[1]).quantity(2).identify() );
-			break;
-			
-		case 11:
-			w = (MeleeWeapon) com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.wepTiers[2]);
-			itemsToSpawn.add( com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.misTiers[2]).quantity(2).identify() );
-			break;
-			
-		case 16:
-			w = (MeleeWeapon) com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.wepTiers[3]);
-			itemsToSpawn.add( com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.misTiers[3]).quantity(2).identify() );
-			break;
-
-		case 20: case 21:
-			w = (MeleeWeapon) com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.wepTiers[4]);
-			itemsToSpawn.add( com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.misTiers[4]).quantity(2).identify() );
-			itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.Torch() );
-			itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.Torch() );
-			itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.Torch() );
-			break;
-		}
-		w.enchant(null);
-		w.cursed = false;
-		w.level(0);
-		w.identify();
-		itemsToSpawn.add(w);
-		
-		itemsToSpawn.add( TippedDart.randomTipped(2) );
-
 		itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.MerchantsBeacon() );
 
 
@@ -205,47 +168,6 @@ public class ShopRoom extends SpecialRoom {
 		}
 
 		itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.Ankh() );
-		itemsToSpawn.add( new StoneOfAugmentation() );
-
-		TimekeepersHourglass hourglass = Dungeon.hero.belongings.getItem(TimekeepersHourglass.class);
-		if (hourglass != null){
-			int bags = 0;
-			//creates the given float percent of the remaining bags to be dropped.
-			//this way players who get the hourglass late can still max it, usually.
-			switch (Dungeon.depth) {
-				case 6:
-					bags = (int)Math.ceil(( 5-hourglass.sandBags) * 0.20f ); break;
-				case 11:
-					bags = (int)Math.ceil(( 5-hourglass.sandBags) * 0.25f ); break;
-				case 16:
-					bags = (int)Math.ceil(( 5-hourglass.sandBags) * 0.50f ); break;
-				case 20: case 21:
-					bags = (int)Math.ceil(( 5-hourglass.sandBags) * 0.80f ); break;
-			}
-
-			for(int i = 1; i <= bags; i++){
-				itemsToSpawn.add( new TimekeepersHourglass.sandBag());
-				hourglass.sandBags ++;
-			}
-		}
-
-		com.quasistellar.hollowdungeon.items.Item rare;
-		switch (Random.Int(10)){
-			case 0:
-				rare = com.quasistellar.hollowdungeon.items.Generator.random( com.quasistellar.hollowdungeon.items.Generator.Category.WAND );
-				rare.level( 0 );
-				break;
-			case 1:
-				rare = com.quasistellar.hollowdungeon.items.Generator.random(com.quasistellar.hollowdungeon.items.Generator.Category.RING);
-				rare.level( 0 );
-				break;
-			case 2: default:
-				rare = Generator.random( com.quasistellar.hollowdungeon.items.Generator.Category.ARTIFACT );
-				break;
-		}
-		rare.cursed = false;
-		rare.cursedKnown = true;
-		itemsToSpawn.add( rare );
 
 		//hard limit is 63 items + 1 shopkeeper, as shops can't be bigger than 8x8=64 internally
 		if (itemsToSpawn.size() > 63)

@@ -25,14 +25,12 @@ import com.quasistellar.hollowdungeon.actors.buffs.ArtifactRecharge;
 import com.quasistellar.hollowdungeon.actors.buffs.Recharging;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRecharging;
 import com.quasistellar.hollowdungeon.items.scrolls.exotic.ScrollOfMysticalEnergy;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.items.quest.MetalShard;
-import com.quasistellar.hollowdungeon.items.wands.CursedWand;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
@@ -48,30 +46,10 @@ public class WildEnergy extends TargetedSpell {
 	protected void fx(Ballistica bolt, Callback callback) {
 		affectTarget(bolt, com.quasistellar.hollowdungeon.items.Item.curUser);
 	}
-	
+
 	@Override
 	protected void affectTarget(Ballistica bolt, final Hero hero) {
-		CursedWand.cursedZap(this, hero, bolt, new Callback() {
-			@Override
-			public void call() {
-				Sample.INSTANCE.play( Assets.Sounds.LIGHTNING );
-				Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.CHARGEUP );
-				ScrollOfRecharging.charge(hero);
 
-				hero.belongings.charge(1f);
-				for (int i = 0; i < 4; i++){
-					if (hero.belongings.misc1 instanceof com.quasistellar.hollowdungeon.items.artifacts.Artifact) ((com.quasistellar.hollowdungeon.items.artifacts.Artifact) hero.belongings.misc1).charge(hero);
-					if (hero.belongings.misc2 instanceof com.quasistellar.hollowdungeon.items.artifacts.Artifact) ((Artifact) hero.belongings.misc2).charge(hero);
-				}
-
-				Buff.affect(hero, Recharging.class, 8f);
-				com.quasistellar.hollowdungeon.actors.buffs.Buff.affect(hero, ArtifactRecharge.class).prolong( 8 );
-				
-				detach( com.quasistellar.hollowdungeon.items.Item.curUser.belongings.backpack );
-				com.quasistellar.hollowdungeon.items.Item.updateQuickslot();
-				Item.curUser.spendAndNext( 1f );
-			}
-		});
 	}
 	
 	@Override

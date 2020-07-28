@@ -31,7 +31,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.utils.GLog;
@@ -58,10 +57,8 @@ public class Fadeleaf extends Plant {
 					return;
 					
 				}
-				
-				Buff buff = Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
-				if (buff != null) buff.detach();
-				buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+
+				Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 				if (buff != null) buff.detach();
 				
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;

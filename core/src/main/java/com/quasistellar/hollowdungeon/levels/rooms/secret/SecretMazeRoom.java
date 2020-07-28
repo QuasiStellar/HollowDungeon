@@ -93,19 +93,6 @@ public class SecretMazeRoom extends SecretRoom {
 			}
 		}
 		
-		Item prize;
-		//1 floor set higher in probability, never cursed
-		do {
-			prize = Generator.randomWeapon((Dungeon.depth / 5) + 1);
-		} while (prize.cursed || Challenges.isItemBlocked(prize));
-		
-		//33% chance for an extra update.
-		if (Random.Int(3) == 0){
-			prize.upgrade();
-		}
-		
-		level.drop(prize, level.pointToCell(bestDistP)).type = Heap.Type.CHEST;
-		
 		PathFinder.setMapSize(level.width(), level.height());
 		
 		entrance().set(Door.Type.HIDDEN);

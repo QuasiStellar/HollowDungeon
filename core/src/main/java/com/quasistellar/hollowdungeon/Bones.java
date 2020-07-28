@@ -25,8 +25,6 @@ import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Gold;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.artifacts.Artifact;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.FileUtils;
 import com.watabou.utils.Random;
@@ -72,20 +70,7 @@ public class Bones {
 	private static com.quasistellar.hollowdungeon.items.Item pickItem(Hero hero){
 		com.quasistellar.hollowdungeon.items.Item item = null;
 		if (Random.Int(3) != 0) {
-			switch (Random.Int(6)) {
-				case 0: case 1:
-					item = hero.belongings.weapon;
-					break;
-				case 2:
-					item = hero.belongings.misc1;
-					break;
-				case 3:
-					item = hero.belongings.misc2;
-					break;
-				case 4: case 5:
-					item = Dungeon.quickslot.randomNonePlaceholder();
-					break;
-			}
+			item = Dungeon.quickslot.randomNonePlaceholder();
 			if (item == null || !item.bones) {
 				return pickItem(hero);
 			}
@@ -139,29 +124,8 @@ public class Bones {
 				depth = 0;
 				
 				if (item == null) return null;
-
-				//Enforces artifact uniqueness
-				if (item instanceof Artifact){
-					if (Generator.removeArtifact(((Artifact)item).getClass())) {
-						
-						//generates a new artifact of the same type, always +0
-						Artifact artifact = Reflection.newInstance(((Artifact)item).getClass());
-						
-						if (artifact == null){
-							return new com.quasistellar.hollowdungeon.items.Gold(item.price());
-						}
-
-						artifact.cursed = true;
-						artifact.cursedKnown = true;
-
-						return artifact;
-						
-					} else {
-						return new Gold(item.price());
-					}
-				}
 				
-				if (item.isUpgradable() && !(item instanceof MissileWeapon)) {
+				if (item.isUpgradable()) {
 					item.cursed = true;
 					item.cursedKnown = true;
 				}
@@ -171,8 +135,7 @@ public class Bones {
 					if (item.level() > 3) {
 						item.degrade( item.level() - 3 );
 					}
-					//thrown weapons are always IDed, otherwise set unknown
-					item.levelKnown = item instanceof MissileWeapon;
+					item.levelKnown = false;
 				}
 				
 				item.reset();

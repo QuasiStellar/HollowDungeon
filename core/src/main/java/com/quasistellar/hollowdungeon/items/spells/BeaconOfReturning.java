@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.items.scrolls.exotic.ScrollOfPassage;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
@@ -137,10 +136,8 @@ public class BeaconOfReturning extends Spell {
 			com.quasistellar.hollowdungeon.Dungeon.observe();
 			com.quasistellar.hollowdungeon.scenes.GameScene.updateFog();
 		} else {
-			
-			Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(TimekeepersHourglass.timeFreeze.class);
-			if (buff != null) buff.detach();
-			buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+
+			Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 			if (buff != null) buff.detach();
 			
 			InterlevelScene.mode = InterlevelScene.Mode.RETURN;

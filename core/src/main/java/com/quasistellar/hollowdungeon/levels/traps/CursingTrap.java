@@ -24,16 +24,11 @@ package com.quasistellar.hollowdungeon.levels.traps;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
-import com.quasistellar.hollowdungeon.items.EquipableItem;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.KindOfWeapon;
-import com.quasistellar.hollowdungeon.items.weapon.melee.MagesStaff;
-import com.quasistellar.hollowdungeon.items.weapon.missiles.MissileWeapon;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.weapon.Weapon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 
@@ -57,7 +52,7 @@ public class CursingTrap extends Trap {
 		Heap heap = Dungeon.level.heaps.get( pos );
 		if (heap != null){
 			for (com.quasistellar.hollowdungeon.items.Item item : heap.items){
-				if (item.isUpgradable() && !(item instanceof MissileWeapon))
+				if (item.isUpgradable())
 					curse(item);
 			}
 		}
@@ -73,14 +68,6 @@ public class CursingTrap extends Trap {
 		//items the trap can curse if nothing else is available.
 		ArrayList<com.quasistellar.hollowdungeon.items.Item> canCurse = new ArrayList<>();
 
-		KindOfWeapon weapon = hero.belongings.weapon;
-		if (weapon instanceof Weapon && !(weapon instanceof MagesStaff)){
-			if (((Weapon) weapon).enchantment == null)
-				priorityCurse.add(weapon);
-			else
-				canCurse.add(weapon);
-		}
-
 		Collections.shuffle(priorityCurse);
 		Collections.shuffle(canCurse);
 
@@ -90,18 +77,10 @@ public class CursingTrap extends Trap {
 			curse(canCurse.remove(0));
 		}
 
-		EquipableItem.equipCursed(hero);
 		GLog.n( Messages.get(CursingTrap.class, "curse") );
 	}
 
 	private static void curse(Item item){
 		item.cursed = item.cursedKnown = true;
-
-		if (item instanceof Weapon){
-			Weapon w = (Weapon) item;
-			if (w.enchantment == null){
-				w.enchant(Weapon.Enchantment.randomCurse());
-			}
-		}
 	}
 }

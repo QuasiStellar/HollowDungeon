@@ -28,8 +28,6 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroSubClass;
-import com.quasistellar.hollowdungeon.items.artifacts.CloakOfShadows;
-import com.quasistellar.hollowdungeon.items.artifacts.TimekeepersHourglass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 
 public class Invisibility extends FlavourBuff {
@@ -90,16 +88,6 @@ public class Invisibility extends FlavourBuff {
 	public static void dispel() {
 		for ( Buff invis : Dungeon.hero.buffs( Invisibility.class )){
 			invis.detach();
-		}
-		CloakOfShadows.cloakStealth cloakBuff = Dungeon.hero.buff( CloakOfShadows.cloakStealth.class );
-		if (cloakBuff != null) {
-			cloakBuff.dispel();
-		}
-		
-		//these aren't forms of invisibilty, but do dispel at the same time as it.
-		TimekeepersHourglass.timeFreeze timeFreeze = Dungeon.hero.buff( TimekeepersHourglass.timeFreeze.class );
-		if (timeFreeze != null) {
-			timeFreeze.detach();
 		}
 		
 		Preparation prep = Dungeon.hero.buff( Preparation.class );

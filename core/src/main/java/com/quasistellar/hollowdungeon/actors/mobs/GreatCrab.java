@@ -22,13 +22,10 @@
 package com.quasistellar.hollowdungeon.actors.mobs;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Ghost;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.sprites.GreatCrabSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.wands.Wand;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
@@ -66,8 +63,7 @@ public class GreatCrab extends Crab {
 		//crab blocks all attacks originating from its current enemy if it sees them.
 		//All direct damage is negated, no exceptions. environmental effects go through as normal.
 		if ((enemySeen && state != SLEEPING && paralysed == 0)
-				&& ((src instanceof Wand && enemy == Dungeon.hero)
-				|| (src instanceof com.quasistellar.hollowdungeon.actors.Char && enemy == src))){
+				|| (src instanceof com.quasistellar.hollowdungeon.actors.Char && enemy == src)){
 			GLog.n( Messages.get(this, "noticed") );
 			sprite.showStatus( CharSprite.NEUTRAL, Messages.get(this, "blocked") );
 			Sample.INSTANCE.play( Assets.Sounds.HIT_PARRY, 1, Random.Float(0.96f, 1.05f));
@@ -80,6 +76,5 @@ public class GreatCrab extends Crab {
 	public void die( Object cause ) {
 		super.die( cause );
 
-		Ghost.Quest.process();
 	}
 }
