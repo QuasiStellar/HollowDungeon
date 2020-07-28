@@ -53,9 +53,8 @@ public class StatusPane extends Component {
 
 	private int lastTier = 0;
 
-	private Image rawShielding;
-	private Image shieldedHP;
-	private Image hp;
+//	private Image rawShielding;
+//	private Image shieldedHP;
 	private Image exp;
 
 	private com.quasistellar.hollowdungeon.ui.BossHealthBar bossHP;
@@ -65,6 +64,7 @@ public class StatusPane extends Component {
 	private BitmapText level;
 	private BitmapText depth;
 
+	private HpIndicator hp;
 	private com.quasistellar.hollowdungeon.ui.DangerIndicator danger;
 	private com.quasistellar.hollowdungeon.ui.BuffIndicator buffs;
 	private com.quasistellar.hollowdungeon.ui.Compass compass;
@@ -107,14 +107,14 @@ public class StatusPane extends Component {
 		compass = new Compass( Statistics.amuletObtained ? Dungeon.level.entrance : Dungeon.level.exit );
 		add( compass );
 
-		rawShielding = new Image( Assets.Interfaces.SHLD_BAR );
-		rawShielding.alpha(0.5f);
-		add(rawShielding);
+//		rawShielding = new Image( Assets.Interfaces.SHLD_BAR );
+//		rawShielding.alpha(0.5f);
+//		add(rawShielding);
 
-		shieldedHP = new Image( Assets.Interfaces.SHLD_BAR );
-		add(shieldedHP);
+//		shieldedHP = new Image( Assets.Interfaces.SHLD_BAR );
+//		add(shieldedHP);
 
-		hp = new Image( Assets.Interfaces.HP_BAR );
+		hp = new HpIndicator( Dungeon.hero );
 		add( hp );
 
 		exp = new Image( Assets.Interfaces.XP_BAR );
@@ -160,8 +160,7 @@ public class StatusPane extends Component {
 		compass.y = avatar.y + avatar.height / 2f - compass.origin.y;
 		PixelScene.align(compass);
 
-		hp.x = shieldedHP.x = rawShielding.x = 30;
-		hp.y = shieldedHP.y = rawShielding.y = 3;
+		hp.setPos(30, 3);
 
 		bossHP.setPos( 6 + (width - bossHP.width())/2, 20);
 
@@ -189,24 +188,20 @@ public class StatusPane extends Component {
 	@Override
 	public void update() {
 		super.update();
-		
-		float health = Dungeon.hero.HP;
-		float shield = Dungeon.hero.shielding();
-		float max = Dungeon.hero.HT;
 
-		if (!Dungeon.hero.isAlive()) {
-			avatar.tint(0x000000, 0.5f);
-		} else if ((health/max) < 0.3f) {
-			warning += Game.elapsed * 5f *(0.4f - (health/max));
-			warning %= 1f;
-			avatar.tint(ColorMath.interpolate(warning, warningColors), 0.5f );
-		} else {
-			avatar.resetColor();
-		}
+//		if (!Dungeon.hero.isAlive()) {
+//			avatar.tint(0x000000, 0.5f);
+//		} else if ((health/max) < 0.3f) {
+//			warning += Game.elapsed * 5f *(0.4f - (health/max));
+//			warning %= 1f;
+//			avatar.tint(ColorMath.interpolate(warning, warningColors), 0.5f );
+//		} else {
+//			avatar.resetColor();
+//		}
 
-		hp.scale.x = Math.max( 0, (health-shield)/max);
-		shieldedHP.scale.x = health/max;
-		rawShielding.scale.x = shield/max;
+//		hp.scale.x = Math.max( 0, (health-shield)/max);
+//		shieldedHP.scale.x = health/max;
+//		rawShielding.scale.x = shield/max;
 
 		exp.scale.x = 0;
 	}

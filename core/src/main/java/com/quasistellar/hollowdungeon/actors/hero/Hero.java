@@ -24,6 +24,8 @@ package com.quasistellar.hollowdungeon.actors.hero;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
+import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
+import com.quasistellar.hollowdungeon.actors.buffs.LockedFloor;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.CheckedCell;
@@ -39,6 +41,7 @@ import com.quasistellar.hollowdungeon.plants.Earthroot;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
 import com.quasistellar.hollowdungeon.scenes.SurfaceScene;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
+import com.quasistellar.hollowdungeon.ui.HpIndicator;
 import com.quasistellar.hollowdungeon.windows.WndMessage;
 import com.quasistellar.hollowdungeon.windows.WndResurrect;
 import com.quasistellar.hollowdungeon.windows.WndTradeItem;
@@ -336,6 +339,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	@Override
 	public boolean act() {
+
+		if (this.buff(Invulnerable.class) != null)
+			this.buff(Invulnerable.class).detach();
 		
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = com.quasistellar.hollowdungeon.Dungeon.level.heroFOV;
@@ -850,9 +856,16 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		return damage;
 	}
 
+	public static class Invulnerable extends Buff {
+		//does nothing
+	}
+
 	@Override
 	public void damage( int dmg, Object src ) {
 		if (buff(TimekeepersHourglass.timeStasis.class) != null)
+			return;
+
+		if (this.buff(Invulnerable.class) != null)
 			return;
 
 		if (damageInterrupt) {
@@ -874,6 +887,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		int preHP = HP + shielding();
 		super.damage( dmg, src );
+		Buff.affect(this, Invulnerable.class);
 		int postHP = HP + shielding();
 		int effectiveDamage = preHP - postHP;
 
@@ -894,6 +908,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				}
 			}
 		}
+
+		HpIndicator.refreshHero();
 	}
 	
 	public void checkVisibleMobs() {
@@ -1125,7 +1141,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	}
 
 	@Override
-	public void add( com.quasistellar.hollowdungeon.actors.buffs.Buff buff ) {
+	public void add( Buff buff ) {
 
 		if (buff(TimekeepersHourglass.timeStasis.class) != null)
 			return;
