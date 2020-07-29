@@ -54,24 +54,24 @@ public class PhaseShift extends TargetedSpell {
 				}
 			} while (pos == -1);
 			
-			if (pos == -1 || Dungeon.bossLevel()) {
-				
-				GLog.w( Messages.get(com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation.class, "no_tele") );
-				
-			} else if (ch.properties().contains(Char.Property.IMMOVABLE)) {
-				
-				com.quasistellar.hollowdungeon.utils.GLog.w( Messages.get(this, "tele_fail") );
-				
-			} else  {
-				
-				ch.pos = pos;
-				if (ch instanceof com.quasistellar.hollowdungeon.actors.mobs.Mob && ((com.quasistellar.hollowdungeon.actors.mobs.Mob) ch).state == ((com.quasistellar.hollowdungeon.actors.mobs.Mob) ch).HUNTING){
-					((com.quasistellar.hollowdungeon.actors.mobs.Mob) ch).state = ((Mob) ch).WANDERING;
-				}
-				ch.sprite.place(ch.pos);
-				ch.sprite.visible = com.quasistellar.hollowdungeon.Dungeon.level.heroFOV[pos];
-				
-			}
+//			if (pos == -1 || Dungeon.bossLevel()) {
+//
+//				GLog.w( Messages.get(com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation.class, "no_tele") );
+//
+//			} else if (ch.properties().contains(Char.Property.IMMOVABLE)) {
+//
+//				com.quasistellar.hollowdungeon.utils.GLog.w( Messages.get(this, "tele_fail") );
+//
+//			} else  {
+//
+//				ch.pos = pos;
+//				if (ch instanceof com.quasistellar.hollowdungeon.actors.mobs.Mob && ((com.quasistellar.hollowdungeon.actors.mobs.Mob) ch).state == ((com.quasistellar.hollowdungeon.actors.mobs.Mob) ch).HUNTING){
+//					((com.quasistellar.hollowdungeon.actors.mobs.Mob) ch).state = ((Mob) ch).WANDERING;
+//				}
+//				ch.sprite.place(ch.pos);
+//				ch.sprite.visible = com.quasistellar.hollowdungeon.Dungeon.level.heroFOV[pos];
+//
+//			}
 		}
 	}
 	

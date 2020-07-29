@@ -48,13 +48,13 @@ public class PitfallTrap extends Trap {
 	@Override
 	public void activate() {
 		
-		if( Dungeon.bossLevel() || Dungeon.depth > 25){
-			GLog.w(Messages.get(this, "no_pit"));
-			return;
-		}
+//		if( Dungeon.bossLevel() || Dungeon.depth > 25){
+//			GLog.w(Messages.get(this, "no_pit"));
+//			return;
+//		}
 
 		DelayedPit p = Buff.affect(Dungeon.hero, DelayedPit.class, 1);
-		p.depth = Dungeon.depth;
+		//p.depth = Dungeon.depth;
 		p.pos = pos;
 
 		for (int i : PathFinder.NEIGHBOURS9){
@@ -78,42 +78,42 @@ public class PitfallTrap extends Trap {
 
 		@Override
 		public boolean act() {
-			if (depth == Dungeon.depth) {
-				for (int i : PathFinder.NEIGHBOURS9) {
-
-					int cell = pos + i;
-
-					if (Dungeon.level.solid[pos+i] && !Dungeon.level.passable[pos+i]){
-						continue;
-					}
-
-					com.quasistellar.hollowdungeon.effects.CellEmitter.floor(pos+i).burst(com.quasistellar.hollowdungeon.effects.particles.PitfallParticle.FACTORY8, 12);
-
-					Heap heap = Dungeon.level.heaps.get(cell);
-
-					if (heap != null) {
-						for (Item item : heap.items) {
-							Dungeon.dropToChasm(item);
-						}
-						heap.sprite.kill();
-						GameScene.discard(heap);
-						Dungeon.level.heaps.remove(cell);
-					}
-
-					com.quasistellar.hollowdungeon.actors.Char ch = Actor.findChar(cell);
-
-					//don't trigger on flying chars, or immovable neutral chars
-					if (ch != null && !ch.flying
-						&& !(ch.alignment == Char.Alignment.NEUTRAL && Char.hasProp(ch, com.quasistellar.hollowdungeon.actors.Char.Property.IMMOVABLE))) {
-						if (ch == com.quasistellar.hollowdungeon.Dungeon.hero) {
-							Chasm.heroFall(cell);
-						} else {
-							com.quasistellar.hollowdungeon.levels.features.Chasm.mobFall((Mob) ch);
-						}
-					}
-
-				}
-			}
+//			if (depth == Dungeon.depth) {
+//				for (int i : PathFinder.NEIGHBOURS9) {
+//
+//					int cell = pos + i;
+//
+//					if (Dungeon.level.solid[pos+i] && !Dungeon.level.passable[pos+i]){
+//						continue;
+//					}
+//
+//					com.quasistellar.hollowdungeon.effects.CellEmitter.floor(pos+i).burst(com.quasistellar.hollowdungeon.effects.particles.PitfallParticle.FACTORY8, 12);
+//
+//					Heap heap = Dungeon.level.heaps.get(cell);
+//
+//					if (heap != null) {
+//						for (Item item : heap.items) {
+//							Dungeon.dropToChasm(item);
+//						}
+//						heap.sprite.kill();
+//						GameScene.discard(heap);
+//						Dungeon.level.heaps.remove(cell);
+//					}
+//
+//					com.quasistellar.hollowdungeon.actors.Char ch = Actor.findChar(cell);
+//
+//					//don't trigger on flying chars, or immovable neutral chars
+//					if (ch != null && !ch.flying
+//						&& !(ch.alignment == Char.Alignment.NEUTRAL && Char.hasProp(ch, com.quasistellar.hollowdungeon.actors.Char.Property.IMMOVABLE))) {
+//						if (ch == com.quasistellar.hollowdungeon.Dungeon.hero) {
+//							Chasm.heroFall(cell);
+//						} else {
+//							com.quasistellar.hollowdungeon.levels.features.Chasm.mobFall((Mob) ch);
+//						}
+//					}
+//
+//				}
+//			}
 
 			detach();
 			return true;

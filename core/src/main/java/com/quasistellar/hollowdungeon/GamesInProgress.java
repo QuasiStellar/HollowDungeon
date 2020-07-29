@@ -59,8 +59,8 @@ public class GamesInProgress {
 		return gameFolder(slot) + "/" + GAME_FILE;
 	}
 	
-	public static String depthFile( int slot, int depth ) {
-		return gameFolder(slot) + "/" + Messages.format(DEPTH_FILE, depth);
+	public static String depthFile( int slot, String location ) {
+		return gameFolder(slot) + "/" + Messages.format(DEPTH_FILE, location);
 	}
 	
 	public static int firstEmpty(){
@@ -119,12 +119,12 @@ public class GamesInProgress {
 		}
 	}
 
-	public static void set(int slot, int depth, int challenges,
+	public static void set(int slot, String location, int challenges,
 	                       Hero hero) {
 		Info info = new Info();
 		info.slot = slot;
 		
-		info.depth = depth;
+		info.location = location;
 		info.challenges = challenges;
 
 		info.hp = hero.HP;
@@ -149,7 +149,7 @@ public class GamesInProgress {
 	public static class Info {
 		public int slot;
 		
-		public int depth;
+		public String location;
 		public int version;
 		public int challenges;
 		

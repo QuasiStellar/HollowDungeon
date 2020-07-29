@@ -37,7 +37,7 @@ public class PotionOfEarthenArmor extends ExoticPotion {
 	public void apply( Hero hero ) {
 		setKnown();
 		
-		Buff.affect(hero, Barkskin.class).set( 2 + Dungeon.depth /3, 50 );
+		Buff.affect(hero, Barkskin.class).set( 2, 50 );
 	}
 	
 }

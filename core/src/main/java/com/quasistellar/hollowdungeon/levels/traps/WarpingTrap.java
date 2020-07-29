@@ -69,7 +69,7 @@ public class WarpingTrap extends Trap {
 					}
 				} while (pos == -1);
 				
-				if (pos == -1 || Dungeon.bossLevel()) {
+				if (pos == -1) {
 					
 					GLog.w(Messages.get(ScrollOfTeleportation.class, "no_tele"));
 					

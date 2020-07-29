@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.items.keys;
 
+import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
 public class SkeletonKey extends Key {
@@ -30,12 +31,12 @@ public class SkeletonKey extends Key {
 	}
 	
 	public SkeletonKey() {
-		this( 0 );
+		this( "" );
 	}
 	
-	public SkeletonKey( int depth ) {
+	public SkeletonKey( String location ) {
 		super();
-		this.depth = depth;
+		this.location = location;
 	}
 
 }

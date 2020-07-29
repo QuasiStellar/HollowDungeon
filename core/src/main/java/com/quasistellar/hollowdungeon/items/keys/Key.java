@@ -39,11 +39,11 @@ public abstract class Key extends com.quasistellar.hollowdungeon.items.Item {
 		unique = true;
 	}
 	
-	public int depth;
+	public String location;
 	
 	@Override
 	public boolean isSimilar( Item item ) {
-		return super.isSimilar(item) && ((Key)item).depth == depth;
+		return super.isSimilar(item) && ((Key)item).location == location;
 	}
 
 	@Override
@@ -57,18 +57,18 @@ public abstract class Key extends com.quasistellar.hollowdungeon.items.Item {
 		return true;
 	}
 
-	private static final String DEPTH = "depth";
+	private static final String LOCATION = "location";
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
-		bundle.put( DEPTH, depth );
+		bundle.put( LOCATION, location );
 	}
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle( bundle );
-		depth = bundle.getInt( DEPTH );
+		location = bundle.getString( LOCATION );
 	}
 	
 	@Override

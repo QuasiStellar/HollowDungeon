@@ -82,7 +82,7 @@ public class v0_6_X_Changes {
 				"_-_ 'Death by glyph' badge is now 'death by deferred damage'.\n\n" +
 				"_-_ Removed rare monster slayer badge."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.WARRIOR, 0, 90, 12, 15), "Berserker",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Berserker",
 				"Even with recent nerfs the berserker is still much stronger than other subclasses. Rather than continually nerfing his existing mechanics, which makes the subclass unfun, I have instead opted to give him a small rework.\n\n" +
 				"These changes focus on giving the berserker some of his old power back, but making it more difficult to access that power.\n\n" +
 				"_-_ Rage is built by taking physical damage\n" +
@@ -145,13 +145,13 @@ public class v0_6_X_Changes {
 				"_-_ Base chance to deal 2x damage reduced to 50% from 60%\n" +
 				"_-_ Each time 0x damage is dealt, the next hit will be much more likely to deal 2x damage"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.MAGE, 0, 90, 12, 15), "Warlock",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Warlock",
 				"Soul mark chance changed. Now has a 10% chance to activate per wand level, stacking multiplicatively, with a base of 10% at +0.\n" +
 				"e.g. +0 is 10%, +1 is 19%, +2 is 27%, etc.\n\n" +
 				"Previous soul mark chance was 9% at base plus 6% per level, stacking linearly.\n\n" +
 				"This substantially increases soul mark chance at wand levels +1 to +5"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.HUNTRESS, 0, 15, 12, 15), "Huntress",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Huntress",
 				"Huntress ranged weapon durability boost now stacks with magical holster durability boost, for a total of 180% durability."));
 		
 		changes = new com.quasistellar.hollowdungeon.ui.changelist.ChangeInfo(Messages.get(com.quasistellar.hollowdungeon.scenes.ChangesScene.class, "nerfs"), false, null);
@@ -339,7 +339,7 @@ public class v0_6_X_Changes {
 				"_-_ Existing ranged weapons reworked, 5 new ranged weapons added.\n\n" +
 				"_-_ Warrior now starts with throwing stones, rogue starts with throwing knives"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.HUNTRESS, 0, 15, 12, 15), "Huntress",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Huntress",
 				"Huntress adjusted due to ranged weapon changes (note that this is not a full class rework):\n\n" +
 				"_-_ Huntress no longer has a chance to reclaim a single ranged weapon.\n\n" +
 				"_-_ Missile weapons now have 50% greater durability when used by the huntress.\n\n" +
@@ -416,7 +416,7 @@ public class v0_6_X_Changes {
 				"_-_ Rather than granting a chance to resist elemental/magic damage, ring now grants a set percentage resistance to these effects, which increases each level.\n\n" +
 				"_-_ Ring now applies to more elemental/magical effects than before."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.MAGE, 0, 90, 12, 15), "Warlock",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Warlock",
 				"The warlock is underperforming relative to the battlemage at the moment, and so he is getting an adjustment to his ability.\n\n" +
 				"This should hopefully both increase his power, and further encourage investing upgrades in wands.\n\n" +
 				"_-_ Reduced the base soul mark chance by 40%\n" +
@@ -446,7 +446,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.WARRIOR, 0, 90, 12, 15), "Berserker",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Berserker",
 				"The previous berserker nerf from 0.6.2 had little effect on his overall winrate, so I'm trying again with a different approach, based around having a permanent penalty for each use of berserk.\n\n" +
 				"_-_ Reverted exhaustion nerf from 0.6.2\n\n" +
 				"_-_ Decreased lvls to recover rage to 2 from 3\n" +
@@ -484,7 +484,7 @@ public class v0_6_X_Changes {
 				"_-_ Searching now consumes 6 turns of hunger, up from 2.\n\n" +
 				"This is a big adjustment to how secrets work in the dungeon. The goal is to make secrets more interesting, harder to find, and also more optional."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.ROGUE, 0, 15, 12, 15), "Rogue Rework!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Rogue Rework!",
 				"The rogue has been reworked! His abilities have received a number of changes to make his strengths more pronounced and focused.\n\n" +
 				"These abilities have been _removed:_\n" +
 				"_-_ Gains evasion from excess strength on armor\n" +
@@ -496,7 +496,7 @@ public class v0_6_X_Changes {
 				"_-_ Is able to find more secrets in the dungeon\n\n" +
 				"Make sure to check out the Cloak of Shadows and Dagger changes as well."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.ROGUE, 0, 90, 12, 15), "Rogue Subclasses Rework!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Rogue Subclasses Rework!",
 				"Both of the rogue's subclasses has been reworked, with an emphasis on more powerful abilities that need more interaction from the player.\n\n" +
 				"_The Assassin:_\n" +
 				"_-_ No longer gains a free +25% damage on surprise attacks\n" +
@@ -632,7 +632,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.WARRIOR, 0, 90, 12, 15), "Berserker",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Berserker",
 				"The Berserker's survivability and power have been reduced to help bring him into line with the other subclasses:\n\n" +
 				"_-_ Bonus damage from low health reduced significantly when below 50% HP. 2x damage while berserking is unchanged.\n\n" +
 				"_-_ Turns of exhaustion after berserking increased to 60 from 40. Damage reduction from exhaustion stays higher for longer."));

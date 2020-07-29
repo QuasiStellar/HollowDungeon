@@ -46,7 +46,7 @@ public class Sorrowmoss extends com.quasistellar.hollowdungeon.plants.Plant {
 		}
 		
 		if (ch != null) {
-			Buff.affect( ch, Poison.class ).set( 5 + Math.round(2*Dungeon.depth / 3f) );
+			Buff.affect( ch, Poison.class ).set( 5 );
 		}
 		
 		if (Dungeon.level.heroFOV[pos]) {

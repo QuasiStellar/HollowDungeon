@@ -518,8 +518,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			com.quasistellar.hollowdungeon.items.Heap heap = com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( dst );
 			if (heap != null && (heap.type != com.quasistellar.hollowdungeon.items.Heap.Type.HEAP && heap.type != com.quasistellar.hollowdungeon.items.Heap.Type.FOR_SALE)) {
 				
-				if ((heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.LOCKED_CHEST && Notes.keyCount(new GoldenKey(com.quasistellar.hollowdungeon.Dungeon.depth)) < 1)
-					|| (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.CRYSTAL_CHEST && Notes.keyCount(new CrystalKey(com.quasistellar.hollowdungeon.Dungeon.depth)) < 1)){
+				if ((heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.LOCKED_CHEST && Notes.keyCount(new GoldenKey(Dungeon.location)) < 1)
+					|| (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.CRYSTAL_CHEST && Notes.keyCount(new CrystalKey(Dungeon.location)) < 1)){
 
 						GLog.w( Messages.get(this, "locked_chest") );
 						ready();
@@ -565,12 +565,12 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			int door = com.quasistellar.hollowdungeon.Dungeon.level.map[doorCell];
 			
 			if (door == Terrain.LOCKED_DOOR
-					&& Notes.keyCount(new IronKey(com.quasistellar.hollowdungeon.Dungeon.depth)) > 0) {
+					&& Notes.keyCount(new IronKey(Dungeon.location)) > 0) {
 				
 				hasKey = true;
 				
 			} else if (door == Terrain.LOCKED_EXIT
-					&& Notes.keyCount(new SkeletonKey(com.quasistellar.hollowdungeon.Dungeon.depth)) > 0) {
+					&& Notes.keyCount(new SkeletonKey(Dungeon.location)) > 0) {
 
 				hasKey = true;
 				
@@ -642,24 +642,24 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		//TODO this is slightly brittle, it assumes there are no disjointed sets of entrance tiles
 		} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.ENTRANCE) {
 			
-			if (com.quasistellar.hollowdungeon.Dungeon.depth == 1) {
-				
-				if (belongings.getItem( com.quasistellar.hollowdungeon.items.Amulet.class ) == null) {
-					Game.runOnRenderThread(new Callback() {
-						@Override
-						public void call() {
-							GameScene.show( new WndMessage( Messages.get(Hero.this, "leave") ) );
-						}
-					});
-					ready();
-				} else {
-					com.quasistellar.hollowdungeon.Badges.silentValidateHappyEnd();
-					com.quasistellar.hollowdungeon.Dungeon.win( com.quasistellar.hollowdungeon.items.Amulet.class );
-					com.quasistellar.hollowdungeon.Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
-					Game.switchScene( SurfaceScene.class );
-				}
-				
-			} else {
+//			if (com.quasistellar.hollowdungeon.Dungeon.depth == 1) {
+//
+//				if (belongings.getItem( com.quasistellar.hollowdungeon.items.Amulet.class ) == null) {
+//					Game.runOnRenderThread(new Callback() {
+//						@Override
+//						public void call() {
+//							GameScene.show( new WndMessage( Messages.get(Hero.this, "leave") ) );
+//						}
+//					});
+//					ready();
+//				} else {
+//					com.quasistellar.hollowdungeon.Badges.silentValidateHappyEnd();
+//					com.quasistellar.hollowdungeon.Dungeon.win( com.quasistellar.hollowdungeon.items.Amulet.class );
+//					com.quasistellar.hollowdungeon.Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
+//					Game.switchScene( SurfaceScene.class );
+//				}
+//
+//			} else {
 				
 				curAction = null;
 
@@ -668,7 +668,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 				Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
-			}
+//			}
 
 			return false;
 
@@ -962,8 +962,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 			curAction = new HeroAction.Unlock( cell );
 			
-		} else if ((cell == com.quasistellar.hollowdungeon.Dungeon.level.exit || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.EXIT || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.UNLOCKED_EXIT)
-				&& com.quasistellar.hollowdungeon.Dungeon.depth < 26) {
+		} else if ((cell == com.quasistellar.hollowdungeon.Dungeon.level.exit || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.EXIT || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.UNLOCKED_EXIT)) {
 			
 			curAction = new HeroAction.Descend( cell );
 			
@@ -1186,10 +1185,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			if (com.quasistellar.hollowdungeon.Dungeon.level.distance(pos, doorCell) <= 1) {
 				boolean hasKey = true;
 				if (door == Terrain.LOCKED_DOOR) {
-					hasKey = Notes.remove(new IronKey(com.quasistellar.hollowdungeon.Dungeon.depth));
+					hasKey = Notes.remove(new IronKey(Dungeon.location));
 					if (hasKey) Level.set(doorCell, Terrain.DOOR);
 				} else {
-					hasKey = Notes.remove(new SkeletonKey(com.quasistellar.hollowdungeon.Dungeon.depth));
+					hasKey = Notes.remove(new SkeletonKey(Dungeon.location));
 					if (hasKey) Level.set(doorCell, Terrain.UNLOCKED_EXIT);
 				}
 				
@@ -1210,9 +1209,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				if (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.SKELETON || heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.REMAINS) {
 					Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.BONES );
 				} else if (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.LOCKED_CHEST){
-					hasKey = Notes.remove(new GoldenKey(com.quasistellar.hollowdungeon.Dungeon.depth));
+					hasKey = Notes.remove(new GoldenKey(Dungeon.location));
 				} else if (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.CRYSTAL_CHEST){
-					hasKey = com.quasistellar.hollowdungeon.journal.Notes.remove(new CrystalKey(com.quasistellar.hollowdungeon.Dungeon.depth));
+					hasKey = com.quasistellar.hollowdungeon.journal.Notes.remove(new CrystalKey(Dungeon.location));
 				}
 				
 				if (hasKey) {
@@ -1287,11 +1286,11 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 							
 						//unintentional trap detection scales from 40% at floor 0 to 30% at floor 25
 						} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[p] == Terrain.SECRET_TRAP) {
-							chance = 0.4f - (com.quasistellar.hollowdungeon.Dungeon.depth / 250f);
+							chance = 0.4f - (10 / 250f); //TODO: do smth with it
 							
 						//unintentional door detection scales from 20% at floor 0 to 0% at floor 20
 						} else {
-							chance = 0.2f - (com.quasistellar.hollowdungeon.Dungeon.depth / 100f);
+							chance = 0.2f - (10 / 100f);
 						}
 						
 						if (Random.Float() < chance) {
@@ -1333,7 +1332,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		HP = HT;
 		com.quasistellar.hollowdungeon.Dungeon.gold = 0;
 		
-		belongings.resurrect( resetLevel );
+		//belongings.resurrect( resetLevel );
 
 		live();
 	}

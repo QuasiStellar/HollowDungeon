@@ -136,11 +136,11 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 		return Random.element( backpack.items );
 	}
 	
-	public void resurrect( int depth ) {
+	public void resurrect( String location ) {
 
 		for (com.quasistellar.hollowdungeon.items.Item item : backpack.items.toArray( new com.quasistellar.hollowdungeon.items.Item[0])) {
 			if (item instanceof Key) {
-				if (((Key)item).depth == depth) {
+				if (((Key) item).location.equals(location)) {
 					item.detachAll( backpack );
 				}
 			} else if (item.unique) {

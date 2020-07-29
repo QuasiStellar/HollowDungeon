@@ -184,38 +184,38 @@ public class Imp extends NPC {
 		}
 		
 		public static void spawn( CityLevel level ) {
-			if (!spawned && Dungeon.depth > 16 && Random.Int( 20 - Dungeon.depth ) == 0) {
-				
-				Imp npc = new Imp();
-				do {
-					npc.pos = level.randomRespawnCell( npc );
-				} while (
-						npc.pos == -1 ||
-						level.heaps.get( npc.pos ) != null ||
-						level.traps.get( npc.pos) != null ||
-						level.findMob( npc.pos ) != null ||
-						//The imp doesn't move, so he cannot obstruct a passageway
-						!(level.passable[npc.pos + PathFinder.CIRCLE4[0]] && level.passable[npc.pos + PathFinder.CIRCLE4[2]]) ||
-						!(level.passable[npc.pos + PathFinder.CIRCLE4[1]] && level.passable[npc.pos + PathFinder.CIRCLE4[3]]));
-				level.mobs.add( npc );
-				
-				spawned = true;
-
-				//always assigns monks on floor 17, golems on floor 19, and 50/50 between either on 18
-				switch (Dungeon.depth){
-					case 17: default:
-						alternative = true;
-						break;
-					case 18:
-						alternative = Random.Int(2) == 0;
-						break;
-					case 19:
-						alternative = false;
-						break;
-				}
-				
-				given = false;
-			}
+//			if (!spawned && Dungeon.depth > 16 && Random.Int( 20 - Dungeon.depth ) == 0) {
+//
+//				Imp npc = new Imp();
+//				do {
+//					npc.pos = level.randomRespawnCell( npc );
+//				} while (
+//						npc.pos == -1 ||
+//						level.heaps.get( npc.pos ) != null ||
+//						level.traps.get( npc.pos) != null ||
+//						level.findMob( npc.pos ) != null ||
+//						//The imp doesn't move, so he cannot obstruct a passageway
+//						!(level.passable[npc.pos + PathFinder.CIRCLE4[0]] && level.passable[npc.pos + PathFinder.CIRCLE4[2]]) ||
+//						!(level.passable[npc.pos + PathFinder.CIRCLE4[1]] && level.passable[npc.pos + PathFinder.CIRCLE4[3]]));
+//				level.mobs.add( npc );
+//
+//				spawned = true;
+//
+//				//always assigns monks on floor 17, golems on floor 19, and 50/50 between either on 18
+//				switch (Dungeon.depth){
+//					case 17: default:
+//						alternative = true;
+//						break;
+//					case 18:
+//						alternative = Random.Int(2) == 0;
+//						break;
+//					case 19:
+//						alternative = false;
+//						break;
+//				}
+//
+//				given = false;
+//			}
 		}
 		
 		public static void process( Mob mob ) {

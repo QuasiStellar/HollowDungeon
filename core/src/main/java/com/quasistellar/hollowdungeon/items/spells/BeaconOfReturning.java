@@ -91,7 +91,7 @@ public class BeaconOfReturning extends Spell {
 	}
 	
 	private void setBeacon(com.quasistellar.hollowdungeon.actors.hero.Hero hero ){
-		returnDepth = Dungeon.depth;
+		//returnDepth = Dungeon.depth;
 		returnPos = hero.pos;
 		
 		hero.spend( 1f );
@@ -105,10 +105,10 @@ public class BeaconOfReturning extends Spell {
 	}
 	
 	private void returnBeacon( Hero hero ){
-		if (Dungeon.bossLevel()) {
-			GLog.w( Messages.get(this, "preventing") );
-			return;
-		}
+//		if (Dungeon.bossLevel()) {
+//			GLog.w( Messages.get(this, "preventing") );
+//			return;
+//		}
 		
 		for (int i = 0; i < PathFinder.NEIGHBOURS8.length; i++) {
 			com.quasistellar.hollowdungeon.actors.Char ch = Actor.findChar(hero.pos + PathFinder.NEIGHBOURS8[i]);
@@ -118,33 +118,33 @@ public class BeaconOfReturning extends Spell {
 			}
 		}
 		
-		if (returnDepth == Dungeon.depth) {
-			ScrollOfTeleportation.appear( hero, returnPos );
-			for(Mob m : com.quasistellar.hollowdungeon.Dungeon.level.mobs){
-				if (m.pos == hero.pos){
-					//displace mob
-					for(int i : PathFinder.NEIGHBOURS8){
-						if (com.quasistellar.hollowdungeon.actors.Actor.findChar(m.pos+i) == null && com.quasistellar.hollowdungeon.Dungeon.level.passable[m.pos + i]){
-							m.pos += i;
-							m.sprite.point(m.sprite.worldToCamera(m.pos));
-							break;
-						}
-					}
-				}
-			}
-			com.quasistellar.hollowdungeon.Dungeon.level.occupyCell(hero );
-			com.quasistellar.hollowdungeon.Dungeon.observe();
-			com.quasistellar.hollowdungeon.scenes.GameScene.updateFog();
-		} else {
+//		if (returnDepth == Dungeon.depth) {
+//			ScrollOfTeleportation.appear( hero, returnPos );
+//			for(Mob m : com.quasistellar.hollowdungeon.Dungeon.level.mobs){
+//				if (m.pos == hero.pos){
+//					//displace mob
+//					for(int i : PathFinder.NEIGHBOURS8){
+//						if (com.quasistellar.hollowdungeon.actors.Actor.findChar(m.pos+i) == null && com.quasistellar.hollowdungeon.Dungeon.level.passable[m.pos + i]){
+//							m.pos += i;
+//							m.sprite.point(m.sprite.worldToCamera(m.pos));
+//							break;
+//						}
+//					}
+//				}
+//			}
+//			com.quasistellar.hollowdungeon.Dungeon.level.occupyCell(hero );
+//			com.quasistellar.hollowdungeon.Dungeon.observe();
+//			com.quasistellar.hollowdungeon.scenes.GameScene.updateFog();
+//		} else {
 
 			Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 			if (buff != null) buff.detach();
 			
 			InterlevelScene.mode = InterlevelScene.Mode.RETURN;
-			InterlevelScene.returnDepth = returnDepth;
+			//InterlevelScene.returnDepth = returnDepth;
 			InterlevelScene.returnPos = returnPos;
 			Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
-		}
+//		}
 		detach(hero.belongings.backpack);
 	}
 	

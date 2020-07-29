@@ -61,7 +61,7 @@ public class LibraryRoom extends SpecialRoom {
 		
 		entrance.set( Door.Type.LOCKED );
 		
-		level.addItemToSpawn( new IronKey( Dungeon.depth ) );
+		level.addItemToSpawn( new IronKey( Dungeon.location ) );
 	}
 	
 	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {

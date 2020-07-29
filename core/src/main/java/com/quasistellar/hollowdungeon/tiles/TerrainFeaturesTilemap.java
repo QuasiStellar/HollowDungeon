@@ -65,8 +65,8 @@ public class TerrainFeaturesTilemap extends com.quasistellar.hollowdungeon.tiles
 			return plants.get(pos).image + 7*16;
 		}
 
-		int stage = (Dungeon.depth-1)/5;
-		if (Dungeon.depth == 21 && Dungeon.level instanceof LastShopLevel) stage--;
+		int stage = 1;
+//		if (Dungeon.depth == 21 && Dungeon.level instanceof LastShopLevel) stage--;
 		if (tile == Terrain.HIGH_GRASS){
 			return 9 + 16*stage + (com.quasistellar.hollowdungeon.tiles.DungeonTileSheet.tileVariance[pos] >= 50 ? 1 : 0);
 		} else if (tile == Terrain.FURROWED_GRASS){

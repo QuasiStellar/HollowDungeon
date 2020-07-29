@@ -585,7 +585,7 @@ public class NewTengu extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 							
 							com.quasistellar.hollowdungeon.actors.Char ch = Actor.findChar(cell);
 							if (ch != null && !(ch instanceof NewTengu)){
-								int dmg = Random.NormalIntRange(5 + Dungeon.depth, 10 + Dungeon.depth*2);
+								int dmg = 1;
 								
 								if (dmg > 0) {
 									ch.damage(dmg, Bomb.class);
@@ -972,7 +972,7 @@ public class NewTengu extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 							
 							com.quasistellar.hollowdungeon.actors.Char ch = com.quasistellar.hollowdungeon.actors.Actor.findChar(cell);
 							if (ch != null && !(ch instanceof NewTengu)){
-								ch.damage(2 + Dungeon.depth, new Electricity());
+								ch.damage(1, new Electricity());
 								
 								if (ch == Dungeon.hero && !ch.isAlive()) {
 									com.quasistellar.hollowdungeon.Dungeon.fail(NewTengu.class);

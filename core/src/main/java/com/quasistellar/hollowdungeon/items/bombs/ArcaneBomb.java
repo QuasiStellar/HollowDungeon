@@ -80,7 +80,7 @@ public class ArcaneBomb extends com.quasistellar.hollowdungeon.items.bombs.Bomb 
 		
 		for (Char ch : affected){
 			// 100%/83%/67% bomb damage based on distance, but pierces armor.
-			int damage = Math.round(Random.NormalIntRange( Dungeon.depth+5, 10 + Dungeon.depth * 2 ));
+			int damage = 8;
 			float multiplier = 1f - (.16667f* Dungeon.level.distance(cell, ch.pos));
 			ch.damage(Math.round(damage*multiplier), this);
 			if (ch == Dungeon.hero && !ch.isAlive()){

@@ -49,7 +49,7 @@ public class Piranha extends com.quasistellar.hollowdungeon.actors.mobs.Mob {
 	public Piranha() {
 		super();
 		
-		HP = HT = 10 + Dungeon.depth * 5;
+		HP = HT = 10;
 	}
 	
 	@Override

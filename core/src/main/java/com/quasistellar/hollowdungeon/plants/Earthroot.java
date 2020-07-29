@@ -46,7 +46,7 @@ public class Earthroot extends Plant {
 		
 		if (ch == Dungeon.hero) {
 			if (Dungeon.hero.heroClass == HeroClass.HORNET){
-				Buff.affect(ch, Barkskin.class).set(Dungeon.depth + 5, 5);
+				Buff.affect(ch, Barkskin.class).set(5, 5);
 			} else {
 				Buff.affect(ch, Armor.class).level(ch.HT);
 			}
@@ -96,7 +96,7 @@ public class Earthroot extends Plant {
 		}
 		
 		private static int blocking(){
-			return (Dungeon.depth + 5)/2;
+			return 5;
 		}
 		
 		public int absorb( int damage ) {

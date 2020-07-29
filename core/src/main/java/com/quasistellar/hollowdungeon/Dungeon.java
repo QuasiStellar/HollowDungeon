@@ -29,6 +29,7 @@ import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.journal.Notes;
+import com.quasistellar.hollowdungeon.levels.SewerLevel;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.ui.QuickSlotButton;
 import com.quasistellar.hollowdungeon.utils.BArray;
@@ -59,6 +60,7 @@ import com.watabou.utils.SparseArray;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Dungeon {
@@ -140,13 +142,12 @@ public class Dungeon {
 
 	public static QuickSlot quickslot = new QuickSlot();
 	
-	public static int depth;
+	public static String location;
 	public static int gold;
+
+	public static String nextLocation;
 	
 	public static HashSet<Integer> chapters;
-
-	public static SparseArray<ArrayList<com.quasistellar.hollowdungeon.items.Item>> droppedItems;
-	public static SparseArray<ArrayList<com.quasistellar.hollowdungeon.items.Item>> portedItems;
 
 	public static int version;
 
@@ -178,11 +179,10 @@ public class Dungeon {
 		quickslot.reset();
 		QuickSlotButton.reset();
 		
-		depth = 0;
+		location = "King's Pass";
 		gold = 0;
 
-		droppedItems = new SparseArray<>();
-		portedItems = new SparseArray<>();
+		nextLocation = "King's Pass";
 
 		for (LimitedDrops a : LimitedDrops.values())
 			a.count = 0;
@@ -211,80 +211,10 @@ public class Dungeon {
 		Dungeon.level = null;
 		Actor.clear();
 		
-		depth++;
-		if (depth > Statistics.deepestFloor) {
-			Statistics.deepestFloor = depth;
-			
-			if (Statistics.qualifiedForNoKilling) {
-				Statistics.completedWithNoKilling = true;
-			} else {
-				Statistics.completedWithNoKilling = false;
-			}
-		}
-		
-		com.quasistellar.hollowdungeon.levels.Level level;
-		switch (depth) {
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-			level = new com.quasistellar.hollowdungeon.levels.SewerLevel();
-			break;
-		case 5:
-			level = new com.quasistellar.hollowdungeon.levels.SewerBossLevel();
-			break;
-		case 6:
-		case 7:
-		case 8:
-		case 9:
-			level = new com.quasistellar.hollowdungeon.levels.PrisonLevel();
-			break;
-		case 10:
-			level = new com.quasistellar.hollowdungeon.levels.NewPrisonBossLevel();
-			break;
-		case 11:
-		case 12:
-		case 13:
-		case 14:
-			level = new com.quasistellar.hollowdungeon.levels.CavesLevel();
-			break;
-		case 15:
-			level = new com.quasistellar.hollowdungeon.levels.NewCavesBossLevel();
-			break;
-		case 16:
-		case 17:
-		case 18:
-		case 19:
-			level = new com.quasistellar.hollowdungeon.levels.CityLevel();
-			break;
-		case 20:
-			level = new com.quasistellar.hollowdungeon.levels.NewCityBossLevel();
-			break;
-		case 21:
-			//logic for old city boss levels, need to spawn a shop on floor 21
-			try {
-				Bundle bundle = FileUtils.bundleFromFile(GamesInProgress.depthFile(GamesInProgress.curSlot, 20));
-				Class cls = bundle.getBundle(LEVEL).getClass("__className");
-				if (cls == com.quasistellar.hollowdungeon.levels.NewCityBossLevel.class) {
-					level = new com.quasistellar.hollowdungeon.levels.HallsLevel();
-				} else {
-					level = new com.quasistellar.hollowdungeon.levels.LastShopLevel();
-				}
-			} catch (Exception e) {
-				ShatteredPixelDungeon.reportException(e);
-				level = new com.quasistellar.hollowdungeon.levels.HallsLevel();
-			}
-			break;
-		case 22:
-		case 23:
-		case 24:
-			level = new com.quasistellar.hollowdungeon.levels.HallsLevel();
-			break;
-		case 25:
-			level = new com.quasistellar.hollowdungeon.levels.NewHallsBossLevel();
-			break;
-		case 26:
-			level = new com.quasistellar.hollowdungeon.levels.LastLevel();
+		Level level;
+		switch (location) {
+		case "King's Pass":
+			level = new SewerLevel();
 			break;
 		default:
 			level = new com.quasistellar.hollowdungeon.levels.DeadEndLevel();
@@ -292,8 +222,6 @@ public class Dungeon {
 		}
 		
 		level.create();
-		
-		Statistics.qualifiedForNoKilling = !bossLevel();
 		
 		return level;
 	}
@@ -307,13 +235,13 @@ public class Dungeon {
 	}
 
 	public static long seedCurDepth(){
-		return seedForDepth(depth);
+		return seedForDepth(location);
 	}
 
-	public static long seedForDepth(int depth){
+	public static long seedForDepth(String location){
 		Random.pushGenerator( seed );
 
-			for (int i = 0; i < depth; i ++) {
+			for (int i = 0; i < location.length(); i ++) {
 				Random.Long(); //we don't care about these values, just need to go through them
 			}
 			long result = Random.Long();
@@ -321,19 +249,7 @@ public class Dungeon {
 		Random.popGenerator();
 		return result;
 	}
-	
-	public static boolean shopOnLevel() {
-		return depth == 6 || depth == 11 || depth == 16;
-	}
-	
-	public static boolean bossLevel() {
-		return bossLevel( depth );
-	}
-	
-	public static boolean bossLevel( int depth ) {
-		return depth == 5 || depth == 10 || depth == 15 || depth == 20 || depth == 25;
-	}
-	
+
 	public static void switchLevel(final com.quasistellar.hollowdungeon.levels.Level level, int pos ) {
 		
 		if (pos == -2){
@@ -383,53 +299,7 @@ public class Dungeon {
 	}
 
 	public static void dropToChasm( com.quasistellar.hollowdungeon.items.Item item ) {
-		int depth = Dungeon.depth + 1;
-		ArrayList<com.quasistellar.hollowdungeon.items.Item> dropped = Dungeon.droppedItems.get( depth );
-		if (dropped == null) {
-			Dungeon.droppedItems.put( depth, dropped = new ArrayList<>() );
-		}
-		dropped.add( item );
-	}
 
-	public static boolean posNeeded() {
-		//2 POS each floor set
-		int posLeftThisSet = 2 - (LimitedDrops.STRENGTH_POTIONS.count - (depth / 5) * 2);
-		if (posLeftThisSet <= 0) return false;
-
-		int floorThisSet = (depth % 5);
-
-		//pos drops every two floors, (numbers 1-2, and 3-4) with a 50% chance for the earlier one each time.
-		int targetPOSLeft = 2 - floorThisSet/2;
-		if (floorThisSet % 2 == 1 && Random.Int(2) == 0) targetPOSLeft --;
-
-		if (targetPOSLeft < posLeftThisSet) return true;
-		else return false;
-
-	}
-	
-	public static boolean souNeeded() {
-		int souLeftThisSet;
-		//3 SOU each floor set, 1.5 (rounded) on forbidden runes challenge
-		if (isChallenged(com.quasistellar.hollowdungeon.Challenges.NO_SCROLLS)){
-			souLeftThisSet = Math.round(1.5f - (LimitedDrops.UPGRADE_SCROLLS.count - (depth / 5) * 1.5f));
-		} else {
-			souLeftThisSet = 3 - (LimitedDrops.UPGRADE_SCROLLS.count - (depth / 5) * 3);
-		}
-		if (souLeftThisSet <= 0) return false;
-
-		int floorThisSet = (depth % 5);
-		//chance is floors left / scrolls left
-		return Random.Int(5 - floorThisSet) < souLeftThisSet;
-	}
-	
-	public static boolean asNeeded() {
-		//1 AS each floor set
-		int asLeftThisSet = 1 - (LimitedDrops.ARCANE_STYLI.count - (depth / 5));
-		if (asLeftThisSet <= 0) return false;
-
-		int floorThisSet = (depth % 5);
-		//chance is floors left / scrolls left
-		return Random.Int(5 - floorThisSet) < asLeftThisSet;
 	}
 	
 	private static final String VERSION		= "version";
@@ -437,7 +307,7 @@ public class Dungeon {
 	private static final String CHALLENGES	= "challenges";
 	private static final String HERO		= "hero";
 	private static final String GOLD		= "gold";
-	private static final String DEPTH		= "depth";
+	private static final String LOCATION	= "location";
 	private static final String DROPPED     = "dropped%d";
 	private static final String PORTED      = "ported%d";
 	private static final String LEVEL		= "level";
@@ -456,15 +326,7 @@ public class Dungeon {
 			bundle.put( CHALLENGES, challenges );
 			bundle.put( HERO, hero );
 			bundle.put( GOLD, gold );
-			bundle.put( DEPTH, depth );
-
-			for (int d : droppedItems.keyArray()) {
-				bundle.put(Messages.format(DROPPED, d), droppedItems.get(d));
-			}
-			
-			for (int p : portedItems.keyArray()){
-				bundle.put(Messages.format(PORTED, p), portedItems.get(p));
-			}
+			bundle.put( LOCATION, location );
 
 			quickslot.storePlaceholders( bundle );
 
@@ -513,7 +375,7 @@ public class Dungeon {
 		Bundle bundle = new Bundle();
 		bundle.put( LEVEL, level );
 		
-		FileUtils.bundleToFile(GamesInProgress.depthFile( save, depth), bundle);
+		FileUtils.bundleToFile(GamesInProgress.depthFile( save, location), bundle);
 	}
 	
 	public static void saveAll() throws IOException {
@@ -523,7 +385,7 @@ public class Dungeon {
 			saveGame( GamesInProgress.curSlot );
 			saveLevel( GamesInProgress.curSlot );
 
-			GamesInProgress.set( GamesInProgress.curSlot, depth, challenges, hero );
+			GamesInProgress.set( GamesInProgress.curSlot, location, challenges, hero );
 
 		}
 	}
@@ -548,7 +410,7 @@ public class Dungeon {
 		Dungeon.challenges = bundle.getInt( CHALLENGES );
 		
 		Dungeon.level = null;
-		Dungeon.depth = -1;
+		Dungeon.location = null;
 		
 		Scroll.restore( bundle );
 		Potion.restore( bundle );
@@ -593,48 +455,12 @@ public class Dungeon {
 		
 		hero = null;
 		hero = (Hero)bundle.get( HERO );
-
-		//pre-0.7.0 saves, back when alchemy had a window which could store items
-		if (bundle.contains("alchemy_inputs")){
-			for (Bundlable item : bundle.getCollection("alchemy_inputs")){
-				
-				//try to add normally, force-add otherwise.
-				if (!((com.quasistellar.hollowdungeon.items.Item)item).collect(hero.belongings.backpack)){
-					hero.belongings.backpack.items.add((com.quasistellar.hollowdungeon.items.Item)item);
-				}
-			}
-		}
 		
 		gold = bundle.getInt( GOLD );
-		depth = bundle.getInt( DEPTH );
+		location = bundle.getString( LOCATION );
 		
 		Statistics.restoreFromBundle( bundle );
 		com.quasistellar.hollowdungeon.items.Generator.restoreFromBundle( bundle );
-
-		droppedItems = new SparseArray<>();
-		portedItems = new SparseArray<>();
-		for (int i=1; i <= 26; i++) {
-			
-			//dropped items
-			ArrayList<com.quasistellar.hollowdungeon.items.Item> items = new ArrayList<>();
-			if (bundle.contains(Messages.format( DROPPED, i )))
-				for (Bundlable b : bundle.getCollection( Messages.format( DROPPED, i ) ) ) {
-					items.add( (com.quasistellar.hollowdungeon.items.Item)b );
-				}
-			if (!items.isEmpty()) {
-				droppedItems.put( i, items );
-			}
-			
-			//ported items
-			items = new ArrayList<>();
-			if (bundle.contains(Messages.format( PORTED, i )))
-				for (Bundlable b : bundle.getCollection( Messages.format( PORTED, i ) ) ) {
-					items.add( (Item)b );
-				}
-			if (!items.isEmpty()) {
-				portedItems.put( i, items );
-			}
-		}
 	}
 	
 	public static com.quasistellar.hollowdungeon.levels.Level loadLevel(int save ) throws IOException {
@@ -642,7 +468,7 @@ public class Dungeon {
 		Dungeon.level = null;
 		Actor.clear();
 		
-		Bundle bundle = FileUtils.bundleFromFile( GamesInProgress.depthFile( save, depth)) ;
+		Bundle bundle = FileUtils.bundleFromFile( GamesInProgress.depthFile( save, location)) ;
 		
 		com.quasistellar.hollowdungeon.levels.Level level = (Level)bundle.get( LEVEL );
 		
@@ -665,7 +491,7 @@ public class Dungeon {
 	}
 	
 	public static void preview( GamesInProgress.Info info, Bundle bundle ) {
-		info.depth = bundle.getInt( DEPTH );
+		info.location = bundle.getString( LOCATION );
 		info.version = bundle.getInt( VERSION );
 		info.challenges = bundle.getInt( CHALLENGES );
 		Hero.preview( info, bundle.getBundle( HERO ) );

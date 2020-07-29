@@ -162,10 +162,10 @@ public class WndDocument extends Window {
 				depth.text(Integer.toString(d));
 				depth.measure();
 				
-				if (d == Dungeon.depth) {
-					label.hardlight(TITLE_COLOR);
-					depth.hardlight(TITLE_COLOR);
-				}
+//				if (d == Dungeon.depth) {
+//					label.hardlight(TITLE_COLOR);
+//					depth.hardlight(TITLE_COLOR);
+//				}
 			}
 		}
 		

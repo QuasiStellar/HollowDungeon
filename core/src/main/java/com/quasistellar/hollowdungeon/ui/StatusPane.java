@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.windows.WndGame;
 import com.quasistellar.hollowdungeon.windows.WndHero;
 import com.quasistellar.hollowdungeon.windows.WndJournal;
-import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
@@ -40,10 +39,8 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.ui.Button;
 import com.watabou.noosa.ui.Component;
-import com.watabou.utils.ColorMath;
 
 public class StatusPane extends Component {
 
@@ -62,7 +59,7 @@ public class StatusPane extends Component {
 	private int lastLvl = -1;
 
 	private BitmapText level;
-	private BitmapText depth;
+	private BitmapText location;
 
 	private HpIndicator hp;
 	private com.quasistellar.hollowdungeon.ui.DangerIndicator danger;
@@ -127,10 +124,10 @@ public class StatusPane extends Component {
 		level.hardlight( 0xFFEBA4 );
 		add( level );
 
-		depth = new BitmapText( Integer.toString( Dungeon.depth ), PixelScene.pixelFont);
-		depth.hardlight( 0xCACFC2 );
-		depth.measure();
-		add( depth );
+		location = new BitmapText( Dungeon.location, PixelScene.pixelFont);
+		location.hardlight( 0xCACFC2 );
+		location.measure();
+		add(location);
 
 		danger = new DangerIndicator();
 		add( danger );
@@ -164,9 +161,9 @@ public class StatusPane extends Component {
 
 		bossHP.setPos( 6 + (width - bossHP.width())/2, 20);
 
-		depth.x = width - 35.5f - depth.width() / 2f;
-		depth.y = 8f - depth.baseLine() / 2f;
-		PixelScene.align(depth);
+		location.x = width - 35.5f - location.width() / 2f;
+		location.y = 8f - location.baseLine() / 2f;
+		PixelScene.align(location);
 
 		danger.setPos( width - danger.width(), 20 );
 

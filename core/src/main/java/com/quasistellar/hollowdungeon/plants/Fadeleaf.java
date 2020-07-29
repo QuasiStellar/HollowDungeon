@@ -52,17 +52,17 @@ public class Fadeleaf extends Plant {
 			
 			if (((Hero) ch).heroClass == HeroClass.HORNET){
 				
-				if (Dungeon.bossLevel()) {
-					GLog.w( Messages.get(ScrollOfTeleportation.class, "no_tele") );
-					return;
-					
-				}
+//				if (Dungeon.bossLevel()) {
+//					GLog.w( Messages.get(ScrollOfTeleportation.class, "no_tele") );
+//					return;
+//
+//				}
 
 				Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 				if (buff != null) buff.detach();
 				
 				InterlevelScene.mode = InterlevelScene.Mode.RETURN;
-				InterlevelScene.returnDepth = Math.max(1, (Dungeon.depth - 1));
+//				InterlevelScene.returnDepth = Math.max(1, (Dungeon.depth - 1));
 				InterlevelScene.returnPos = -2;
 				Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
 				
@@ -72,7 +72,7 @@ public class Fadeleaf extends Plant {
 			
 		} else if (ch instanceof Mob && !ch.properties().contains(Char.Property.IMMOVABLE)) {
 
-			if (!Dungeon.bossLevel()) {
+//			if (!Dungeon.bossLevel()) {
 
 				int count = 10;
 				int newPos;
@@ -92,7 +92,7 @@ public class Fadeleaf extends Plant {
 					ch.sprite.visible = Dungeon.level.heroFOV[ch.pos];
 
 				}
-			}
+//			}
 
 		}
 		

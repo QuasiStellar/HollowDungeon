@@ -42,18 +42,18 @@ public class ScrollOfPassage extends ExoticScroll {
 		
 		setKnown();
 		
-		if (Dungeon.bossLevel()) {
-			
-			GLog.w( Messages.get(ScrollOfTeleportation.class, "no_tele") );
-			return;
-			
-		}
+//		if (Dungeon.bossLevel()) {
+//
+//			GLog.w( Messages.get(ScrollOfTeleportation.class, "no_tele") );
+//			return;
+//
+//		}
 
 		Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 		if (buff != null) buff.detach();
 		
 		InterlevelScene.mode = InterlevelScene.Mode.RETURN;
-		InterlevelScene.returnDepth = Math.max(1, (Dungeon.depth - 1 - (com.quasistellar.hollowdungeon.Dungeon.depth-2)%5));
+		//InterlevelScene.returnDepth = Math.max(1, (Dungeon.depth - 1 - (com.quasistellar.hollowdungeon.Dungeon.depth-2)%5));
 		InterlevelScene.returnPos = -1;
 		Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
 	}

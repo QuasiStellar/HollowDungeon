@@ -97,49 +97,6 @@ public class DistortionTrap extends Trap{
 		int summoned = 0;
 		for (Integer point : respawnPoints) {
 			summoned++;
-			Mob mob;
-			switch (summoned){
-				case 1:
-					if (Dungeon.depth != 5 && Random.Int(100) == 0){
-						mob = new RatKing();
-						break;
-					}
-				case 3: case 5 : default:
-					int floor;
-					do {
-						floor = Random.Int(25);
-					} while( Dungeon.bossLevel(floor));
-					mob = Reflection.newInstance(Bestiary.getMobRotation(floor).get(0));
-					break;
-				case 2:
-					switch (Random.Int(4)){
-						case 0: default:
-							Wraith.spawnAt(point);
-							continue; //wraiths spawn themselves, no need to do more
-						case 1:
-							//yes it's intended that these are likely to die right away
-							mob = new Piranha();
-							break;
-						case 2:
-							mob = Mimic.spawnAt(point, new ArrayList<>());
-							((Mimic)mob).stopHiding();
-							mob.alignment = Char.Alignment.ENEMY;
-							break;
-					}
-					break;
-				case 4:
-					mob = Reflection.newInstance(Random.element(RARE));
-					break;
-			}
-
-			if (Char.hasProp(mob, com.quasistellar.hollowdungeon.actors.Char.Property.LARGE) && !Dungeon.level.openSpace[point]){
-				continue;
-			}
-
-			mob.state = mob.WANDERING;
-			mob.pos = point;
-			GameScene.add(mob, DELAY);
-			mobs.add(mob);
 		}
 
 		//important to process the visuals and pressing of cells last, so spawned mobs have a chance to occupy cells first

@@ -105,10 +105,7 @@ public abstract class RegularLevel extends Level {
 			i += s.sizeCat.roomValue-1;
 			initRooms.add(s);
 		}
-		
-		if (Dungeon.shopOnLevel())
-			initRooms.add(new ShopRoom());
-		
+
 		int specials = specialRooms();
 		SpecialRoom.initForFloor();
 		for (int i = 0; i < specials; i++) {
@@ -117,9 +114,9 @@ public abstract class RegularLevel extends Level {
 			initRooms.add(s);
 		}
 		
-		int secrets = SecretRoom.secretsForFloor(Dungeon.depth);
-		for (int i = 0; i < secrets; i++)
-			initRooms.add(SecretRoom.createRoom());
+		//int secrets = SecretRoom.secretsForFloor(Dungeon.depth);
+//		for (int i = 0; i < secrets; i++)
+//			initRooms.add(SecretRoom.createRoom());
 		
 		return initRooms;
 	}
@@ -142,7 +139,7 @@ public abstract class RegularLevel extends Level {
 	protected abstract Painter painter();
 	
 	protected int nTraps() {
-		return Random.NormalIntRange( 2, 3 + (Dungeon.depth/5) );
+		return Random.NormalIntRange( 2, 3 );
 	}
 	
 	protected Class<?>[] trapClasses(){
@@ -155,19 +152,19 @@ public abstract class RegularLevel extends Level {
 	
 	@Override
 	public int nMobs() {
-		switch(Dungeon.depth) {
-			case 1:
+		switch(Dungeon.location) {
+			case "King's Pass":
 				//mobs are not randomly spawned on floor 1.
 				return 0;
 			default:
-				return 3 + Dungeon.depth % 5 + Random.Int(3);
+				return 3 + Random.Int(3);
 		}
 	}
 	
 	@Override
 	protected void createMobs() {
 		//on floor 1, 8 pre-set mobs are created so the player can get level 2.
-		int mobsToSpawn = Dungeon.depth == 1 ? 8 : nMobs();
+		int mobsToSpawn = Dungeon.location.equals("King's Pass") ? 8 : nMobs();
 
 		ArrayList<Room> stdRooms = new ArrayList<>();
 		for (Room room : rooms) {
@@ -310,7 +307,7 @@ public abstract class RegularLevel extends Level {
 				type = Heap.Type.CHEST;
 				break;
 			case 5:
-				if (Dungeon.depth > 1 && findMob(cell) == null){
+				if (findMob(cell) == null){
 					mobs.add(Mimic.spawnAt(cell, toDrop));
 					continue;
 				}
@@ -362,20 +359,6 @@ public abstract class RegularLevel extends Level {
 		//these are dropped specially
 		missingPages.remove(Document.GUIDE_INTRO_PAGE);
 		missingPages.remove(com.quasistellar.hollowdungeon.journal.Document.GUIDE_SEARCH_PAGE);
-
-		int foundPages = allPages.size() - (missingPages.size() + 2);
-
-		//chance to find a page scales with pages missing and depth
-		if (missingPages.size() > 0 && Random.Float() < (Dungeon.depth/(float)(foundPages + 1))){
-			GuidePage p = new GuidePage();
-			p.page(missingPages.get(0));
-			int cell = randomDropCell();
-			if (map[cell] == Terrain.HIGH_GRASS || map[cell] == Terrain.FURROWED_GRASS) {
-				map[cell] = Terrain.GRASS;
-				losBlocking[cell] = false;
-			}
-			drop( p, cell );
-		}
 
 		Random.popGenerator();
 

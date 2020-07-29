@@ -70,10 +70,10 @@ public class ScrollOfTeleportation extends Scroll {
 	@Override
 	public void empoweredRead() {
 		
-		if (Dungeon.bossLevel()){
-			GLog.w( Messages.get(this, "no_tele") );
-			return;
-		}
+//		if (Dungeon.bossLevel()){
+//			GLog.w( Messages.get(this, "no_tele") );
+//			return;
+//		}
 		
 		GameScene.selectCell(new CellSelector.Listener() {
 			@Override
@@ -115,10 +115,10 @@ public class ScrollOfTeleportation extends Scroll {
 	
 	public static void teleportChar( com.quasistellar.hollowdungeon.actors.Char ch ) {
 
-		if (Dungeon.bossLevel()){
-			GLog.w( Messages.get(ScrollOfTeleportation.class, "no_tele") );
-			return;
-		}
+//		if (Dungeon.bossLevel()){
+//			GLog.w( Messages.get(ScrollOfTeleportation.class, "no_tele") );
+//			return;
+//		}
 		
 		int count = 10;
 		int pos;
@@ -150,10 +150,10 @@ public class ScrollOfTeleportation extends Scroll {
 	
 	public static void teleportPreferringUnseen( Hero hero ){
 		
-		if (Dungeon.bossLevel() || !(Dungeon.level instanceof com.quasistellar.hollowdungeon.levels.RegularLevel)){
-			teleportHero( hero );
-			return;
-		}
+//		if (Dungeon.bossLevel() || !(Dungeon.level instanceof com.quasistellar.hollowdungeon.levels.RegularLevel)){
+//			teleportHero( hero );
+//			return;
+//		}
 		
 		com.quasistellar.hollowdungeon.levels.RegularLevel level = (RegularLevel) Dungeon.level;
 		ArrayList<Integer> candidates = new ArrayList<>();

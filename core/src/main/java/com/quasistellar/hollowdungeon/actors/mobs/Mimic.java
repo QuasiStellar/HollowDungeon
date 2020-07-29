@@ -249,7 +249,7 @@ public class Mimic extends Mob {
 		}
 
 		m.items = new ArrayList<>( items );
-		m.setLevel( com.quasistellar.hollowdungeon.Dungeon.depth );
+		m.setLevel( 1 );
 		m.pos = pos;
 
 		//generate an extra reward for killing the mimic

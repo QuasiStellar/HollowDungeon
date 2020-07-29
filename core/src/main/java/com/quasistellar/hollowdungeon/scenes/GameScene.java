@@ -340,64 +340,28 @@ public class GameScene extends PixelScene {
 			ScrollOfTeleportation.appear(  Dungeon.hero, Dungeon.hero.pos );
 			break;
 		case DESCEND:
-			switch (Dungeon.depth) {
-			case 1:
-				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_SEWERS );
-				break;
-			case 6:
-				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_PRISON );
-				break;
-			case 11:
-				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CAVES );
-				break;
-			case 16:
-				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CITY );
-				break;
-			case 21:
-				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_HALLS );
-				break;
-			}
-			if (Dungeon.hero.isAlive()) {
-				Badges.validateNoKilling();
-			}
+//			switch (Dungeon.depth) {
+//			case 1:
+//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_SEWERS );
+//				break;
+//			case 6:
+//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_PRISON );
+//				break;
+//			case 11:
+//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CAVES );
+//				break;
+//			case 16:
+//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CITY );
+//				break;
+//			case 21:
+//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_HALLS );
+//				break;
+//			}
+//			if (Dungeon.hero.isAlive()) {
+//				Badges.validateNoKilling();
+//			}
 			break;
 		default:
-		}
-
-		ArrayList<Item> dropped = Dungeon.droppedItems.get( Dungeon.depth );
-		if (dropped != null) {
-			for (Item item : dropped) {
-				int pos = Dungeon.level.randomRespawnCell( null );
-				if (item instanceof Potion) {
-					((Potion)item).shatter( pos );
-				} else if (item instanceof Plant.Seed) {
-					Dungeon.level.plant( (Plant.Seed)item, pos );
-				} else if (item instanceof Honeypot) {
-					Dungeon.level.drop(((Honeypot) item).shatter(null, pos), pos);
-				} else {
-					Dungeon.level.drop( item, pos );
-				}
-			}
-			Dungeon.droppedItems.remove( Dungeon.depth );
-		}
-		
-		ArrayList<Item> ported = Dungeon.portedItems.get( Dungeon.depth );
-		if (ported != null){
-			//TODO currently items are only ported to boss rooms, so this works well
-			//might want to have a 'near entrance' function if items can be ported elsewhere
-			int pos;
-			//try to find a tile with no heap, otherwise just stick items onto a heap.
-			int tries = 100;
-			do {
-				pos = Dungeon.level.randomRespawnCell( null );
-				tries--;
-			} while (tries > 0 && Dungeon.level.heaps.get(pos) != null);
-			for (Item item : ported) {
-				Dungeon.level.drop( item, pos ).type = Heap.Type.CHEST;
-			}
-			Dungeon.level.heaps.get(pos).type = Heap.Type.CHEST;
-			Dungeon.level.heaps.get(pos).sprite.link(); //sprite reset to show chest
-			Dungeon.portedItems.remove( Dungeon.depth );
 		}
 
 		Dungeon.hero.next();
@@ -415,32 +379,32 @@ public class GameScene extends PixelScene {
 		Camera.main.panTo(hero.center(), 2.5f);
 
 		if (InterlevelScene.mode != InterlevelScene.Mode.NONE) {
-			if (Dungeon.depth == Statistics.deepestFloor
-					&& (InterlevelScene.mode == InterlevelScene.Mode.DESCEND || InterlevelScene.mode == InterlevelScene.Mode.FALL)) {
-				GLog.h(Messages.get(this, "descend"), Dungeon.depth);
+			if (//Dungeon.depth == Statistics.deepestFloor &&
+					(InterlevelScene.mode == InterlevelScene.Mode.DESCEND || InterlevelScene.mode == InterlevelScene.Mode.FALL)) {
+				GLog.h(Messages.get(this, "descend"), Dungeon.location);
 				Sample.INSTANCE.play(Assets.Sounds.DESCEND);
 
-				int spawnersAbove = Statistics.spawnersAlive;
-				if (spawnersAbove > 0 && Dungeon.depth <= 25) {
-					for (Mob m : Dungeon.level.mobs) {
-						if (m instanceof DemonSpawner && ((DemonSpawner) m).spawnRecorded) {
-							spawnersAbove--;
-						}
-					}
-
-					if (spawnersAbove > 0) {
-						if (Dungeon.bossLevel()) {
-							GLog.n(Messages.get(this, "spawner_warn_final"));
-						} else {
-							GLog.n(Messages.get(this, "spawner_warn"));
-						}
-					}
-				}
+//				int spawnersAbove = Statistics.spawnersAlive;
+//				if (spawnersAbove > 0 && Dungeon.depth <= 25) {
+//					for (Mob m : Dungeon.level.mobs) {
+//						if (m instanceof DemonSpawner && ((DemonSpawner) m).spawnRecorded) {
+//							spawnersAbove--;
+//						}
+//					}
+//
+//					if (spawnersAbove > 0) {
+////						if (Dungeon.bossLevel()) {
+////							GLog.n(Messages.get(this, "spawner_warn_final"));
+////						} else {
+//							GLog.n(Messages.get(this, "spawner_warn"));
+////						}
+//					}
+//				}
 				
 			} else if (InterlevelScene.mode == InterlevelScene.Mode.RESET) {
 				GLog.h(Messages.get(this, "warp"));
 			} else {
-				GLog.h(Messages.get(this, "return"), Dungeon.depth);
+				GLog.h(Messages.get(this, "return"), Dungeon.location);
 			}
 
 			switch (Dungeon.level.feeling) {

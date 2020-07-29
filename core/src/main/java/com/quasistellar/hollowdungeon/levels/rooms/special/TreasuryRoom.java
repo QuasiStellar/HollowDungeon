@@ -48,11 +48,7 @@ public class TreasuryRoom extends SpecialRoom {
 			do {
 				pos = level.pointToCell(random());
 			} while (level.map[pos] != Terrain.EMPTY || level.heaps.get( pos ) != null || level.findMob(pos) != null);
-			if (heapType == Heap.Type.CHEST && Dungeon.depth > 1 && Random.Int( 5 ) == 0){
-				level.mobs.add(Mimic.spawnAt(pos, new com.quasistellar.hollowdungeon.items.Gold().random()));
-			} else {
-				level.drop( new com.quasistellar.hollowdungeon.items.Gold().random(), pos ).type = heapType;
-			}
+			level.drop( new com.quasistellar.hollowdungeon.items.Gold().random(), pos ).type = heapType;
 		}
 		
 		if (heapType == com.quasistellar.hollowdungeon.items.Heap.Type.HEAP) {
@@ -66,6 +62,6 @@ public class TreasuryRoom extends SpecialRoom {
 		}
 		
 		entrance().set( Door.Type.LOCKED );
-		level.addItemToSpawn( new IronKey( com.quasistellar.hollowdungeon.Dungeon.depth ) );
+		level.addItemToSpawn( new IronKey( com.quasistellar.hollowdungeon.Dungeon.location ) );
 	}
 }

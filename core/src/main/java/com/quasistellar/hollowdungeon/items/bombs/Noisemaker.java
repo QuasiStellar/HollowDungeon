@@ -60,7 +60,7 @@ public class Noisemaker extends Bomb {
 		int left;
 		
 		public void set(int cell){
-			floor = Dungeon.depth;
+			//floor = Dungeon.depth;
 			this.cell = cell;
 			left = 6;
 		}
@@ -68,10 +68,10 @@ public class Noisemaker extends Bomb {
 		@Override
 		public boolean act() {
 
-			if (Dungeon.depth != floor){
-				spend(Actor.TICK);
-				return true;
-			}
+//			if (Dungeon.depth != floor){
+//				spend(Actor.TICK);
+//				return true;
+//			}
 
 			Noisemaker bomb = null;
 			Heap heap = Dungeon.level.heaps.get(cell);

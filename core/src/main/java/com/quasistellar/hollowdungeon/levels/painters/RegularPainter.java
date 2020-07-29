@@ -177,24 +177,24 @@ public abstract class RegularPainter extends com.quasistellar.hollowdungeon.leve
 				
 				if (d.type == Room.Door.Type.REGULAR){
 					//chance for a hidden door scales from 3/21 on floor 2 to 3/3 on floor 20
-					if (Dungeon.depth > 1 &&
-							(Dungeon.depth >= 20 || Random.Int(23 - Dungeon.depth) < Dungeon.depth)) {
+//					if (Dungeon.depth > 1 &&
+//							(Dungeon.depth >= 20 || Random.Int(23 - Dungeon.depth) < Dungeon.depth)) {
 						d.type = Room.Door.Type.HIDDEN;
 						Graph.buildDistanceMap(rooms, r);
 						//don't hide if it would make this room only accessible by hidden doors
 						if (n.distance == Integer.MAX_VALUE){
 							d.type = Room.Door.Type.UNLOCKED;
 						}
-					} else {
-						d.type = Room.Door.Type.UNLOCKED;
-					}
+//					} else {
+//						d.type = Room.Door.Type.UNLOCKED;
+//					}
 
 					//entrance doors on floor 2 are hidden if the player hasn't beaten the first boss
-					if (com.quasistellar.hollowdungeon.Dungeon.depth == 2
-							&& !Badges.isUnlocked(com.quasistellar.hollowdungeon.Badges.Badge.BOSS_SLAIN_1)
-							&& r instanceof EntranceRoom){
-						d.type = Room.Door.Type.HIDDEN;
-					}
+//					if (com.quasistellar.hollowdungeon.Dungeon.depth == 2
+//							&& !Badges.isUnlocked(com.quasistellar.hollowdungeon.Badges.Badge.BOSS_SLAIN_1)
+//							&& r instanceof EntranceRoom){
+//						d.type = Room.Door.Type.HIDDEN;
+//					}
 				}
 				
 				switch (d.type) {

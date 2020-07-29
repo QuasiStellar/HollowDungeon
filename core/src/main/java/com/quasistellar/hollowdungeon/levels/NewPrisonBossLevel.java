@@ -516,7 +516,7 @@ public class NewPrisonBossLevel extends com.quasistellar.hollowdungeon.levels.Le
 		if (item != null) {
 			drop( item, randomRespawnCell( null ) ).setHauntedIfCursed().type = Heap.Type.REMAINS;
 		}
-		drop(new IronKey(10), randomPrisonCellPos());
+		drop(new IronKey(""), randomPrisonCellPos());
 	}
 	
 	private int randomPrisonCellPos(){

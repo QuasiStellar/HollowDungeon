@@ -34,32 +34,27 @@ public class Notes {
 	
 	public static abstract class Record implements Comparable<Record>, Bundlable {
 		
-		protected int depth;
+		protected String location;
 
-		public int depth(){
-			return depth;
+		public String location(){
+			return location;
 		}
 		
 		public abstract String desc();
 		
 		@Override
 		public abstract boolean equals(Object obj);
-		
-		@Override
-		public int compareTo( Record another ) {
-			return another.depth() - depth();
-		}
-		
-		private static final String DEPTH	= "depth";
+
+		private static final String LOCATION	= "location";
 		
 		@Override
 		public void restoreFromBundle( Bundle bundle ) {
-			depth = bundle.getInt( DEPTH );
+			location = bundle.getString( LOCATION );
 		}
 
 		@Override
 		public void storeInBundle( Bundle bundle ) {
-			bundle.put( DEPTH, depth );
+			bundle.put( LOCATION, location );
 		}
 	}
 	
@@ -87,9 +82,9 @@ public class Notes {
 		
 		public LandmarkRecord() {}
 		
-		public LandmarkRecord(Landmark landmark, int depth ) {
+		public LandmarkRecord(Landmark landmark, String location ) {
 			this.landmark = landmark;
-			this.depth = depth;
+			this.location = location;
 		}
 		
 		@Override
@@ -101,7 +96,7 @@ public class Notes {
 		public boolean equals(Object obj) {
 			return (obj instanceof LandmarkRecord)
 					&& landmark == ((LandmarkRecord) obj).landmark
-					&& depth() == ((LandmarkRecord) obj).depth();
+					&& location().equals(((LandmarkRecord) obj).location());
 		}
 		
 		private static final String LANDMARK	= "landmark";
@@ -117,6 +112,11 @@ public class Notes {
 			super.storeInBundle(bundle);
 			bundle.put( LANDMARK, landmark.toString() );
 		}
+
+		@Override
+		public int compareTo(Record record) {
+			return 0;
+		}
 	}
 	
 	public static class KeyRecord extends Record {
@@ -130,8 +130,8 @@ public class Notes {
 		}
 		
 		@Override
-		public int depth() {
-			return key.depth;
+		public String location() {
+			return key.location;
 		}
 		
 		@Override
@@ -170,6 +170,11 @@ public class Notes {
 			super.storeInBundle(bundle);
 			bundle.put( KEY, key );
 		}
+
+		@Override
+		public int compareTo(Record record) {
+			return 0;
+		}
 	}
 	
 	private static ArrayList<Record> records;
@@ -192,9 +197,9 @@ public class Notes {
 	}
 	
 	public static boolean add( Landmark landmark ) {
-		LandmarkRecord l = new LandmarkRecord( landmark, Dungeon.depth );
+		LandmarkRecord l = new LandmarkRecord( landmark, Dungeon.location );
 		if (!records.contains(l)) {
-			boolean result = records.add(new LandmarkRecord(landmark, Dungeon.depth));
+			boolean result = records.add(new LandmarkRecord(landmark, Dungeon.location));
 			Collections.sort(records);
 			return result;
 		}
@@ -202,7 +207,7 @@ public class Notes {
 	}
 	
 	public static boolean remove( Landmark landmark ) {
-		return records.remove( new LandmarkRecord(landmark, Dungeon.depth) );
+		return records.remove( new LandmarkRecord(landmark, Dungeon.location) );
 	}
 	
 	public static boolean add( Key key ){

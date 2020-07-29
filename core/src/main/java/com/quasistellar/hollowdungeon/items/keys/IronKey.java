@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.items.keys;
 
+import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
 public class IronKey extends Key {
@@ -30,12 +31,12 @@ public class IronKey extends Key {
 	}
 
 	public IronKey() {
-		this( 0 );
+		this( "" );
 	}
 	
-	public IronKey( int depth ) {
+	public IronKey( String location ) {
 		super();
-		this.depth = depth;
+		this.location = location;
 	}
 
 }

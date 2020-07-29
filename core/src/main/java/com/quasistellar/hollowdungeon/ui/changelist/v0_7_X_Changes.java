@@ -272,7 +272,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.MAGE, 0, 90, 12, 15), "Subclass Adjustments",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Subclass Adjustments",
 				"The Warlock is intended to require a source of physical damage in addition to a wand to be successful. Upgradeable ally wands are problematic for warlock as you can get magical power and physical damage in one item, which makes his abilities absurdly useful with them. The warlock should synergize with allies, but I have scaled the amount down to more reasonable levels:\n\n" +
 				"_-_ Soul mark healing increased to 40% of damage from 33%\n" +
 				"_-_ Soul mark is now 2/5 as effective when the damage-dealer isn't the hero.\n\n" +
@@ -365,7 +365,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.WARRIOR, 0, 90, 12, 15), "Berserker & Gladiator",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Berserker & Gladiator",
 				"Because of nerfs I have made to the scaling of the warrior's shield regen, I have some power budget to give to his subclasses!\n\n" +
 				"Berserker rate of rage loss decreased by 50%. It should now be easier to hold onto rage at higher health, but being injured will still help to retain it longer.\n\n" +
 				"Gladiator is now significantly more flexible:\n" +
@@ -401,7 +401,7 @@ public class v0_7_X_Changes {
 				"_-_ Tomahawk damage scaling increased to 2-4 per level, up from 2-2\n" +
 				"_-_ Tomahawk bleed damage now starts at 60% of damage, down from 100%"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.WARRIOR, 0, 15, 12, 15), "Warrior Nerfs",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Warrior Nerfs",
 				"Warrior shielding regeneration scaling reduced. It is now a flat 1 shield every 30 turns. This is a very slight buff to the earlygame, and a significant nerf to the lategame.\n\n" +
 				"I made this change as too much of the warrior's power was put into his base class, and into a passive ability that players tend to ignore. By removing this power, I can put more power into the warrior's subclasses, which should make the warrior feel more fun and interesting without significantly nerfing him overall."));
 		
@@ -593,14 +593,14 @@ public class v0_7_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.HUNTRESS, 0, 15, 12, 15), "Huntress Reworked!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Huntress Reworked!",
 				"The Huntress has received a class overhaul!\n\n" +
 				"Her boomerang has been replaced with a bow. The bow has infinite uses, like the boomerang, but cannot be upgraded directly, instead it will grow stronger as the huntress levels up.\n\n" +
 				"Her knuckledusters have been replaced with studded gloves. This change is purely cosmetic.\n\n" +
 				"Those with runs in progress will have their boomerang turn into a bow, and will regain most of the scrolls of upgrade spent on the boomerang.\n\n" +
 				"The huntress can now also move through grass without trampling it (she 'furrows' it instead)."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.HUNTRESS, 0, 90, 12, 15), "Huntress Subclasses Reworked!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Huntress Subclasses Reworked!",
 				"Huntress subclasses have also received overhauls:\n\n" +
 				"The Sniper can now see 50% further, penetrates armor with ranged attacks, and can perform a special attack with her bow.\n\n" +
 				"The Warden can now see through grass and gains a variety of bonuses to plant interaction."));
@@ -659,7 +659,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.POSITIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.ROGUE, 0, 15, 12, 15), "Hero Buffs",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Hero Buffs",
 				"_-_ Rogue's cloak of shadows base charge speed increased by ~11%, scaling reduced to compensate.\n\n" +
 				"_-_ Warlock's soul mark base chance increased to 15% from 10%, scaling reduced to compensate.\n\n" +
 				"_-_ Warlock's soul mark hunger restoration increased by 100%, health restoration increased by 33%."));
@@ -689,7 +689,7 @@ public class v0_7_X_Changes {
 		changes.hardlight( CharSprite.NEGATIVE );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.WARRIOR, 0, 15, 12, 15), "Warrior Nerfs",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Warrior Nerfs",
 				"_-_ Warrior's shielding regen scaling reduced by ~15%. This is primarily a lategame nerf."));
 		
 		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RING_RUBY, null), "Ring Nerfs",

@@ -168,46 +168,46 @@ public abstract class Level implements Bundlable {
 
 		Random.pushGenerator( Dungeon.seedCurDepth() );
 		
-		if (!(Dungeon.bossLevel())) {
+//		if (!(Dungeon.bossLevel())) {
 
 			if (Dungeon.isChallenged(Challenges.DARKNESS)){
 				addItemToSpawn( new Torch() );
 			}
 
-			if (Dungeon.posNeeded()) {
-				addItemToSpawn( new PotionOfStrength() );
-				Dungeon.LimitedDrops.STRENGTH_POTIONS.count++;
-			}
-			if (Dungeon.souNeeded()) {
-				addItemToSpawn( new ScrollOfUpgrade() );
-				Dungeon.LimitedDrops.UPGRADE_SCROLLS.count++;
-			}
-			
-			if ( Dungeon.depth == ((Dungeon.seed % 3) + 1)){
-				addItemToSpawn( new StoneOfIntuition() );
-			}
-			
-			if (Dungeon.depth > 1) {
-				switch (Random.Int( 10 )) {
-				case 0:
-					if (!Dungeon.bossLevel( Dungeon.depth + 1 )) {
-						feeling = Feeling.CHASM;
-					}
-					break;
-				case 1:
-					feeling = Feeling.WATER;
-					break;
-				case 2:
-					feeling = Feeling.GRASS;
-					break;
-				case 3:
-					feeling = Feeling.DARK;
-					addItemToSpawn(new Torch());
-					viewDistance = Math.round(viewDistance/2f);
-					break;
-				}
-			}
-		}
+//			if (Dungeon.posNeeded()) {
+//				addItemToSpawn( new PotionOfStrength() );
+//				Dungeon.LimitedDrops.STRENGTH_POTIONS.count++;
+//			}
+//			if (Dungeon.souNeeded()) {
+//				addItemToSpawn( new ScrollOfUpgrade() );
+//				Dungeon.LimitedDrops.UPGRADE_SCROLLS.count++;
+//			}
+//
+//			if ( Dungeon.depth == ((Dungeon.seed % 3) + 1)){
+//				addItemToSpawn( new StoneOfIntuition() );
+//			}
+//
+//			if (Dungeon.depth > 1) {
+//				switch (Random.Int( 10 )) {
+//				case 0:
+//					if (!Dungeon.bossLevel( Dungeon.depth + 1 )) {
+//						feeling = Feeling.CHASM;
+//					}
+//					break;
+//				case 1:
+//					feeling = Feeling.WATER;
+//					break;
+//				case 2:
+//					feeling = Feeling.GRASS;
+//					break;
+//				case 3:
+//					feeling = Feeling.DARK;
+//					addItemToSpawn(new Torch());
+//					viewDistance = Math.round(viewDistance/2f);
+//					break;
+//				}
+//			}
+//		}
 		
 		do {
 			width = height = length = 0;
@@ -418,7 +418,7 @@ public abstract class Level implements Bundlable {
 	
 	public Mob createMob() {
 		if (mobsToSpawn == null || mobsToSpawn.isEmpty()) {
-			mobsToSpawn = Bestiary.getMobRotation(Dungeon.depth);
+			mobsToSpawn = Bestiary.getMobRotation(Dungeon.location);
 		}
 		
 		return Reflection.newInstance(mobsToSpawn.remove(0));

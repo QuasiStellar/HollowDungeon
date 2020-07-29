@@ -100,9 +100,9 @@ public abstract class SpecialRoom extends Room {
 		floorSpecials = (ArrayList<Class<?extends Room>>) runSpecials.clone();
 		
 		//laboratory rooms spawn at set intervals every chapter
-		if (Dungeon.depth%5 == (Dungeon.seed%3 + 2)){
-			floorSpecials.add(0, com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom.class);
-		}
+//		if (Dungeon.depth%5 == (Dungeon.seed%3 + 2)){
+//			floorSpecials.add(0, com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom.class);
+//		}
 	}
 	
 	private static void useType( Class<?extends Room> type ) {
@@ -117,47 +117,47 @@ public abstract class SpecialRoom extends Room {
 	}
 	
 	public static SpecialRoom createRoom(){
-		if (Dungeon.depth == pitNeededDepth){
-			pitNeededDepth = -1;
-			
-			floorSpecials.remove( ArmoryRoom.class );
-			floorSpecials.remove( CryptRoom.class );
-			floorSpecials.remove( LibraryRoom.class );
-			floorSpecials.remove( RunestoneRoom.class );
-			floorSpecials.remove( StatueRoom.class );
-			floorSpecials.remove( TreasuryRoom.class );
-			floorSpecials.remove( WeakFloorRoom.class );
-			
-			return new PitRoom();
-			
-		} else if (floorSpecials.contains(com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom.class)) {
-		
-			useType(com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom.class);
-			return new com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom();
-		
-		} else {
-			
-			if (Dungeon.bossLevel(Dungeon.depth + 1)){
-				floorSpecials.remove(WeakFloorRoom.class);
-			}
-			
+//		if (Dungeon.depth == pitNeededDepth){
+//			pitNeededDepth = -1;
+//
+//			floorSpecials.remove( ArmoryRoom.class );
+//			floorSpecials.remove( CryptRoom.class );
+//			floorSpecials.remove( LibraryRoom.class );
+//			floorSpecials.remove( RunestoneRoom.class );
+//			floorSpecials.remove( StatueRoom.class );
+//			floorSpecials.remove( TreasuryRoom.class );
+//			floorSpecials.remove( WeakFloorRoom.class );
+//
+//			return new PitRoom();
+//
+//		} else if (floorSpecials.contains(com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom.class)) {
+//
+//			useType(com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom.class);
+//			return new com.quasistellar.hollowdungeon.levels.rooms.special.LaboratoryRoom();
+//
+//		} else {
+//
+//			if (Dungeon.bossLevel(Dungeon.depth + 1)){
+//				floorSpecials.remove(WeakFloorRoom.class);
+//			}
+//
 			Room r = null;
 			int index = floorSpecials.size();
 			for (int i = 0; i < 4; i++){
 				int newidx = Random.Int( floorSpecials.size() );
 				if (newidx < index) index = newidx;
 			}
-			
+
 			r = Reflection.newInstance(floorSpecials.get( index ));
-			
-			if (r instanceof WeakFloorRoom){
-				pitNeededDepth = com.quasistellar.hollowdungeon.Dungeon.depth + 1;
-			}
-			
+//
+//			if (r instanceof WeakFloorRoom){
+//				pitNeededDepth = com.quasistellar.hollowdungeon.Dungeon.depth + 1;
+//			}
+//
 			useType( r.getClass() );
 			return (SpecialRoom)r;
-		
-		}
+//
+//		}
 	}
 	
 	private static final String ROOMS	= "special_rooms";

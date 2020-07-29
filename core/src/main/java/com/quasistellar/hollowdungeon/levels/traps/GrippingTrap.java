@@ -57,7 +57,7 @@ public class GrippingTrap extends Trap {
 		Char c = Actor.findChar( pos );
 
 		if (c != null && !c.flying) {
-			int damage = Math.max( 0,  (2 + com.quasistellar.hollowdungeon.Dungeon.depth) );
+			int damage = 1;
 			Buff.affect( c, Bleeding.class ).set( damage );
 			Buff.prolong( c, Cripple.class, Cripple.DURATION);
 			Wound.hit( c );

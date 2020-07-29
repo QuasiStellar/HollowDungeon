@@ -59,34 +59,34 @@ public class RatKing extends NPC {
 	}
 
 	//***This functionality is for when rat king may be summoned by a distortion trap
-
-	@Override
-	protected void onAdd() {
-		super.onAdd();
-		if (Dungeon.depth != 5){
-			yell(Messages.get(this, "confused"));
-		}
-	}
-
-	@Override
-	protected boolean act() {
-		if (Dungeon.depth < 5){
-			if (pos == Dungeon.level.exit){
-				destroy();
-				sprite.killAndErase();
-			} else {
-				target = Dungeon.level.exit;
-			}
-		} else if (Dungeon.depth > 5){
-			if (pos == Dungeon.level.entrance){
-				destroy();
-				sprite.killAndErase();
-			} else {
-				target = Dungeon.level.entrance;
-			}
-		}
-		return super.act();
-	}
+//
+//	@Override
+//	protected void onAdd() {
+//		super.onAdd();
+//		if (Dungeon.depth != 5){
+//			yell(Messages.get(this, "confused"));
+//		}
+//	}
+//
+//	@Override
+//	protected boolean act() {
+//		if (Dungeon.depth < 5){
+//			if (pos == Dungeon.level.exit){
+//				destroy();
+//				sprite.killAndErase();
+//			} else {
+//				target = Dungeon.level.exit;
+//			}
+//		} else if (Dungeon.depth > 5){
+//			if (pos == Dungeon.level.entrance){
+//				destroy();
+//				sprite.killAndErase();
+//			} else {
+//				target = Dungeon.level.entrance;
+//			}
+//		}
+//		return super.act();
+//	}
 
 	//***
 

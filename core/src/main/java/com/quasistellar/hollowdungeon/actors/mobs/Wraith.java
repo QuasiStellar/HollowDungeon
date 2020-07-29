@@ -92,7 +92,7 @@ public class Wraith extends Mob {
 		if (Dungeon.level.passable[pos] && com.quasistellar.hollowdungeon.actors.Actor.findChar( pos ) == null) {
 			
 			Wraith w = new Wraith();
-			w.adjustStats( com.quasistellar.hollowdungeon.Dungeon.depth );
+			w.adjustStats(1);
 			w.pos = pos;
 			w.state = w.HUNTING;
 			GameScene.add( w, SPAWN_DELAY );

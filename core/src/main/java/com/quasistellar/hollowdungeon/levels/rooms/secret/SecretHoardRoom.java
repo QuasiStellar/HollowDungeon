@@ -45,8 +45,8 @@ public class SecretHoardRoom extends SecretRoom {
 		Class<? extends Trap> trapClass;
 		if (Random.Int(2) == 0){
 			trapClass = RockfallTrap.class;
-		} else if (Dungeon.depth >= 10){
-			trapClass = DisintegrationTrap.class;
+//		} else if (Dungeon.depth >= 10){
+//			trapClass = DisintegrationTrap.class;
 		} else {
 			trapClass = PoisonDartTrap.class;
 		}

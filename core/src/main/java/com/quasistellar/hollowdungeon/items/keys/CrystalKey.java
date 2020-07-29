@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.items.keys;
 
+import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
 public class CrystalKey extends Key {
@@ -30,12 +31,12 @@ public class CrystalKey extends Key {
 	}
 	
 	public CrystalKey() {
-		this( 0 );
+		this( "" );
 	}
 	
-	public CrystalKey( int depth ) {
+	public CrystalKey( String location ) {
 		super();
-		this.depth = depth;
+		this.location = location;
 	}
 	
 }

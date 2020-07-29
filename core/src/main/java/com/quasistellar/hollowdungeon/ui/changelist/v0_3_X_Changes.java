@@ -59,7 +59,7 @@ public class v0_3_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.WARRIOR, 0, 15, 12, 15), "Warrior Rework!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Warrior Rework!",
 				"Warrior Rework:\n" +
 				"_-_ Starting STR down to 10, from 11\n" +
 				"_-_ Short sword dmg down to 1-10, from 1-12\n" +
@@ -69,7 +69,7 @@ public class v0_3_X_Changes {
 				"_-_ Seal grants shielding ontop of health\n" +
 				"_-_ Seal allows for one upgrade transfer"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.WARRIOR, 0, 90, 12, 15), "Warrior Subclass Rework!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.KNIGHT, 0, 0, 14, 20), "Warrior Subclass Rework!",
 				"Berserker Rework:\n" +
 				"_-_ Bonus damage now scales with lost HP, instead of a flat 50% at 50% hp\n" +
 				"_-_ Berserker can now endure through death for a short time, with caveats\n" +
@@ -270,7 +270,7 @@ public class v0_3_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(com.quasistellar.hollowdungeon.Assets.Sprites.MAGE, 0, 15, 12, 15), "Mage Rework!",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(Assets.Sprites.HORNET, 0, 0, 14, 20), "Mage Rework!",
 				"_-_ No longer starts with knuckledusters or a wand\n" +
 				"_-_ Can no longer equip wands\n" +
 				"_-_ Now starts with a unique mages staff, empowered with magic missile to start.\n\n" +

@@ -61,30 +61,30 @@ public class EntranceRoom extends StandardRoom {
 		Random.pushGenerator();
 
 		//places the first guidebook page on floor 1
-		if (Dungeon.depth == 1 && !Document.ADVENTURERS_GUIDE.hasPage(Document.GUIDE_INTRO_PAGE)){
-			int pos;
-			do {
-				//can't be on bottom row of tiles
-				pos = level.pointToCell(new Point( Random.IntRange( left + 1, right - 1 ),
-						Random.IntRange( top + 1, bottom - 2 )));
-			} while (pos == level.entrance || level.findMob(level.entrance) != null);
-			GuidePage p = new GuidePage();
-			p.page(Document.GUIDE_INTRO_PAGE);
-			level.drop( p, pos );
-		}
+//		if (Dungeon.depth == 1 && !Document.ADVENTURERS_GUIDE.hasPage(Document.GUIDE_INTRO_PAGE)){
+//			int pos;
+//			do {
+//				//can't be on bottom row of tiles
+//				pos = level.pointToCell(new Point( Random.IntRange( left + 1, right - 1 ),
+//						Random.IntRange( top + 1, bottom - 2 )));
+//			} while (pos == level.entrance || level.findMob(level.entrance) != null);
+//			GuidePage p = new GuidePage();
+//			p.page(Document.GUIDE_INTRO_PAGE);
+//			level.drop( p, pos );
+//		}
 
 		//places the third guidebook page on floor 2
-		if (com.quasistellar.hollowdungeon.Dungeon.depth == 2 && !Document.ADVENTURERS_GUIDE.hasPage(Document.GUIDE_SEARCH_PAGE)){
-			int pos;
-			do {
-				//can't be on bottom row of tiles
-				pos = level.pointToCell(new Point( Random.IntRange( left + 1, right - 1 ),
-						Random.IntRange( top + 1, bottom - 2 )));
-			} while (pos == level.entrance || level.findMob(level.entrance) != null);
-			GuidePage p = new GuidePage();
-			p.page(com.quasistellar.hollowdungeon.journal.Document.GUIDE_SEARCH_PAGE);
-			level.drop( p, pos );
-		}
+//		if (com.quasistellar.hollowdungeon.Dungeon.depth == 2 && !Document.ADVENTURERS_GUIDE.hasPage(Document.GUIDE_SEARCH_PAGE)){
+//			int pos;
+//			do {
+//				//can't be on bottom row of tiles
+//				pos = level.pointToCell(new Point( Random.IntRange( left + 1, right - 1 ),
+//						Random.IntRange( top + 1, bottom - 2 )));
+//			} while (pos == level.entrance || level.findMob(level.entrance) != null);
+//			GuidePage p = new GuidePage();
+//			p.page(com.quasistellar.hollowdungeon.journal.Document.GUIDE_SEARCH_PAGE);
+//			level.drop( p, pos );
+//		}
 
 		Random.popGenerator();
 

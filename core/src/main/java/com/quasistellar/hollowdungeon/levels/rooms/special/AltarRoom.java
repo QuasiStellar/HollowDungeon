@@ -34,7 +34,7 @@ public class AltarRoom extends SpecialRoom {
 	public void paint( Level level ) {
 		
 		Painter.fill( level, this, Terrain.WALL );
-		Painter.fill( level, this, 1, Dungeon.bossLevel( com.quasistellar.hollowdungeon.Dungeon.depth + 1 ) ? Terrain.HIGH_GRASS : Terrain.CHASM );
+		Painter.fill( level, this, 1, Terrain.CHASM );
 
 		Point c = center();
 		Door door = entrance();

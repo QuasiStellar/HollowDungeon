@@ -122,7 +122,7 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 		private RenderedTextBlock name;
 		
 		private Image steps;
-		private BitmapText depth;
+		private BitmapText location;
 		private Image classIcon;
 		private BitmapText level;
 		
@@ -152,8 +152,8 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 					hero = null;
 					remove(steps);
 					steps = null;
-					remove(depth);
-					depth = null;
+					remove(location);
+					location = null;
 					remove(classIcon);
 					classIcon = null;
 					remove(level);
@@ -169,8 +169,8 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 					
 					steps = new Image(Icons.get(Icons.DEPTH));
 					add(steps);
-					depth = new BitmapText(com.quasistellar.hollowdungeon.scenes.PixelScene.pixelFont);
-					add(depth);
+					location = new BitmapText(com.quasistellar.hollowdungeon.scenes.PixelScene.pixelFont);
+					add(location);
 					
 					classIcon = new Image(Icons.get(info.heroClass));
 					add(classIcon);
@@ -182,19 +182,19 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 					classIcon.copy(Icons.get(info.heroClass));
 				}
 				
-				depth.text(Integer.toString(info.depth));
-				depth.measure();
+				location.text(info.location);
+				location.measure();
 				
 				level.text(Integer.toString(info.level));
 				level.measure();
 				
 				if (info.challenges > 0){
 					name.hardlight(Window.TITLE_COLOR);
-					depth.hardlight(Window.TITLE_COLOR);
+					location.hardlight(Window.TITLE_COLOR);
 					level.hardlight(Window.TITLE_COLOR);
 				} else {
 					name.resetColor();
-					depth.resetColor();
+					location.resetColor();
 					level.resetColor();
 				}
 				
@@ -234,9 +234,9 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 				steps.y = y + (height - steps.height())/2f;
 				align(steps);
 				
-				depth.x = steps.x + (steps.width() - depth.width()) / 2f;
-				depth.y = steps.y + (steps.height() - depth.height()) / 2f + 1;
-				align(depth);
+				location.x = steps.x + (steps.width() - location.width()) / 2f;
+				location.y = steps.y + (steps.height() - location.height()) / 2f + 1;
+				align(location);
 				
 			} else {
 				name.setPos(

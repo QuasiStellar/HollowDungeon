@@ -41,23 +41,23 @@ public class MagicalPorter extends InventorySpell {
 	
 	@Override
 	protected void onCast(Hero hero) {
-		if (Dungeon.depth >= 25){
-			GLog.w(Messages.get(this, "nowhere"));
-		} else {
+//		if (Dungeon.depth >= 25){
+//			GLog.w(Messages.get(this, "nowhere"));
+//		} else {
 			super.onCast(hero);
-		}
+//		}
 	}
 	
 	@Override
 	protected void onItemSelected(com.quasistellar.hollowdungeon.items.Item item) {
 		
-		com.quasistellar.hollowdungeon.items.Item result = item.detachAll(Item.curUser.belongings.backpack);
-		int portDepth = 5 * (1 + Dungeon.depth/5);
-		ArrayList<com.quasistellar.hollowdungeon.items.Item> ported = Dungeon.portedItems.get(portDepth);
-		if (ported == null) {
-			com.quasistellar.hollowdungeon.Dungeon.portedItems.put(portDepth, ported = new ArrayList<>());
-		}
-		ported.add(result);
+//		com.quasistellar.hollowdungeon.items.Item result = item.detachAll(Item.curUser.belongings.backpack);
+//		int portDepth = 5 * (1 + Dungeon.depth/5);
+//		ArrayList<com.quasistellar.hollowdungeon.items.Item> ported = Dungeon.portedItems.get(portDepth);
+//		if (ported == null) {
+//			com.quasistellar.hollowdungeon.Dungeon.portedItems.put(portDepth, ported = new ArrayList<>());
+//		}
+//		ported.add(result);
 		
 	}
 	

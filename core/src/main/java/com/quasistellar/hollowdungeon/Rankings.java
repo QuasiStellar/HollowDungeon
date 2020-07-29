@@ -66,7 +66,6 @@ public enum Rankings {
 		rec.cause = cause;
 		rec.win		= win;
 		rec.heroClass	= com.quasistellar.hollowdungeon.Dungeon.hero.heroClass;
-		rec.depth		= com.quasistellar.hollowdungeon.Dungeon.depth;
 		rec.score	= score( win );
 		
 		INSTANCE.saveGameData(rec);
@@ -102,7 +101,7 @@ public enum Rankings {
 	}
 
 	private int score( boolean win ) {
-		return (Statistics.goldCollected + 30 * (win ? 26 : com.quasistellar.hollowdungeon.Dungeon.depth ) * 100) * (win ? 2 : 1);
+		return (Statistics.goldCollected + 3000) * (win ? 2 : 1);
 	}
 
 	public static final String HERO = "hero";
