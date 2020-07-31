@@ -22,10 +22,6 @@
 package com.quasistellar.hollowdungeon.items.bags;
 
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.quest.GooBlob;
-import com.quasistellar.hollowdungeon.items.quest.MetalShard;
-import com.quasistellar.hollowdungeon.items.stones.Runestone;
-import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 
 public class VelvetPouch extends Bag {
@@ -36,16 +32,15 @@ public class VelvetPouch extends Bag {
 
 	@Override
 	public boolean canHold( Item item ) {
-		if (item instanceof Plant.Seed || item instanceof Runestone
-				|| item instanceof GooBlob || item instanceof MetalShard){
+//		if (item instanceof Charm){
+//			return false;
+//		} else {
 			return super.canHold(item);
-		} else {
-			return false;
-		}
+//		}
 	}
 
 	public int capacity(){
-		return 19;
+		return 39;
 	}
 	
 	@Override

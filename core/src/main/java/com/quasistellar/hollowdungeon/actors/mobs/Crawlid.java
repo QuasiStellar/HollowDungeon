@@ -19,25 +19,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package com.quasistellar.hollowdungeon.items.potions.exotic;
+package com.quasistellar.hollowdungeon.actors.mobs;
 
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
-import com.quasistellar.hollowdungeon.actors.buffs.Barkskin;
-import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.actors.hero.Hero;
+import com.quasistellar.hollowdungeon.sprites.RatSprite;
 
-public class PotionOfEarthenArmor extends ExoticPotion {
-	
-	{
-		icon = ItemSpriteSheet.Icons.POTION_EARTHARMR;
-	}
-	
-	@Override
-	public void apply( Hero hero ) {
-		setKnown();
-		
-		Buff.affect(hero, Barkskin.class).set( 2, 50 );
-	}
-	
+public class Crawlid extends Mob {
+
+    {
+        spriteClass = RatSprite.class;
+
+        HP = HT = 8;
+
+    }
 }

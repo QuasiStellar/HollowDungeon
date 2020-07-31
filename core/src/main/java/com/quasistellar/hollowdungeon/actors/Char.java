@@ -57,13 +57,8 @@ import com.quasistellar.hollowdungeon.actors.buffs.Vulnerable;
 import com.quasistellar.hollowdungeon.actors.buffs.Terror;
 import com.quasistellar.hollowdungeon.actors.buffs.Vertigo;
 import com.quasistellar.hollowdungeon.actors.buffs.Weakness;
-import com.quasistellar.hollowdungeon.actors.mobs.Elemental;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRetribution;
-import com.quasistellar.hollowdungeon.items.scrolls.exotic.ScrollOfPsionicBlast;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAggression;
 import com.quasistellar.hollowdungeon.levels.features.Chasm;
 import com.quasistellar.hollowdungeon.levels.features.Door;
-import com.quasistellar.hollowdungeon.levels.traps.GrimTrap;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.noosa.audio.Sample;
@@ -656,8 +651,6 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 	}
 
 	public enum Property{
-		BOSS ( new HashSet<Class>( Arrays.asList(GrimTrap.class, ScrollOfRetribution.class, ScrollOfPsionicBlast.class)),
-				new HashSet<Class>( Arrays.asList(Corruption.class, StoneOfAggression.Aggression.class) )),
 		MINIBOSS ( new HashSet<Class>(),
 				new HashSet<Class>( Arrays.asList(Corruption.class) )),
 		UNDEAD,
@@ -666,13 +659,13 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 				new HashSet<Class>( Arrays.asList(Bleeding.class, ToxicGas.class, Poison.class) )),
 		BLOB_IMMUNE ( new HashSet<Class>(),
 				new HashSet<Class>( Arrays.asList(Blob.class) )),
-		FIERY ( new HashSet<Class>( Arrays.asList(Elemental.FireElemental.class)),
+		FIERY ( new HashSet<Class>(),
 				new HashSet<Class>( Arrays.asList(Burning.class))),
-		ICY ( new HashSet<Class>( Arrays.asList(Elemental.FrostElemental.class)),
+		ICY ( new HashSet<Class>(),
 				new HashSet<Class>( Arrays.asList(Frost.class, Chill.class))),
 		ACIDIC ( new HashSet<Class>( Arrays.asList(Corrosion.class)),
 				new HashSet<Class>( Arrays.asList(Ooze.class))),
-		ELECTRIC ( new HashSet<Class>( Arrays.asList(Electricity.class, Elemental.ShockElemental.class )),
+		ELECTRIC ( new HashSet<Class>( Arrays.asList(Electricity.class)),
 				new HashSet<Class>()),
 		LARGE,
 		IMMOVABLE;

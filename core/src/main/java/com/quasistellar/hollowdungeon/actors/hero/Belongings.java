@@ -57,11 +57,6 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 		};
 		backpack.owner = owner;
 	}
-	
-	private static final String WEAPON		= "weapon";
-	private static final String ARMOR		= "armor";
-	private static final String MISC1       = "misc1";
-	private static final String MISC2       = "misc2";
 
 	public void storeInBundle( Bundle bundle ) {
 		
@@ -101,17 +96,6 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 		}
 		
 		return false;
-	}
-	
-	public com.quasistellar.hollowdungeon.items.Item getSimilar(com.quasistellar.hollowdungeon.items.Item similar ){
-		
-		for (com.quasistellar.hollowdungeon.items.Item item : this) {
-			if (similar != item && similar.isSimilar(item)) {
-				return item;
-			}
-		}
-		
-		return null;
 	}
 	
 	public ArrayList<com.quasistellar.hollowdungeon.items.Item> getAllSimilar(com.quasistellar.hollowdungeon.items.Item similar ){

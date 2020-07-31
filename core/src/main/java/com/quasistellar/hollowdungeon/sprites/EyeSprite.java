@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.sprites;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Eye;
 import com.quasistellar.hollowdungeon.effects.Beam;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
 import com.quasistellar.hollowdungeon.tiles.DungeonTilemap;
@@ -73,8 +72,6 @@ public class EyeSprite extends MobSprite {
 		chargeParticles.autoKill = false;
 		chargeParticles.pour(MagicMissile.MagicParticle.ATTRACTING, 0.05f);
 		chargeParticles.on = false;
-		
-		if (((Eye)ch).beamCharged) play(charging);
 	}
 
 	@Override
@@ -131,7 +128,6 @@ public class EyeSprite extends MobSprite {
 			} else {
 				parent.add(new Beam.DeathRay(center(), DungeonTilemap.raisedTileCenterToWorld(zapPos)));
 			}
-			((Eye)ch).deathGaze();
 			ch.next();
 		} else if (anim == die){
 			chargeParticles.killAndErase();

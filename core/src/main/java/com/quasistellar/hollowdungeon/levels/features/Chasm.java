@@ -38,7 +38,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Cripple;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.spells.FeatherFall;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Camera;
@@ -100,14 +99,6 @@ public class Chasm {
 	public static void heroLand() {
 		
 		Hero hero = Dungeon.hero;
-		
-		FeatherFall.FeatherBuff b = hero.buff(FeatherFall.FeatherBuff.class);
-		
-		if (b != null){
-			//TODO visuals
-			b.detach();
-			return;
-		}
 		
 		Camera.main.shake( 4, 1f );
 

@@ -21,12 +21,10 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.items.Honeypot;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Random;
 
@@ -38,38 +36,7 @@ public class StorageRoom extends SpecialRoom {
 		
 		Painter.fill( level, this, com.quasistellar.hollowdungeon.levels.Terrain.WALL );
 		Painter.fill( level, this, 1, floor );
-
-		boolean honeyPot = Random.Int( 2 ) == 0;
-		
-		int n = Random.IntRange( 3, 4 );
-		for (int i=0; i < n; i++) {
-			int pos;
-			do {
-				pos = level.pointToCell(random());
-			} while (level.map[pos] != floor);
-			if (honeyPot){
-				level.drop( new Honeypot(), pos);
-				honeyPot = false;
-			} else
-				level.drop( prize( level ), pos );
-		}
 		
 		entrance().set( Door.Type.BARRICADE );
-		level.addItemToSpawn( new PotionOfLiquidFlame() );
-	}
-	
-	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {
-
-		if (Random.Int(2) != 0){
-			Item prize = level.findPrizeItem();
-			if (prize != null)
-				return prize;
-		}
-		
-		return Generator.random( Random.oneOf(
-			Generator.Category.POTION,
-			Generator.Category.SCROLL,
-			com.quasistellar.hollowdungeon.items.Generator.Category.GOLD
-		) );
 	}
 }

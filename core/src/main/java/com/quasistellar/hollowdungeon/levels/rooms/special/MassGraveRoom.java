@@ -29,9 +29,6 @@ import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.tiles.CustomTilemap;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Skeleton;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
-import com.quasistellar.hollowdungeon.items.quest.CorpseDust;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Image;
@@ -52,7 +49,6 @@ public class MassGraveRoom extends SpecialRoom {
 
 		Door entrance = entrance();
 		entrance.set(Door.Type.BARRICADE);
-		level.addItemToSpawn(new PotionOfLiquidFlame());
 
 		Painter.fill(level, this, Terrain.WALL);
 		Painter.fill(level, this, 1, Terrain.EMPTY_SP);
@@ -62,21 +58,8 @@ public class MassGraveRoom extends SpecialRoom {
 		b.setRect(left+1, top, width()-2, height()-1);
 		level.customTiles.add(b);
 
-		//50% 1 skeleton, 50% 2 skeletons
-		for (int i = 0; i <= Random.Int(2); i++){
-			Skeleton skele = new Skeleton();
-
-			int pos;
-			do {
-				pos = level.pointToCell(random());
-			} while (level.map[pos] != Terrain.EMPTY_SP || level.findMob(pos) != null);
-			skele.pos = pos;
-			level.mobs.add( skele );
-		}
-
 		ArrayList<com.quasistellar.hollowdungeon.items.Item> items = new ArrayList<>();
 		//100% corpse dust, 2x100% 1 coin, 2x30% coins, 1x60% random item, 1x30% armor
-		items.add(new CorpseDust());
 		items.add(new com.quasistellar.hollowdungeon.items.Gold(1));
 		items.add(new com.quasistellar.hollowdungeon.items.Gold(1));
 		if (Random.Float() <= 0.3f) items.add(new com.quasistellar.hollowdungeon.items.Gold());

@@ -24,22 +24,15 @@ package com.quasistellar.hollowdungeon.actors.hero;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
-import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
-import com.quasistellar.hollowdungeon.actors.buffs.LockedFloor;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.CheckedCell;
 import com.quasistellar.hollowdungeon.effects.Flare;
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfMight;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.messages.Languages;
-import com.quasistellar.hollowdungeon.plants.Earthroot;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
-import com.quasistellar.hollowdungeon.scenes.SurfaceScene;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.ui.HpIndicator;
-import com.quasistellar.hollowdungeon.windows.WndMessage;
 import com.quasistellar.hollowdungeon.windows.WndResurrect;
 import com.quasistellar.hollowdungeon.windows.WndTradeItem;
 import com.quasistellar.hollowdungeon.actors.Actor;
@@ -62,20 +55,12 @@ import com.quasistellar.hollowdungeon.items.keys.GoldenKey;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
 import com.quasistellar.hollowdungeon.items.keys.Key;
 import com.quasistellar.hollowdungeon.items.keys.SkeletonKey;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfExperience;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
-import com.watabou.utils.GameMath;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
@@ -130,10 +115,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		int curHT = HT;
 		
 		HT = 5 + HTBoost;
-		
-		if (buff(com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfMight.HTBoost.class) != null){
-			HT += buff(com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfMight.HTBoost.class).boost();
-		}
 		
 		if (boostHP){
 			HP += Math.max(HT - curHT, 0);
@@ -470,16 +451,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 					if (item instanceof com.quasistellar.hollowdungeon.items.Dewdrop || item instanceof Key) {
 						//Do Nothing
-					} else {
-
-						boolean important =
-								(item instanceof ScrollOfUpgrade && ((Scroll)item).isKnown()) ||
-								(item instanceof PotionOfStrength && ((Potion)item).isKnown());
-						if (important) {
-							GLog.p( Messages.get(this, "you_now_have", item.name()) );
-						} else {
-							GLog.i( Messages.get(this, "you_now_have", item.name()) );
-						}
 					}
 					
 					curAction = null;
@@ -1067,26 +1038,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				}
 			}
 		}
-
-		if (ankh != null && ankh.isBlessed()) {
-			this.HP = HT/4;
-
-			//ensures that you'll get to act first in almost any case, to prevent reviving and then instantly dieing again.
-			PotionOfHealing.cure(this);
-			com.quasistellar.hollowdungeon.actors.buffs.Buff.detach(this, com.quasistellar.hollowdungeon.actors.buffs.Paralysis.class);
-			spend(-cooldown());
-
-			new Flare(8, 32).color(0xFFFF66, true).show(sprite, 2f);
-			CellEmitter.get(this.pos).start(Speck.factory(com.quasistellar.hollowdungeon.effects.Speck.LIGHT), 0.2f, 3);
-
-			ankh.detach(belongings.backpack);
-
-			Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.TELEPORT );
-			GLog.w( Messages.get(this, "revive") );
-			com.quasistellar.hollowdungeon.Statistics.ankhsUsed++;
-
-			return;
-		}
 		
 		com.quasistellar.hollowdungeon.actors.Actor.fixTime();
 		super.die( cause );
@@ -1094,17 +1045,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		if (ankh == null) {
 			
 			reallyDie( cause );
-			
-		} else {
-			
-			com.quasistellar.hollowdungeon.Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, false );
-			final com.quasistellar.hollowdungeon.items.Ankh finalAnkh = ankh;
-			Game.runOnRenderThread(new Callback() {
-				@Override
-				public void call() {
-					GameScene.show( new WndResurrect( finalAnkh, cause ) );
-				}
-			});
 			
 		}
 	}
@@ -1336,8 +1276,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 							com.quasistellar.hollowdungeon.scenes.GameScene.discoverTile( p, oldValue );
 							
 							com.quasistellar.hollowdungeon.Dungeon.level.discover( p );
-							
-							ScrollOfMagicMapping.discover( p );
+
+							CellEmitter.get( p ).start( Speck.factory( com.quasistellar.hollowdungeon.effects.Speck.DISCOVER ), 0.1f, 4 );
 							
 							smthFound = true;
 						}

@@ -30,15 +30,7 @@ import com.quasistellar.hollowdungeon.items.Gold;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Recipe;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
-import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
-import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
-import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTransmutation;
-import com.quasistellar.hollowdungeon.items.spells.Recycle;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
@@ -86,8 +78,8 @@ public class WndBag extends WndTabbed {
 		NOT_EQUIPPED
 	}
 
-	protected static final int COLS_P    = 4;
-	protected static final int COLS_L    = 6;
+	protected static final int COLS_P    = 5;
+	protected static final int COLS_L    = 8;
 	
 	protected static final int SLOT_WIDTH	= 28;
 	protected static final int SLOT_HEIGHT	= 28;
@@ -138,10 +130,7 @@ public class WndBag extends WndTabbed {
 		Belongings stuff = Dungeon.hero.belongings;
 		Bag[] bags = {
 			stuff.backpack,
-			stuff.getItem( VelvetPouch.class ),
-			stuff.getItem( ScrollHolder.class ),
-			stuff.getItem( PotionBandolier.class ),
-			stuff.getItem( MagicalHolster.class )};
+			stuff.getItem( VelvetPouch.class )};
 
 		for (Bag b : bags) {
 			if (b != null) {
@@ -166,13 +155,6 @@ public class WndBag extends WndTabbed {
 			return new WndBag( Dungeon.hero.belongings.backpack, listener, mode, title );
 			
 		}
-	}
-
-	public static WndBag getBag( Class<? extends Bag> bagClass, Listener listener, Mode mode, String title ) {
-		Bag bag = Dungeon.hero.belongings.getItem( bagClass );
-		return bag != null ?
-				new WndBag( bag, listener, mode, title ) :
-				lastBag( listener, mode, title );
 	}
 	
 	protected void placeTitle( Bag bag, int width ){
@@ -285,12 +267,6 @@ public class WndBag extends WndTabbed {
 	private Image icon( Bag bag ) {
 		if (bag instanceof VelvetPouch) {
 			return Icons.get( Icons.SEED_POUCH );
-		} else if (bag instanceof ScrollHolder) {
-			return Icons.get( Icons.SCROLL_HOLDER );
-		} else if (bag instanceof MagicalHolster) {
-			return Icons.get( Icons.WAND_HOLSTER );
-		} else if (bag instanceof PotionBandolier) {
-			return Icons.get( Icons.POTION_BANDOLIER );
 		} else {
 			return Icons.get( Icons.BACKPACK );
 		}
@@ -387,15 +363,9 @@ public class WndBag extends WndTabbed {
 						mode == Mode.FOR_SALE && !item.unique && (item.price() > 0) && (!item.isEquipped( Dungeon.hero ) || !item.cursed) ||
 						mode == Mode.UPGRADEABLE && item.isUpgradable() ||
 						mode == Mode.UNIDENTIFED && !item.isIdentified() ||
-						mode == Mode.UNCURSABLE && ScrollOfRemoveCurse.uncursable(item) ||
 						mode == Mode.QUICKSLOT && (item.defaultAction != null) ||
-						mode == Mode.POTION && (item instanceof Potion) ||
-						mode == Mode.SCROLL && (item instanceof Scroll) ||
-						mode == Mode.UNIDED_POTION_OR_SCROLL && (!item.isIdentified() && (item instanceof Scroll || item instanceof Potion)) ||
 						mode == Mode.ALCHEMY && Recipe.usableInRecipe(item) ||
-						mode == Mode.TRANMSUTABLE && ScrollOfTransmutation.canTransmute(item) ||
 						mode == Mode.NOT_EQUIPPED && !item.isEquipped(Dungeon.hero) ||
-						mode == Mode.RECYCLABLE && Recycle.isRecyclable(item) ||
 						mode == Mode.ALL
 					);
 				}

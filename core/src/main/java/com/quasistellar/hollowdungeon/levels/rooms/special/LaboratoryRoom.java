@@ -32,7 +32,6 @@ import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
 import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.items.journal.AlchemyPage;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
@@ -63,17 +62,6 @@ public class LaboratoryRoom extends SpecialRoom {
 		
 		int chapter = 1;
 		Blob.seed( pot.x + level.width() * pot.y, 1 + chapter*10 + Random.NormalIntRange(0, 10), Alchemy.class, level );
-		
-		int n = Random.NormalIntRange( 1, 3 );
-		for (int i=0; i < n; i++) {
-			int pos;
-			do {
-				pos = level.pointToCell(random());
-			} while (
-				level.map[pos] != Terrain.EMPTY_SP ||
-				level.heaps.get( pos ) != null);
-			level.drop( prize( level ), pos );
-		}
 		
 		//guide pages
 		Collection<String> allPages = Document.ALCHEMY_GUIDE.pages();
@@ -119,14 +107,5 @@ public class LaboratoryRoom extends SpecialRoom {
 			level.addItemToSpawn( new IronKey( Dungeon.location ) );
 		}
 		
-	}
-	
-	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {
-
-		Item prize = level.findPrizeItem( Potion.class );
-		if (prize == null)
-			prize = Generator.random( Random.oneOf( Generator.Category.POTION, com.quasistellar.hollowdungeon.items.Generator.Category.STONE ));
-
-		return prize;
 	}
 }

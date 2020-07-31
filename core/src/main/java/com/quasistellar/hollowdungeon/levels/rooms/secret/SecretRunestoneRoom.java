@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.levels.rooms.secret;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 
@@ -59,25 +58,7 @@ public class SecretRunestoneRoom extends SecretRoom {
 				Painter.fill(level, left+1, top+1, width()-2, center.y-top-1, Terrain.EMPTY_SP);
 			}
 		}
-		
-		level.addItemToSpawn(new PotionOfLiquidFlame());
-		
-		int dropPos;
-		
-		do{
-			dropPos = level.pointToCell(random());
-		} while (level.map[dropPos] != Terrain.EMPTY);
-		level.drop( Generator.random(Generator.Category.STONE), dropPos);
-		
-		do{
-			dropPos = level.pointToCell(random());
-		} while (level.map[dropPos] != Terrain.EMPTY || level.heaps.get(dropPos) != null);
-		level.drop( Generator.random(com.quasistellar.hollowdungeon.items.Generator.Category.STONE), dropPos);
-		
-		do{
-			dropPos = level.pointToCell(random());
-		} while (level.map[dropPos] != Terrain.EMPTY_SP);
-		
+
 		entrance.set(Door.Type.HIDDEN);
 	}
 	

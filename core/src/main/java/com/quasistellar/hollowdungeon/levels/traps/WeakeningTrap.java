@@ -44,8 +44,7 @@ public class WeakeningTrap extends Trap {
 
 		com.quasistellar.hollowdungeon.actors.Char ch = Actor.findChar( pos );
 		if (ch != null){
-			if (ch.properties().contains(Char.Property.BOSS)
-				|| ch.properties().contains(com.quasistellar.hollowdungeon.actors.Char.Property.MINIBOSS)){
+			if (ch.properties().contains(com.quasistellar.hollowdungeon.actors.Char.Property.MINIBOSS)){
 				Buff.prolong( ch, Weakness.class, Weakness.DURATION/2f );
 			}
 			Buff.prolong( ch, Weakness.class, Weakness.DURATION*3f );

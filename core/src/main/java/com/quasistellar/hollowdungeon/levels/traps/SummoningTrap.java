@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
@@ -94,7 +93,6 @@ public class SummoningTrap extends Trap {
 				t.reveal();
 				t.activate();
 			}
-			ScrollOfTeleportation.appear(mob, mob.pos);
 			com.quasistellar.hollowdungeon.Dungeon.level.occupyCell(mob);
 		}
 

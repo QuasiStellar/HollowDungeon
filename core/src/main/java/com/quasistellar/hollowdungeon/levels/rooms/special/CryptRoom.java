@@ -21,8 +21,6 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.Challenges;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Gold;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;

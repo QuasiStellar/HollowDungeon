@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.levels;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Blacksmith;
 import com.quasistellar.hollowdungeon.levels.painters.CavesPainter;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
@@ -54,11 +53,6 @@ public class CavesLevel extends RegularLevel {
 	{
 		color1 = 0x534f3e;
 		color2 = 0xb9d661;
-	}
-	
-	@Override
-	protected ArrayList<Room> initRooms() {
-		return Blacksmith.Quest.spawn(super.initRooms());
 	}
 	
 	@Override

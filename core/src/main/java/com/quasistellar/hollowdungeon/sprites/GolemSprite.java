@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Golem;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
 import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
 import com.watabou.noosa.TextureFilm;
@@ -107,16 +106,6 @@ public class GolemSprite extends MobSprite {
 		turnTo( ch.pos , cell );
 		play( zap );
 
-		MagicMissile.boltFromChar( parent,
-				MagicMissile.ELMO,
-				this,
-				cell,
-				new Callback() {
-					@Override
-					public void call() {
-						((Golem)ch).onZapComplete();
-					}
-				} );
 		Sample.INSTANCE.play( Assets.Sounds.ZAP );
 	}
 

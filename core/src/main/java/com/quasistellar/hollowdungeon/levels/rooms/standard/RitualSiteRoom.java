@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.tiles.CustomTilemap;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.quest.CeremonialCandle;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Tilemap;
@@ -59,13 +58,6 @@ public class RitualSiteRoom extends StandardRoom {
 		level.customTiles.add(vis);
 		
 		Painter.fill(level, c.x-1, c.y-1, 3, 3, com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_DECO);
-
-		level.addItemToSpawn(new CeremonialCandle());
-		level.addItemToSpawn(new CeremonialCandle());
-		level.addItemToSpawn(new CeremonialCandle());
-		level.addItemToSpawn(new CeremonialCandle());
-
-		CeremonialCandle.ritualPos = c.x + (level.width() * c.y);
 	}
 
 	public static class RitualMarker extends CustomTilemap {

@@ -69,8 +69,7 @@ public class Preparation extends Buff implements com.quasistellar.hollowdungeon.
 		}
 		
 		public boolean canKO(com.quasistellar.hollowdungeon.actors.Char defender){
-			if (defender.properties().contains(Char.Property.MINIBOSS)
-					|| defender.properties().contains(Char.Property.BOSS)){
+			if (defender.properties().contains(Char.Property.MINIBOSS)){
 				return (defender.HP/(float)defender.HT) < (KOThreshold/5f);
 			} else {
 				return (defender.HP/(float)defender.HT) < KOThreshold;

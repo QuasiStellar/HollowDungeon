@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.levels.rooms.standard;
 
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Piranha;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 
 public class AquariumRoom extends StandardRoom {
@@ -49,18 +48,7 @@ public class AquariumRoom extends StandardRoom {
 		Painter.fill( level, this, 1, Terrain.EMPTY );
 		Painter.fill( level, this, 2, Terrain.EMPTY_SP );
 		Painter.fill( level, this, 3, Terrain.WATER );
-		
-		int minDim = Math.min(width(), height());
-		int numFish = (minDim - 4)/3; //1-3 fish, depending on room size
-		
-		for (int i=0; i < numFish; i++) {
-			Piranha piranha = new Piranha();
-			do {
-				piranha.pos = level.pointToCell(random(3));
-			} while (level.map[piranha.pos] != com.quasistellar.hollowdungeon.levels.Terrain.WATER|| level.findMob( piranha.pos ) != null);
-			level.mobs.add( piranha );
-		}
-		
+
 		for (Door door : connected.values()) {
 			door.set( Door.Type.REGULAR );
 		}

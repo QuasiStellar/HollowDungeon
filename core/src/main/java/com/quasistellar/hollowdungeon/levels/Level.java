@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.plants.Swiftthistle;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.Statistics;
@@ -46,18 +45,12 @@ import com.quasistellar.hollowdungeon.actors.buffs.Shadows;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.actors.mobs.Bestiary;
-import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.actors.mobs.YogFist;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Sheep;
 import com.quasistellar.hollowdungeon.effects.particles.FlowParticle;
 import com.quasistellar.hollowdungeon.effects.particles.WindParticle;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Torch;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfIntuition;
 import com.quasistellar.hollowdungeon.levels.features.Chasm;
 import com.quasistellar.hollowdungeon.levels.features.Door;
 import com.quasistellar.hollowdungeon.levels.features.HighGrass;
@@ -108,7 +101,7 @@ public abstract class Level implements Bundlable {
 	public boolean[] mapped;
 	public boolean[] discoverable;
 
-	public int viewDistance = Dungeon.isChallenged( Challenges.DARKNESS ) ? 2 : 8;
+	public int viewDistance = 8;
 	
 	public boolean[] heroFOV;
 	
@@ -172,9 +165,9 @@ public abstract class Level implements Bundlable {
 		
 //		if (!(Dungeon.bossLevel())) {
 
-			if (Dungeon.isChallenged(Challenges.DARKNESS)){
-				addItemToSpawn( new Torch() );
-			}
+//			if (Dungeon.isChallenged(Challenges.DARKNESS)){
+//				addItemToSpawn( new Torch() );
+//			}
 
 //			if (Dungeon.posNeeded()) {
 //				addItemToSpawn( new PotionOfStrength() );
@@ -359,14 +352,6 @@ public abstract class Level implements Bundlable {
 		
 		buildFlagMaps();
 		cleanWalls();
-
-		//compat with pre-0.8.0 saves
-		for (Heap h : heaps.valueList()){
-			if (h.type == Heap.Type.MIMIC){
-				heaps.remove(h.pos);
-				mobs.add(Mimic.spawnAt(h.pos, h.items));
-			}
-		}
 	}
 	
 	@Override
@@ -702,7 +687,7 @@ public abstract class Level implements Bundlable {
 	
 	public Heap drop( Item item, int cell ) {
 
-		if (item == null || Challenges.isItemBlocked(item)){
+		if (item == null){
 
 			//create a dummy heap, give it a dummy sprite, don't add it to the game, and return it.
 			//effectively nullifies whatever the logic calling this wants to do, including dropping items.
@@ -749,10 +734,6 @@ public abstract class Level implements Bundlable {
 	
 	public com.quasistellar.hollowdungeon.plants.Plant plant(com.quasistellar.hollowdungeon.plants.Plant.Seed seed, int pos ) {
 		
-		if (Dungeon.isChallenged(Challenges.NO_HERBALISM)){
-			return null;
-		}
-
 		com.quasistellar.hollowdungeon.plants.Plant plant = plants.get( pos );
 		if (plant != null) {
 			plant.wither();
@@ -866,7 +847,7 @@ public abstract class Level implements Bundlable {
 			}
 			
 			//characters which are not the hero or a sheep 'soft' press cells
-			pressCell( ch.pos, ch instanceof Hero || ch instanceof Sheep);
+			pressCell( ch.pos, ch instanceof Hero);
 		} else {
 			if (map[ch.pos] == Terrain.DOOR){
 				Door.enter( ch.pos );

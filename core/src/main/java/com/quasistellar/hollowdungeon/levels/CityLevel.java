@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.levels;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Imp;
 import com.quasistellar.hollowdungeon.levels.painters.CityPainter;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.traps.BlazingTrap;
@@ -100,13 +99,6 @@ public class CityLevel extends RegularLevel {
 				4, 4, 4, 4, 4,
 				2, 2, 2, 2,
 				1, 1, 1, 1, 1, 1 };
-	}
-	
-	@Override
-	protected void createMobs() {
-		Imp.Quest.spawn( this );
-		
-		super.createMobs();
 	}
 	
 	@Override

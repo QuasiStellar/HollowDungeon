@@ -82,10 +82,6 @@ public class StudyRoom extends StandardRoom {
 		
 		if (prize != null) {
 			level.drop(prize, (center.x + center.y * level.width()));
-		} else {
-			level.drop(Generator.random( Random.oneOf(
-					Generator.Category.POTION,
-					com.quasistellar.hollowdungeon.items.Generator.Category.SCROLL)), (center.x + center.y * level.width()));
 		}
 	}
 }

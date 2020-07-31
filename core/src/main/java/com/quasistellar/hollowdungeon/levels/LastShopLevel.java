@@ -25,8 +25,6 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.Heap;
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.builders.Builder;
 import com.quasistellar.hollowdungeon.levels.builders.LineBuilder;
 import com.quasistellar.hollowdungeon.levels.painters.CityPainter;
@@ -34,7 +32,6 @@ import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.ExitRoom;
-import com.quasistellar.hollowdungeon.levels.rooms.standard.ImpShopRoom;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Group;
 
@@ -79,7 +76,6 @@ public class LastShopLevel extends RegularLevel {
 		ArrayList<Room> rooms = new ArrayList<>();
 		
 		rooms.add ( roomEntrance = new EntranceRoom());
-		rooms.add( new ImpShopRoom() );
 		rooms.add( roomExit = new ExitRoom());
 		
 		return rooms;

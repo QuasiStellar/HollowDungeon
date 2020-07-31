@@ -19,27 +19,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-package com.quasistellar.hollowdungeon.items.quest;
+package com.quasistellar.hollowdungeon.actors.mobs;
 
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
+import com.quasistellar.hollowdungeon.sprites.RatSprite;
 
-public class DarkGold extends Item {
-	
-	{
-		image = ItemSpriteSheet.ORE;
-		
-		stackable = true;
-		unique = true;
-	}
-	
-	@Override
-	public boolean isUpgradable() {
-		return false;
-	}
-	
-	@Override
-	public boolean isIdentified() {
-		return true;
-	}
+public class Tiktik extends Mob {
+
+    {
+        spriteClass = RatSprite.class;
+
+        HP = HT = 8;
+
+    }
 }

@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Pylon;
 import com.quasistellar.hollowdungeon.effects.particles.BlastParticle;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.audio.Sample;
@@ -56,15 +55,6 @@ public class PylonSprite extends MobSprite {
 		die.frames( frames, 2 );
 
 		play( idle );
-	}
-
-	@Override
-	public void link(Char ch) {
-		super.link(ch);
-		if (ch instanceof Pylon && ch.alignment == Char.Alignment.ENEMY){
-			activate();
-		}
-		renderShadow = false;
 	}
 
 	@Override

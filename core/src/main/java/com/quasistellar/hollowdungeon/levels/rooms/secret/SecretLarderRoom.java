@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.secret;
 
-import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.plants.BlandfruitBush;
 import com.quasistellar.hollowdungeon.Dungeon;
@@ -50,11 +49,7 @@ public class SecretLarderRoom extends SecretRoom {
 		
 		Painter.fill(level, c.x-1, c.y-1, 3, 3, Terrain.WATER);
 		Painter.set(level, c, Terrain.GRASS);
-		
-		if (!Dungeon.isChallenged(Challenges.NO_FOOD)) {
-			level.plant(new BlandfruitBush.Seed(), level.pointToCell(c));
-		}
-		
+
 		entrance().set(Door.Type.HIDDEN);
 	}
 	

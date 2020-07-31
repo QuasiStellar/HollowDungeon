@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.levels.traps;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Sheep;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.utils.BArray;
@@ -49,31 +48,7 @@ public class FlockTrap extends Trap {
 			{ actPriority = BUFF_PRIO; }
 
 			protected boolean act() {
-				PathFinder.buildDistanceMap( pos, BArray.not( Dungeon.level.solid, null ), 2 );
-				for (int i = 0; i < PathFinder.distance.length; i++) {
-					Trap t;
-					if (PathFinder.distance[i] < Integer.MAX_VALUE) {
-						if (Dungeon.level.insideMap(i)
-								&& Actor.findChar(i) == null
-								&& !(Dungeon.level.pit[i])) {
-							com.quasistellar.hollowdungeon.actors.mobs.npcs.Sheep sheep = new Sheep();
-							sheep.lifespan = Random.NormalIntRange( 4, 8 );
-							sheep.pos = i;
-							GameScene.add(sheep);
-							CellEmitter.get(i).burst(Speck.factory(com.quasistellar.hollowdungeon.effects.Speck.WOOL), 4);
-							//before the tile is pressed, directly trigger traps to avoid sfx spam
-							if ((t = Dungeon.level.traps.get(i)) != null && t.active){
-								t.disarm();
-								t.reveal();
-								t.activate();
-							}
-							com.quasistellar.hollowdungeon.Dungeon.level.occupyCell(sheep);
 
-						}
-					}
-				}
-				Sample.INSTANCE.play(Assets.Sounds.PUFF);
-				com.quasistellar.hollowdungeon.actors.Actor.remove(this);
 				return true;
 			}
 		});

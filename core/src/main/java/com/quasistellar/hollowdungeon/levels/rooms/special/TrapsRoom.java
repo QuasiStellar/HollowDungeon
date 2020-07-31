@@ -21,15 +21,10 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.levels.Level;
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLevitation;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.traps.DisintegrationTrap;
 import com.quasistellar.hollowdungeon.levels.traps.ExplosiveTrap;
@@ -98,41 +93,6 @@ public class TrapsRoom extends SpecialRoom {
 				level.setTrap(Reflection.newInstance(trapClass).reveal(), cell);
 			}
 		}
-		
-		int pos = x + y * level.width();
-		if (Random.Int( 3 ) == 0) {
-			if (lastRow == Terrain.CHASM) {
-				Painter.set( level, pos, Terrain.EMPTY );
-			}
-			level.drop( prize( level ), pos ).type = Heap.Type.CHEST;
-		} else {
-			Painter.set( level, pos, com.quasistellar.hollowdungeon.levels.Terrain.PEDESTAL );
-			level.drop( prize( level ), pos );
-		}
-		
-		level.addItemToSpawn( new PotionOfLevitation() );
-	}
-	
-	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {
-
-		Item prize;
-
-		if (Random.Int(3) != 0){
-			prize = level.findPrizeItem();
-			if (prize != null)
-				return prize;
-		}
-		
-		//1 floor set higher in probability, never cursed
-		prize = new Bomb();
-		prize.cursedKnown = true;
-
-		//33% chance for an extra update.
-		if (Random.Int(3) == 0){
-			prize.upgrade();
-		}
-		
-		return prize;
 	}
 
 	@SuppressWarnings("unchecked")

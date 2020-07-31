@@ -21,11 +21,9 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
-import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -38,7 +36,6 @@ import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
 
@@ -124,8 +121,7 @@ public abstract class Plant implements Bundlable {
 		protected void onThrow( int cell ) {
 			if (Dungeon.level.map[cell] == Terrain.ALCHEMY
 					|| Dungeon.level.pit[cell]
-					|| Dungeon.level.traps.get(cell) != null
-					|| Dungeon.isChallenged(Challenges.NO_HERBALISM)) {
+					|| Dungeon.level.traps.get(cell) != null) {
 				super.onThrow( cell );
 			} else {
 				Dungeon.level.plant( this, cell );

@@ -22,27 +22,10 @@
 package com.quasistellar.hollowdungeon.levels.traps;
 
 import com.quasistellar.hollowdungeon.actors.Actor;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.RatKing;
-import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Acidic;
-import com.quasistellar.hollowdungeon.actors.mobs.Albino;
-import com.quasistellar.hollowdungeon.actors.mobs.ArmoredBrute;
-import com.quasistellar.hollowdungeon.actors.mobs.Bandit;
-import com.quasistellar.hollowdungeon.actors.mobs.Bestiary;
-import com.quasistellar.hollowdungeon.actors.mobs.CausticSlime;
-import com.quasistellar.hollowdungeon.actors.mobs.DM201;
-import com.quasistellar.hollowdungeon.actors.mobs.Elemental;
-import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.actors.mobs.Piranha;
-import com.quasistellar.hollowdungeon.actors.mobs.Senior;
-import com.quasistellar.hollowdungeon.actors.mobs.Wraith;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
-import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,13 +38,6 @@ public class DistortionTrap extends Trap{
 		color = TEAL;
 		shape = LARGE_DOT;
 	}
-
-	private static final ArrayList<Class<?extends Mob>> RARE = new ArrayList<>(Arrays.asList(
-			Albino.class, CausticSlime.class,
-			Bandit.class,
-			ArmoredBrute.class, DM201.class,
-			Senior.class,
-			Acidic.class));
 
 	@Override
 	public void activate() {
@@ -108,7 +84,6 @@ public class DistortionTrap extends Trap{
 				t.reveal();
 				t.activate();
 			}
-			ScrollOfTeleportation.appear(mob, mob.pos);
 			com.quasistellar.hollowdungeon.Dungeon.level.occupyCell(mob);
 		}
 

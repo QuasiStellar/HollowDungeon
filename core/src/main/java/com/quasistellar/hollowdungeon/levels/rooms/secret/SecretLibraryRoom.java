@@ -23,18 +23,6 @@ package com.quasistellar.hollowdungeon.levels.rooms.secret;
 
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfLullaby;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMirrorImage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRecharging;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRetribution;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTerror;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTransmutation;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
@@ -53,21 +41,6 @@ public class SecretLibraryRoom extends SecretRoom {
 		return Math.max(7, super.minHeight());
 	}
 	
-	private static HashMap<Class<? extends Scroll>, Float> scrollChances = new HashMap<>();
-	static{
-		scrollChances.put( ScrollOfIdentify.class,      1f );
-		scrollChances.put( ScrollOfRemoveCurse.class,   2f );
-		scrollChances.put( ScrollOfMirrorImage.class,   3f );
-		scrollChances.put( ScrollOfRecharging.class,    3f );
-		scrollChances.put( ScrollOfTeleportation.class, 3f );
-		scrollChances.put( ScrollOfLullaby.class,       4f );
-		scrollChances.put( ScrollOfMagicMapping.class,  4f );
-		scrollChances.put( ScrollOfRage.class,          4f );
-		scrollChances.put( ScrollOfRetribution.class,   4f );
-		scrollChances.put( ScrollOfTerror.class,        4f );
-		scrollChances.put( ScrollOfTransmutation.class, 6f );
-	}
-	
 	public void paint( Level level ) {
 		
 		Painter.fill( level, this, Terrain.WALL );
@@ -82,19 +55,6 @@ public class SecretLibraryRoom extends SecretRoom {
 			Painter.drawInside(level, this, entrance, (height() - 3) / 2, Terrain.EMPTY_SP);
 		}
 		entrance.set( Door.Type.HIDDEN );
-		
-		int n = Random.IntRange( 2, 3 );
-		HashMap<Class<? extends Scroll>, Float> chances = new HashMap<>(scrollChances);
-		for (int i=0; i < n; i++) {
-			int pos;
-			do {
-				pos = level.pointToCell(random());
-			} while (level.map[pos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_SP || level.heaps.get( pos ) != null);
-			
-			Class<?extends Scroll> scrollCls = Random.chances(chances);
-			chances.put(scrollCls, 0f);
-			level.drop( Reflection.newInstance(scrollCls), pos );
-		}
 	}
 	
 }

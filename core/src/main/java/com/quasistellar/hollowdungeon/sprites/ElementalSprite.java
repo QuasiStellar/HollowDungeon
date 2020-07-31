@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Elemental;
 import com.quasistellar.hollowdungeon.effects.Beam;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
 import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
@@ -109,17 +108,7 @@ public abstract class ElementalSprite extends MobSprite {
 		
 		turnTo( ch.pos , cell );
 		play( zap );
-		
-		MagicMissile.boltFromChar( parent,
-				boltType,
-				this,
-				cell,
-				new Callback() {
-					@Override
-					public void call() {
-						((Elemental)ch).onZapComplete();
-					}
-				} );
+
 		Sample.INSTANCE.play( Assets.Sounds.ZAP );
 	}
 	
@@ -210,8 +199,7 @@ public abstract class ElementalSprite extends MobSprite {
 		public void zap( int cell ) {
 			turnTo( ch.pos , cell );
 			play( zap );
-			
-			((Elemental)ch).onZapComplete();
+
 			parent.add( new Beam.LightRay(center(), DungeonTilemap.raisedTileCenterToWorld(cell)));
 		}
 		
@@ -240,8 +228,7 @@ public abstract class ElementalSprite extends MobSprite {
 		public void zap( int cell ) {
 			turnTo( ch.pos , cell );
 			play( zap );
-			
-			((Elemental)ch).onZapComplete();
+
 			Sample.INSTANCE.play( Assets.Sounds.ZAP );
 		}
 		

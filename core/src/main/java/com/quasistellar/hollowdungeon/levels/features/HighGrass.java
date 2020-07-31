@@ -67,10 +67,6 @@ public class HighGrass {
 			int naturalismLevel = 0;
 			
 			if (naturalismLevel >= 0) {
-				// Seed, scales from 1/25 to 1/5
-				if (Random.Int(25 - (naturalismLevel * 5)) == 0) {
-					level.drop(Generator.random(com.quasistellar.hollowdungeon.items.Generator.Category.SEED), pos).sprite.drop();
-				}
 				
 				// Dew, scales from 1/6 to 1/3
 				if (Random.Int(24 - naturalismLevel*3) <= 3) {

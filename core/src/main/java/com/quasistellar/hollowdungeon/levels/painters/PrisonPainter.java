@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.levels.painters;
 
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Wandmaker;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
 import com.quasistellar.hollowdungeon.levels.Terrain;
@@ -34,13 +33,6 @@ public class PrisonPainter extends RegularPainter {
 	
 	@Override
 	protected void decorate(Level level, ArrayList<Room> rooms) {
-		
-		for (Room r : rooms) {
-			if (r instanceof EntranceRoom) {
-				Wandmaker.Quest.spawnWandmaker(level, r);
-				break;
-			}
-		}
 		
 		int w = level.width();
 		int l = level.length();

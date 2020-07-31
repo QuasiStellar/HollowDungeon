@@ -22,6 +22,16 @@
 package com.quasistellar.hollowdungeon.actors.blobs;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.actors.buffs.Bleeding;
+import com.quasistellar.hollowdungeon.actors.buffs.Blindness;
+import com.quasistellar.hollowdungeon.actors.buffs.Buff;
+import com.quasistellar.hollowdungeon.actors.buffs.Cripple;
+import com.quasistellar.hollowdungeon.actors.buffs.Drowsy;
+import com.quasistellar.hollowdungeon.actors.buffs.Poison;
+import com.quasistellar.hollowdungeon.actors.buffs.Slow;
+import com.quasistellar.hollowdungeon.actors.buffs.Vertigo;
+import com.quasistellar.hollowdungeon.actors.buffs.Vulnerable;
+import com.quasistellar.hollowdungeon.actors.buffs.Weakness;
 import com.quasistellar.hollowdungeon.effects.BlobEmitter;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShaftParticle;
@@ -34,8 +44,6 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 
@@ -51,7 +59,15 @@ public class WaterOfHealth extends WellWater {
 		hero.HP = hero.HT;
 		hero.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.4f, 4 );
 
-		PotionOfHealing.cure( hero );
+		Buff.detach( hero, Poison.class );
+		Buff.detach( hero, Cripple.class );
+		Buff.detach( hero, Weakness.class );
+		Buff.detach( hero, Vulnerable.class );
+		Buff.detach( hero, Bleeding.class );
+		Buff.detach( hero, Blindness.class );
+		Buff.detach( hero, Drowsy.class );
+		Buff.detach( hero, Slow.class );
+		Buff.detach( hero, Vertigo.class);
 		CellEmitter.get( hero.pos ).start( ShaftParticle.FACTORY, 0.2f, 3 );
 
 		Dungeon.hero.interrupt();
@@ -72,12 +88,6 @@ public class WaterOfHealth extends WellWater {
 			((Ankh) item).bless();
 			CellEmitter.get( pos ).start(Speck.factory(Speck.LIGHT), 0.2f, 3);
 			Sample.INSTANCE.play( Assets.Sounds.DRINK );
-			return item;
-		} else if (ScrollOfRemoveCurse.uncursable(item)) {
-			if (ScrollOfRemoveCurse.uncurse( null, item )){
-				com.quasistellar.hollowdungeon.effects.CellEmitter.get( pos ).start( ShadowParticle.UP, 0.05f, 10 );
-			}
-			Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.DRINK );
 			return item;
 		}
 		return null;

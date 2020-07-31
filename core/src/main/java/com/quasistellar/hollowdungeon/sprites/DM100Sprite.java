@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.sprites;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.DM100;
 import com.quasistellar.hollowdungeon.effects.Lightning;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.watabou.noosa.TextureFilm;
@@ -70,11 +69,6 @@ public class DM100Sprite extends MobSprite {
 		} else {
 			origin.y -= 8*scale.y;
 			origin.x += 1*scale.x;
-		}
-		if (enemy != null) {
-			parent.add(new Lightning(origin, enemy.sprite.destinationCenter(), (DM100) ch));
-		} else {
-			parent.add(new Lightning(origin, pos, (DM100) ch));
 		}
 		Sample.INSTANCE.play( Assets.Sounds.LIGHTNING );
 		

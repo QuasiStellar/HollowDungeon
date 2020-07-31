@@ -30,7 +30,6 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAggression;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
@@ -162,18 +161,6 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
             com.quasistellar.hollowdungeon.actors.Char source = (com.quasistellar.hollowdungeon.actors.Char) Actor.findById(terror.object);
             if (source != null) {
                 return source;
-            }
-        }
-
-        //if we are an enemy, and have no target or current target isn't affected by aggression
-        //then auto-prioritize a target that is affected by aggression, even another enemy
-        if (alignment == Alignment.ENEMY
-                && (enemy == null || enemy.buff(StoneOfAggression.Aggression.class) == null)) {
-            for (com.quasistellar.hollowdungeon.actors.Char ch : Actor.chars()) {
-                if (ch != this && fieldOfView[ch.pos] &&
-                        ch.buff(StoneOfAggression.Aggression.class) != null) {
-                    return ch;
-                }
             }
         }
 
@@ -641,14 +628,6 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
                 state = HUNTING;
                 target = enemy.pos;
 
-                if (com.quasistellar.hollowdungeon.Dungeon.isChallenged(com.quasistellar.hollowdungeon.Challenges.SWARM_INTELLIGENCE)) {
-                    for (Mob mob : com.quasistellar.hollowdungeon.Dungeon.level.mobs) {
-                        if (com.quasistellar.hollowdungeon.Dungeon.level.distance(pos, mob.pos) <= 8 && mob.state != mob.HUNTING) {
-                            mob.beckon(target);
-                        }
-                    }
-                }
-
                 spend(TIME_TO_WAKE_UP);
 
             } else {
@@ -686,14 +665,6 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
             alerted = true;
             state = HUNTING;
             target = enemy.pos;
-
-            if (com.quasistellar.hollowdungeon.Dungeon.isChallenged(com.quasistellar.hollowdungeon.Challenges.SWARM_INTELLIGENCE)) {
-                for (Mob mob : com.quasistellar.hollowdungeon.Dungeon.level.mobs) {
-                    if (com.quasistellar.hollowdungeon.Dungeon.level.distance(pos, mob.pos) <= 8 && mob.state != mob.HUNTING) {
-                        mob.beckon(target);
-                    }
-                }
-            }
 
             return true;
         }

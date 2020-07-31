@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.levels.rooms.sewerboss;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.rooms.connection.PerimeterRoom;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Goo;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 
 public class ThickPillarsGooRoom extends GooBossRoom {
@@ -50,9 +49,5 @@ public class ThickPillarsGooRoom extends GooBossRoom {
 		}
 		
 		setupGooNest(level);
-		
-		Goo boss = new Goo();
-		boss.pos = level.pointToCell(center());
-		level.mobs.add( boss );
 	}
 }

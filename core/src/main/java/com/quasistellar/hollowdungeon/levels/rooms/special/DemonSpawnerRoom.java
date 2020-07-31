@@ -28,7 +28,6 @@ import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
 import com.quasistellar.hollowdungeon.tiles.CustomTilemap;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.DemonSpawner;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.watabou.noosa.Tilemap;
@@ -47,10 +46,6 @@ public class DemonSpawnerRoom extends SpecialRoom {
 
 		Door door = entrance();
 		door.set(Door.Type.UNLOCKED);
-
-		DemonSpawner spawner = new DemonSpawner();
-		spawner.pos = cx + cy * level.width();
-		level.mobs.add( spawner );
 
 		CustomFloor vis = new CustomFloor();
 		vis.setRect(left+1, top+1, width()-2, height()-2);
@@ -97,13 +92,7 @@ public class DemonSpawnerRoom extends SpecialRoom {
 					cell = tileX + (tileY + i / tileW) * Dungeon.level.width();
 				}
 
-				if (com.quasistellar.hollowdungeon.Dungeon.level.findMob(cell) instanceof DemonSpawner){
-					data[i-1] = 5 + 4*8;
-					data[i] = 6 + 4*8;
-					data[i+1] = 7 + 4*8;
-					i++;
-					cell++;
-				} else if (map[cell] == com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_DECO) {
+				if (map[cell] == com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_DECO) {
 					if (Statistics.amuletObtained){
 						data[i] = 31;
 					} else {

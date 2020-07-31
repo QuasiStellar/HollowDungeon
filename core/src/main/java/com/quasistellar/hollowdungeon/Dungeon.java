@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon;
 
 import com.quasistellar.hollowdungeon.items.Ankh;
 import com.quasistellar.hollowdungeon.items.Heap;
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -40,28 +39,16 @@ import com.quasistellar.hollowdungeon.actors.buffs.Light;
 import com.quasistellar.hollowdungeon.actors.buffs.MindVision;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Blacksmith;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Imp;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Wandmaker;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.quasistellar.hollowdungeon.levels.rooms.secret.SecretRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
 import com.quasistellar.hollowdungeon.mechanics.ShadowCaster;
-import com.quasistellar.hollowdungeon.messages.Messages;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.noosa.Game;
-import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.FileUtils;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
-import com.watabou.utils.SparseArray;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class Dungeon {
@@ -168,9 +155,6 @@ public class Dungeon {
 		
 		Random.pushGenerator( seed );
 
-			Scroll.initLabels();
-			Potion.initColors();
-
 			SpecialRoom.initForRun();
 			SecretRoom.initForRun();
 
@@ -190,10 +174,6 @@ public class Dungeon {
 			a.count = 0;
 		
 		chapters = new HashSet<>();
-
-		Wandmaker.Quest.reset();
-		Blacksmith.Quest.reset();
-		Imp.Quest.reset();
 
 		Generator.reset();
 		hero = new Hero();
@@ -550,9 +530,6 @@ public class Dungeon {
 		Level level = switchLocation(location);
 		changeConnections(location);
 
-		GLog.h(entranceDestination);
-		GLog.h(exitDestination);
-		GLog.h(transitionDestination);
 		level.create();
 		
 		return level;
@@ -674,9 +651,6 @@ public class Dungeon {
 			bundle.put( CHAPTERS, ids );
 			
 			Bundle quests = new Bundle();
-			Wandmaker	.Quest.storeInBundle( quests );
-			Blacksmith	.Quest.storeInBundle( quests );
-			Imp			.Quest.storeInBundle( quests );
 			bundle.put( QUESTS, quests );
 			
 			SpecialRoom.storeRoomsInBundle( bundle );
@@ -685,9 +659,6 @@ public class Dungeon {
 			Statistics.storeInBundle( bundle );
 			Notes.storeInBundle( bundle );
 			Generator.storeInBundle( bundle );
-			
-			Scroll.save( bundle );
-			Potion.save( bundle );
 
 			Actor.storeNextID( bundle );
 			
@@ -742,9 +713,6 @@ public class Dungeon {
 		Dungeon.challenges = bundle.getInt( CHALLENGES );
 		
 		Dungeon.level = null;
-		
-		Scroll.restore( bundle );
-		Potion.restore( bundle );
 
 		quickslot.restorePlaceholders( bundle );
 		
@@ -762,13 +730,9 @@ public class Dungeon {
 			
 			Bundle quests = bundle.getBundle( QUESTS );
 			if (!quests.isNull()) {
-				Wandmaker.Quest.restoreFromBundle( quests );
-				Blacksmith.Quest.restoreFromBundle( quests );
-				Imp.Quest.restoreFromBundle( quests );
+
 			} else {
-				Wandmaker.Quest.reset();
-				Blacksmith.Quest.reset();
-				Imp.Quest.reset();
+
 			}
 			
 			SpecialRoom.restoreRoomsFromBundle(bundle);
@@ -838,15 +802,6 @@ public class Dungeon {
 	public static void win( Class cause ) {
 
 		hero.belongings.identify();
-
-		int chCount = 0;
-		for (int ch : Challenges.MASKS){
-			if ((challenges & ch) != 0) chCount++;
-		}
-		
-		if (chCount != 0) {
-			Badges.validateChampion(chCount);
-		}
 
 		Rankings.INSTANCE.submit( true, cause );
 	}

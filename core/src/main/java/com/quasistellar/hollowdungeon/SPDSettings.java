@@ -179,9 +179,9 @@ public class SPDSettings extends GameSettings {
 	public static void challenges( int value ) {
 		put( KEY_CHALLENGES, value );
 	}
-	
+
 	public static int challenges() {
-		return getInt( KEY_CHALLENGES, 0, 0, Challenges.MAX_VALUE );
+		return getInt( KEY_CHALLENGES, 0, 0, 127 );
 	}
 	
 	//Audio

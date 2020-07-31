@@ -24,44 +24,6 @@ package com.quasistellar.hollowdungeon.items;
 import com.quasistellar.hollowdungeon.plants.Plant.Seed;
 import com.quasistellar.hollowdungeon.plants.Starflower;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfExperience;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfFrost;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHaste;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfInvisibility;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLevitation;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfMindVision;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfParalyticGas;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfPurity;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfToxicGas;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfLullaby;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMirrorImage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRecharging;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRetribution;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTerror;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTransmutation;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
-import com.quasistellar.hollowdungeon.items.stones.Runestone;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAffection;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfAggression;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfBlast;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfBlink;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfClairvoyance;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfDeepenedSleep;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfDisarming;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfFlock;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfIntuition;
-import com.quasistellar.hollowdungeon.items.stones.StoneOfShock;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
@@ -72,11 +34,6 @@ import java.util.LinkedHashMap;
 public class Generator {
 
 	public enum Category {
-		POTION	( 16,   Potion.class ),
-		SEED	( 2,    Seed.class ),
-		
-		SCROLL	( 16,   Scroll.class ),
-		STONE   ( 2,    Runestone.class),
 		
 		GOLD	( 20,   com.quasistellar.hollowdungeon.items.Gold.class );
 		
@@ -111,80 +68,8 @@ public class Generator {
 			GOLD.classes = new Class<?>[]{
 					Gold.class };
 			GOLD.probs = new float[]{ 1 };
-			
-			POTION.classes = new Class<?>[]{
-					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
-					PotionOfHealing.class,
-					PotionOfMindVision.class,
-					PotionOfFrost.class,
-					PotionOfLiquidFlame.class,
-					PotionOfToxicGas.class,
-					PotionOfHaste.class,
-					PotionOfInvisibility.class,
-					PotionOfLevitation.class,
-					PotionOfParalyticGas.class,
-					PotionOfPurity.class,
-					PotionOfExperience.class};
-			POTION.defaultProbs = new float[]{ 0, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
-			POTION.probs = POTION.defaultProbs.clone();
-			
-			SEED.classes = new Class<?>[]{
-					com.quasistellar.hollowdungeon.plants.Rotberry.Seed.class, //quest item
-					com.quasistellar.hollowdungeon.plants.Sungrass.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Fadeleaf.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Icecap.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Firebloom.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Sorrowmoss.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Swiftthistle.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Blindweed.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Stormvine.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Earthroot.Seed.class,
-					com.quasistellar.hollowdungeon.plants.Dreamfoil.Seed.class,
-					Starflower.Seed.class};
-			SEED.defaultProbs = new float[]{ 0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2 };
-			SEED.probs = SEED.defaultProbs.clone();
-			
-			SCROLL.classes = new Class<?>[]{
-					ScrollOfUpgrade.class, //3 drop every chapter, see Dungeon.souNeeded()
-					ScrollOfIdentify.class,
-					ScrollOfRemoveCurse.class,
-					ScrollOfMirrorImage.class,
-					ScrollOfRecharging.class,
-					ScrollOfTeleportation.class,
-					ScrollOfLullaby.class,
-					ScrollOfMagicMapping.class,
-					ScrollOfRage.class,
-					ScrollOfRetribution.class,
-					ScrollOfTerror.class,
-					ScrollOfTransmutation.class
-			};
-			SCROLL.defaultProbs = new float[]{ 0, 6, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1 };
-			SCROLL.probs = SCROLL.defaultProbs.clone();
-			
-			STONE.classes = new Class<?>[]{
-					StoneOfIntuition.class,     //1 additional stone is also dropped on floors 1-3
-					StoneOfDisarming.class,
-					StoneOfFlock.class,
-					StoneOfShock.class,
-					StoneOfBlink.class,
-					StoneOfDeepenedSleep.class,
-					StoneOfClairvoyance.class,
-					StoneOfAggression.class,
-					StoneOfBlast.class,
-					StoneOfAffection.class
-			};
-			STONE.defaultProbs = new float[]{ 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-			STONE.probs = STONE.defaultProbs.clone();
 		}
 	}
-
-	private static final float[][] floorSetTierProbs = new float[][] {
-			{0, 70, 20,  8,  2},
-			{0, 25, 50, 20,  5},
-			{0,  0, 40, 50, 10},
-			{0,  0, 20, 40, 40},
-			{0,  0,  0, 20, 80}
-	};
 	
 	private static HashMap<Category,Float> categoryProbs = new LinkedHashMap<>();
 	

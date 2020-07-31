@@ -31,8 +31,6 @@ import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
@@ -147,8 +145,6 @@ public enum Rankings {
 
 		//save handler information
 		Bundle handler = new Bundle();
-		Scroll.saveSelectively(handler, belongings.backpack.items);
-		Potion.saveSelectively(handler, belongings.backpack.items);
 		rec.gameData.put( HANDLERS, handler);
 
 		//restore items now that we're done saving
@@ -170,8 +166,6 @@ public enum Rankings {
 		QuickSlotButton.reset();
 
 		Bundle handler = data.getBundle(HANDLERS);
-		Scroll.restore(handler);
-		Potion.restore(handler);
 
 		Badges.loadLocal(data.getBundle(BADGES));
 

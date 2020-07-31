@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.NewDM300;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
 import com.quasistellar.hollowdungeon.effects.particles.BlastParticle;
 import com.quasistellar.hollowdungeon.effects.particles.SparkParticle;
@@ -85,16 +84,6 @@ public class DM300Sprite extends MobSprite {
 		turnTo( ch.pos , cell );
 		play( zap );
 
-		MagicMissile.boltFromChar( parent,
-				MagicMissile.TOXIC_VENT,
-				this,
-				cell,
-				new Callback() {
-					@Override
-					public void call() {
-						((NewDM300)ch).onZapComplete();
-					}
-				} );
 		Sample.INSTANCE.play( Assets.Sounds.PUFF );
 	}
 
@@ -116,10 +105,6 @@ public class DM300Sprite extends MobSprite {
 
 		if (anim == zap || anim == slam){
 			idle();
-		}
-
-		if (anim == slam){
-			((NewDM300)ch).onSlamComplete();
 		}
 
 		super.onComplete( anim );
@@ -146,25 +131,6 @@ public class DM300Sprite extends MobSprite {
 		superchargeSparks.autoKill = false;
 		superchargeSparks.pour(SparkParticle.STATIC, 0.05f);
 		superchargeSparks.on = false;
-
-		if (ch instanceof NewDM300 && ((NewDM300) ch).isSupercharged()){
-			setAnimations(true);
-			superchargeSparks.on = true;
-		}
-	}
-
-	@Override
-	public void update() {
-		super.update();
-
-		if (superchargeSparks != null){
-			superchargeSparks.visible = visible;
-			if (ch instanceof NewDM300
-					&& ((NewDM300) ch).isSupercharged() != superchargeSparks.on){
-				superchargeSparks.on = ((NewDM300) ch).isSupercharged();
-				setAnimations(((NewDM300) ch).isSupercharged());
-			}
-		}
 	}
 
 	@Override

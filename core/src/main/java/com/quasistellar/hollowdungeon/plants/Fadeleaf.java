@@ -31,7 +31,6 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.noosa.Game;
@@ -67,7 +66,7 @@ public class Fadeleaf extends Plant {
 				Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
 				
 			} else {
-				ScrollOfTeleportation.teleportHero((Hero) ch);
+
 			}
 			
 		} else if (ch instanceof Mob && !ch.properties().contains(Char.Property.IMMOVABLE)) {

@@ -21,8 +21,6 @@
 
 package com.quasistellar.hollowdungeon.levels.traps;
 
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-
 public class ExplosiveTrap extends Trap {
 
 	{
@@ -32,7 +30,6 @@ public class ExplosiveTrap extends Trap {
 
 	@Override
 	public void activate() {
-		new Bomb().explode(pos);
 	}
 
 }

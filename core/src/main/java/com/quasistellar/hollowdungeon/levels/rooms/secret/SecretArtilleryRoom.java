@@ -24,7 +24,6 @@ package com.quasistellar.hollowdungeon.levels.rooms.secret;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 
 public class SecretArtilleryRoom extends SecretRoom {
@@ -35,15 +34,6 @@ public class SecretArtilleryRoom extends SecretRoom {
 		Painter.fill(level, this, 1, Terrain.EMPTY_SP);
 		
 		Painter.set(level, center(), Terrain.STATUE_SP);
-		
-		for (int i = 0; i < 3; i++){
-			int itemPos;
-			do{
-				itemPos = level.pointToCell(random());
-			} while ( level.map[itemPos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_SP
-					|| level.heaps.get(itemPos) != null);
-			level.drop(new Bomb.DoubleBomb(), itemPos);
-		}
 		
 		entrance().set(Door.Type.HIDDEN);
 	}

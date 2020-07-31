@@ -27,9 +27,6 @@ import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Random;
 
@@ -45,31 +42,8 @@ public class LibraryRoom extends SpecialRoom {
 		Painter.fill( level, left + 1, top+1, width() - 2, 1 , Terrain.BOOKSHELF );
 		Painter.drawInside(level, this, entrance, 1, Terrain.EMPTY_SP );
 		
-		int n = Random.NormalIntRange( 1, 3 );
-		for (int i=0; i < n; i++) {
-			int pos;
-			do {
-				pos = level.pointToCell(random());
-			} while (level.map[pos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_SP || level.heaps.get( pos ) != null);
-			com.quasistellar.hollowdungeon.items.Item item;
-			if (i == 0)
-				item = Random.Int(2) == 0 ? new ScrollOfIdentify() : new ScrollOfRemoveCurse();
-			else
-				item = prize( level );
-			level.drop( item, pos );
-		}
-		
 		entrance.set( Door.Type.LOCKED );
 		
 		level.addItemToSpawn( new IronKey( Dungeon.location ) );
-	}
-	
-	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {
-		
-		Item prize = level.findPrizeItem( Scroll.class );
-		if (prize == null)
-			prize = Generator.random( com.quasistellar.hollowdungeon.items.Generator.Category.SCROLL );
-		
-		return prize;
 	}
 }

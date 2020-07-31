@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.levels.rooms.sewerboss;
 
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Goo;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 
@@ -58,10 +57,6 @@ public class WalledGooRoom extends GooBossRoom {
 		Painter.fill( level, left + width()/2 - 2, top + height()/2 - 1, 4 + width()%2, 2 + height()%2, com.quasistellar.hollowdungeon.levels.Terrain.WATER);
 		
 		setupGooNest(level);
-		
-		Goo boss = new Goo();
-		boss.pos = level.pointToCell(center());
-		level.mobs.add( boss );
 	}
 	
 	@Override

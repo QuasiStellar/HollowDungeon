@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.items.keys.GoldenKey;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLevitation;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 
@@ -109,8 +108,6 @@ public class SecretChestChasmRoom extends SecretRoom {
 			level.drop(new GoldenKey(com.quasistellar.hollowdungeon.Dungeon.location), level.pointToCell(p));
 			chests--;
 		}
-		
-		level.addItemToSpawn(new PotionOfLevitation());
 		
 		entrance().set(Door.Type.HIDDEN);
 	}

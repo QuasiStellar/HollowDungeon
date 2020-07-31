@@ -25,7 +25,6 @@ import com.quasistellar.hollowdungeon.journal.Document;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Heap;
@@ -303,13 +302,7 @@ public abstract class RegularLevel extends Level {
 			case 2:
 			case 3:
 			case 4:
-				type = Heap.Type.CHEST;
-				break;
 			case 5:
-				if (findMob(cell) == null){
-					mobs.add(Mimic.spawnAt(cell, toDrop));
-					continue;
-				}
 				type = Heap.Type.CHEST;
 				break;
 			default:

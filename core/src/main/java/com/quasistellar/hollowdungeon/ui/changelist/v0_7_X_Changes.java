@@ -21,14 +21,6 @@
 
 package com.quasistellar.hollowdungeon.ui.changelist;
 
-import com.quasistellar.hollowdungeon.Badges;
-import com.quasistellar.hollowdungeon.effects.BadgeBanner;
-import com.quasistellar.hollowdungeon.items.Honeypot;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMirrorImage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRetribution;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTerror;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.Assets;
@@ -863,17 +855,17 @@ public class v0_7_X_Changes {
 				"_-_ Charming is now more powerful at higher wand levels\n\n" +
 				"_-_ All other transfusion functionality has been removed"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_KAUNAN, null), new ScrollOfTeleportation().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_KAUNAN, null), "ScrollOfTeleportation",
 				"The scroll of teleportation has been buffed. It now prioritizes sending the user to rooms they have not seen yet, and can teleport to secret rooms."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_ODAL, null), new ScrollOfMirrorImage().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_ODAL, null), "ScrollOfMirrorImage",
 				"Scroll of mirror image has been adjusted to have more interactions with other items, but to also be less powerful at base:\n\n" +
 				"_-_ Scroll now spawns 2 images, down from 3\n\n" +
 				"_-_ Mirror images now attack with the hero's weapon, at 50% damage\n\n" +
 				"_-_ Images no longer fade after a successful attack, instead they pull enemy aggro\n\n" +
 				"_-_ Images start out invisible, have 1 hp, no blocking power, but do inherit some of the hero's evasion."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_NAUDIZ, null), new ScrollOfTerror().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_NAUDIZ, null), "ScrollOfTerror",
 				"Terror now has it's duration reduced by 5 whenever damage is taken, rather than being removed entirely. Scroll of terror duration has been increased to 20 from 10.\n\n" +
 				"Charm now has it's duration reduced by 5 whenever damage is taken, rather than not losing any duration. Succubi have been given a life-drain ability in compensation, and various charming effects have had their durations adjusted."));
 		
@@ -885,17 +877,17 @@ public class v0_7_X_Changes {
 				"Wand of regrowth will now cease producing plants if it is overused. Charges spent before it begins degrading will increase if the wand is upgraded. At +12 the wand will function infinitely.\n\n" +
 				"This change is made to combat farming with low-levelled wands of regrowth. Especially with the alchemy changes this would be far too powerful. Infinite farming is still possible, but requires upgrades."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_GYFU, null), new ScrollOfRetribution().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SCROLL_GYFU, null), "ScrollOfRetribution",
 				"The scroll of psionic blast is now known as the scroll of retribution:\n" +
 				"_-_ removed damage and stun penalty, now self-weakens instead\n" +
 				"_-_ now blinds enemies as well as the player\n" +
 				"_-_ damage dealt now scales with missing player HP. At very low HP scroll is still an instakill on most enemies\n\n" +
 				"Scroll of psionic blast still exists however. It is now an exotic scroll!"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new ItemSprite(com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.POTION_CRIMSON, null), new PotionOfHealing().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new ItemSprite(com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet.POTION_CRIMSON, null), "PotionOfHealing",
 				"_-_ Speed of healing effects (e.g. potion of healing) have been reduced slightly. Overall heal amounts unchanged."));
 		
-		changes.addButton( new ChangeButton(new Honeypot(),
+		changes.addButton( new ChangeButton(new ItemSprite(ItemSpriteSheet.HONEYPOT), "Honeypot",
 				"Bees were never intended to be used as a boss-killing tool by stacking many of them onto one area. This use has now been restricted:\n" +
 				"_-_ Bees are now hostile to eachother\n\n" +
 				"Note that the new alchemy system may have a recipe which helps calm angry bees down..."));

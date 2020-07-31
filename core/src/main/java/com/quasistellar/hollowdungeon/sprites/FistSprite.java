@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.YogFist;
 import com.quasistellar.hollowdungeon.effects.Beam;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
 import com.quasistellar.hollowdungeon.effects.Speck;
@@ -123,16 +122,6 @@ public abstract class FistSprite extends MobSprite {
 		turnTo( ch.pos , cell );
 		play( zap );
 
-		MagicMissile.boltFromChar( parent,
-				boltType,
-				this,
-				cell,
-				new Callback() {
-					@Override
-					public void call() {
-						((YogFist)ch).onZapComplete();
-					}
-				} );
 		Sample.INSTANCE.play( Assets.Sounds.ZAP );
 	}
 
@@ -269,7 +258,6 @@ public abstract class FistSprite extends MobSprite {
 			turnTo( ch.pos , cell );
 			play( zap );
 
-			((YogFist)ch).onZapComplete();
 			parent.add( new Beam.LightRay(center(), DungeonTilemap.raisedTileCenterToWorld(cell)));
 		}
 		@Override

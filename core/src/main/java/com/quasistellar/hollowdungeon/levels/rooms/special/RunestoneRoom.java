@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
-import com.quasistellar.hollowdungeon.items.stones.Runestone;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Random;
 
@@ -50,25 +49,7 @@ public class RunestoneRoom extends SpecialRoom {
 		Painter.drawInside( level, this, entrance(), 2, Terrain.EMPTY_SP);
 		Painter.fill( level, this, 2, Terrain.EMPTY );
 		
-		int n = Random.NormalIntRange(2, 3);
-		int dropPos;
-		for (int i = 0; i < n; i++) {
-			do {
-				dropPos = level.pointToCell(random());
-			} while (level.map[dropPos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY || level.heaps.get( dropPos ) != null);
-			level.drop(prize(level), dropPos);
-		}
-		
 		entrance().set( Door.Type.LOCKED );
 		level.addItemToSpawn( new IronKey( Dungeon.location ) );
-	}
-	
-	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {
-		
-		Item prize = level.findPrizeItem( Runestone.class );
-		if (prize == null)
-			prize = Generator.random( com.quasistellar.hollowdungeon.items.Generator.Category.STONE );
-		
-		return prize;
 	}
 }

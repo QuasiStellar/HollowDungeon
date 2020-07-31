@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
@@ -55,20 +54,7 @@ public class ArmoryRoom extends SpecialRoom {
 			Painter.set( level, statue, Terrain.STATUE );
 		}
 		
-		int n = Random.IntRange( 2, 3 );
-		for (int i=0; i < n; i++) {
-			int pos;
-			do {
-				pos = level.pointToCell(random());
-			} while (level.map[pos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY || level.heaps.get( pos ) != null);
-			level.drop( prize( level ), pos );
-		}
-		
 		entrance.set( Door.Type.LOCKED );
 		level.addItemToSpawn( new IronKey( Dungeon.location ) );
-	}
-	
-	private static Item prize(Level level ) {
-		return new Bomb();
 	}
 }

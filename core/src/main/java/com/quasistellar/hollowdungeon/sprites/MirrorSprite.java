@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.MirrorImage;
 import com.watabou.noosa.TextureFilm;
 
 public class MirrorSprite extends MobSprite {
@@ -37,12 +36,6 @@ public class MirrorSprite extends MobSprite {
 		texture( Dungeon.hero.heroClass.spritesheet() );
 		updateArmor( 0 );
 		idle();
-	}
-	
-	@Override
-	public void link( Char ch ) {
-		super.link( ch );
-		updateArmor( ((MirrorImage)ch).armTier );
 	}
 	
 	public void updateArmor( int tier ) {

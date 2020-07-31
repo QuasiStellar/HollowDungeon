@@ -22,9 +22,7 @@
 package com.quasistellar.hollowdungeon.levels.traps;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.actors.mobs.Gnoll;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
-import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.StatueSprite;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
@@ -64,7 +62,7 @@ public class GuardianTrap extends Trap {
 
 	}
 
-	public static class Guardian extends Gnoll {
+	public static class Guardian extends Mob {
 
 		{
 			spriteClass = GuardianSprite.class;

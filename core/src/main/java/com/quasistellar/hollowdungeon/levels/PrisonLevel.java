@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.levels;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Wandmaker;
 import com.watabou.noosa.Halo;
 import com.quasistellar.hollowdungeon.effects.particles.FlameParticle;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
@@ -56,12 +55,7 @@ public class PrisonLevel extends RegularLevel {
 		color1 = 0x6a723d;
 		color2 = 0x88924c;
 	}
-	
-	@Override
-	protected ArrayList<Room> initRooms() {
-		return Wandmaker.Quest.spawnRoom(super.initRooms());
-	}
-	
+
 	@Override
 	protected int standardRooms() {
 		//6 to 8, average 6.66

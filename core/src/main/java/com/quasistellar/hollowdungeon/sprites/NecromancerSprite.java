@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.actors.mobs.Necromancer;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.audio.Sample;
 
@@ -60,28 +59,4 @@ public class NecromancerSprite extends MobSprite {
 		play(charging);
 	}
 
-	@Override
-	public void zap(int cell) {
-		super.zap(cell);
-		if (visible && ch instanceof Necromancer && ((Necromancer) ch).summoning){
-			Sample.INSTANCE.play( Assets.Sounds.CHARGEUP, 1f, 0.8f );
-		}
-	}
-
-	@Override
-	public void onComplete(Animation anim) {
-		super.onComplete(anim);
-		if (anim == zap){
-			if (ch instanceof Necromancer){
-				if (((Necromancer) ch).summoning){
-					charge();
-				} else {
-					((Necromancer)ch).onZapComplete();
-					idle();
-				}
-			} else {
-				idle();
-			}
-		}
-	}
 }

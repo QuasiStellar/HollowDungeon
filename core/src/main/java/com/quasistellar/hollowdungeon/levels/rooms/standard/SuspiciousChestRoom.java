@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Random;
 
@@ -56,10 +55,6 @@ public class SuspiciousChestRoom extends EmptyRoom {
 
 		Painter.set(level, center, Terrain.PEDESTAL);
 
-		if (Random.Int(3) == 0) {
-			level.mobs.add(Mimic.spawnAt(center, i));
-		} else {
-			level.drop(i, center).type = Heap.Type.CHEST;
-		}
+		level.drop(i, center).type = Heap.Type.CHEST;
 	}
 }

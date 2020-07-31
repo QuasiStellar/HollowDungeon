@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.Spinner;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.audio.Sample;
@@ -69,17 +68,7 @@ public class SpinnerSprite extends MobSprite {
 		
 		turnTo( ch.pos , cell );
 		play( zap );
-		
-		MagicMissile.boltFromChar( parent,
-				MagicMissile.MAGIC_MISSILE,
-				this,
-				cell,
-				new Callback() {
-					@Override
-					public void call() {
-						((Spinner)ch).shootWeb();
-					}
-				} );
+
 		Sample.INSTANCE.play( Assets.Sounds.MISS );
 	}
 	

@@ -24,25 +24,15 @@ package com.quasistellar.hollowdungeon.actors.buffs;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.Heap;
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.ui.BuffIndicator;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.actors.blobs.Fire;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.mobs.Thief;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
-import com.watabou.utils.Random;
-
-import java.util.ArrayList;
 
 public class Burning extends Buff implements Hero.Doom {
 	
@@ -89,40 +79,9 @@ public class Burning extends Buff implements Hero.Doom {
 
 				hero.damage( damage, this );
 				burnIncrement++;
-
-				//at 4+ turns, there is a (turns-3)/3 chance an item burns
-				if (Random.Int(3) < (burnIncrement - 3)){
-					burnIncrement = 0;
-
-					ArrayList<com.quasistellar.hollowdungeon.items.Item> burnable = new ArrayList<>();
-					//does not reach inside of containers
-					for (com.quasistellar.hollowdungeon.items.Item i : hero.belongings.backpack.items){
-						if ((i instanceof Scroll && !(i instanceof ScrollOfUpgrade))){
-							burnable.add(i);
-						}
-					}
-
-					if (!burnable.isEmpty()){
-						com.quasistellar.hollowdungeon.items.Item toBurn = Random.element(burnable).detach(hero.belongings.backpack);
-						GLog.w( Messages.get(this, "burnsup", Messages.capitalize(toBurn.toString())) );
-						Heap.burnFX( hero.pos );
-					}
-				}
 				
 			} else {
 				target.damage( damage, this );
-			}
-
-			if (target instanceof Thief) {
-
-				Item item = ((Thief) target).item;
-
-				if (item instanceof Scroll &&
-						!(item instanceof ScrollOfUpgrade)) {
-					target.sprite.emitter().burst( ElmoParticle.FACTORY, 6 );
-					((Thief)target).item = null;
-				}
-
 			}
 
 		} else {

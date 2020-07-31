@@ -23,30 +23,6 @@ package com.quasistellar.hollowdungeon.journal;
 
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfExperience;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfFrost;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHaste;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfInvisibility;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLevitation;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfLiquidFlame;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfMindVision;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfParalyticGas;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfPurity;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfToxicGas;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfLullaby;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMirrorImage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRage;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRecharging;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRetribution;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTerror;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTransmutation;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
@@ -76,32 +52,7 @@ public enum Catalog {
 	}
 	
 	static {
-	
-		POTIONS.seen.put( PotionOfHealing.class,            false);
-		POTIONS.seen.put( PotionOfStrength.class,           false);
-		POTIONS.seen.put( PotionOfLiquidFlame.class,        false);
-		POTIONS.seen.put( PotionOfFrost.class,              false);
-		POTIONS.seen.put( PotionOfToxicGas.class,           false);
-		POTIONS.seen.put( PotionOfParalyticGas.class,       false);
-		POTIONS.seen.put( PotionOfPurity.class,             false);
-		POTIONS.seen.put( PotionOfLevitation.class,         false);
-		POTIONS.seen.put( PotionOfMindVision.class,         false);
-		POTIONS.seen.put( PotionOfInvisibility.class,       false);
-		POTIONS.seen.put( PotionOfExperience.class,         false);
-		POTIONS.seen.put( PotionOfHaste.class,              false);
-	
-		SCROLLS.seen.put( ScrollOfIdentify.class,           false);
-		SCROLLS.seen.put( ScrollOfUpgrade.class,            false);
-		SCROLLS.seen.put( ScrollOfRemoveCurse.class,        false);
-		SCROLLS.seen.put( ScrollOfMagicMapping.class,       false);
-		SCROLLS.seen.put( ScrollOfTeleportation.class,      false);
-		SCROLLS.seen.put( ScrollOfRecharging.class,         false);
-		SCROLLS.seen.put( ScrollOfMirrorImage.class,        false);
-		SCROLLS.seen.put( ScrollOfTerror.class,             false);
-		SCROLLS.seen.put( ScrollOfLullaby.class,            false);
-		SCROLLS.seen.put( ScrollOfRage.class,               false);
-		SCROLLS.seen.put( ScrollOfRetribution.class,        false);
-		SCROLLS.seen.put( ScrollOfTransmutation.class,      false);
+
 	}
 	
 	public static LinkedHashMap<Catalog, Badges.Badge> catalogBadges = new LinkedHashMap<>();

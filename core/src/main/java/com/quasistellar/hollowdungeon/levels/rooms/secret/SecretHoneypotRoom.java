@@ -21,13 +21,9 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.secret;
 
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.Honeypot;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Bee;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 
@@ -42,21 +38,6 @@ public class SecretHoneypotRoom extends SecretRoom {
 		
 		brokenPotPos.x = (brokenPotPos.x + entrance().x) / 2;
 		brokenPotPos.y = (brokenPotPos.y + entrance().y) / 2;
-		
-		com.quasistellar.hollowdungeon.items.Honeypot.ShatteredPot pot = new com.quasistellar.hollowdungeon.items.Honeypot.ShatteredPot();
-		level.drop(pot, level.pointToCell(brokenPotPos));
-		
-		Bee bee = new Bee();
-		bee.spawn(1);
-		bee.HP = bee.HT;
-		bee.pos = level.pointToCell(brokenPotPos);
-		level.mobs.add( bee );
-		
-		bee.setPotInfo(level.pointToCell(brokenPotPos), null);
-		
-		placeItem(new Honeypot(), level);
-		
-		placeItem( new Bomb().random(), level);
 		
 		entrance().set(Door.Type.HIDDEN);
 	}

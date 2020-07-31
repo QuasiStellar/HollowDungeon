@@ -22,35 +22,6 @@
 package com.quasistellar.hollowdungeon.items;
 
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.items.potions.AlchemicalCatalyst;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.potions.brews.BlizzardBrew;
-import com.quasistellar.hollowdungeon.items.potions.brews.CausticBrew;
-import com.quasistellar.hollowdungeon.items.potions.brews.InfernalBrew;
-import com.quasistellar.hollowdungeon.items.potions.brews.ShockingBrew;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfAquaticRejuvenation;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfArcaneArmor;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfDragonsBlood;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfHoneyedHealing;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfIcyTouch;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfMight;
-import com.quasistellar.hollowdungeon.items.potions.elixirs.ElixirOfToxicEssence;
-import com.quasistellar.hollowdungeon.items.potions.exotic.ExoticPotion;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.exotic.ExoticScroll;
-import com.quasistellar.hollowdungeon.items.spells.Alchemize;
-import com.quasistellar.hollowdungeon.items.spells.AquaBlast;
-import com.quasistellar.hollowdungeon.items.spells.ArcaneCatalyst;
-import com.quasistellar.hollowdungeon.items.spells.BeaconOfReturning;
-import com.quasistellar.hollowdungeon.items.spells.CurseInfusion;
-import com.quasistellar.hollowdungeon.items.spells.FeatherFall;
-import com.quasistellar.hollowdungeon.items.spells.MagicalInfusion;
-import com.quasistellar.hollowdungeon.items.spells.MagicalPorter;
-import com.quasistellar.hollowdungeon.items.spells.PhaseShift;
-import com.quasistellar.hollowdungeon.items.spells.ReclaimTrap;
-import com.quasistellar.hollowdungeon.items.spells.Recycle;
-import com.quasistellar.hollowdungeon.items.spells.WildEnergy;
 import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
@@ -160,41 +131,12 @@ public abstract class Recipe {
 	//*******
 	
 	private static Recipe[] oneIngredientRecipes = new Recipe[]{
-		new Scroll.ScrollToStone()
 	};
 	
 	private static Recipe[] twoIngredientRecipes = new Recipe[]{
-		new Bomb.EnhanceBomb(),
-		new AlchemicalCatalyst.Recipe(),
-		new ArcaneCatalyst.Recipe(),
-		new ElixirOfArcaneArmor.Recipe(),
-		new ElixirOfAquaticRejuvenation.Recipe(),
-		new ElixirOfDragonsBlood.Recipe(),
-		new ElixirOfIcyTouch.Recipe(),
-		new ElixirOfMight.Recipe(),
-		new ElixirOfHoneyedHealing.Recipe(),
-		new ElixirOfToxicEssence.Recipe(),
-		new BlizzardBrew.Recipe(),
-		new InfernalBrew.Recipe(),
-		new ShockingBrew.Recipe(),
-		new CausticBrew.Recipe(),
-		new Alchemize.Recipe(),
-		new AquaBlast.Recipe(),
-		new BeaconOfReturning.Recipe(),
-		new CurseInfusion.Recipe(),
-		new FeatherFall.Recipe(),
-		new MagicalInfusion.Recipe(),
-		new MagicalPorter.Recipe(),
-		new PhaseShift.Recipe(),
-		new ReclaimTrap.Recipe(),
-		new Recycle.Recipe(),
-		new WildEnergy.Recipe()
 	};
 	
 	private static Recipe[] threeIngredientRecipes = new Recipe[]{
-		new Potion.SeedToPotion(),
-		new ExoticPotion.PotionToExotic(),
-		new ExoticScroll.ScrollToExotic()
 	};
 	
 	public static Recipe findRecipe(ArrayList<com.quasistellar.hollowdungeon.items.Item> ingredients){

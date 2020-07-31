@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.tiles;
 
-import com.quasistellar.hollowdungeon.levels.NewHallsBossLevel;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.watabou.noosa.TextureFilm;
@@ -68,11 +67,11 @@ public class WallBlockingTilemap extends Tilemap {
 
 		//FIXME this is to address the wall blocking looking odd on the new yog floor.
 		// The true solution is to improve the fog of war so the blockers aren't necessary.
-		if (Dungeon.level instanceof NewHallsBossLevel){
-			data[cell] = CLEARED;
-			super.updateMapCell(cell);
-			return;
-		}
+//		if (Dungeon.level instanceof NewHallsBossLevel){
+//			data[cell] = CLEARED;
+//			super.updateMapCell(cell);
+//			return;
+//		}
 		
 		//TODO should doors be considered? currently the blocking is a bit permissive around doors
 

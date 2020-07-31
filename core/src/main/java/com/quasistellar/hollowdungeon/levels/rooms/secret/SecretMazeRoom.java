@@ -21,18 +21,12 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.secret;
 
-import com.quasistellar.hollowdungeon.Challenges;
-import com.quasistellar.hollowdungeon.items.Heap;
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.levels.features.Maze;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Point;
-import com.watabou.utils.Random;
 
 public class SecretMazeRoom extends SecretRoom {
 	

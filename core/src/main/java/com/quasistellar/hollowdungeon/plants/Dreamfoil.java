@@ -21,6 +21,15 @@
 
 package com.quasistellar.hollowdungeon.plants;
 
+import com.quasistellar.hollowdungeon.actors.buffs.Bleeding;
+import com.quasistellar.hollowdungeon.actors.buffs.Blindness;
+import com.quasistellar.hollowdungeon.actors.buffs.Cripple;
+import com.quasistellar.hollowdungeon.actors.buffs.Drowsy;
+import com.quasistellar.hollowdungeon.actors.buffs.Poison;
+import com.quasistellar.hollowdungeon.actors.buffs.Slow;
+import com.quasistellar.hollowdungeon.actors.buffs.Vertigo;
+import com.quasistellar.hollowdungeon.actors.buffs.Vulnerable;
+import com.quasistellar.hollowdungeon.actors.buffs.Weakness;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -29,7 +38,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.MagicalSleep;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.utils.GLog;
 
@@ -48,7 +56,15 @@ public class Dreamfoil extends Plant {
 				Buff.affect(ch, MagicalSleep.class);
 			} else if (ch instanceof Hero){
 				GLog.i( Messages.get(this, "refreshed") );
-				PotionOfHealing.cure(ch);
+				Buff.detach( ch, Poison.class );
+				Buff.detach( ch, Cripple.class );
+				Buff.detach( ch, Weakness.class );
+				Buff.detach( ch, Vulnerable.class );
+				Buff.detach( ch, Bleeding.class );
+				Buff.detach( ch, Blindness.class );
+				Buff.detach( ch, Drowsy.class );
+				Buff.detach( ch, Slow.class );
+				Buff.detach( ch, Vertigo.class);
 				
 				if (((Hero) ch).heroClass == HeroClass.HORNET){
 					Buff.affect(ch, BlobImmunity.class, BlobImmunity.DURATION/2f);

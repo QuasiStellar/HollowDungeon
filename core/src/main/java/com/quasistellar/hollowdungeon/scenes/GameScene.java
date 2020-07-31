@@ -35,19 +35,11 @@ import com.quasistellar.hollowdungeon.SPDSettings;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.Statistics;
 import com.quasistellar.hollowdungeon.actors.Actor;
-import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.blobs.Blob;
-import com.quasistellar.hollowdungeon.actors.mobs.DemonSpawner;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.items.Heap;
-import com.quasistellar.hollowdungeon.items.Honeypot;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
-import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
-import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfTeleportation;
 import com.quasistellar.hollowdungeon.levels.RegularLevel;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -332,13 +324,13 @@ public class GameScene extends PixelScene {
 		counter.show(this, busy.center(), 0f);
 		
 		switch (InterlevelScene.mode) {
-		case RESURRECT:
-			ScrollOfTeleportation.appear( Dungeon.hero, Dungeon.level.entrance );
-			new com.quasistellar.hollowdungeon.effects.Flare( 8, 32 ).color( 0xFFFF66, true ).show( hero, 2f ) ;
-			break;
-		case RETURN:
-			ScrollOfTeleportation.appear(  Dungeon.hero, Dungeon.hero.pos );
-			break;
+//		case RESURRECT:
+//			ScrollOfTeleportation.appear( Dungeon.hero, Dungeon.level.entrance );
+//			new com.quasistellar.hollowdungeon.effects.Flare( 8, 32 ).color( 0xFFFF66, true ).show( hero, 2f ) ;
+//			break;
+//		case RETURN:
+//			ScrollOfTeleportation.appear(  Dungeon.hero, Dungeon.hero.pos );
+//			break;
 		case DESCEND:
 //			switch (Dungeon.depth) {
 //			case 1:
@@ -945,18 +937,9 @@ public class GameScene extends PixelScene {
 	
 	public static com.quasistellar.hollowdungeon.windows.WndBag selectItem(com.quasistellar.hollowdungeon.windows.WndBag.Listener listener, com.quasistellar.hollowdungeon.windows.WndBag.Mode mode, String title ) {
 		cancelCellSelector();
-		
-		com.quasistellar.hollowdungeon.windows.WndBag wnd =
-				mode == com.quasistellar.hollowdungeon.windows.WndBag.Mode.SEED ?
-					com.quasistellar.hollowdungeon.windows.WndBag.getBag( VelvetPouch.class, listener, mode, title ) :
-				mode == com.quasistellar.hollowdungeon.windows.WndBag.Mode.SCROLL ?
-					com.quasistellar.hollowdungeon.windows.WndBag.getBag( ScrollHolder.class, listener, mode, title ) :
-				mode == com.quasistellar.hollowdungeon.windows.WndBag.Mode.POTION ?
-					com.quasistellar.hollowdungeon.windows.WndBag.getBag( PotionBandolier.class, listener, mode, title ) :
-				mode == com.quasistellar.hollowdungeon.windows.WndBag.Mode.WAND ?
-					com.quasistellar.hollowdungeon.windows.WndBag.getBag( MagicalHolster.class, listener, mode, title ) :
-				WndBag.lastBag( listener, mode, title );
-		
+
+		com.quasistellar.hollowdungeon.windows.WndBag wnd =	WndBag.lastBag( listener, mode, title );
+
 		if (scene != null) scene.addToFront( wnd );
 		
 		return wnd;

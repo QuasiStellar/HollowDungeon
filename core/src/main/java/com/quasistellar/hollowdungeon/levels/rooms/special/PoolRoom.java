@@ -21,18 +21,8 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.Challenges;
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.levels.Level;
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.Generator;
-import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Piranha;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfInvisibility;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
-import com.watabou.utils.Random;
 
 public class PoolRoom extends SpecialRoom {
 
@@ -83,37 +73,5 @@ public class PoolRoom extends SpecialRoom {
 			Painter.fill(level, left+1, bottom-1, width()-2, 1, Terrain.EMPTY_SP);
 			
 		}
-		
-		int pos = x + y * level.width();
-		level.drop( prize( level ), pos ).type =
-			Random.Int( 3 ) == 0 ? Heap.Type.CHEST : com.quasistellar.hollowdungeon.items.Heap.Type.HEAP;
-		Painter.set( level, pos, Terrain.PEDESTAL );
-		
-		level.addItemToSpawn( new PotionOfInvisibility() );
-		
-		for (int i=0; i < NPIRANHAS; i++) {
-			Piranha piranha = new Piranha();
-			do {
-				piranha.pos = level.pointToCell(random());
-			} while (level.map[piranha.pos] != com.quasistellar.hollowdungeon.levels.Terrain.WATER|| level.findMob( piranha.pos ) != null);
-			level.mobs.add( piranha );
-		}
-	}
-	
-	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {
-
-		Item prize;
-
-		if (Random.Int(3) == 0){
-			prize = level.findPrizeItem();
-			if (prize != null)
-				return prize;
-		}
-
-		//1 floor set higher in probability, never cursed
-		prize = new Bomb();
-		prize.cursedKnown = true;
-
-		return prize;
 	}
 }

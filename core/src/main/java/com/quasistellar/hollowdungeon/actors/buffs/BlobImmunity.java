@@ -36,7 +36,6 @@ import com.quasistellar.hollowdungeon.actors.blobs.StenchGas;
 import com.quasistellar.hollowdungeon.actors.blobs.StormCloud;
 import com.quasistellar.hollowdungeon.actors.blobs.ToxicGas;
 import com.quasistellar.hollowdungeon.actors.blobs.Web;
-import com.quasistellar.hollowdungeon.actors.mobs.NewTengu;
 import com.quasistellar.hollowdungeon.messages.Messages;
 
 public class BlobImmunity extends FlavourBuff {
@@ -78,9 +77,6 @@ public class BlobImmunity extends FlavourBuff {
 		immunities.add( StormCloud.class );
 		immunities.add( ToxicGas.class );
 		immunities.add( Web.class );
-
-		immunities.add(NewTengu.FireAbility.FireBlob.class);
-		immunities.add(NewTengu.BombAbility.BombBlob.class);
 	}
 
 	@Override

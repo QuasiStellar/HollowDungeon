@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.windows;
 
-import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.SPDSettings;
 import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -62,36 +61,6 @@ public class WndChallenges extends Window {
 		boxes = new ArrayList<>();
 
 		float pos = TTL_HEIGHT;
-		for (int i=0; i < Challenges.NAME_IDS.length; i++) {
-
-			final String challenge = Challenges.NAME_IDS[i];
-			
-			CheckBox cb = new CheckBox( Messages.get(Challenges.class, challenge) );
-			cb.checked( (checked & Challenges.MASKS[i]) != 0 );
-			cb.active = editable;
-
-			if (i > 0) {
-				pos += GAP;
-			}
-			cb.setRect( 0, pos, WIDTH-16, BTN_HEIGHT );
-
-			add( cb );
-			boxes.add( cb );
-			
-			IconButton info = new IconButton(Icons.get(Icons.INFO)){
-				@Override
-				protected void onClick() {
-					super.onClick();
-					ShatteredPixelDungeon.scene().add(
-							new WndMessage(Messages.get(Challenges.class, challenge+"_desc"))
-					);
-				}
-			};
-			info.setRect(cb.right(), pos, 16, BTN_HEIGHT);
-			add(info);
-			
-			pos = cb.bottom();
-		}
 
 		resize( WIDTH, (int)pos );
 	}
@@ -101,11 +70,7 @@ public class WndChallenges extends Window {
 
 		if (editable) {
 			int value = 0;
-			for (int i=0; i < boxes.size(); i++) {
-				if (boxes.get( i ).checked()) {
-					value |= Challenges.MASKS[i];
-				}
-			}
+
 			SPDSettings.challenges( value );
 		}
 

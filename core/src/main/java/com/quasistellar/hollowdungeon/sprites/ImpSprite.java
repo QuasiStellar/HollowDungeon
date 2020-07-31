@@ -23,7 +23,6 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.npcs.Imp;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.watabou.noosa.TextureFilm;
 
@@ -48,15 +47,6 @@ public class ImpSprite extends MobSprite {
 		die.frames( frames, 0, 3, 2, 1, 0, 3, 2, 1, 0 );
 		
 		play( idle );
-	}
-	
-	@Override
-	public void link( Char ch ) {
-		super.link( ch );
-		
-		if (ch instanceof Imp) {
-			alpha( 0.4f );
-		}
 	}
 	
 	@Override

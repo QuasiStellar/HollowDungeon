@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.actors.mobs.DM201;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.watabou.noosa.TextureFilm;
@@ -74,17 +73,6 @@ public class DM201Sprite extends MobSprite {
 		turnTo( ch.pos , cell );
 		play( zap );
 
-		MagicMissile.boltFromChar( parent,
-				MagicMissile.CORROSION,
-				this,
-				cell,
-				new Callback() {
-					@Override
-					public void call() {
-						Sample.INSTANCE.play( Assets.Sounds.PUFF );
-						((DM201)ch).onZapComplete();
-					}
-				} );
 		Sample.INSTANCE.play( Assets.Sounds.MISS, 0.6f, 0.6f, 1.5f );
 	}
 

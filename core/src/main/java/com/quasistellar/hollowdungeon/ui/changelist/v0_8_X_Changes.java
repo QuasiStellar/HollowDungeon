@@ -21,8 +21,6 @@
 
 package com.quasistellar.hollowdungeon.ui.changelist;
 
-import com.quasistellar.hollowdungeon.actors.mobs.DwarfKing;
-import com.quasistellar.hollowdungeon.actors.mobs.NewDM300;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.Assets;
@@ -316,7 +314,7 @@ public class v0_8_X_Changes {
 
 		Image i = new Image(new com.quasistellar.hollowdungeon.sprites.DM300Sprite());
 		i.scale.set(PixelScene.align(0.74f));
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(i, Messages.get(NewDM300.class, "name"),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(new com.quasistellar.hollowdungeon.sprites.DM300Sprite()), "DM-300",
 				"The DM-300 fight has been reworked! DM-300 now has redesigned abilities, a new boss arena, and multiple phases!\n\n" +
 				"As a part of this rework, DM-300's direct stats have been adjusted:\n" +
 				"_-_ Health increased to 300 from 200\n" +
@@ -331,7 +329,7 @@ public class v0_8_X_Changes {
 				"_Warlocks_ now deal ~21% less damage in melee, but have a nasty new debuff. They inflict 'degraded', which temporarily weakens heavily upgraded gear.\n\n" +
 				"_Golems_ have been entirely reworked and are now large enemies like DM-200s. Unlike DM-200s they have no ranged attacks, but instead use dwarven teleportation magic to compensate for their low mobility."));
 
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(new com.quasistellar.hollowdungeon.sprites.KingSprite()), Messages.get(DwarfKing.class, "name"),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new Image(new com.quasistellar.hollowdungeon.sprites.KingSprite()), "Dwarf King",
 				"The Dwarf King fight has received a full rework! His fight still heavily features minion summoning, but now also features new abilities, a new arena, and multiple phases!\n\n" +
 				"As a part of this fight rework DK's stats have been adjusted:\n" +
 				"_-_ Damage reduced by ~40%\n" +

@@ -27,21 +27,14 @@ import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.mobs.Wraith;
 import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.items.journal.DocumentPage;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfUpgrade;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -75,7 +68,6 @@ public class Heap implements Bundlable {
 			type = Type.CHEST;
 			break;
 		case TOMB:
-			Wraith.spawnAround( hero.pos );
 			break;
 		case REMAINS:
 		case SKELETON:
@@ -84,14 +76,6 @@ public class Heap implements Bundlable {
 		default:
 		}
 		
-		if (haunted){
-			if (Wraith.spawnAt( pos ) == null) {
-				hero.sprite.emitter().burst( ShadowParticle.CURSE, 6 );
-				hero.damage( hero.HP / 2, this );
-			}
-			Sample.INSTANCE.play( Assets.Sounds.CURSED );
-		}
-
 		if (type != Type.MIMIC) {
 			type = Type.HEAP;
 			sprite.link();
@@ -186,22 +170,9 @@ public class Heap implements Bundlable {
 		boolean evaporated = false;
 		
 		for (Item item : items.toArray( new Item[0] )) {
-			if (item instanceof Scroll
-					&& !(item instanceof ScrollOfUpgrade)) {
-				items.remove( item );
-				burnt = true;
-			} else if (item instanceof Dewdrop) {
+			if (item instanceof Dewdrop) {
 				items.remove( item );
 				evaporated = true;
-			} else if (item instanceof Bomb) {
-				items.remove( item );
-				((Bomb) item).explode( pos );
-				if (((Bomb) item).explodesDestructively()) {
-					//stop processing the burning, it will be replaced by the explosion.
-					return;
-				} else {
-					burnt = true;
-				}
 			}
 		}
 		
@@ -241,30 +212,6 @@ public class Heap implements Bundlable {
 
 		} else {
 
-			for (Item item : items.toArray( new Item[0] )) {
-
-				if (item instanceof Potion) {
-					items.remove(item);
-					((Potion) item).shatter(pos);
-
-				} else if (item instanceof com.quasistellar.hollowdungeon.items.Honeypot.ShatteredPot) {
-					items.remove(item);
-					((Honeypot.ShatteredPot) item).destroyPot(pos);
-
-				} else if (item instanceof Bomb) {
-					items.remove( item );
-					((Bomb) item).explode(pos);
-					if (((Bomb) item).explodesDestructively()) {
-						//stop processing current explosion, it will be replaced by the new one.
-						return;
-					}
-
-				//unique and upgraded items can endure the blast
-				} else if (!(item.level() > 0 || item.unique))
-					items.remove( item );
-
-			}
-
 			if (isEmpty()){
 				destroy();
 			} else if (sprite != null) {
@@ -280,16 +227,6 @@ public class Heap implements Bundlable {
 		}
 		
 		boolean frozen = false;
-		for (Item item : items.toArray( new Item[0] )) {
-			if (item instanceof Potion && !(item instanceof PotionOfStrength)) {
-				items.remove(item);
-				((Potion) item).shatter(pos);
-				frozen = true;
-			} else if (item instanceof Bomb){
-				((Bomb) item).fuse = null;
-				frozen = true;
-			}
-		}
 		
 		if (frozen) {
 			if (isEmpty()) {

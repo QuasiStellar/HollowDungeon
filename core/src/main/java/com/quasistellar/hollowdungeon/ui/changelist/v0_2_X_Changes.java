@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.ui.changelist;
 
-import com.quasistellar.hollowdungeon.items.Honeypot;
+import com.quasistellar.hollowdungeon.items.Ankh;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.Assets;
@@ -63,7 +63,7 @@ public class v0_2_X_Changes {
 				"\n" +
 				"Dev commentary will be added here in the future."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Honeypot()), "Pixel Dungeon v1.7.5",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(new Ankh()), "Pixel Dungeon v1.7.5",
 				"v1.7.3 - v1.7.5 Source Implemented, with exceptions:\n" +
 				"_-_ Degredation not implemented.\n\n" +
 				"_-_ Badge syncing not implemented.\n\n" +

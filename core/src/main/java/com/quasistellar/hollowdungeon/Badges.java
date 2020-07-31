@@ -21,14 +21,8 @@
 
 package com.quasistellar.hollowdungeon;
 
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
-import com.quasistellar.hollowdungeon.journal.Catalog;
 import com.quasistellar.hollowdungeon.utils.GLog;
-import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
-import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
-import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
-import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.FileUtils;

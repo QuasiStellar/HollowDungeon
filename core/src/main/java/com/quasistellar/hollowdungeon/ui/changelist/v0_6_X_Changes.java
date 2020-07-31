@@ -23,9 +23,7 @@ package com.quasistellar.hollowdungeon.ui.changelist;
 
 import com.quasistellar.hollowdungeon.items.DewVial;
 import com.quasistellar.hollowdungeon.items.Torch;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
 import com.quasistellar.hollowdungeon.scenes.ChangesScene;
-import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.effects.BadgeBanner;
@@ -308,7 +306,7 @@ public class v0_6_X_Changes {
 				"\n" +
 				"_-_ Earthroot now blocks up to a certain amount of damage, based on depth, rather than 50% damage"));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.POTION_CRIMSON, null), new com.quasistellar.hollowdungeon.items.potions.PotionOfHealing().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.POTION_CRIMSON, null), "Potion Of Healing",
 				"Heal potion drops have had their RNG bounded in shattered for a long time, but this bound was always fairly lax. This meant that people who wanted to slowly farm for potions could still amass large numbers of them. I have decided to reign this in more harshly.\n" +
 				"\n" +
 				"_-_ Health potion drops now lower in probability more quickly after potions have already been dropped from a given enemy type\n" +
@@ -707,7 +705,7 @@ public class v0_6_X_Changes {
 				"_-_ Now has a chance to generate extra loot when defeating enemies.\n\n" +
 				"I'm planning to make further tweaks to this item in future updates."));
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.POTION_CRIMSON, null), new PotionOfHealing().trueName(),
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton( new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.POTION_CRIMSON, null), "Potion of Healing",
 				"Health Potions are getting a changeup to make hoarding and chugging them less effective, and to encourage a bit more strategy than to just drink them on the verge of death.\n\n" +
 				"_-_ Health potions now heal in a burst that fades over time, rather than instantly.\n\n" +
 				"_-_ Health potions now heal more than max HP at low levels, and slightly less than max HP at high levels.\n\n" +

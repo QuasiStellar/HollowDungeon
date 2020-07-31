@@ -21,11 +21,9 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.Challenges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Terrain;
@@ -60,32 +58,8 @@ public class PitRoom extends SpecialRoom {
 		while (level.map[remains] == com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_WELL) {
 			remains = level.pointToCell(random());
 		}
-		
-		level.drop( new IronKey( Dungeon.location ), remains ).type = Heap.Type.SKELETON;
-		Item mainLoot = new Bomb();
-		level.drop(mainLoot, remains);
-		
-		int n = Random.IntRange( 1, 2 );
-		for (int i=0; i < n; i++) {
-			level.drop( prize( level ), remains ).setHauntedIfCursed();
-		}
 	}
-	
-	private static com.quasistellar.hollowdungeon.items.Item prize(Level level ) {
-		
-		if (Random.Int(2) != 0){
-			Item prize = level.findPrizeItem();
-			if (prize != null)
-				return prize;
-		}
-		
-		return Generator.random( Random.oneOf(
-			Generator.Category.POTION,
-			Generator.Category.SCROLL,
-			com.quasistellar.hollowdungeon.items.Generator.Category.GOLD
-		) );
-	}
-	
+
 	@Override
 	public boolean canPlaceTrap(Point p) {
 		//the player is already weak after landing, and will likely need to kite the ghost.

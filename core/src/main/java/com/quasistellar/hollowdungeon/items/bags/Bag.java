@@ -51,7 +51,7 @@ public class Bag extends com.quasistellar.hollowdungeon.items.Item implements It
 	public ArrayList<com.quasistellar.hollowdungeon.items.Item> items = new ArrayList<>();
 
 	public int capacity(){
-		return 20; // default container size
+		return 40; // default container size
 	}
 	
 	@Override

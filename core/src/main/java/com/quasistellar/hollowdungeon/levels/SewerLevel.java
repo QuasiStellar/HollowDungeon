@@ -102,16 +102,6 @@ public class SewerLevel extends RegularLevel {
 	}
 	
 	@Override
-	protected void createItems() {
-		if (!Dungeon.LimitedDrops.DEW_VIAL.dropped()) {
-			addItemToSpawn( new DewVial() );
-			Dungeon.LimitedDrops.DEW_VIAL.drop();
-		}
-
-		super.createItems();
-	}
-	
-	@Override
 	public Group addVisuals() {
 		super.addVisuals();
 		addSewerVisuals(this, visuals);

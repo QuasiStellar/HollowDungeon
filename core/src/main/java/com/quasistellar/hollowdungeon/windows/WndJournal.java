@@ -21,10 +21,7 @@
 
 package com.quasistellar.hollowdungeon.windows;
 
-import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.scrolls.Scroll;
 import com.quasistellar.hollowdungeon.journal.Catalog;
 import com.quasistellar.hollowdungeon.journal.Document;
 import com.quasistellar.hollowdungeon.journal.Notes;
@@ -619,15 +616,9 @@ public class WndJournal extends WndTabbed {
 			
 			ArrayList<Class<? extends Item>> itemClasses;
 			final HashMap<Class<?  extends Item>, Boolean> known = new HashMap<>();
-			if (currentItemIdx == POTION_IDX){
-				itemClasses = new ArrayList<>(Catalog.POTIONS.items());
-				for (Class<? extends Item> cls : itemClasses) known.put(cls, Potion.getKnown().contains(cls));
-			} else if (currentItemIdx == SCROLL_IDX) {
-				itemClasses = new ArrayList<>(Catalog.SCROLLS.items());
-				for (Class<? extends Item> cls : itemClasses) known.put(cls, Scroll.getKnown().contains(cls));
-			} else {
+
 				itemClasses = new ArrayList<>();
-			}
+
 			
 			Collections.sort(itemClasses, new Comparator<Class<? extends Item>>() {
 				@Override
@@ -668,14 +659,6 @@ public class WndJournal extends WndTabbed {
 				
 				this.item = item;
 				this.seen = seen;
-
-				if ( seen && !IDed ){
-					if (item instanceof Potion){
-						((Potion) item).anonymize();
-					} else if (item instanceof Scroll){
-						((Scroll) item).anonymize();
-					}
-				}
 				
 				if (!seen) {
 					icon.copy( new ItemSprite( ItemSpriteSheet.SOMETHING + spriteIndexes[currentItemIdx], null) );

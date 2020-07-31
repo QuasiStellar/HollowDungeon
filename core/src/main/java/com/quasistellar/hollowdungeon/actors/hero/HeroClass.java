@@ -24,13 +24,7 @@ package com.quasistellar.hollowdungeon.actors.hero;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfMindVision;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfLullaby;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRage;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.DeviceCompat;
@@ -65,9 +59,7 @@ public enum HeroClass {
 	}
 
 	private static void initCommon( com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
-
-		new ScrollOfIdentify().identify();
-
+		new VelvetPouch().collect();
 	}
 
 	public com.quasistellar.hollowdungeon.Badges.Badge masteryBadge() {
@@ -80,22 +72,12 @@ public enum HeroClass {
 		return null;
 	}
 
-	private static void initKnight(com.quasistellar.hollowdungeon.actors.hero.Hero hero ) {
+	private static void initKnight(Hero hero ) {
 
-		new PotionBandolier().collect();
-		Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
-
-		new PotionOfHealing().identify();
-		new ScrollOfRage().identify();
 	}
 
 	private static void initHornet(Hero hero ) {
 
-		new VelvetPouch().collect();
-		com.quasistellar.hollowdungeon.Dungeon.LimitedDrops.VELVET_POUCH.drop();
-
-		new PotionOfMindVision().identify();
-		new ScrollOfLullaby().identify();
 	}
 
 	public String title() {

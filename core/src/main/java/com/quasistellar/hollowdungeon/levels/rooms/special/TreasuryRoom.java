@@ -23,10 +23,8 @@ package com.quasistellar.hollowdungeon.levels.rooms.special;
 
 import com.quasistellar.hollowdungeon.items.Gold;
 import com.quasistellar.hollowdungeon.levels.Level;
-import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Random;

@@ -28,9 +28,6 @@ import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.mobs.Thief;
-import com.quasistellar.hollowdungeon.items.potions.Potion;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfStrength;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.Image;
 import com.watabou.utils.Random;
@@ -53,36 +50,6 @@ public class Frost extends FlavourBuff {
 			target.paralysed++;
 			com.quasistellar.hollowdungeon.actors.buffs.Buff.detach( target, Burning.class );
 			com.quasistellar.hollowdungeon.actors.buffs.Buff.detach( target, com.quasistellar.hollowdungeon.actors.buffs.Chill.class );
-
-			if (target instanceof Hero) {
-
-				Hero hero = (Hero)target;
-				ArrayList<com.quasistellar.hollowdungeon.items.Item> freezable = new ArrayList<>();
-				//does not reach inside of containers
-				for (com.quasistellar.hollowdungeon.items.Item i : hero.belongings.backpack.items){
-					if ((i instanceof Potion && !(i instanceof PotionOfStrength))){
-						freezable.add(i);
-					}
-				}
-				
-				if (!freezable.isEmpty()){
-					com.quasistellar.hollowdungeon.items.Item toFreeze = Random.element(freezable).detach( hero.belongings.backpack );
-					GLog.w( Messages.get(this, "freezes", toFreeze.toString()) );
-					if (toFreeze instanceof Potion){
-						((Potion) toFreeze).shatter(hero.pos);
-					}
-				}
-				
-			} else if (target instanceof Thief) {
-
-				Item item = ((Thief) target).item;
-
-				if (item instanceof Potion && !(item instanceof PotionOfStrength)) {
-					((Potion) ((Thief) target).item).shatter(target.pos);
-					((Thief) target).item = null;
-				}
-
-			}
 
 			return true;
 		} else {

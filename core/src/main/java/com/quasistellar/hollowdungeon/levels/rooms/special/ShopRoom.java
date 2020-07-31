@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.levels.Terrain;
@@ -29,15 +28,7 @@ import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Shopkeeper;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
-import com.quasistellar.hollowdungeon.items.bags.MagicalHolster;
-import com.quasistellar.hollowdungeon.items.bags.PotionBandolier;
-import com.quasistellar.hollowdungeon.items.bags.ScrollHolder;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
-import com.quasistellar.hollowdungeon.items.bombs.Bomb;
-import com.quasistellar.hollowdungeon.items.potions.PotionOfHealing;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfIdentify;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfMagicMapping;
-import com.quasistellar.hollowdungeon.items.scrolls.ScrollOfRemoveCurse;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
@@ -137,36 +128,6 @@ public class ShopRoom extends SpecialRoom {
 
 		itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.MerchantsBeacon() );
 
-
-		itemsToSpawn.add(ChooseBag(Dungeon.hero.belongings));
-
-
-		itemsToSpawn.add( new PotionOfHealing() );
-		itemsToSpawn.add( com.quasistellar.hollowdungeon.items.Generator.randomUsingDefaults( com.quasistellar.hollowdungeon.items.Generator.Category.POTION ) );
-		itemsToSpawn.add( com.quasistellar.hollowdungeon.items.Generator.randomUsingDefaults( com.quasistellar.hollowdungeon.items.Generator.Category.POTION ) );
-
-		itemsToSpawn.add( new ScrollOfIdentify() );
-		itemsToSpawn.add( new ScrollOfRemoveCurse() );
-		itemsToSpawn.add( new ScrollOfMagicMapping() );
-
-		for (int i=0; i < 2; i++)
-			itemsToSpawn.add( Random.Int(2) == 0 ?
-					com.quasistellar.hollowdungeon.items.Generator.randomUsingDefaults( com.quasistellar.hollowdungeon.items.Generator.Category.POTION ) :
-					com.quasistellar.hollowdungeon.items.Generator.randomUsingDefaults( com.quasistellar.hollowdungeon.items.Generator.Category.SCROLL ) );
-
-		switch (Random.Int(4)){
-			case 0:
-				itemsToSpawn.add( new Bomb() );
-				break;
-			case 1:
-			case 2:
-				itemsToSpawn.add( new Bomb.DoubleBomb() );
-				break;
-			case 3:
-				itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.Honeypot() );
-				break;
-		}
-
 		itemsToSpawn.add( new com.quasistellar.hollowdungeon.items.Ankh() );
 
 		//hard limit is 63 items + 1 shopkeeper, as shops can't be bigger than 8x8=64 internally
@@ -176,49 +137,4 @@ public class ShopRoom extends SpecialRoom {
 		Random.shuffle(itemsToSpawn);
 		return itemsToSpawn;
 	}
-
-	protected static Bag ChooseBag(Belongings pack){
-
-		//generate a hashmap of all valid bags.
-		HashMap<Bag, Integer> bags = new HashMap<>();
-		if (!Dungeon.LimitedDrops.VELVET_POUCH.dropped()) bags.put(new VelvetPouch(), 1);
-		if (!Dungeon.LimitedDrops.SCROLL_HOLDER.dropped()) bags.put(new ScrollHolder(), 0);
-		if (!Dungeon.LimitedDrops.POTION_BANDOLIER.dropped()) bags.put(new PotionBandolier(), 0);
-		if (!Dungeon.LimitedDrops.MAGICAL_HOLSTER.dropped()) bags.put(new MagicalHolster(), 0);
-
-		if (bags.isEmpty()) return null;
-
-		//count up items in the main bag
-		for (com.quasistellar.hollowdungeon.items.Item item : pack.backpack.items) {
-			for (Bag bag : bags.keySet()){
-				if (bag.canHold(item)){
-					bags.put(bag, bags.get(bag)+1);
-				}
-			}
-		}
-
-		//find which bag will result in most inventory savings, drop that.
-		Bag bestBag = null;
-		for (Bag bag : bags.keySet()){
-			if (bestBag == null){
-				bestBag = bag;
-			} else if (bags.get(bag) > bags.get(bestBag)){
-				bestBag = bag;
-			}
-		}
-
-		if (bestBag instanceof VelvetPouch){
-			Dungeon.LimitedDrops.VELVET_POUCH.drop();
-		} else if (bestBag instanceof ScrollHolder){
-			Dungeon.LimitedDrops.SCROLL_HOLDER.drop();
-		} else if (bestBag instanceof PotionBandolier){
-			Dungeon.LimitedDrops.POTION_BANDOLIER.drop();
-		} else if (bestBag instanceof MagicalHolster){
-			com.quasistellar.hollowdungeon.Dungeon.LimitedDrops.MAGICAL_HOLSTER.drop();
-		}
-
-		return bestBag;
-
-	}
-
 }
