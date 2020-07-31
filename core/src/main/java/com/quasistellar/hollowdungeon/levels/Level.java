@@ -127,6 +127,7 @@ public abstract class Level implements Bundlable {
 	
 	public int entrance;
 	public int exit;
+	public int transition;
 
 	//when a boss level has become locked.
 	public boolean locked = false;
@@ -154,6 +155,7 @@ public abstract class Level implements Bundlable {
 	private static final String MAPPED		= "mapped";
 	private static final String ENTRANCE	= "entrance";
 	private static final String EXIT		= "exit";
+	private static final String TRANSITION  = "transition";
 	private static final String LOCKED      = "locked";
 	private static final String HEAPS		= "heaps";
 	private static final String PLANTS		= "plants";
@@ -296,6 +298,7 @@ public abstract class Level implements Bundlable {
 		
 		entrance	= bundle.getInt( ENTRANCE );
 		exit		= bundle.getInt( EXIT );
+		transition  = bundle.getInt( TRANSITION );
 
 		locked      = bundle.getBoolean( LOCKED );
 		
@@ -376,6 +379,7 @@ public abstract class Level implements Bundlable {
 		bundle.put( MAPPED, mapped );
 		bundle.put( ENTRANCE, entrance );
 		bundle.put( EXIT, exit );
+		bundle.put( TRANSITION, transition );
 		bundle.put( LOCKED, locked );
 		bundle.put( HEAPS, heaps.valueList() );
 		bundle.put( PLANTS, plants.valueList() );

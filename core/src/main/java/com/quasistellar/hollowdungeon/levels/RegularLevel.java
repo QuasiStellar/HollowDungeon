@@ -22,29 +22,24 @@
 package com.quasistellar.hollowdungeon.levels;
 
 import com.quasistellar.hollowdungeon.journal.Document;
-import com.quasistellar.hollowdungeon.Bones;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.mobs.GoldenMimic;
 import com.quasistellar.hollowdungeon.actors.mobs.Mimic;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.journal.GuidePage;
-import com.quasistellar.hollowdungeon.items.keys.GoldenKey;
 import com.quasistellar.hollowdungeon.levels.builders.Builder;
 import com.quasistellar.hollowdungeon.levels.builders.LoopBuilder;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
-import com.quasistellar.hollowdungeon.levels.rooms.secret.SecretRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.special.PitRoom;
-import com.quasistellar.hollowdungeon.levels.rooms.special.ShopRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.ExitRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.StandardRoom;
+import com.quasistellar.hollowdungeon.levels.rooms.standard.TransitionRoom;
 import com.quasistellar.hollowdungeon.levels.traps.BlazingTrap;
 import com.quasistellar.hollowdungeon.levels.traps.BurningTrap;
 import com.quasistellar.hollowdungeon.levels.traps.ChillingTrap;
@@ -104,6 +99,10 @@ public abstract class RegularLevel extends Level {
 			} while (!s.setSizeCat( standards-i ));
 			i += s.sizeCat.roomValue-1;
 			initRooms.add(s);
+		}
+
+		if (!Dungeon.transitionDestination.equals("")) {
+			initRooms.add(new TransitionRoom());
 		}
 
 		int specials = specialRooms();
@@ -336,16 +335,6 @@ public abstract class RegularLevel extends Level {
 
 		//use a separate generator for this to prevent held items and meta progress from affecting levelgen
 		Random.pushGenerator( Dungeon.seedCurDepth() );
-
-		Item item = Bones.get();
-		if (item != null) {
-			int cell = randomDropCell();
-			if (map[cell] == Terrain.HIGH_GRASS || map[cell] == Terrain.FURROWED_GRASS) {
-				map[cell] = Terrain.GRASS;
-				losBlocking[cell] = false;
-			}
-			drop( item, cell ).setHauntedIfCursed().type = Heap.Type.REMAINS;
-		}
 
 		//guide pages
 		Collection<String> allPages = Document.ADVENTURERS_GUIDE.pages();

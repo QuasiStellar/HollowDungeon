@@ -27,7 +27,6 @@ import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.Bones;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -188,14 +187,7 @@ public class NewCavesBossLevel extends Level {
 
 	@Override
 	protected void createItems() {
-		Item item = Bones.get();
-		if (item != null) {
-			int pos;
-			do {
-				pos = randomRespawnCell(null);
-			} while (pos == entrance);
-			drop( item, pos ).setHauntedIfCursed().type = Heap.Type.REMAINS;
-		}
+
 	}
 
 	@Override

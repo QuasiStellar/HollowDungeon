@@ -62,7 +62,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 	
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE
+		DESCEND, TRANSIT, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE
 	}
 	public static Mode mode;
 	
@@ -107,7 +107,7 @@ public class InterlevelScene extends PixelScene {
 					loadingLocation = "King's Pass";
 					fadeTime = SLOW_FADE;
 				} else {
-					loadingLocation = Dungeon.nextLocation;
+					loadingLocation = Dungeon.exitDestination;
 					//TODO: utilize it
 					if (false) {
 						fadeTime = FAST_FADE;
@@ -117,8 +117,11 @@ public class InterlevelScene extends PixelScene {
 				}
 				scrollSpeed = 5;
 				break;
+			case TRANSIT:
+				scrollSpeed = 5;
+				break;
 			case FALL:
-				loadingLocation = Dungeon.nextLocation;
+				loadingLocation = Dungeon.exitDestination;
 				scrollSpeed = 50;
 				break;
 			case RETURN:
@@ -198,6 +201,9 @@ public class InterlevelScene extends PixelScene {
 						switch (mode) {
 							case DESCEND:
 								descend();
+								break;
+							case TRANSIT:
+								transit();
 								break;
 							case ASCEND:
 								ascend();
@@ -320,13 +326,30 @@ public class InterlevelScene extends PixelScene {
 		}
 
 		Level level;
-		Dungeon.location = Dungeon.nextLocation;
+		Dungeon.location = Dungeon.exitDestination;
 		try {
 			level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		} catch (IOException e) {
 			level = Dungeon.newLevel();
 		}
+		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.entrance );
+	}
+
+	private void transit() throws IOException {
+
+		Mob.holdAllies( Dungeon.level );
+		Dungeon.saveAll();
+
+		Level level;
+		Dungeon.location = Dungeon.transitionDestination;
+		try {
+			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		} catch (IOException e) {
+			level = Dungeon.newLevel();
+		}
+		Dungeon.changeConnections(Dungeon.location);
+		Dungeon.switchLevel( level, level.transition );
 	}
 	
 	private void fall() throws IOException {
@@ -337,12 +360,13 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.saveAll();
 
 		Level level;
-		Dungeon.location = Dungeon.nextLocation;
+		Dungeon.location = Dungeon.exitDestination;
 		try {
 			level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		} catch (IOException e) {
 			level = Dungeon.newLevel();
 		}
+		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.fallCell( fallIntoPit ));
 	}
 	
@@ -351,8 +375,15 @@ public class InterlevelScene extends PixelScene {
 		Mob.holdAllies( Dungeon.level );
 
 		Dungeon.saveAll();
-		//Dungeon.depth--;
-		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		Dungeon.location = Dungeon.entranceDestination;
+
+		Level level;
+		try {
+			level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		} catch (IOException e) {
+			level = Dungeon.newLevel();
+		}
+		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.exit );
 	}
 	
@@ -361,8 +392,8 @@ public class InterlevelScene extends PixelScene {
 		Mob.holdAllies( Dungeon.level );
 
 		Dungeon.saveAll();
-		//Dungeon.depth = returnDepth;
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, returnPos );
 	}
 	
@@ -377,6 +408,7 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.switchLevel( Dungeon.loadLevel( GamesInProgress.curSlot ), -1 );
 		} else {
 			Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
+			Dungeon.changeConnections(Dungeon.location);
 			Dungeon.switchLevel( level, Dungeon.hero.pos );
 		}
 	}
@@ -404,6 +436,7 @@ public class InterlevelScene extends PixelScene {
 
 		//Dungeon.depth--;
 		Level level = Dungeon.newLevel();
+		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.entrance );
 	}
 	

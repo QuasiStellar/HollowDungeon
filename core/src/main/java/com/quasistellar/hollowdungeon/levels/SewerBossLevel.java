@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.levels;
 
 import com.quasistellar.hollowdungeon.scenes.GameScene;
-import com.quasistellar.hollowdungeon.Bones;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.items.Heap;
@@ -109,14 +108,7 @@ public class SewerBossLevel extends SewerLevel {
 	
 	@Override
 	protected void createItems() {
-		Item item = Bones.get();
-		if (item != null) {
-			int pos;
-			do {
-				pos = pointToCell(roomEntrance.random());
-			} while (pos == entrance || solid[pos]);
-			drop( item, pos ).setHauntedIfCursed().type = Heap.Type.REMAINS;
-		}
+
 	}
 
 	@Override

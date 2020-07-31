@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.tiles;
 
-import com.quasistellar.hollowdungeon.levels.LastShopLevel;
 import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.Assets;

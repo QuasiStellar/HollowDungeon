@@ -26,7 +26,6 @@ import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.effects.Speck;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.Bones;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -512,11 +511,7 @@ public class NewPrisonBossLevel extends com.quasistellar.hollowdungeon.levels.Le
 	
 	@Override
 	protected void createItems() {
-		Item item = Bones.get();
-		if (item != null) {
-			drop( item, randomRespawnCell( null ) ).setHauntedIfCursed().type = Heap.Type.REMAINS;
-		}
-		drop(new IronKey(""), randomPrisonCellPos());
+
 	}
 	
 	private int randomPrisonCellPos(){

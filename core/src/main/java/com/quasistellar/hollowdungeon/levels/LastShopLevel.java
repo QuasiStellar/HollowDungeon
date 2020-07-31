@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.levels;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.Bones;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
@@ -116,14 +115,7 @@ public class LastShopLevel extends RegularLevel {
 	
 	@Override
 	protected void createItems() {
-		Item item = Bones.get();
-		if (item != null) {
-			int pos;
-			do {
-				pos = pointToCell(roomEntrance.random());
-			} while (pos == entrance);
-			drop( item, pos ).setHauntedIfCursed().type = Heap.Type.REMAINS;
-		}
+
 	}
 	
 	@Override

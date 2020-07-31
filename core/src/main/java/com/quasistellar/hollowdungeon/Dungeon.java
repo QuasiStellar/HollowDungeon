@@ -50,6 +50,7 @@ import com.quasistellar.hollowdungeon.levels.rooms.secret.SecretRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
 import com.quasistellar.hollowdungeon.mechanics.ShadowCaster;
 import com.quasistellar.hollowdungeon.messages.Messages;
+import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
@@ -145,7 +146,9 @@ public class Dungeon {
 	public static String location;
 	public static int gold;
 
-	public static String nextLocation;
+	public static String entranceDestination;
+	public static String exitDestination;
+	public static String transitionDestination;
 	
 	public static HashSet<Integer> chapters;
 
@@ -180,9 +183,8 @@ public class Dungeon {
 		QuickSlotButton.reset();
 		
 		location = "King's Pass";
+		exitDestination = "King's Pass";
 		gold = 0;
-
-		nextLocation = "King's Pass";
 
 		for (LimitedDrops a : LimitedDrops.values())
 			a.count = 0;
@@ -205,22 +207,352 @@ public class Dungeon {
 	public static boolean isChallenged( int mask ) {
 		return (challenges & mask) != 0;
 	}
-	
+
+	public static Level switchLocation(String location) {
+		Level level;
+		switch (location) {
+			case "King's Pass":
+				level = new SewerLevel();
+				break;
+			case "Dirtmouth":
+				level = new SewerLevel();
+				break;
+			case "Forgotten Crossroads 1":
+				level = new SewerLevel();
+				break;
+			case "Forgotten Crossroads 2":
+				level = new SewerLevel();
+				break;
+			case "Forgotten Crossroads 3":
+				level = new SewerLevel();
+				break;
+			case "Forgotten Crossroads 4":
+				level = new SewerLevel();
+				break;
+			case "Forgotten Crossroads 5":
+				level = new SewerLevel();
+				break;
+			case "Ancestral Mound":
+				level = new SewerLevel();
+				break;
+			case "Temple of the Black Egg":
+				level = new SewerLevel();
+				break;
+			case "Greenpath 1":
+				level = new SewerLevel();
+				break;
+			case "Greenpath 2":
+				level = new SewerLevel();
+				break;
+			case "Greenpath 3":
+				level = new SewerLevel();
+				break;
+			case "Greenpath 4":
+				level = new SewerLevel();
+				break;
+			case "Greenpath 5":
+				level = new SewerLevel();
+				break;
+			case "Lake of Unn":
+				level = new SewerLevel();
+				break;
+			case "Fog Canyon 1":
+				level = new SewerLevel();
+				break;
+			case "Fog Canyon 2":
+				level = new SewerLevel();
+				break;
+			case "Fog Canyon 3":
+				level = new SewerLevel();
+				break;
+			case "Fog Canyon 4":
+				level = new SewerLevel();
+				break;
+			case "Overgrown Mound":
+				level = new SewerLevel();
+				break;
+			case "Teacher's Archives":
+				level = new SewerLevel();
+				break;
+			case "Fungal Wastes 1":
+				level = new SewerLevel();
+				break;
+			case "Fungal Wastes 2":
+				level = new SewerLevel();
+				break;
+			case "Fungal Wastes 3":
+				level = new SewerLevel();
+				break;
+			case "Fungal Wastes 4":
+				level = new SewerLevel();
+				break;
+			case "Fungal Wastes 5":
+				level = new SewerLevel();
+				break;
+			case "City of Tears 1":
+				level = new SewerLevel();
+				break;
+			case "City of Tears 2":
+				level = new SewerLevel();
+				break;
+			case "City of Tears 3":
+				level = new SewerLevel();
+				break;
+			case "City of Tears 4":
+				level = new SewerLevel();
+				break;
+			case "City of Tears 5":
+				level = new SewerLevel();
+				break;
+			case "Soul Sanctum 1":
+				level = new SewerLevel();
+				break;
+			case "Soul Sanctum 2":
+				level = new SewerLevel();
+				break;
+			case "Soul Sanctum 3":
+				level = new SewerLevel();
+				break;
+			case "Watcher's Spire 1":
+				level = new SewerLevel();
+				break;
+			case "Watcher's Spire 2":
+				level = new SewerLevel();
+				break;
+			case "Watcher's Spire 3":
+				level = new SewerLevel();
+				break;
+			case "Resting Grounds":
+				level = new SewerLevel();
+				break;
+			case "Crystal Peak 1":
+				level = new SewerLevel();
+				break;
+			case "Crystal Peak 2":
+				level = new SewerLevel();
+				break;
+			default:
+				level = new com.quasistellar.hollowdungeon.levels.DeadEndLevel();
+		}
+		return level;
+	}
+
+	public static void changeConnections(String location) {
+		switch (location) {
+			case "King's Pass":
+				entranceDestination = "Howling Cliffs 1";
+				exitDestination = "Dirtmouth";
+				transitionDestination = "";
+				break;
+			case "Dirtmouth":
+				entranceDestination = "King's Pass";
+				exitDestination = "Forgotten Crossroads 1";
+				transitionDestination = "Crystal Peak 1";
+				break;
+			case "Forgotten Crossroads 1":
+				entranceDestination = "Dirtmouth";
+				exitDestination = "Forgotten Crossroads 2";
+				transitionDestination = "Crystal Peak 2";
+				break;
+			case "Forgotten Crossroads 2":
+				entranceDestination = "Forgotten Crossroads 1";
+				exitDestination = "Forgotten Crossroads 3";
+				transitionDestination = "Resting Grounds";
+				break;
+			case "Forgotten Crossroads 3":
+				entranceDestination = "Forgotten Crossroads 2";
+				exitDestination = "Forgotten Crossroads 4";
+				transitionDestination = "Greenpath 1";
+				break;
+			case "Forgotten Crossroads 4":
+				entranceDestination = "Forgotten Crossroads 3";
+				exitDestination = "Forgotten Crossroads 5";
+				transitionDestination = "Fungal Wastes 1";
+				break;
+			case "Forgotten Crossroads 5":
+				entranceDestination = "Forgotten Crossroads 4";
+				exitDestination = "Ancestral Mound";
+				transitionDestination = "";
+				break;
+			case "Ancestral Mound":
+				entranceDestination = "Forgotten Crossroads 5";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Temple of the Black Egg":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Greenpath 1":
+				entranceDestination = "";
+				exitDestination = "Greenpath 2";
+				transitionDestination = "Forgotten Crossroads 3";
+				break;
+			case "Greenpath 2":
+				entranceDestination = "Greenpath 1";
+				exitDestination = "Greenpath 3";
+				transitionDestination = "Howling Cliffs 3";
+				break;
+			case "Greenpath 3":
+				entranceDestination = "Greenpath 2";
+				exitDestination = "Greenpath 4";
+				transitionDestination = "Queen's Gardens 1";
+				break;
+			case "Greenpath 4":
+				entranceDestination = "Greenpath 3";
+				exitDestination = "Greenpath 5";
+				transitionDestination = "Fog Canyon 2";
+				break;
+			case "Greenpath 5":
+				entranceDestination = "Greenpath 4";
+				exitDestination = "Lake of Unn";
+				transitionDestination = "";
+				break;
+			case "Lake of Unn":
+				entranceDestination = "Greenpath 5";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Fog Canyon 1":
+				entranceDestination = "";
+				exitDestination = "Fog Canyon 2";
+				transitionDestination = "Fungal Wastes 2";
+				break;
+			case "Fog Canyon 2":
+				entranceDestination = "Fog Canyon 1";
+				exitDestination = "Fog Canyon 3";
+				transitionDestination = "Greenpath 4";
+				break;
+			case "Fog Canyon 3":
+				entranceDestination = "Fog Canyon 2";
+				exitDestination = "Fog Canyon 4";
+				transitionDestination = "Teacher's Archives";
+				break;
+			case "Fog Canyon 4":
+				entranceDestination = "Fog Canyon 3";
+				exitDestination = "Overgrown Mound";
+				transitionDestination = "Queen's Gardens 3";
+				break;
+			case "Overgrown Mound":
+				entranceDestination = "Fog Canyon 4";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Teacher's Archives":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "Fog Canyon 3";
+				break;
+			case "Fungal Wastes 1":
+				entranceDestination = "";
+				exitDestination = "Fungal Wastes 2";
+				transitionDestination = "Forgotten Crossroads 4";
+				break;
+			case "Fungal Wastes 2":
+				entranceDestination = "Fungal Wastes 1";
+				exitDestination = "Fungal Wastes 3";
+				transitionDestination = "Fog Canyon 1";
+				break;
+			case "Fungal Wastes 3":
+				entranceDestination = "Fungal Wastes 2";
+				exitDestination = "Fungal Wastes 4";
+				transitionDestination = "Fog Canyon 3";
+				break;
+			case "Fungal Wastes 4":
+				entranceDestination = "Fungal Wastes 3";
+				exitDestination = "Fungal Wastes 5";
+				transitionDestination = "City of Tears 1";
+				break;
+			case "Fungal Wastes 5":
+				entranceDestination = "Fungal Wastes 4";
+				exitDestination = "Deepnest 1";
+				transitionDestination = "";
+				break;
+			case "City of Tears 1":
+				entranceDestination = "";
+				exitDestination = "City of Tears 2";
+				transitionDestination = "Fungal Wastes 4";
+				break;
+			case "City of Tears 2":
+				entranceDestination = "City of Tears 1";
+				exitDestination = "City of Tears 3";
+				transitionDestination = "Soul Sanctum 1";
+				break;
+			case "City of Tears 3":
+				entranceDestination = "City of Tears 2";
+				exitDestination = "City of Tears 4";
+				transitionDestination = "Resting Grounds";
+				break;
+			case "City of Tears 4":
+				entranceDestination = "City of Tears 3";
+				exitDestination = "City of Tears 5";
+				transitionDestination = "Watcher's Spire 1";
+				break;
+			case "City of Tears 5":
+				entranceDestination = "City of Tears 4";
+				exitDestination = "Royal Waterways 1";
+				transitionDestination = "Tower of Love";
+				break;
+			case "Soul Sanctum 1":
+				entranceDestination = "";
+				exitDestination = "Soul Sanctum 2";
+				transitionDestination = "City of Tears 2";
+				break;
+			case "Soul Sanctum 2":
+				entranceDestination = "Soul Sanctum 1";
+				exitDestination = "Soul Sanctum 3";
+				transitionDestination = "";
+				break;
+			case "Soul Sanctum 3":
+				entranceDestination = "Soul Sanctum 2";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Watcher's Spire 1":
+				entranceDestination = "";
+				exitDestination = "Watcher's Spire 2";
+				transitionDestination = "City of Tears 4";
+				break;
+			case "Watcher's Spire 2":
+				entranceDestination = "Watcher's Spire 1";
+				exitDestination = "Watcher's Spire 3";
+				transitionDestination = "";
+				break;
+			case "Watcher's Spire 3":
+				entranceDestination = "Watcher's Spire 2";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Resting Grounds":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Crystal Peak 1":
+				entranceDestination = "";
+				exitDestination = "Crystal Peak 2";
+				transitionDestination = "Dirtmouth";
+				break;
+			case "Crystal Peak 2":
+				entranceDestination = "Crystal Peak 1";
+				exitDestination = "Crystal Peak 3";
+				transitionDestination = "Forgotten Crossroads 1";
+				break;
+		}
+	}
+
 	public static com.quasistellar.hollowdungeon.levels.Level newLevel() {
 		
 		Dungeon.level = null;
 		Actor.clear();
 		
-		Level level;
-		switch (location) {
-		case "King's Pass":
-			level = new SewerLevel();
-			break;
-		default:
-			level = new com.quasistellar.hollowdungeon.levels.DeadEndLevel();
-			Statistics.deepestFloor--;
-		}
-		
+		Level level = switchLocation(location);
+		changeConnections(location);
+
+		GLog.h(entranceDestination);
+		GLog.h(exitDestination);
+		GLog.h(transitionDestination);
 		level.create();
 		
 		return level;
@@ -410,7 +742,6 @@ public class Dungeon {
 		Dungeon.challenges = bundle.getInt( CHALLENGES );
 		
 		Dungeon.level = null;
-		Dungeon.location = null;
 		
 		Scroll.restore( bundle );
 		Potion.restore( bundle );

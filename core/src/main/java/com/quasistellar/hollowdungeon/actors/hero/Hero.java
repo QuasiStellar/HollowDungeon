@@ -317,6 +317,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				
 			} else if (curAction instanceof HeroAction.Descend) {
 				actResult = actDescend( (HeroAction.Descend)curAction );
+
+			} else if (curAction instanceof HeroAction.Transit) {
+				actResult = actTransit( (HeroAction.Transit)curAction );
 				
 			} else if (curAction instanceof HeroAction.Ascend) {
 				actResult = actAscend( (HeroAction.Ascend)curAction );
@@ -608,7 +611,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			return false;
 		//there can be multiple exit tiles, so descend on any of them
 		//TODO this is slightly brittle, it assumes there are no disjointed sets of exit tiles
-		} else if ((com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.EXIT || com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.UNLOCKED_EXIT)) {
+		} else if ((com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.EXIT)) {
 			
 			curAction = null;
 
@@ -616,6 +619,37 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			if (buff != null) buff.detach();
 			
 			InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
+			Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
+
+			return false;
+
+		} else if (getCloser( stairs )) {
+
+			return true;
+
+		} else {
+			ready();
+			return false;
+		}
+	}
+
+	private boolean actTransit( HeroAction.Transit action ) {
+		int stairs = action.dst;
+
+		if (rooted) {
+			Camera.main.shake(1, 1f);
+			ready();
+			return false;
+			//there can be multiple exit tiles, so descend on any of them
+			//TODO this is slightly brittle, it assumes there are no disjointed sets of exit tiles
+		} else if ((com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.UNLOCKED_EXIT)) {
+
+			curAction = null;
+
+			com.quasistellar.hollowdungeon.actors.buffs.Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble.class);
+			if (buff != null) buff.detach();
+
+			InterlevelScene.mode = InterlevelScene.Mode.TRANSIT;
 			Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
 
 			return false;
@@ -962,7 +996,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 			curAction = new HeroAction.Unlock( cell );
 			
-		} else if ((cell == com.quasistellar.hollowdungeon.Dungeon.level.exit || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.EXIT || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.UNLOCKED_EXIT)) {
+		} else if ((cell == com.quasistellar.hollowdungeon.Dungeon.level.exit || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.EXIT)) {
 			
 			curAction = new HeroAction.Descend( cell );
 			
@@ -970,6 +1004,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 			curAction = new HeroAction.Ascend( cell );
 			
+		} else if (cell == Dungeon.level.transition || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.UNLOCKED_EXIT) {
+
+			curAction = new HeroAction.Transit( cell );
+
 		} else  {
 			
 			if (!com.quasistellar.hollowdungeon.Dungeon.level.visited[cell] && !com.quasistellar.hollowdungeon.Dungeon.level.mapped[cell]
@@ -1090,8 +1128,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				}
 			}
 		}
-		
-		com.quasistellar.hollowdungeon.Bones.leave();
 		
 		com.quasistellar.hollowdungeon.Dungeon.observe();
 		GameScene.updateFog();
