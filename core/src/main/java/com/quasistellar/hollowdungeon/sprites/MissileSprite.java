@@ -23,6 +23,7 @@ package com.quasistellar.hollowdungeon.sprites;
 
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Item;
+import com.quasistellar.hollowdungeon.skills.VengefulSpirit;
 import com.quasistellar.hollowdungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.tweeners.PosTweener;
@@ -72,7 +73,7 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 	static {
 
 		ANGULAR_SPEEDS.put(ScorpioSprite.ScorpioShot.class,   0);
-		
+		ANGULAR_SPEEDS.put(VengefulSpirit.VengefulSpiritShot.class,   0);
 		ANGULAR_SPEEDS.put(TenguSprite.TenguShuriken.class,      2160);
 	}
 
@@ -96,7 +97,7 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 			}
 		}
 		
-		angle = 135 - (float)(Math.atan2( d.x, d.y ) / 3.1415926 * 180);
+		angle = 0 - (float)(Math.atan2( d.x, d.y ) / 3.1415926 * 180);
 		
 		if (d.x >= 0){
 			flipHorizontal = false;

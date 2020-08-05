@@ -141,6 +141,7 @@ public class GameScene extends PixelScene {
 	private SkillIndicator dreamNail;
 	private SkillIndicator dreamgate;
 	private SpellIndicator focus;
+	private SpellIndicator vengefulSpirit;
 	private AttackIndicator attack;
 	private LootIndicator loot;
 	private ActionIndicator action;
@@ -320,6 +321,10 @@ public class GameScene extends PixelScene {
 		focus = new SpellIndicator(Dungeon.hero.focus);
 		focus.camera = uiCamera;
 		add(focus);
+
+		vengefulSpirit = new SpellIndicator(Dungeon.hero.vengefulSpirit);
+		vengefulSpirit.camera = uiCamera;
+		add(vengefulSpirit);
 
 		attack = new AttackIndicator();
 		attack.camera = uiCamera;
@@ -618,6 +623,13 @@ public class GameScene extends PixelScene {
 			layoutSkillTags();
 		}
 
+		if (tagVengefulSpirit != vengefulSpirit.visible) {
+
+			tagVengefulSpirit = vengefulSpirit.visible;
+
+			layoutSkillTags();
+		}
+
 		cellSelector.enable(Dungeon.hero.ready);
 		
 		for (Gizmo g : toDestroy){
@@ -632,6 +644,7 @@ public class GameScene extends PixelScene {
 	private boolean tagDreamNail        = false;
 	private boolean tagDreamgate        = false;
 	private boolean tagFocus            = false;
+	private boolean tagVengefulSpirit   = false;
 	private boolean tagAttack    = false;
 	private boolean tagLoot      = false;
 	private boolean tagAction    = false;
@@ -679,7 +692,7 @@ public class GameScene extends PixelScene {
 
 		if (scene == null) return;
 
-		float tagRight = SPDSettings.flipTags() ? uiCamera.width - scene.attack.width() : 0;
+		float tagLeft = SPDSettings.flipTags() ? uiCamera.width - scene.attack.width() : 0;
 
 		if (SPDSettings.flipTags()) {
 			scene.log.setRect(scene.attack.width(), scene.toolbar.top(), uiCamera.width - scene.attack.width(), 0);
@@ -690,33 +703,66 @@ public class GameScene extends PixelScene {
 		float upper_pos = scene.pane.bottom();
 
 		if (scene.tagMothwingCloak) {
-			scene.mothwingCloak.setPos( tagRight, upper_pos + 10);
-			scene.mothwingCloak.flip(tagRight == 0);
+			scene.mothwingCloak.setPos( tagLeft, upper_pos + 10);
+			scene.mothwingCloak.flip(tagLeft == 0);
 		}
 
 		if (scene.tagCrystalHeart) {
-			scene.crystalHeart.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height());
-			scene.crystalHeart.flip(tagRight == 0);
+			scene.crystalHeart.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height());
+			scene.crystalHeart.flip(tagLeft == 0);
 		}
 
 		if (scene.tagMonarchWings) {
-			scene.monarchWings.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height());
-			scene.monarchWings.flip(tagRight == 0);
+			scene.monarchWings.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height());
+			scene.monarchWings.flip(tagLeft == 0);
 		}
 
 		if (scene.tagDreamNail) {
-			scene.dreamNail.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height() + scene.monarchWings.height());
-			scene.dreamNail.flip(tagRight == 0);
+			scene.dreamNail.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height() + scene.monarchWings.height());
+			scene.dreamNail.flip(tagLeft == 0);
 		}
 
 		if (scene.tagDreamgate) {
-			scene.dreamgate.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height() + scene.monarchWings.height() + scene.dreamNail.height());
-			scene.dreamgate.flip(tagRight == 0);
+			scene.dreamgate.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height() + scene.monarchWings.height() + scene.dreamNail.height());
+			scene.dreamgate.flip(tagLeft == 0);
 		}
 
 		if (scene.tagFocus) {
-			scene.focus.setPos( tagRight + 30, upper_pos);
-			scene.focus.flip(tagRight == 0);
+			float xPos = 0;
+			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+				case SPLIT:
+					xPos = uiCamera.width - scene.focus.width() - 25;
+					break;
+				case CENTER:
+					xPos = uiCamera.width / 2f - scene.focus.width() - 33;
+					break;
+				case GROUP:
+					xPos = uiCamera.width - scene.focus.width() - 65;
+					break;
+			}
+			if (SPDSettings.flipToolbar()) {
+				xPos = uiCamera.width - xPos - scene.focus.width();
+			}
+			scene.focus.setPos( xPos, uiCamera.height - scene.focus.height());
+		}
+
+		if (scene.tagVengefulSpirit) {
+			float xPos = 0;
+			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+				case SPLIT:
+					xPos = uiCamera.width - scene.vengefulSpirit.width() * 2 - 25;
+					break;
+				case CENTER:
+					xPos = uiCamera.width / 2f - scene.vengefulSpirit.width() * 2 - 33;
+					break;
+				case GROUP:
+					xPos = uiCamera.width - scene.vengefulSpirit.width() * 2 - 65;
+					break;
+			}
+			if (SPDSettings.flipToolbar()) {
+				xPos = uiCamera.width - xPos - scene.vengefulSpirit.width();
+			}
+			scene.vengefulSpirit.setPos( xPos, uiCamera.height - scene.vengefulSpirit.height());
 		}
 	}
 	

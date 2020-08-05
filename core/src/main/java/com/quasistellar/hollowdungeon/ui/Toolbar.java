@@ -52,7 +52,6 @@ public class Toolbar extends Component {
 	private Tool btnWait;
 	private Tool btnSearch;
 	private Tool btnInventory;
-	private QuickslotTool[] btnQuick;
 	
 	private PickedUpItem pickedUp;
 	
@@ -77,14 +76,7 @@ public class Toolbar extends Component {
 	
 	@Override
 	protected void createChildren() {
-		
-		btnQuick = new QuickslotTool[4];
-		
-		add( btnQuick[3] = new QuickslotTool(64, 0, 22, 24, 3) );
-		add( btnQuick[2] = new QuickslotTool(64, 0, 22, 24, 2) );
-		add( btnQuick[1] = new QuickslotTool(64, 0, 22, 24, 1) );
-		add( btnQuick[0] = new QuickslotTool(64, 0, 22, 24, 0) );
-		
+
 		add(btnWait = new Tool(24, 0, 20, 26) {
 			@Override
 			protected void onClick() {
@@ -192,69 +184,23 @@ public class Toolbar extends Component {
 	@Override
 	protected void layout() {
 
-		for(int i = 0; i <= 3; i++) {
-			if (i == 0 && !SPDSettings.flipToolbar() ||
-				i == 3 && SPDSettings.flipToolbar()){
-				btnQuick[i].border(0, 2);
-				btnQuick[i].frame(106, 0, 19, 24);
-			} else if (i == 0 && SPDSettings.flipToolbar() ||
-					i == 3 && !SPDSettings.flipToolbar()){
-				btnQuick[i].border(2, 1);
-				btnQuick[i].frame(86, 0, 20, 24);
-			} else {
-				btnQuick[i].border(0, 1);
-				btnQuick[i].frame(88, 0, 18, 24);
-			}
-		}
-
 		float right = width;
 		switch(Mode.valueOf(SPDSettings.toolbarMode())){
 			case SPLIT:
 				btnWait.setPos(x, y);
 				btnSearch.setPos(btnWait.right(), y);
-
 				btnInventory.setPos(right - btnInventory.width(), y);
-
-				btnQuick[0].setPos(btnInventory.left() - btnQuick[0].width(), y+2);
-				btnQuick[1].setPos(btnQuick[0].left() - btnQuick[1].width(), y+2);
-				btnQuick[2].setPos(btnQuick[1].left() - btnQuick[2].width(), y+2);
-				btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), y+2);
-				
-				//center the quickslots if they
-				if (btnQuick[3].left() < btnSearch.right()){
-					float diff = Math.round(btnSearch.right() - btnQuick[3].left())/2;
-					for( int i = 0; i < 4; i++){
-						btnQuick[i].setPos( btnQuick[i].left()+diff, btnQuick[i].top() );
-					}
-				}
-				
 				break;
 
 			//center = group but.. well.. centered, so all we need to do is pre-emptively set the right side further in.
 			case CENTER:
 				float toolbarWidth = btnWait.width() + btnSearch.width() + btnInventory.width();
-				for(Button slot : btnQuick){
-					if (slot.visible) toolbarWidth += slot.width();
-				}
 				right = (width + toolbarWidth)/2;
 
 			case GROUP:
 				btnWait.setPos(right - btnWait.width(), y);
 				btnSearch.setPos(btnWait.left() - btnSearch.width(), y);
 				btnInventory.setPos(btnSearch.left() - btnInventory.width(), y);
-
-				btnQuick[0].setPos(btnInventory.left() - btnQuick[0].width(), y+2);
-				btnQuick[1].setPos(btnQuick[0].left() - btnQuick[1].width(), y+2);
-				btnQuick[2].setPos(btnQuick[1].left() - btnQuick[2].width(), y+2);
-				btnQuick[3].setPos(btnQuick[2].left() - btnQuick[3].width(), y+2);
-				
-				if (btnQuick[3].left() < 0){
-					float diff = -Math.round(btnQuick[3].left())/2;
-					for( int i = 0; i < 4; i++){
-						btnQuick[i].setPos( btnQuick[i].left()+diff, btnQuick[i].top() );
-					}
-				}
-				
 				break;
 		}
 		right = width;
@@ -264,10 +210,6 @@ public class Toolbar extends Component {
 			btnWait.setPos( (right - btnWait.right()), y);
 			btnSearch.setPos( (right - btnSearch.right()), y);
 			btnInventory.setPos( (right - btnInventory.right()), y);
-
-			for(int i = 0; i <= 3; i++) {
-				btnQuick[i].setPos( right - btnQuick[i].right(), y+2);
-			}
 
 		}
 
@@ -376,39 +318,7 @@ public class Toolbar extends Component {
 			}
 		}
 	}
-	
-	private static class QuickslotTool extends Tool {
-		
-		private com.quasistellar.hollowdungeon.ui.QuickSlotButton slot;
-		private int borderLeft = 2;
-		private int borderRight = 2;
-		
-		public QuickslotTool( int x, int y, int width, int height, int slotNum ) {
-			super( x, y, width, height );
 
-			slot = new QuickSlotButton( slotNum );
-			add( slot );
-		}
-
-		public void border( int left, int right ){
-			borderLeft = left;
-			borderRight = right;
-			layout();
-		}
-		
-		@Override
-		protected void layout() {
-			super.layout();
-			slot.setRect( x + borderLeft, y + 2, width - borderLeft-borderRight, height - 4 );
-		}
-		
-		@Override
-		public void enable( boolean value ) {
-			super.enable( value );
-			slot.enable( value );
-		}
-	}
-	
 	public static class PickedUpItem extends com.quasistellar.hollowdungeon.sprites.ItemSprite {
 		
 		private static final float DURATION = 0.5f;

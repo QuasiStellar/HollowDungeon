@@ -42,6 +42,7 @@ import com.quasistellar.hollowdungeon.skills.Focus;
 import com.quasistellar.hollowdungeon.skills.MonarchWings;
 import com.quasistellar.hollowdungeon.skills.MothwingCloak;
 import com.quasistellar.hollowdungeon.skills.Skill;
+import com.quasistellar.hollowdungeon.skills.VengefulSpirit;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.ui.HpIndicator;
 import com.quasistellar.hollowdungeon.windows.WndResurrect;
@@ -110,6 +111,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public Skill dreamNail = new DreamNail();
 	public Skill dreamgate = new Dreamgate();
 	public Skill focus = new Focus();
+	public Skill vengefulSpirit = new VengefulSpirit();
 
 	public int MM;
 	public int MP;

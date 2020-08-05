@@ -12,6 +12,7 @@ public class Skill implements Bundlable {
     public static final int DREAM_NAIL = 3;
     public static final int DREAMGATE = 4;
     public static final int FOCUS = 5;
+    public static final int VENGEFUL_SPIRIT = 6;
 
     public static final int NONE = 10;
 

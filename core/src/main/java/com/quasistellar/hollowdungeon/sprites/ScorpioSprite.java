@@ -80,7 +80,7 @@ public class ScorpioSprite extends MobSprite {
 		if (anim == zap) {
 			idle();
 			
-			((com.quasistellar.hollowdungeon.sprites.MissileSprite)parent.recycle( MissileSprite.class )).
+			((MissileSprite)parent.recycle( MissileSprite.class )).
 			reset( ch.pos, cellToAttack, new ScorpioShot(), new Callback() {
 				@Override
 				public void call() {

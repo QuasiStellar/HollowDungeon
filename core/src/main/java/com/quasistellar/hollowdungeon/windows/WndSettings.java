@@ -215,6 +215,7 @@ public class WndSettings extends WndTabbed {
 				protected void onClick() {
 					SPDSettings.toolbarMode(Toolbar.Mode.SPLIT.name());
 					Toolbar.updateLayout();
+					GameScene.layoutSkillTags();
 				}
 			};
 			btnSplit.setRect( 0, barDesc.bottom() + GAP_TINY, 36, 16);
@@ -225,6 +226,7 @@ public class WndSettings extends WndTabbed {
 				protected void onClick() {
 					SPDSettings.toolbarMode(Toolbar.Mode.GROUP.name());
 					Toolbar.updateLayout();
+					GameScene.layoutSkillTags();
 				}
 			};
 			btnGrouped.setRect( btnSplit.right()+GAP_TINY, btnSplit.top(), 36, 16);
@@ -235,6 +237,7 @@ public class WndSettings extends WndTabbed {
 				protected void onClick() {
 					SPDSettings.toolbarMode(Toolbar.Mode.CENTER.name());
 					Toolbar.updateLayout();
+					GameScene.layoutSkillTags();
 				}
 			};
 			btnCentered.setRect(btnGrouped.right()+GAP_TINY, btnSplit.top(), 36, 16);
@@ -246,6 +249,7 @@ public class WndSettings extends WndTabbed {
 					super.onClick();
 					SPDSettings.flipToolbar(checked());
 					Toolbar.updateLayout();
+					GameScene.layoutSkillTags();
 				}
 			};
 			chkFlipToolbar.setRect(0, btnGrouped.bottom() + GAP_TINY, WIDTH, BTN_HEIGHT);
@@ -258,6 +262,7 @@ public class WndSettings extends WndTabbed {
 					super.onClick();
 					SPDSettings.flipTags(checked());
 					GameScene.layoutTags();
+					GameScene.layoutSkillTags();
 				}
 			};
 			chkFlipTags.setRect(0, chkFlipToolbar.bottom() + GAP_TINY, WIDTH, BTN_HEIGHT);
