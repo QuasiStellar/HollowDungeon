@@ -35,7 +35,7 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
-public class Gold extends Item {
+public class Geo extends Item {
 
 	private static final String TXT_VALUE	= "%+d";
 	
@@ -44,11 +44,11 @@ public class Gold extends Item {
 		stackable = true;
 	}
 	
-	public Gold() {
+	public Geo() {
 		this( 1 );
 	}
 	
-	public Gold( int value ) {
+	public Geo(int value ) {
 		this.quantity = value;
 	}
 	

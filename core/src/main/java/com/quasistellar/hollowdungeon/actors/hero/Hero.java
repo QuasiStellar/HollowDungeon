@@ -24,13 +24,24 @@ package com.quasistellar.hollowdungeon.actors.hero;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
+import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
+import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.CheckedCell;
 import com.quasistellar.hollowdungeon.effects.Flare;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
+import com.quasistellar.hollowdungeon.mechanics.Ballistica;
+import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.messages.Languages;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
+import com.quasistellar.hollowdungeon.skills.CrystalHeart;
+import com.quasistellar.hollowdungeon.skills.DreamNail;
+import com.quasistellar.hollowdungeon.skills.Dreamgate;
+import com.quasistellar.hollowdungeon.skills.Focus;
+import com.quasistellar.hollowdungeon.skills.MonarchWings;
+import com.quasistellar.hollowdungeon.skills.MothwingCloak;
+import com.quasistellar.hollowdungeon.skills.Skill;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.ui.HpIndicator;
 import com.quasistellar.hollowdungeon.windows.WndResurrect;
@@ -92,8 +103,21 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public Belongings belongings;
 	
 	public float awareness;
+
+	public Skill mothwingCloak = new MothwingCloak();
+	public Skill crystalHeart = new CrystalHeart();
+	public Skill monarchWings = new MonarchWings();
+	public Skill dreamNail = new DreamNail();
+	public Skill dreamgate = new Dreamgate();
+	public Skill focus = new Focus();
+
+	public int MM;
+	public int MP;
 	
 	public int HTBoost = 0;
+
+	public int dreamgatePos;
+	public String dreamgateLocation = "";
 	
 	private ArrayList<com.quasistellar.hollowdungeon.actors.mobs.Mob> visibleEnemies;
 
@@ -104,6 +128,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public Hero() {
 		super();
 
+		MM = 20;
+		MP = 0;
 		HP = HT = 5;
 		
 		belongings = new Belongings( this );
@@ -124,6 +150,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 
 	private static final String HTBOOST     = "htboost";
+	private static final String MANA_MAX	= "MM";
+	private static final String MANA		= "MP";
+	private static final String DREAMGATE_POS= "dreamgatePos";
+	private static final String DREAMGATE_LOCATION		= "dreamgateLocation";
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -133,6 +163,12 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		heroClass.storeInBundle( bundle );
 		
 		bundle.put( HTBOOST, HTBoost );
+
+		bundle.put( MANA_MAX, MM );
+		bundle.put( MANA, MP );
+
+		bundle.put( DREAMGATE_POS, dreamgatePos );
+		bundle.put( DREAMGATE_LOCATION, dreamgateLocation );
 
 		belongings.storeInBundle( bundle );
 	}
@@ -144,6 +180,12 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		heroClass = HeroClass.restoreInBundle( bundle );
 		
 		HTBoost = bundle.getInt(HTBOOST);
+
+		MM = bundle.getInt( MANA_MAX );
+		MP = bundle.getInt( MANA );
+
+		dreamgatePos = bundle.getInt( DREAMGATE_POS );
+		dreamgateLocation = bundle.getString( DREAMGATE_LOCATION );
 		
 		belongings.restoreFromBundle( bundle );
 	}
@@ -151,6 +193,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public static void preview(com.quasistellar.hollowdungeon.GamesInProgress.Info info, Bundle bundle ) {
 		info.hp = bundle.getInt( Char.TAG_HP );
 		info.ht = bundle.getInt( Char.TAG_HT );
+		info.mp = bundle.getInt( MANA );
+		info.mm = bundle.getInt( MANA_MAX);
 		info.shld = bundle.getInt( Char.TAG_SHLD );
 		info.heroClass = HeroClass.restoreInBundle( bundle );
 		Belongings.preview( info, bundle );
@@ -232,9 +276,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	@Override
 	public boolean act() {
-
-		if (this.buff(Invulnerable.class) != null)
-			this.buff(Invulnerable.class).detach();
 		
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = com.quasistellar.hollowdungeon.Dungeon.level.heroFOV;
@@ -723,7 +764,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		resting = fullRest;
 	}
 
-	public static class Invulnerable extends Buff {
+	public static class Invulnerable extends FlavourBuff {
 		//does nothing
 	}
 
@@ -745,7 +786,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		int preHP = HP + shielding();
 		super.damage( dmg, src );
-		Buff.affect(this, Invulnerable.class);
+		Buff.prolong(this, Invulnerable.class, 1.9f);
 		int postHP = HP + shielding();
 		int effectiveDamage = preHP - postHP;
 
@@ -996,6 +1037,14 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		return true;
 	}
 
+	public void earnMana( int mana ) {
+		this.MP = Math.max(Math.min(this.MP + mana, this.MM), 0);
+	}
+
+	public void loseMana( int mana ) {
+		earnMana(-mana);
+	}
+
 	@Override
 	public void add( Buff buff ) {
 
@@ -1085,17 +1134,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		}
 		Collections.shuffle( passable );
 
-		ArrayList<com.quasistellar.hollowdungeon.items.Item> items = new ArrayList<>(com.quasistellar.hollowdungeon.Dungeon.hero.belongings.backpack.items);
-		for (Integer cell : passable) {
-			if (items.isEmpty()) {
-				break;
-			}
-
-			com.quasistellar.hollowdungeon.items.Item item = Random.element( items );
-			com.quasistellar.hollowdungeon.Dungeon.level.drop( item, cell ).sprite.drop( pos );
-			items.remove( item );
-		}
-
 		GameScene.gameOver();
 		
 		if (cause instanceof Hero.Doom) {
@@ -1136,8 +1174,15 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		com.quasistellar.hollowdungeon.ui.AttackIndicator.target(enemy);
 		
 		boolean hit = attack( enemy );
+
+		//trace a ballistica to our target (which will also extend past them
+		Ballistica trajectory = new Ballistica(this.pos, enemy.pos, Ballistica.STOP_TARGET);
+		//trim it to just be the part that goes past them
+		trajectory = new Ballistica(trajectory.collisionPos, trajectory.path.get(trajectory.path.size()-1), Ballistica.PROJECTILE);
+		//knock them back along that ballistica
+		Utils.throwChar(enemy, trajectory, 1);
 		
-		com.quasistellar.hollowdungeon.actors.buffs.Invisibility.dispel();
+		Invisibility.dispel();
 		spend( attackDelay() );
 
 		curAction = null;

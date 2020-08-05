@@ -34,6 +34,7 @@ public class Chrome {
 		GREY_BUTTON,
 		GREY_BUTTON_TR,
 		TAG,
+		VERTICAL_TAG,
 		GEM,
 		SCROLL,
 		TAB_SET,
@@ -58,6 +59,8 @@ public class Chrome {
 			return new NinePatch( Asset, 58, 6, 6, 6, 2 );
 		case TAG:
 			return new NinePatch( Asset, 22, 18, 16, 14, 3 );
+		case VERTICAL_TAG:
+			return new NinePatch( Asset, 110, 0, 14, 16, 3 );
 		case GEM:
 			return new NinePatch( Asset, 0, 32, 32, 32, 13 );
 		case GREY_BUTTON_TR:

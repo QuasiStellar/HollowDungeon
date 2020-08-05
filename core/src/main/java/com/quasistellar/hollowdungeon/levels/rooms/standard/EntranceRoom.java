@@ -52,10 +52,14 @@ public class EntranceRoom extends StandardRoom {
 			door.set( Room.Door.Type.REGULAR );
 		}
 
-		do {
-			level.entrance = level.pointToCell(random(2));
-		} while (level.findMob(level.entrance) != null);
-		Painter.set( level, level.entrance, com.quasistellar.hollowdungeon.levels.Terrain.ENTRANCE );
+		if (!Dungeon.entranceDestination.equals("")) {
+			do {
+				level.entrance = level.pointToCell(random(2));
+			} while (level.findMob(level.entrance) != null);
+			Painter.set(level, level.entrance, com.quasistellar.hollowdungeon.levels.Terrain.ENTRANCE);
+		} else {
+			level.entrance = 0;
+		}
 
 		//use a separate generator here so meta progression doesn't affect levelgen
 		Random.pushGenerator();

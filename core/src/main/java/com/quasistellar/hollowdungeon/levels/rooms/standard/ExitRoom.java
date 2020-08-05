@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.standard;
 
+import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
@@ -47,9 +48,13 @@ public class ExitRoom extends StandardRoom {
 		for (Room.Door door : connected.values()) {
 			door.set( Room.Door.Type.REGULAR );
 		}
-		
-		level.exit = level.pointToCell(random( 2 ));
-		Painter.set( level, level.exit, com.quasistellar.hollowdungeon.levels.Terrain.EXIT );
+
+		if (!Dungeon.exitDestination.equals("")) {
+			level.exit = level.pointToCell(random(2));
+			Painter.set(level, level.exit, com.quasistellar.hollowdungeon.levels.Terrain.EXIT);
+		} else {
+			level.exit = 0;
+		}
 	}
 	
 	@Override

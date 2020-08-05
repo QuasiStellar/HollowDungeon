@@ -126,7 +126,7 @@ public class Dungeon {
 	public static int challenges;
 
 	public static Hero hero;
-	public static com.quasistellar.hollowdungeon.levels.Level level;
+	public static Level level;
 
 	public static QuickSlot quickslot = new QuickSlot();
 	
@@ -302,13 +302,181 @@ public class Dungeon {
 			case "Watcher's Spire 3":
 				level = new SewerLevel();
 				break;
-			case "Resting Grounds":
+			case "Resting Grounds 1":
+				level = new SewerLevel();
+				break;
+			case "Resting Grounds 2":
 				level = new SewerLevel();
 				break;
 			case "Crystal Peak 1":
 				level = new SewerLevel();
 				break;
 			case "Crystal Peak 2":
+				level = new SewerLevel();
+				break;
+			case "Crystal Peak 3":
+				level = new SewerLevel();
+				break;
+			case "Crystal Peak 4":
+				level = new SewerLevel();
+				break;
+			case "Hallownest's Crown":
+				level = new SewerLevel();
+				break;
+			case "Crystallised Mound":
+				level = new SewerLevel();
+				break;
+			case "Crystal Core":
+				level = new SewerLevel();
+				break;
+			case "Howling Cliffs 1":
+				level = new SewerLevel();
+				break;
+			case "Howling Cliffs 2":
+				level = new SewerLevel();
+				break;
+			case "Howling Cliffs 3":
+				level = new SewerLevel();
+				break;
+			case "Joni's Repose":
+				level = new SewerLevel();
+				break;
+			case "Stag Nest":
+				level = new SewerLevel();
+				break;
+			case "Royal Waterways 1":
+				level = new SewerLevel();
+				break;
+			case "Royal Waterways 2":
+				level = new SewerLevel();
+				break;
+			case "Royal Waterways 3":
+				level = new SewerLevel();
+				break;
+			case "Royal Waterways 4":
+				level = new SewerLevel();
+				break;
+			case "Royal Waterways 5":
+				level = new SewerLevel();
+				break;
+			case "Isma's Grove":
+				level = new SewerLevel();
+				break;
+			case "Ancient Basin 0":
+				level = new SewerLevel();
+				break;
+			case "Ancient Basin 1":
+				level = new SewerLevel();
+				break;
+			case "Ancient Basin 2":
+				level = new SewerLevel();
+				break;
+			case "Ancient Basin 3":
+				level = new SewerLevel();
+				break;
+			case "Mawlek Nest 1":
+				level = new SewerLevel();
+				break;
+			case "Mawlek Nest 2":
+				level = new SewerLevel();
+				break;
+			case "Tower of Love":
+				level = new SewerLevel();
+				break;
+			case "Kingdom's Edge 1":
+				level = new SewerLevel();
+				break;
+			case "Kingdom's Edge 2":
+				level = new SewerLevel();
+				break;
+			case "Kingdom's Edge 3":
+				level = new SewerLevel();
+				break;
+			case "Kingdom's Edge 4":
+				level = new SewerLevel();
+				break;
+			case "Kingdom's Edge 5":
+				level = new SewerLevel();
+				break;
+			case "Cast-Off Shell":
+				level = new SewerLevel();
+				break;
+			case "The Hive 1":
+				level = new SewerLevel();
+				break;
+			case "The Hive 2":
+				level = new SewerLevel();
+				break;
+			case "The Hive 3":
+				level = new SewerLevel();
+				break;
+			case "Queen's Gardens 1":
+				level = new SewerLevel();
+				break;
+			case "Queen's Gardens 2":
+				level = new SewerLevel();
+				break;
+			case "Queen's Gardens 3":
+				level = new SewerLevel();
+				break;
+			case "Queen's Gardens 4":
+				level = new SewerLevel();
+				break;
+			case "Queen's Gardens 5":
+				level = new SewerLevel();
+				break;
+			case "Deepnest 1":
+				level = new SewerLevel();
+				break;
+			case "Deepnest 2":
+				level = new SewerLevel();
+				break;
+			case "Deepnest 3":
+				level = new SewerLevel();
+				break;
+			case "Deepnest 4":
+				level = new SewerLevel();
+				break;
+			case "Deepnest 5":
+				level = new SewerLevel();
+				break;
+			case "Failed Tramway":
+				level = new SewerLevel();
+				break;
+			case "The Abyss 1":
+				level = new SewerLevel();
+				break;
+			case "The Abyss 2":
+				level = new SewerLevel();
+				break;
+			case "The Abyss 3":
+				level = new SewerLevel();
+				break;
+			case "White Palace 1":
+				level = new SewerLevel();
+				break;
+			case "White Palace 2":
+				level = new SewerLevel();
+				break;
+			case "White Palace 3":
+				level = new SewerLevel();
+				break;
+			case "White Palace 4":
+				level = new SewerLevel();
+				break;
+			case "White Palace 5":
+				level = new SewerLevel();
+				break;
+			case "Path of Pain 1":
+				level = new SewerLevel();
+				break;
+			case "Path of Pain 2":
+				level = new SewerLevel();
+				break;
+			case "Path of Pain 3":
+				level = new SewerLevel();
+				break;
+			case "Path of Pain 4":
 				level = new SewerLevel();
 				break;
 			default:
@@ -337,7 +505,7 @@ public class Dungeon {
 			case "Forgotten Crossroads 2":
 				entranceDestination = "Forgotten Crossroads 1";
 				exitDestination = "Forgotten Crossroads 3";
-				transitionDestination = "Resting Grounds";
+				transitionDestination = "Resting Grounds 1";
 				break;
 			case "Forgotten Crossroads 3":
 				entranceDestination = "Forgotten Crossroads 2";
@@ -462,7 +630,7 @@ public class Dungeon {
 			case "City of Tears 3":
 				entranceDestination = "City of Tears 2";
 				exitDestination = "City of Tears 4";
-				transitionDestination = "Resting Grounds";
+				transitionDestination = "Resting Grounds 2";
 				break;
 			case "City of Tears 4":
 				entranceDestination = "City of Tears 3";
@@ -504,10 +672,15 @@ public class Dungeon {
 				exitDestination = "";
 				transitionDestination = "";
 				break;
-			case "Resting Grounds":
-				entranceDestination = "";
+			case "Resting Grounds 1":
+				entranceDestination = "Crystallised Mound";
+				exitDestination = "Resting Grounds 2";
+				transitionDestination = "Forgotten Crossroads 2";
+				break;
+			case "Resting Grounds 2":
+				entranceDestination = "Resting Grounds 1";
 				exitDestination = "";
-				transitionDestination = "";
+				transitionDestination = "City of Tears 3";
 				break;
 			case "Crystal Peak 1":
 				entranceDestination = "";
@@ -518,6 +691,281 @@ public class Dungeon {
 				entranceDestination = "Crystal Peak 1";
 				exitDestination = "Crystal Peak 3";
 				transitionDestination = "Forgotten Crossroads 1";
+				break;
+			case "Crystal Peak 3":
+				entranceDestination = "Crystal Peak 2";
+				exitDestination = "Crystal Peak 4";
+				transitionDestination = "Crystal Core";
+				break;
+			case "Crystal Peak 4":
+				entranceDestination = "Crystal Peak 3";
+				exitDestination = "Hallownest's Crown";
+				transitionDestination = "Crystallised Mound";
+				break;
+			case "Hallownest's Crown":
+				entranceDestination = "Crystal Peak 4";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Crystallised Mound":
+				entranceDestination = "";
+				exitDestination = "Resting Grounds 1";
+				transitionDestination = "Crystal Peak 4";
+				break;
+			case "Crystal Core":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "Crystal Peak 3";
+				break;
+			case "Howling Cliffs 1":
+				entranceDestination = "Howling Cliffs 2";
+				exitDestination = "King's Pass";
+				transitionDestination = "Joni's Repose";
+				break;
+			case "Howling Cliffs 2":
+				entranceDestination = "Howling Cliffs 3";
+				exitDestination = "Howling Cliffs 1";
+				transitionDestination = "Stag Nest";
+				break;
+			case "Howling Cliffs 3":
+				entranceDestination = "";
+				exitDestination = "Howling Cliffs 2";
+				transitionDestination = "Greenpath 2";
+				break;
+			case "Joni's Repose":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "Howling Cliffs 1";
+				break;
+			case "Stag Nest":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "Howling Cliffs 2";
+				break;
+			case "Royal Waterways 1":
+				entranceDestination = "City of Tears 5";
+				exitDestination = "Royal Waterways 2";
+				transitionDestination = "Ancient Basin 0";
+				break;
+			case "Royal Waterways 2":
+				entranceDestination = "Royal Waterways 1";
+				exitDestination = "Royal Waterways 3";
+				transitionDestination = "Kingdom's Edge 2";
+				break;
+			case "Royal Waterways 3":
+				entranceDestination = "Royal Waterways 2";
+				exitDestination = "Royal Waterways 4";
+				transitionDestination = "Isma's Grove";
+				break;
+			case "Royal Waterways 4":
+				entranceDestination = "Royal Waterways 3";
+				exitDestination = "Royal Waterways 5";
+				transitionDestination = "Fungal Wastes 5";
+				break;
+			case "Royal Waterways 5":
+				entranceDestination = "Royal Waterways 4";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Isma's Grove":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "Royal Waterways 3";
+				break;
+			case "Ancient Basin 0":
+				entranceDestination = "";
+				exitDestination = "Ancient Basin 1";
+				transitionDestination = "Royal Waterways 1";
+				break;
+			case "Ancient Basin 1":
+				entranceDestination = "Ancient Basin 0";
+				exitDestination = "Ancient Basin 2";
+				transitionDestination = "Deepnest 2";
+				break;
+			case "Ancient Basin 2":
+				entranceDestination = "Ancient Basin 1";
+				exitDestination = "Ancient Basin 3";
+				transitionDestination = "Kingdom's Edge 4";
+				break;
+			case "Ancient Basin 3":
+				entranceDestination = "Ancient Basin 2";
+				exitDestination = "The Abyss 1";
+				transitionDestination = "Mawlek Nest 1";
+				break;
+			case "Mawlek Nest 1":
+				entranceDestination = "";
+				exitDestination = "Mawlek Nest 2";
+				transitionDestination = "Ancient Basin 3";
+				break;
+			case "Mawlek Nest 2":
+				entranceDestination = "Mawlek Nest 1";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Tower of Love":
+				entranceDestination = "";
+				exitDestination = "Kingdom's Edge 1";
+				transitionDestination = "City of Tears 5";
+				break;
+			case "Kingdom's Edge 1":
+				entranceDestination = "Tower of Love";
+				exitDestination = "Kingdom's Edge 2";
+				transitionDestination = "";
+				break;
+			case "Kingdom's Edge 2":
+				entranceDestination = "Kingdom's Edge 1";
+				exitDestination = "Kingdom's Edge 3";
+				transitionDestination = "Royal Waterways 2";
+				break;
+			case "Kingdom's Edge 3":
+				entranceDestination = "Kingdom's Edge 2";
+				exitDestination = "Kingdom's Edge 4";
+				transitionDestination = "The Hive 1";
+				break;
+			case "Kingdom's Edge 4":
+				entranceDestination = "Kingdom's Edge 3";
+				exitDestination = "Kingdom's Edge 5";
+				transitionDestination = "Ancient Basin 2";
+				break;
+			case "Kingdom's Edge 5":
+				entranceDestination = "Kingdom's Edge 4";
+				exitDestination = "Cast-Off Shell";
+				transitionDestination = "";
+				break;
+			case "Cast-Off Shell":
+				entranceDestination = "Kingdom's Edge 5";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "The Hive 1":
+				entranceDestination = "";
+				exitDestination = "The Hive 2";
+				transitionDestination = "Kingdom's Edge 3";
+				break;
+			case "The Hive 2":
+				entranceDestination = "The Hive 1";
+				exitDestination = "The Hive 3";
+				transitionDestination = "";
+				break;
+			case "The Hive 3":
+				entranceDestination = "The Hive 2";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Queen's Gardens 1":
+				entranceDestination = "";
+				exitDestination = "Queen's Gardens 2";
+				transitionDestination = "Greenpath 3";
+				break;
+			case "Queen's Gardens 2":
+				entranceDestination = "Queen's Gardens 1";
+				exitDestination = "Queen's Gardens 3";
+				transitionDestination = "";
+				break;
+			case "Queen's Gardens 3":
+				entranceDestination = "Queen's Gardens 2";
+				exitDestination = "Queen's Gardens 4";
+				transitionDestination = "Fog Canyon 4";
+				break;
+			case "Queen's Gardens 4":
+				entranceDestination = "Queen's Gardens 3";
+				exitDestination = "Queen's Gardens 5";
+				transitionDestination = "Deepnest 4";
+				break;
+			case "Queen's Gardens 5":
+				entranceDestination = "Queen's Gardens 4";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Deepnest 1":
+				entranceDestination = "Fungal Wastes 5";
+				exitDestination = "Deepnest 2";
+				transitionDestination = "";
+				break;
+			case "Deepnest 2":
+				entranceDestination = "Deepnest 1";
+				exitDestination = "Deepnest 3";
+				transitionDestination = "Ancient Basin 1";
+				break;
+			case "Deepnest 3":
+				entranceDestination = "Deepnest 2";
+				exitDestination = "Deepnest 4";
+				transitionDestination = "Failed Tramway";
+				break;
+			case "Deepnest 4":
+				entranceDestination = "Deepnest 3";
+				exitDestination = "Deepnest 5";
+				transitionDestination = "Queen's Gardens 4";
+				break;
+			case "Deepnest 5":
+				entranceDestination = "Deepnest 4";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Failed Tramway":
+				entranceDestination = "";
+				exitDestination = "";
+				transitionDestination = "Deepnest 3";
+				break;
+			case "The Abyss 1":
+				entranceDestination = "Ancient Basin 3";
+				exitDestination = "The Abyss 2";
+				transitionDestination = "";
+				break;
+			case "The Abyss 2":
+				entranceDestination = "The Abyss 1";
+				exitDestination = "The Abyss 3";
+				transitionDestination = "";
+				break;
+			case "The Abyss 3":
+				entranceDestination = "The Abyss 2";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "White Palace 1":
+				entranceDestination = "";
+				exitDestination = "White Palace 2";
+				transitionDestination = "Path of Pain 1";
+				break;
+			case "White Palace 2":
+				entranceDestination = "White Palace 1";
+				exitDestination = "White Palace 3";
+				transitionDestination = "";
+				break;
+			case "White Palace 3":
+				entranceDestination = "White Palace 2";
+				exitDestination = "White Palace 4";
+				transitionDestination = "";
+				break;
+			case "White Palace 4":
+				entranceDestination = "White Palace 3";
+				exitDestination = "White Palace 5";
+				transitionDestination = "";
+				break;
+			case "White Palace 5":
+				entranceDestination = "White Palace 4";
+				exitDestination = "";
+				transitionDestination = "";
+				break;
+			case "Path of Pain 1":
+				entranceDestination = "";
+				exitDestination = "Path of Pain 2";
+				transitionDestination = "White Palace 1";
+				break;
+			case "Path of Pain 2":
+				entranceDestination = "Path of Pain 1";
+				exitDestination = "Path of Pain 3";
+				transitionDestination = "";
+				break;
+			case "Path of Pain 3":
+				entranceDestination = "Path of Pain 2";
+				exitDestination = "Path of Pain 4";
+				transitionDestination = "";
+				break;
+			case "Path of Pain 4":
+				entranceDestination = "Path of Pain 3";
+				exitDestination = "";
+				transitionDestination = "";
 				break;
 		}
 	}

@@ -25,7 +25,7 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.Speck;
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Terrain;
@@ -164,7 +164,7 @@ public class ItemSprite extends MovieClip {
 		speed.set( 0, -100 );
 		acc.set(0, -speed.y / DROP_INTERVAL * 2);
 		
-		if (heap != null && heap.seen && heap.peek() instanceof Gold) {
+		if (heap != null && heap.seen && heap.peek() instanceof Geo) {
 			CellEmitter.center( heap.pos ).burst( Speck.factory( Speck.COIN ), 5 );
 			Sample.INSTANCE.play( Assets.Sounds.GOLD, 1, 1, Random.Float( 0.9f, 1.1f ) );
 		}
@@ -331,7 +331,7 @@ public class ItemSprite extends MovieClip {
 						water = (cell == Terrain.WELL || cell == Terrain.ALCHEMY);
 					}
 
-					if (!(heap.peek() instanceof Gold)) {
+					if (!(heap.peek() instanceof Geo)) {
 						Sample.INSTANCE.play(water ? Assets.Sounds.WATER : Assets.Sounds.STEP, 0.8f, 0.8f, 1.2f);
 					}
 				}

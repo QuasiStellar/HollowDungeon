@@ -392,6 +392,7 @@ public class InterlevelScene extends PixelScene {
 		Mob.holdAllies( Dungeon.level );
 
 		Dungeon.saveAll();
+		Dungeon.location = returnLocation;
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, returnPos );

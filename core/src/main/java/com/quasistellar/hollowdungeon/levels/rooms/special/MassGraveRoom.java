@@ -22,7 +22,7 @@
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
@@ -60,10 +60,10 @@ public class MassGraveRoom extends SpecialRoom {
 
 		ArrayList<com.quasistellar.hollowdungeon.items.Item> items = new ArrayList<>();
 		//100% corpse dust, 2x100% 1 coin, 2x30% coins, 1x60% random item, 1x30% armor
-		items.add(new com.quasistellar.hollowdungeon.items.Gold(1));
-		items.add(new com.quasistellar.hollowdungeon.items.Gold(1));
-		if (Random.Float() <= 0.3f) items.add(new com.quasistellar.hollowdungeon.items.Gold());
-		if (Random.Float() <= 0.3f) items.add(new Gold());
+		items.add(new Geo(1));
+		items.add(new Geo(1));
+		if (Random.Float() <= 0.3f) items.add(new Geo());
+		if (Random.Float() <= 0.3f) items.add(new Geo());
 		if (Random.Float() <= 0.6f) items.add(Generator.random());
 
 		for (Item item : items){

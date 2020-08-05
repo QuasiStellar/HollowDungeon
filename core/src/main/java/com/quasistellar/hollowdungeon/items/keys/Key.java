@@ -43,7 +43,7 @@ public abstract class Key extends com.quasistellar.hollowdungeon.items.Item {
 	
 	@Override
 	public boolean isSimilar( Item item ) {
-		return super.isSimilar(item) && ((Key)item).location == location;
+		return super.isSimilar(item) && ((Key) item).location.equals(location);
 	}
 
 	@Override

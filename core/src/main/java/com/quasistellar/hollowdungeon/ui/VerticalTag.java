@@ -26,16 +26,16 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.ui.Button;
 
-public class Tag extends Button {
+public class VerticalTag extends Button {
 
 	protected float r;
 	protected float g;
 	protected float b;
 	protected NinePatch bg;
-	
+
 	protected float lightness = 0;
-	
-	public Tag( int color ) {
+
+	public VerticalTag(int color ) {
 		super();
 		
 		this.r = (color >> 16) / 255f;
@@ -48,7 +48,7 @@ public class Tag extends Button {
 		
 		super.createChildren();
 		
-		bg = Chrome.get( Chrome.Type.TAG );
+		bg = Chrome.get( Chrome.Type.VERTICAL_TAG );
 		bg.hardlight( r, g, b );
 		add( bg );
 	}

@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.secret;
 
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
@@ -79,7 +79,7 @@ public class RatKingRoom extends SecretRoom {
 			return;
 		}
 		
-		Item prize = new Gold( Random.IntRange( 10, 25 ) );
+		Item prize = new Geo( Random.IntRange( 10, 25 ) );
 		
 		level.drop( prize, pos ).type = Heap.Type.CHEST;
 	}

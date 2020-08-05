@@ -26,7 +26,7 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.SPDAction;
 import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Recipe;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
@@ -317,7 +317,7 @@ public class WndBag extends WndTabbed {
 			super( item );
 
 			this.item = item;
-			if (item instanceof Gold || item instanceof Bag) {
+			if (item instanceof Geo || item instanceof Bag) {
 				bg.visible = false;
 			}
 			

@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.actors;
 
+import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.Assets;
@@ -249,6 +250,7 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 				return true;
 			}
 
+			int hp = enemy.HP;
 			enemy.damage( dmg, this );
 
 			if (buff(FireImbue.class) != null)
@@ -269,7 +271,9 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 				enemy.sprite.showStatus(CharSprite.NEGATIVE, Messages.get(Preparation.class, "assassinated"));
 			}
 
-			enemy.sprite.bloodBurstA( sprite.center(), dmg );
+			if (enemy.HP != hp) {
+				enemy.sprite.bloodBurstA( sprite.center(), dmg );
+			}
 			enemy.sprite.flash();
 
 			if (!enemy.isAlive() && visibleFight) {

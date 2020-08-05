@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.levels.Terrain;
@@ -46,7 +46,7 @@ public class TreasuryRoom extends SpecialRoom {
 			do {
 				pos = level.pointToCell(random());
 			} while (level.map[pos] != Terrain.EMPTY || level.heaps.get( pos ) != null || level.findMob(pos) != null);
-			level.drop( new com.quasistellar.hollowdungeon.items.Gold().random(), pos ).type = heapType;
+			level.drop( new Geo().random(), pos ).type = heapType;
 		}
 		
 		if (heapType == com.quasistellar.hollowdungeon.items.Heap.Type.HEAP) {
@@ -55,7 +55,7 @@ public class TreasuryRoom extends SpecialRoom {
 				do {
 					pos = level.pointToCell(random());
 				} while (level.map[pos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY);
-				level.drop( new Gold( Random.IntRange( 5, 12 ) ), pos );
+				level.drop( new Geo( Random.IntRange( 5, 12 ) ), pos );
 			}
 		}
 		

@@ -26,6 +26,8 @@ import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.sprites.DiscardedItemSprite;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
+import com.quasistellar.hollowdungeon.ui.SkillIndicator;
+import com.quasistellar.hollowdungeon.ui.SpellIndicator;
 import com.quasistellar.hollowdungeon.windows.WndBag;
 import com.quasistellar.hollowdungeon.journal.Journal;
 import com.quasistellar.hollowdungeon.Assets;
@@ -133,6 +135,12 @@ public class GameScene extends PixelScene {
 	private Toolbar toolbar;
 	private Toast prompt;
 
+	private SkillIndicator mothwingCloak;
+	private SkillIndicator crystalHeart;
+	private SkillIndicator monarchWings;
+	private SkillIndicator dreamNail;
+	private SkillIndicator dreamgate;
+	private SpellIndicator focus;
 	private AttackIndicator attack;
 	private LootIndicator loot;
 	private ActionIndicator action;
@@ -288,7 +296,31 @@ public class GameScene extends PixelScene {
 		toolbar.camera = uiCamera;
 		toolbar.setRect( 0,uiCamera.height - toolbar.height(), uiCamera.width, toolbar.height() );
 		add( toolbar );
-		
+
+		mothwingCloak = new SkillIndicator(Dungeon.hero.mothwingCloak);
+		mothwingCloak.camera = uiCamera;
+		add(mothwingCloak);
+
+		crystalHeart = new SkillIndicator(Dungeon.hero.crystalHeart);
+		crystalHeart.camera = uiCamera;
+		add(crystalHeart);
+
+		monarchWings = new SkillIndicator(Dungeon.hero.monarchWings);
+		monarchWings.camera = uiCamera;
+		add(monarchWings);
+
+		dreamNail = new SkillIndicator(Dungeon.hero.dreamNail);
+		dreamNail.camera = uiCamera;
+		add(dreamNail);
+
+		dreamgate = new SkillIndicator(Dungeon.hero.dreamgate);
+		dreamgate.camera = uiCamera;
+		add(dreamgate);
+
+		focus = new SpellIndicator(Dungeon.hero.focus);
+		focus.camera = uiCamera;
+		add(focus);
+
 		attack = new AttackIndicator();
 		attack.camera = uiCamera;
 		add( attack );
@@ -544,6 +576,48 @@ public class GameScene extends PixelScene {
 			if (tagAppearing) layoutTags();
 		}
 
+		if (tagMothwingCloak != mothwingCloak.visible) {
+
+			tagMothwingCloak = mothwingCloak.visible;
+
+			layoutSkillTags();
+		}
+
+		if (tagCrystalHeart != crystalHeart.visible) {
+
+			tagCrystalHeart = crystalHeart.visible;
+
+			layoutSkillTags();
+		}
+
+		if (tagMonarchWings != monarchWings.visible) {
+
+			tagMonarchWings = monarchWings.visible;
+
+			layoutSkillTags();
+		}
+
+		if (tagDreamNail != dreamNail.visible) {
+
+			tagDreamNail = dreamNail.visible;
+
+			layoutSkillTags();
+		}
+
+		if (tagDreamgate != dreamgate.visible) {
+
+			tagDreamgate = dreamgate.visible;
+
+			layoutSkillTags();
+		}
+
+		if (tagFocus != focus.visible) {
+
+			tagFocus = focus.visible;
+
+			layoutSkillTags();
+		}
+
 		cellSelector.enable(Dungeon.hero.ready);
 		
 		for (Gizmo g : toDestroy){
@@ -552,6 +626,12 @@ public class GameScene extends PixelScene {
 		toDestroy.clear();
 	}
 
+	private boolean tagMothwingCloak    = false;
+	private boolean tagCrystalHeart     = false;
+	private boolean tagMonarchWings     = false;
+	private boolean tagDreamNail        = false;
+	private boolean tagDreamgate        = false;
+	private boolean tagFocus            = false;
 	private boolean tagAttack    = false;
 	private boolean tagLoot      = false;
 	private boolean tagAction    = false;
@@ -592,6 +672,51 @@ public class GameScene extends PixelScene {
 		if (scene.tagResume) {
 			scene.resume.setPos( tagLeft, pos - scene.resume.height() );
 			scene.resume.flip(tagLeft == 0);
+		}
+	}
+
+	public static void layoutSkillTags() {
+
+		if (scene == null) return;
+
+		float tagRight = SPDSettings.flipTags() ? uiCamera.width - scene.attack.width() : 0;
+
+		if (SPDSettings.flipTags()) {
+			scene.log.setRect(scene.attack.width(), scene.toolbar.top(), uiCamera.width - scene.attack.width(), 0);
+		} else {
+			scene.log.setRect(0, scene.toolbar.top(), uiCamera.width - scene.attack.width(),  0 );
+		}
+
+		float upper_pos = scene.pane.bottom();
+
+		if (scene.tagMothwingCloak) {
+			scene.mothwingCloak.setPos( tagRight, upper_pos + 10);
+			scene.mothwingCloak.flip(tagRight == 0);
+		}
+
+		if (scene.tagCrystalHeart) {
+			scene.crystalHeart.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height());
+			scene.crystalHeart.flip(tagRight == 0);
+		}
+
+		if (scene.tagMonarchWings) {
+			scene.monarchWings.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height());
+			scene.monarchWings.flip(tagRight == 0);
+		}
+
+		if (scene.tagDreamNail) {
+			scene.dreamNail.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height() + scene.monarchWings.height());
+			scene.dreamNail.flip(tagRight == 0);
+		}
+
+		if (scene.tagDreamgate) {
+			scene.dreamgate.setPos( tagRight, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height() + scene.monarchWings.height() + scene.dreamNail.height());
+			scene.dreamgate.flip(tagRight == 0);
+		}
+
+		if (scene.tagFocus) {
+			scene.focus.setPos( tagRight + 30, upper_pos);
+			scene.focus.flip(tagRight == 0);
 		}
 	}
 	

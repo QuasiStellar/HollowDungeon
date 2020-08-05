@@ -22,7 +22,7 @@
 package com.quasistellar.hollowdungeon.levels.rooms.standard;
 
 import com.quasistellar.hollowdungeon.items.Generator;
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
@@ -52,7 +52,7 @@ public class GrassyGraveRoom extends StandardRoom {
 			int pos = w > h ?
 					left + 1 + shift + i * 2 + (top + 2 + Random.Int( h-2 )) * level.width() :
 					(left + 2 + Random.Int( w-2 )) + (top + 1 + shift + i * 2) * level.width();
-			level.drop( i == index ? Generator.random() : new Gold().random(), pos ).type = Heap.Type.TOMB;
+			level.drop( i == index ? Generator.random() : new Geo().random(), pos ).type = Heap.Type.TOMB;
 		}
 	}
 }

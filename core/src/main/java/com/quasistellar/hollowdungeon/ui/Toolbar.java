@@ -21,8 +21,12 @@
 
 package com.quasistellar.hollowdungeon.ui;
 
+import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.items.Item;
+import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.scenes.CellSelector;
+import com.quasistellar.hollowdungeon.skills.CrystalHeart;
+import com.quasistellar.hollowdungeon.skills.DreamNail;
 import com.quasistellar.hollowdungeon.tiles.DungeonTerrainTilemap;
 import com.quasistellar.hollowdungeon.windows.WndBag;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
@@ -84,7 +88,18 @@ public class Toolbar extends Component {
 		add(btnWait = new Tool(24, 0, 20, 26) {
 			@Override
 			protected void onClick() {
+
 				examining = false;
+
+				Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
+				if (delay == null) {
+					Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 2);
+				} else {
+					Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 3);
+				}
+
+				Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 2);
+
 				Dungeon.hero.rest(false);
 			}
 			
@@ -93,11 +108,11 @@ public class Toolbar extends Component {
 				return SPDAction.WAIT;
 			}
 			
-			protected boolean onLongClick() {
-				examining = false;
-				Dungeon.hero.rest(true);
-				return true;
-			}
+//			protected boolean onLongClick() {
+//				examining = false;
+//				Dungeon.hero.rest(true);
+//				return true;
+//			}
 		});
 
 		add(new Button(){

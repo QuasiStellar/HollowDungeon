@@ -31,6 +31,7 @@ import com.quasistellar.hollowdungeon.levels.Patch;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
+import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.watabou.utils.Graph;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Point;
@@ -130,7 +131,7 @@ public abstract class RegularPainter extends com.quasistellar.hollowdungeon.leve
 		if (nTraps > 0){
 			paintTraps( level, rooms );
 		}
-		
+
 		decorate( level, rooms );
 		
 		return true;

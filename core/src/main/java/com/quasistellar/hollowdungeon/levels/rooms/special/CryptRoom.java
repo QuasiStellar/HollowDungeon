@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
@@ -69,6 +69,6 @@ public class CryptRoom extends SpecialRoom {
 	}
 	
 	private static Item prize(Level level ) {
-		return new Gold(1);
+		return new Geo(1);
 	}
 }

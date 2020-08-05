@@ -21,13 +21,12 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.standard;
 
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
-import com.watabou.utils.Random;
 
 public class SuspiciousChestRoom extends EmptyRoom {
 
@@ -48,7 +47,7 @@ public class SuspiciousChestRoom extends EmptyRoom {
 		Item i = level.findPrizeItem();
 
 		if ( i == null ){
-			i = new Gold().random();
+			i = new Geo().random();
 		}
 
 		int center = level.pointToCell(center());

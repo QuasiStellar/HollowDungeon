@@ -21,8 +21,6 @@
 
 package com.quasistellar.hollowdungeon.items;
 
-import com.quasistellar.hollowdungeon.plants.Plant.Seed;
-import com.quasistellar.hollowdungeon.plants.Starflower;
 import com.quasistellar.hollowdungeon.items.bags.Bag;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
@@ -35,7 +33,7 @@ public class Generator {
 
 	public enum Category {
 		
-		GOLD	( 20,   com.quasistellar.hollowdungeon.items.Gold.class );
+		GOLD	( 20,   Geo.class );
 		
 		public Class<?>[] classes;
 
@@ -66,7 +64,7 @@ public class Generator {
 
 		static {
 			GOLD.classes = new Class<?>[]{
-					Gold.class };
+					Geo.class };
 			GOLD.probs = new float[]{ 1 };
 		}
 	}

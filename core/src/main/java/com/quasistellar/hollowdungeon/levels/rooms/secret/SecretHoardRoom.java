@@ -21,13 +21,11 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.secret;
 
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
-import com.quasistellar.hollowdungeon.levels.traps.DisintegrationTrap;
 import com.quasistellar.hollowdungeon.levels.traps.PoisonDartTrap;
 import com.quasistellar.hollowdungeon.levels.traps.RockfallTrap;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
@@ -61,7 +59,7 @@ public class SecretHoardRoom extends SecretRoom {
 			do {
 				goldPos = level.pointToCell(random());
 			} while (level.heaps.get(goldPos) != null);
-			Item gold = new Gold().random();
+			Item gold = new Geo().random();
 			gold.quantity(Math.round(gold.quantity() * goldRatio));
 			level.drop(gold, goldPos);
 		}

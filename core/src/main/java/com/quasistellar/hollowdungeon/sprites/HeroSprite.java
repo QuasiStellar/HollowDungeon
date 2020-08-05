@@ -125,16 +125,21 @@ public class HeroSprite extends CharSprite {
 		play( read );
 	}
 
-	@Override
-	public void bloodBurstA(PointF from, int damage) {
-		//Does nothing.
+//	@Override
+//	public void bloodBurstA(PointF from, int damage) {
+//		//Does nothing.
+//
+//		/*
+//		 * This is both for visual clarity, and also for content ratings regarding violence
+//		 * towards human characters. The heroes are the only human or human-like characters which
+//		 * participate in combat, so removing all blood associated with them is a simple way to
+//		 * reduce the violence rating of the game.
+//		 */
+//	}
 
-		/*
-		 * This is both for visual clarity, and also for content ratings regarding violence
-		 * towards human characters. The heroes are the only human or human-like characters which
-		 * participate in combat, so removing all blood associated with them is a simple way to
-		 * reduce the violence rating of the game.
-		 */
+	@Override
+	public int blood() {
+		return 0x00000000;
 	}
 
 	@Override

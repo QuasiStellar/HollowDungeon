@@ -23,9 +23,8 @@ package com.quasistellar.hollowdungeon.windows;
 
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Shopkeeper;
-import com.quasistellar.hollowdungeon.items.Gold;
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -134,7 +133,7 @@ public class WndTradeItem extends WndInfoItem {
 
 		item.detachAll( hero.belongings.backpack );
 		
-		new Gold( item.price() ).doPickUp( hero );
+		new Geo( item.price() ).doPickUp( hero );
 		
 		//selling items in the sell interface doesn't spend time
 		hero.spend(-hero.cooldown());
@@ -150,7 +149,7 @@ public class WndTradeItem extends WndInfoItem {
 			
 			item = item.detach( hero.belongings.backpack );
 			
-			new Gold( item.price() ).doPickUp( hero );
+			new Geo( item.price() ).doPickUp( hero );
 			
 			//selling items in the sell interface doesn't spend time
 			hero.spend(-hero.cooldown());
