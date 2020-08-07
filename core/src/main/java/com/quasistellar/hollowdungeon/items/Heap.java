@@ -29,7 +29,6 @@ import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.effects.particles.ElmoParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
-import com.quasistellar.hollowdungeon.items.journal.DocumentPage;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
@@ -312,15 +311,6 @@ public class Heap implements Bundlable {
 		
 		items = new LinkedList<>((Collection<Item>) ((Collection<?>) bundle.getCollection(ITEMS)));
 		items.removeAll(Collections.singleton(null));
-		
-		//remove any document pages that either don't exist anymore or that the player already has
-		for (Item item : items.toArray(new Item[0])){
-			if (item instanceof DocumentPage
-					&& ( !((DocumentPage) item).document().pages().contains(((DocumentPage) item).page())
-					||    ((DocumentPage) item).document().hasPage(((DocumentPage) item).page()))){
-				items.remove(item);
-			}
-		}
 		
 		haunted = bundle.getBoolean( HAUNTED );
 		

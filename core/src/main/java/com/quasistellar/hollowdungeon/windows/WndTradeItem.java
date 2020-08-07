@@ -108,7 +108,7 @@ public class WndTradeItem extends WndInfoItem {
 			}
 		};
 		btnBuy.setRect( 0, pos + GAP, width, BTN_HEIGHT );
-		btnBuy.enable( price <= Dungeon.gold );
+		btnBuy.enable( price <= Dungeon.geo);
 		add( btnBuy );
 
 		pos = btnBuy.bottom();
@@ -167,7 +167,7 @@ public class WndTradeItem extends WndInfoItem {
 		if (item == null) return;
 		
 		int price = price( item );
-		Dungeon.gold -= price;
+		Dungeon.geo -= price;
 		
 		if (!item.doPickUp( Dungeon.hero )) {
 			Dungeon.level.drop( item, heap.pos ).sprite.drop();

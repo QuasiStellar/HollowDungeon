@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class HpIndicator extends Component {
 
-	public static final int SIZE = 8;
+	public static final int SIZE = 10;
 
 	private static HpIndicator heroInstance;
 

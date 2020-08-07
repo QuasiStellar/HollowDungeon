@@ -21,7 +21,6 @@
 
 package com.quasistellar.hollowdungeon.sprites;
 
-import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.skills.VengefulSpirit;
 import com.quasistellar.hollowdungeon.tiles.DungeonTilemap;
@@ -36,10 +35,10 @@ import java.util.HashMap;
 public class MissileSprite extends ItemSprite implements Tweener.Listener {
 
 	private static final float SPEED	= 240f;
-	
+
 	private Callback callback;
-	
-	public void reset( int from, int to, Item item, Callback listener ) {
+
+	public void reset(int from, int to, Item item, Callback listener ) {
 		reset( DungeonTilemap.tileToWorld( from ), DungeonTilemap.tileToWorld( to ), item, listener);
 	}
 
@@ -50,7 +49,7 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 	public void reset( Visual from, int to, Item item, Callback listener ) {
 		reset(from.center(this), DungeonTilemap.tileToWorld( to ), item, listener );
 	}
-	
+
 	public void reset( int from, Visual to, Item item, Callback listener ) {
 		reset(DungeonTilemap.tileToWorld( from ), to.center(this), item, listener );
 	}
@@ -66,14 +65,30 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 				item,
 				listener );
 	}
-	
+
 	private static final int DEFAULT_ANGULAR_SPEED = 720;
-	
+
 	private static final HashMap<Class<?extends Item>, Integer> ANGULAR_SPEEDS = new HashMap<>();
 	static {
-
+//		ANGULAR_SPEEDS.put(Dart.class,          0);
+//		ANGULAR_SPEEDS.put(ThrowingKnife.class, 0);
+//		ANGULAR_SPEEDS.put(FishingSpear.class,  0);
+//		ANGULAR_SPEEDS.put(ThrowingSpear.class, 0);
+//		ANGULAR_SPEEDS.put(Kunai.class,         0);
+//		ANGULAR_SPEEDS.put(Javelin.class,       0);
+//		ANGULAR_SPEEDS.put(Trident.class,       0);
+//
+//		ANGULAR_SPEEDS.put(SpiritBow.SpiritArrow.class,       0);
 		ANGULAR_SPEEDS.put(ScorpioSprite.ScorpioShot.class,   0);
 		ANGULAR_SPEEDS.put(VengefulSpirit.VengefulSpiritShot.class,   0);
+
+		//720 is default
+
+//		ANGULAR_SPEEDS.put(HeavyBoomerang.class,1440);
+//		ANGULAR_SPEEDS.put(Bolas.class,         1440);
+//
+//		ANGULAR_SPEEDS.put(Shuriken.class,      2160);
+
 		ANGULAR_SPEEDS.put(TenguSprite.TenguShuriken.class,      2160);
 	}
 
@@ -88,7 +103,7 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 
 		PointF d = PointF.diff( to, from );
 		speed.set(d).normalize().scale(SPEED);
-		
+
 		angularSpeed = DEFAULT_ANGULAR_SPEED;
 		for (Class<?extends Item> cls : ANGULAR_SPEEDS.keySet()){
 			if (cls.isAssignableFrom(item.getClass())){
@@ -96,13 +111,13 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 				break;
 			}
 		}
-		
-		angle = 0 - (float)(Math.atan2( d.x, d.y ) / 3.1415926 * 180);
-		
+
+		angle = 135 - (float)(Math.atan2( d.x, d.y ) / 3.1415926 * 180);
+
 		if (d.x >= 0){
 			flipHorizontal = false;
 			updateFrame();
-			
+
 		} else {
 			angularSpeed = -angularSpeed;
 			angle += 90;
@@ -110,7 +125,17 @@ public class MissileSprite extends ItemSprite implements Tweener.Listener {
 			updateFrame();
 		}
 
-		PosTweener tweener = new PosTweener( this, to, d.length() / SPEED);
+		float speed = SPEED;
+//		if (item instanceof Dart && Dungeon.hero.belongings.weapon instanceof Crossbow){
+//			speed *= 3f;
+//
+//		} else if (item instanceof SpiritBow.SpiritArrow
+//				|| item instanceof ScorpioSprite.ScorpioShot
+//				|| item instanceof TenguSprite.TenguShuriken){
+//			speed *= 1.5f;
+//		}
+
+		PosTweener tweener = new PosTweener( this, to, d.length() / speed );
 		tweener.listener = this;
 		parent.add( tweener );
 	}

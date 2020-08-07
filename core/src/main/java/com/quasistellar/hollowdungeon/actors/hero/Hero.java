@@ -29,23 +29,23 @@ import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.CheckedCell;
-import com.quasistellar.hollowdungeon.effects.Flare;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.messages.Languages;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
 import com.quasistellar.hollowdungeon.skills.CrystalHeart;
+import com.quasistellar.hollowdungeon.skills.DesolateDive;
 import com.quasistellar.hollowdungeon.skills.DreamNail;
 import com.quasistellar.hollowdungeon.skills.Dreamgate;
 import com.quasistellar.hollowdungeon.skills.Focus;
+import com.quasistellar.hollowdungeon.skills.HowlingWraiths;
 import com.quasistellar.hollowdungeon.skills.MonarchWings;
 import com.quasistellar.hollowdungeon.skills.MothwingCloak;
 import com.quasistellar.hollowdungeon.skills.Skill;
 import com.quasistellar.hollowdungeon.skills.VengefulSpirit;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.ui.HpIndicator;
-import com.quasistellar.hollowdungeon.windows.WndResurrect;
 import com.quasistellar.hollowdungeon.windows.WndTradeItem;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -112,6 +112,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public Skill dreamgate = new Dreamgate();
 	public Skill focus = new Focus();
 	public Skill vengefulSpirit = new VengefulSpirit();
+	public Skill desolateDive = new DesolateDive();
+	public Skill howlingWraiths = new HowlingWraiths();
 
 	public int MM;
 	public int MP;
@@ -1216,7 +1218,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				}
 				
 				if (hasKey) {
-					GameScene.updateKeyDisplay();
 					com.quasistellar.hollowdungeon.levels.Level.set(doorCell, door == Terrain.LOCKED_DOOR ? Terrain.DOOR : Terrain.UNLOCKED_EXIT);
 					GameScene.updateMap(doorCell);
 					spend(Key.TIME_TO_UNLOCK);
@@ -1238,7 +1239,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				}
 				
 				if (hasKey) {
-					GameScene.updateKeyDisplay();
 					heap.open(this);
 					spend(Key.TIME_TO_UNLOCK);
 				}
@@ -1353,7 +1353,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public void resurrect( int resetLevel ) {
 		
 		HP = HT;
-		com.quasistellar.hollowdungeon.Dungeon.gold = 0;
+		com.quasistellar.hollowdungeon.Dungeon.geo = 0;
 		
 		//belongings.resurrect( resetLevel );
 

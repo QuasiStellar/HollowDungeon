@@ -28,6 +28,7 @@ import com.quasistellar.hollowdungeon.effects.particles.FlameParticle;
 import com.quasistellar.hollowdungeon.effects.particles.LeafParticle;
 import com.quasistellar.hollowdungeon.effects.particles.RainbowParticle;
 import com.quasistellar.hollowdungeon.effects.particles.ShadowParticle;
+import com.quasistellar.hollowdungeon.effects.particles.SoulParticle;
 import com.quasistellar.hollowdungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
@@ -72,6 +73,7 @@ public class MagicMissile extends Emitter {
 
 	public static final int FIRE_CONE       = 100;
 	public static final int FOLIAGE_CONE    = 101;
+	public static final int SOUL_CONE       = 102;
 	
 	public void reset( int type, int from, int to, Callback callback ) {
 		reset( type,
@@ -181,6 +183,10 @@ public class MagicMissile extends Emitter {
 			case FOLIAGE_CONE:
 				size( 10 );
 				pour( LeafParticle.GENERAL, 0.03f );
+				break;
+			case SOUL_CONE:
+				size( 10 );
+				pour( SoulParticle.FACTORY, 0.03f );
 				break;
 		}
 

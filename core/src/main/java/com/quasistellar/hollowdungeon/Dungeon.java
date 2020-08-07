@@ -131,7 +131,7 @@ public class Dungeon {
 	public static QuickSlot quickslot = new QuickSlot();
 	
 	public static String location;
-	public static int gold;
+	public static int geo;
 
 	public static String entranceDestination;
 	public static String exitDestination;
@@ -168,7 +168,7 @@ public class Dungeon {
 		
 		location = "King's Pass";
 		exitDestination = "King's Pass";
-		gold = 0;
+		geo = 0;
 
 		for (LimitedDrops a : LimitedDrops.values())
 			a.count = 0;
@@ -1082,7 +1082,7 @@ public class Dungeon {
 			bundle.put( SEED, seed );
 			bundle.put( CHALLENGES, challenges );
 			bundle.put( HERO, hero );
-			bundle.put( GOLD, gold );
+			bundle.put( GOLD, geo);
 			bundle.put( LOCATION, location );
 
 			quickslot.storePlaceholders( bundle );
@@ -1199,7 +1199,7 @@ public class Dungeon {
 		hero = null;
 		hero = (Hero)bundle.get( HERO );
 		
-		gold = bundle.getInt( GOLD );
+		geo = bundle.getInt( GOLD );
 		location = bundle.getString( LOCATION );
 		
 		Statistics.restoreFromBundle( bundle );

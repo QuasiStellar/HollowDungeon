@@ -21,16 +21,12 @@
 
 package com.quasistellar.hollowdungeon.levels.rooms.special;
 
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.RegularLevel;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.journal.Document;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
 import com.quasistellar.hollowdungeon.actors.blobs.Blob;
-import com.quasistellar.hollowdungeon.items.journal.AlchemyPage;
 import com.quasistellar.hollowdungeon.items.keys.IronKey;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.watabou.utils.Point;
@@ -62,43 +58,6 @@ public class LaboratoryRoom extends SpecialRoom {
 		
 		int chapter = 1;
 		Blob.seed( pot.x + level.width() * pot.y, 1 + chapter*10 + Random.NormalIntRange(0, 10), Alchemy.class, level );
-		
-		//guide pages
-		Collection<String> allPages = Document.ALCHEMY_GUIDE.pages();
-		ArrayList<String> missingPages = new ArrayList<>();
-		for ( String page : allPages){
-			if (!com.quasistellar.hollowdungeon.journal.Document.ALCHEMY_GUIDE.hasPage(page)){
-				missingPages.add(page);
-			}
-		}
-		
-		//4 pages in sewers, 6 in prison, 9 in caves+
-		int chapterTarget;
-		if (missingPages.size() <= 3){
-			chapterTarget = 3;
-		} else if (missingPages.size() <= 5){
-			chapterTarget = 2;
-		} else {
-			chapterTarget = 1;
-		}
-		
-		if(!missingPages.isEmpty() && chapter >= chapterTarget){
-			
-			//for each chapter ahead of the target chapter, drop 1 additional page
-			int pagesToDrop = Math.min(missingPages.size(), (chapter - chapterTarget) + 1);
-			
-			for (int i = 0; i < pagesToDrop; i++) {
-				AlchemyPage p = new AlchemyPage();
-				p.page(missingPages.remove(0));
-				int pos;
-				do {
-					pos = level.pointToCell(random());
-				} while (
-						level.map[pos] != com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_SP ||
-								level.heaps.get(pos) != null);
-				level.drop(p, pos);
-			}
-		}
 		
 		if (level instanceof com.quasistellar.hollowdungeon.levels.RegularLevel && ((RegularLevel)level).hasPitRoom()){
 			entrance.set( Door.Type.REGULAR );

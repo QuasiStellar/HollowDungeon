@@ -67,9 +67,9 @@ public class GoldIndicator extends Component {
 			
 		}
 		
-		if (Dungeon.gold != lastValue) {
+		if (Dungeon.geo != lastValue) {
 			
-			lastValue = Dungeon.gold;
+			lastValue = Dungeon.geo;
 			
 			tf.text( Integer.toString( lastValue ) );
 			tf.measure();

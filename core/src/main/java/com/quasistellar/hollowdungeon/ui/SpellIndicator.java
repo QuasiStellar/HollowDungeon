@@ -38,6 +38,8 @@ public class SpellIndicator extends VerticalTag {
 	private Image skillIcon;
 	private Skill skill;
 
+	private static final int BGCOLOR = 0x7B8073;
+
 	public SpellIndicator(Skill skill) {
 		super( 0xCDD5C0 );
 		this.skill = skill;
@@ -105,6 +107,17 @@ public class SpellIndicator extends VerticalTag {
 		}
 
 		super.update();
+	}
+
+	public void enable( boolean value ) {
+		if (value != active) {
+			if (value) {
+				skillIcon.resetColor();
+			} else {
+				skillIcon.tint( BGCOLOR, 0.7f );
+			}
+			active = value;
+		}
 	}
 
 	@Override

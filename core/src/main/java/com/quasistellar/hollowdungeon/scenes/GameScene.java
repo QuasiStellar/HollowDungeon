@@ -142,10 +142,14 @@ public class GameScene extends PixelScene {
 	private SkillIndicator dreamgate;
 	private SpellIndicator focus;
 	private SpellIndicator vengefulSpirit;
+	private SpellIndicator desolateDive;
+	private SpellIndicator howlingWraiths;
 	private AttackIndicator attack;
 	private LootIndicator loot;
 	private ActionIndicator action;
 	private ResumeIndicator resume;
+
+	private boolean lastEnabled = true;
 	
 	@Override
 	public void create() {
@@ -325,6 +329,14 @@ public class GameScene extends PixelScene {
 		vengefulSpirit = new SpellIndicator(Dungeon.hero.vengefulSpirit);
 		vengefulSpirit.camera = uiCamera;
 		add(vengefulSpirit);
+
+		desolateDive = new SpellIndicator(Dungeon.hero.desolateDive);
+		desolateDive.camera = uiCamera;
+		add(desolateDive);
+
+		howlingWraiths = new SpellIndicator(Dungeon.hero.howlingWraiths);
+		howlingWraiths.camera = uiCamera;
+		add(howlingWraiths);
 
 		attack = new AttackIndicator();
 		attack.camera = uiCamera;
@@ -630,6 +642,33 @@ public class GameScene extends PixelScene {
 			layoutSkillTags();
 		}
 
+		if (tagDesolateDive != desolateDive.visible) {
+
+			tagDesolateDive = desolateDive.visible;
+
+			layoutSkillTags();
+		}
+
+		if (tagHowlingWraiths != howlingWraiths.visible) {
+
+			tagHowlingWraiths = howlingWraiths.visible;
+
+			layoutSkillTags();
+		}
+
+		if ((lastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			lastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+
+			for (Gizmo indicator : members) {
+				if (indicator instanceof SkillIndicator) {
+					((SkillIndicator)indicator).enable( lastEnabled );
+				}
+				if (indicator instanceof SpellIndicator) {
+					((SpellIndicator)indicator).enable( lastEnabled );
+				}
+			}
+		}
+
 		cellSelector.enable(Dungeon.hero.ready);
 		
 		for (Gizmo g : toDestroy){
@@ -645,6 +684,8 @@ public class GameScene extends PixelScene {
 	private boolean tagDreamgate        = false;
 	private boolean tagFocus            = false;
 	private boolean tagVengefulSpirit   = false;
+	private boolean tagDesolateDive     = false;
+	private boolean tagHowlingWraiths   = false;
 	private boolean tagAttack    = false;
 	private boolean tagLoot      = false;
 	private boolean tagAction    = false;
@@ -763,6 +804,44 @@ public class GameScene extends PixelScene {
 				xPos = uiCamera.width - xPos - scene.vengefulSpirit.width();
 			}
 			scene.vengefulSpirit.setPos( xPos, uiCamera.height - scene.vengefulSpirit.height());
+		}
+
+		if (scene.tagDesolateDive) {
+			float xPos = 0;
+			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+				case SPLIT:
+					xPos = uiCamera.width - scene.desolateDive.width() * 3 - 25;
+					break;
+				case CENTER:
+					xPos = uiCamera.width / 2f - scene.desolateDive.width() * 3 - 33;
+					break;
+				case GROUP:
+					xPos = uiCamera.width - scene.desolateDive.width() * 3 - 65;
+					break;
+			}
+			if (SPDSettings.flipToolbar()) {
+				xPos = uiCamera.width - xPos - scene.desolateDive.width();
+			}
+			scene.desolateDive.setPos( xPos, uiCamera.height - scene.desolateDive.height());
+		}
+
+		if (scene.tagHowlingWraiths) {
+			float xPos = 0;
+			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+				case SPLIT:
+					xPos = uiCamera.width - scene.howlingWraiths.width() * 4 - 25;
+					break;
+				case CENTER:
+					xPos = uiCamera.width / 2f - scene.howlingWraiths.width() * 4 - 33;
+					break;
+				case GROUP:
+					xPos = uiCamera.width - scene.howlingWraiths.width() * 4 - 65;
+					break;
+			}
+			if (SPDSettings.flipToolbar()) {
+				xPos = uiCamera.width - xPos - scene.howlingWraiths.width();
+			}
+			scene.howlingWraiths.setPos( xPos, uiCamera.height - scene.howlingWraiths.height());
 		}
 	}
 	
@@ -957,19 +1036,7 @@ public class GameScene extends PixelScene {
 	}
 	
 	public static void pickUp( Item item, int pos ) {
-		if (scene != null) scene.toolbar.pickup( item, pos );
-	}
-
-	public static void pickUpJournal( Item item, int pos ) {
 		if (scene != null) scene.pane.pickup( item, pos );
-	}
-	
-	public static void flashJournal(){
-		if (scene != null) scene.pane.flash();
-	}
-	
-	public static void updateKeyDisplay(){
-		if (scene != null) scene.pane.updateKeys();
 	}
 
 	public static void resetMap() {

@@ -23,12 +23,9 @@ package com.quasistellar.hollowdungeon.levels.rooms.standard;
 
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.journal.Document;
 import com.quasistellar.hollowdungeon.levels.Terrain;
-import com.quasistellar.hollowdungeon.items.journal.GuidePage;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
-import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
 public class EntranceRoom extends StandardRoom {

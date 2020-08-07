@@ -32,6 +32,7 @@ import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndInfoSkill;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
+import com.watabou.noosa.Gizmo;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 
@@ -39,6 +40,8 @@ public class SkillIndicator extends Tag {
 
 	private Image skillIcon;
 	private Skill skill;
+
+	private static final int BGCOLOR = 0x7B8073;
 
 	public SkillIndicator(Skill skill) {
 		super( 0xCDD5C0 );
@@ -107,6 +110,17 @@ public class SkillIndicator extends Tag {
 		}
 
 		super.update();
+	}
+
+	public void enable( boolean value ) {
+		if (value != active) {
+			if (value) {
+				skillIcon.resetColor();
+			} else {
+				skillIcon.tint( BGCOLOR, 0.7f );
+			}
+			active = value;
+		}
 	}
 
 	@Override

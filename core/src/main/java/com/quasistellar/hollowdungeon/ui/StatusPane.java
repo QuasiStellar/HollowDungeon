@@ -22,6 +22,8 @@
 package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.items.Item;
+import com.quasistellar.hollowdungeon.sprites.ItemSprite;
+import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.windows.WndGame;
 import com.quasistellar.hollowdungeon.windows.WndHero;
 import com.quasistellar.hollowdungeon.windows.WndJournal;
@@ -45,28 +47,21 @@ import com.watabou.noosa.ui.Component;
 public class StatusPane extends Component {
 
 	private NinePatch bg;
-	private Image avatar;
-	private float warning;
 
-	private int lastTier = 0;
-
-//	private Image rawShielding;
-//	private Image shieldedHP;
-	private Image exp;
+	private Image soulMeter;
 
 	private com.quasistellar.hollowdungeon.ui.BossHealthBar bossHP;
-
-	private int lastLvl = -1;
 
 	private BitmapText level;
 	private BitmapText location;
 
 	private HpIndicator hp;
-	private com.quasistellar.hollowdungeon.ui.DangerIndicator danger;
-	private com.quasistellar.hollowdungeon.ui.BuffIndicator buffs;
-	private com.quasistellar.hollowdungeon.ui.Compass compass;
+	private DangerIndicator danger;
+	private BuffIndicator buffs;
 
-	private JournalButton btnJournal;
+	private ItemSprite geo;
+	private BitmapText amt;
+
 	private MenuButton btnMenu;
 
 	private Toolbar.PickedUpItem pickedUp;
@@ -79,43 +74,20 @@ public class StatusPane extends Component {
 		bg = new NinePatch( Assets.Interfaces.STATUS, 0, 0, 128, 36, 85, 0, 45, 0 );
 		add( bg );
 
-		add( new Button(){
-			@Override
-			protected void onClick () {
-				Camera.main.panTo( Dungeon.hero.sprite.center(), 5f );
-				GameScene.show( new WndHero() );
-			}
-			
-			@Override
-			public GameAction keyAction() {
-				return SPDAction.HERO_INFO;
-			}
-		}.setRect( 0, 1, 30, 30 ));
-
-		btnJournal = new JournalButton();
-		add( btnJournal );
-
 		btnMenu = new MenuButton();
 		add( btnMenu );
 
-		avatar = HeroSprite.avatar( Dungeon.hero.heroClass, lastTier );
-		add( avatar );
-
-		compass = new Compass( Statistics.amuletObtained ? Dungeon.level.entrance : Dungeon.level.exit );
-		add( compass );
-
-//		rawShielding = new Image( Assets.Interfaces.SHLD_BAR );
-//		rawShielding.alpha(0.5f);
-//		add(rawShielding);
-
-//		shieldedHP = new Image( Assets.Interfaces.SHLD_BAR );
-//		add(shieldedHP);
+		soulMeter = new Image(Assets.Interfaces.SOUL_METER);
+		add( soulMeter );
 
 		hp = new HpIndicator( Dungeon.hero );
 		add( hp );
 
-		exp = new Image( Assets.Interfaces.XP_BAR );
-		add( exp );
+		geo = new ItemSprite(ItemSpriteSheet.GEO, null);
+		add(geo);
+
+		amt = new BitmapText( Integer.toString(Dungeon.geo), PixelScene.pixelFont );
+		add(amt);
 
 		bossHP = new BossHealthBar();
 		add( bossHP );
@@ -137,7 +109,7 @@ public class StatusPane extends Component {
 
 		add( pickedUp = new Toolbar.PickedUpItem());
 		
-		version = new BitmapText( "v" + Game.version, PixelScene.pixelFont);
+		version = new BitmapText( "HD v" + Game.version, PixelScene.pixelFont);
 		version.alpha( 0.5f );
 		add(version);
 	}
@@ -149,27 +121,29 @@ public class StatusPane extends Component {
 
 		bg.size( width, bg.height );
 
-		avatar.x = bg.x + 15 - avatar.width / 2f;
-		avatar.y = bg.y + 16 - avatar.height / 2f;
-		PixelScene.align(avatar);
+		soulMeter.x = bg.x + 18 - soulMeter.width / 2f;
+		soulMeter.y = bg.y + 21 - soulMeter.height / 2f;
+		PixelScene.align(soulMeter);
 
-		compass.x = avatar.x + avatar.width / 2f - compass.origin.x;
-		compass.y = avatar.y + avatar.height / 2f - compass.origin.y;
-		PixelScene.align(compass);
+		hp.setPos(36, 8);
 
-		hp.setPos(30, 3);
+		geo.x = 35;
+		geo.y = 24;
+
+		amt.scale.set(PixelScene.align(1.5f));
+		amt.x = 48;
+		amt.y = 24;
+		PixelScene.align(amt);
 
 		bossHP.setPos( 6 + (width - bossHP.width())/2, 20);
 
-		location.x = width - 35.5f - location.width() / 2f;
+		location.x = width - 20 - location.width();
 		location.y = 8f - location.baseLine() / 2f;
 		PixelScene.align(location);
 
 		danger.setPos( width - danger.width(), 20 );
 
-		buffs.setPos( 31, 9 );
-
-		btnJournal.setPos( width - 42, 1 );
+		buffs.setPos( 31, 40 );
 
 		btnMenu.setPos( width - btnMenu.width(), 1 );
 		
@@ -179,148 +153,22 @@ public class StatusPane extends Component {
 		version.y = btnMenu.bottom() + (4 - version.baseLine());
 		PixelScene.align(version);
 	}
-	
-	private static final int[] warningColors = new int[]{0x660000, 0xCC0000, 0x660000};
 
 	@Override
 	public void update() {
 		super.update();
 
-//		if (!Dungeon.hero.isAlive()) {
-//			avatar.tint(0x000000, 0.5f);
-//		} else if ((health/max) < 0.3f) {
-//			warning += Game.elapsed * 5f *(0.4f - (health/max));
-//			warning %= 1f;
-//			avatar.tint(ColorMath.interpolate(warning, warningColors), 0.5f );
-//		} else {
-//			avatar.resetColor();
-//		}
-
-//		hp.scale.x = Math.max( 0, (health-shield)/max);
-//		shieldedHP.scale.x = health/max;
-//		rawShielding.scale.x = shield/max;
-
-		exp.scale.x = 0;
+		amt.text(Integer.toString(Dungeon.geo));
 	}
 
-	public void pickup(Item item, int cell) {
+	public void pickup(com.quasistellar.hollowdungeon.items.Item item, int cell ) {
 		pickedUp.reset( item,
-			cell,
-			btnJournal.journalIcon.x + btnJournal.journalIcon.width()/2f,
-			btnJournal.journalIcon.y + btnJournal.journalIcon.height()/2f);
+				cell,
+				geo.x + 6,
+				geo.y + 6);
 	}
 	
-	public void flash(){
-		btnJournal.flashing = true;
-	}
-	
-	public void updateKeys(){
-		btnJournal.updateKeyDisplay();
-	}
-
-	private static class JournalButton extends Button {
-
-		private Image bg;
-		private Image journalIcon;
-		private com.quasistellar.hollowdungeon.ui.KeyDisplay keyIcon;
-		
-		private boolean flashing;
-
-		public JournalButton() {
-			super();
-
-			width = bg.width + 13; //includes the depth display to the left
-			height = bg.height + 4;
-		}
-		
-		@Override
-		public GameAction keyAction() {
-			return SPDAction.JOURNAL;
-		}
-		
-		@Override
-		protected void createChildren() {
-			super.createChildren();
-
-			bg = new Image( Assets.Interfaces.MENU, 2, 2, 13, 11 );
-			add( bg );
-			
-			journalIcon = new Image( Assets.Interfaces.MENU, 31, 0, 11, 7);
-			add( journalIcon );
-			
-			keyIcon = new KeyDisplay();
-			add(keyIcon);
-			updateKeyDisplay();
-		}
-
-		@Override
-		protected void layout() {
-			super.layout();
-
-			bg.x = x + 13;
-			bg.y = y + 2;
-			
-			journalIcon.x = bg.x + (bg.width() - journalIcon.width())/2f;
-			journalIcon.y = bg.y + (bg.height() - journalIcon.height())/2f;
-			PixelScene.align(journalIcon);
-			
-			keyIcon.x = bg.x + 1;
-			keyIcon.y = bg.y + 1;
-			keyIcon.width = bg.width - 2;
-			keyIcon.height = bg.height - 2;
-			com.quasistellar.hollowdungeon.scenes.PixelScene.align(keyIcon);
-		}
-
-		private float time;
-		
-		@Override
-		public void update() {
-			super.update();
-			
-			if (flashing){
-				journalIcon.am = (float)Math.abs(Math.cos( 3 * (time += Game.elapsed) ));
-				keyIcon.am = journalIcon.am;
-				if (time >= 0.333f*Math.PI) {
-					time = 0;
-				}
-			}
-		}
-
-		public void updateKeyDisplay() {
-			keyIcon.updateKeys();
-			keyIcon.visible = keyIcon.keyCount() > 0;
-			journalIcon.visible = !keyIcon.visible;
-			if (keyIcon.keyCount() > 0) {
-				bg.brightness(.8f - (Math.min(6, keyIcon.keyCount()) / 20f));
-			} else {
-				bg.resetColor();
-			}
-		}
-
-		@Override
-		protected void onPointerDown() {
-			bg.brightness( 1.5f );
-			Sample.INSTANCE.play( Assets.Sounds.CLICK );
-		}
-
-		@Override
-		protected void onPointerUp() {
-			if (keyIcon.keyCount() > 0) {
-				bg.brightness(.8f - (Math.min(6, keyIcon.keyCount()) / 20f));
-			} else {
-				bg.resetColor();
-			}
-		}
-
-		@Override
-		protected void onClick() {
-			flashing = false;
-			time = 0;
-			keyIcon.am = journalIcon.am = 1;
-			GameScene.show( new WndJournal() );
-		}
-
-	}
+	private static final int[] warningColors = new int[]{0x660000, 0xCC0000, 0x660000};
 
 	private static class MenuButton extends Button {
 
@@ -346,7 +194,7 @@ public class StatusPane extends Component {
 			super.layout();
 
 			image.x = x + 2;
-			image.y = y + 2;
+			image.y = y + 1;
 		}
 
 		@Override

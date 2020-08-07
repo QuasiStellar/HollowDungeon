@@ -90,7 +90,7 @@ public class WornDartTrap extends Trap {
 					}
 				});
 			} else {
-				finalTarget.damage(Random.NormalIntRange(4, 8), trap);
+				finalTarget.damage(1, trap);
 			}
 		}
 	}

@@ -90,6 +90,8 @@ public class Toolbar extends Component {
 					Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 3);
 				}
 
+				GameScene.layoutSkillTags();
+
 				Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 2);
 
 				Dungeon.hero.rest(false);
@@ -145,7 +147,6 @@ public class Toolbar extends Component {
 		});
 		
 		add(btnInventory = new Tool(0, 0, 24, 26) {
-			private com.quasistellar.hollowdungeon.ui.GoldIndicator gold;
 
 			@Override
 			protected void onClick() {
@@ -162,19 +163,6 @@ public class Toolbar extends Component {
 				WndJournal.last_index = 3; //catalog page
 				GameScene.show(new com.quasistellar.hollowdungeon.windows.WndJournal());
 				return true;
-			}
-
-			@Override
-			protected void createChildren() {
-				super.createChildren();
-				gold = new GoldIndicator();
-				add(gold);
-			}
-
-			@Override
-			protected void layout() {
-				super.layout();
-				gold.fill(this);
 			}
 		});
 
@@ -236,13 +224,6 @@ public class Toolbar extends Component {
 		if (!Dungeon.hero.isAlive()) {
 			btnInventory.enable(true);
 		}
-	}
-	
-	public void pickup(com.quasistellar.hollowdungeon.items.Item item, int cell ) {
-		pickedUp.reset( item,
-			cell,
-			btnInventory.centerX(),
-			btnInventory.centerY());
 	}
 	
 	private static com.quasistellar.hollowdungeon.scenes.CellSelector.Listener informer = new CellSelector.Listener() {

@@ -40,7 +40,7 @@ public class Geo extends Item {
 	private static final String TXT_VALUE	= "%+d";
 	
 	{
-		image = ItemSpriteSheet.GOLD;
+		image = ItemSpriteSheet.GEO;
 		stackable = true;
 	}
 	
@@ -60,7 +60,7 @@ public class Geo extends Item {
 	@Override
 	public boolean doPickUp( Hero hero ) {
 		
-		Dungeon.gold += quantity;
+		Dungeon.geo += quantity;
 		Statistics.goldCollected += quantity;
 		Badges.validateGoldCollected();
 

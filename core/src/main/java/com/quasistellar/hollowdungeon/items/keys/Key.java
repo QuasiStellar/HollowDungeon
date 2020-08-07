@@ -48,12 +48,10 @@ public abstract class Key extends com.quasistellar.hollowdungeon.items.Item {
 
 	@Override
 	public boolean doPickUp(Hero hero) {
-		GameScene.pickUpJournal(this, hero.pos);
 		WndJournal.last_index = 2;
 		Notes.add(this);
 		Sample.INSTANCE.play( Assets.Sounds.ITEM );
 		hero.spendAndNext( TIME_TO_PICK_UP );
-		com.quasistellar.hollowdungeon.scenes.GameScene.updateKeyDisplay();
 		return true;
 	}
 

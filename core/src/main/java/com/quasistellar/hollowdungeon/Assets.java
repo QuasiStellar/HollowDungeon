@@ -84,6 +84,7 @@ public class Assets {
 		public static final String BOSSHP   = "interfaces/boss_hp.png";
 
 		public static final String HP       = "interfaces/hp.png";
+		public static final String SOUL_METER       = "interfaces/soul_meter.png";
 
 		public static final String SURFACE	= "interfaces/surface.png";
 

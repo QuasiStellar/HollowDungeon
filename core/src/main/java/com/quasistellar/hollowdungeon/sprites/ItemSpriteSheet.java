@@ -80,7 +80,7 @@ public class ItemSpriteSheet {
 	}
 
 	private static final int UNCOLLECTIBLE  =                               xy(1, 2);   //16 slots
-	public static final int GOLD            = UNCOLLECTIBLE+0;
+	public static final int GEO             = UNCOLLECTIBLE+0;
 	public static final int DEWDROP         = UNCOLLECTIBLE+1;
 	public static final int PETAL           = UNCOLLECTIBLE+2;
 	public static final int SANDBAG         = UNCOLLECTIBLE+3;
@@ -92,12 +92,12 @@ public class ItemSpriteSheet {
 	public static final int TENGU_BOMB      = UNCOLLECTIBLE+9;
 	public static final int TENGU_SHOCKER   = UNCOLLECTIBLE+10;
 	static{
-		assignItemRect(GOLD,        15, 13);
+		assignItemRect(GEO,         13, 13);
 		assignItemRect(DEWDROP,     10, 10);
 		assignItemRect(PETAL,       8,  8);
 		assignItemRect(SANDBAG,     10, 10);
 		assignItemRect(SPIRIT_ARROW,11, 11);
-		
+		assignItemRect(VENGEFUL_SPIRIT,15, 15);
 		assignItemRect(GUIDE_PAGE,  10, 11);
 		assignItemRect(ALCH_PAGE,   10, 11);
 		

@@ -34,6 +34,7 @@ public class Focus extends Skill {
             Dungeon.hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
             Dungeon.hero.sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "value", effect) );
             HpIndicator.refreshHero();
+            Dungeon.hero.spendAndNext(1);
         } else {
             GLog.i( Messages.get(this, "already_full") );
         }

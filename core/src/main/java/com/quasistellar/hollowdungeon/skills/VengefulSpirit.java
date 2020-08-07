@@ -46,14 +46,15 @@ public class VengefulSpirit extends Skill {
             hero.sprite.zap(targetCell);
             hero.busy();
 
+            final Ballistica shot = new Ballistica( Dungeon.hero.pos, targetCell, Ballistica.STOP_TERRAIN);
+
             ((MissileSprite) ShatteredPixelDungeon.scene().recycle(MissileSprite.class)).
-                    reset(Dungeon.hero.pos, targetCell, new VengefulSpiritShot(), new Callback() {
+                    reset(Dungeon.hero.pos, shot.collisionPos, new VengefulSpiritShot(), new Callback() {
                         @Override
                         public void call() {
 
                             ArrayList<Char> chars = new ArrayList<>();
 
-                            final Ballistica shot = new Ballistica( Dungeon.hero.pos, targetCell, Ballistica.STOP_TERRAIN);
                             for (int c : shot.subPath(1, shot.path.size()-1)) {
 
                                 Char ch;
@@ -73,7 +74,7 @@ public class VengefulSpirit extends Skill {
                         }
                     });
 
-            Dungeon.hero.earnMana(-manaCost());
+            Dungeon.hero.loseMana(manaCost());
 
         }
 
