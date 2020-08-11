@@ -54,24 +54,24 @@ public class SewerLevel extends RegularLevel {
 		color1 = 0x48763c;
 		color2 = 0x59994a;
 	}
-	
+
 	@Override
 	protected int standardRooms() {
-		//5 to 7, average 5.57
-		return 5+Random.chances(new float[]{4, 2, 1});
+		//6 to 9, average 7.333
+		return 6+Random.chances(new float[]{2, 3, 3, 1});
 	}
-	
+
 	@Override
 	protected int specialRooms() {
-		//1 to 3, average 1.67
-		return 1+Random.chances(new float[]{4, 4, 2});
+		//1 to 3, average 2.2
+		return 1+Random.chances(new float[]{2, 4, 4});
 	}
 	
 	@Override
 	protected Painter painter() {
 		return new SewerPainter()
-				.setWater(feeling == Feeling.WATER ? 0.85f : 0.30f, 5)
-				.setGrass(feeling == Feeling.GRASS ? 0.80f : 0.20f, 4)
+				.setWater(0, 5)
+				.setGrass(0, 4)
 				.setTraps(nTraps(), trapClasses(), trapChances());
 	}
 	

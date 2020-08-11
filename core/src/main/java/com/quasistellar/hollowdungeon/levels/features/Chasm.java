@@ -25,6 +25,7 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.levels.RegularLevel;
 import com.quasistellar.hollowdungeon.levels.rooms.special.WeakFloorRoom;
+import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.MobSprite;
@@ -83,45 +84,24 @@ public class Chasm {
 		
 		if (Dungeon.hero.isAlive()) {
 			Dungeon.hero.interrupt();
-			InterlevelScene.mode = InterlevelScene.Mode.FALL;
-			if (Dungeon.level instanceof com.quasistellar.hollowdungeon.levels.RegularLevel) {
-				Room room = ((RegularLevel) Dungeon.level).room( pos );
-				InterlevelScene.fallIntoPit = room != null && room instanceof WeakFloorRoom;
-			} else {
-				InterlevelScene.fallIntoPit = false;
+			if (Dungeon.hero.pos != Dungeon.hero.lastFloor) {
+				Utils.appear(Dungeon.hero, Dungeon.hero.lastFloor);
 			}
-			Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
+			Dungeon.hero.damage(1, Chasm.class);
+			if (!Dungeon.hero.isAlive()) {
+				Dungeon.fail( Chasm.class );
+				GLog.n( Messages.get(Chasm.class, "ondeath") );
+			}
+			Camera.main.shake(1, 1f);
+			Dungeon.hero.spendAndNext(1);
 		} else {
 			Dungeon.hero.sprite.visible = false;
 		}
-	}
-	
-	public static void heroLand() {
-		
-		Hero hero = Dungeon.hero;
-		
-		Camera.main.shake( 4, 1f );
-
-		Dungeon.level.occupyCell(hero );
 	}
 
 	public static void mobFall( Mob mob ) {
 		if (mob.isAlive()) mob.die( Chasm.class );
 		
 		((MobSprite)mob.sprite).fall();
-	}
-	
-	public static class Falling extends Buff {
-		
-		{
-			actPriority = Actor.VFX_PRIO;
-		}
-		
-		@Override
-		public boolean act() {
-			heroLand();
-			detach();
-			return true;
-		}
 	}
 }

@@ -79,14 +79,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public abstract class Level implements Bundlable {
-	
-	public static enum Feeling {
-		NONE,
-		CHASM,
-		WATER,
-		GRASS,
-		DARK
-	}
 
 	protected int width;
 	protected int height;
@@ -115,8 +107,6 @@ public abstract class Level implements Bundlable {
 	public boolean[] pit;
 
 	public boolean[] openSpace;
-	
-	public Feeling feeling = Feeling.NONE;
 	
 	public int entrance;
 	public int exit;
@@ -233,7 +223,7 @@ public abstract class Level implements Bundlable {
 		length = w * h;
 		
 		map = new int[length];
-		Arrays.fill( map, feeling == Level.Feeling.CHASM ? Terrain.CHASM : Terrain.WALL );
+		Arrays.fill( map, Terrain.WALL ); //TODO: use this for abyss
 		
 		visited     = new boolean[length];
 		mapped      = new boolean[length];
@@ -340,10 +330,6 @@ public abstract class Level implements Bundlable {
 			blobs.put( blob.getClass(), blob );
 		}
 
-		feeling = bundle.getEnum( FEELING, Feeling.class );
-		if (feeling == Feeling.DARK)
-			viewDistance = Math.round(viewDistance/2f);
-
 		if (bundle.contains( "mobs_to_spawn" )) {
 			for (Class<? extends Mob> mob : bundle.getClassArray("mobs_to_spawn")) {
 				if (mob != null) mobsToSpawn.add(mob);
@@ -373,12 +359,11 @@ public abstract class Level implements Bundlable {
 		bundle.put( CUSTOM_WALLS, customWalls );
 		bundle.put( MOBS, mobs );
 		bundle.put( BLOBS, blobs.values() );
-		bundle.put( FEELING, feeling );
 		bundle.put( "mobs_to_spawn", mobsToSpawn.toArray(new Class[0]));
 	}
 	
 	public int tunnelTile() {
-		return feeling == Feeling.CHASM ? Terrain.EMPTY_SP : Terrain.EMPTY;
+		return Terrain.EMPTY;
 	}
 
 	public int width() {
@@ -499,8 +484,6 @@ public abstract class Level implements Bundlable {
 	public float respawnTime(){
 		if (Statistics.amuletObtained){
 			return TIME_TO_RESPAWN/2f;
-		} else if (Dungeon.level.feeling == Feeling.DARK){
-			return 2*TIME_TO_RESPAWN/3f;
 		} else {
 			return TIME_TO_RESPAWN;
 		}
@@ -893,19 +876,23 @@ public abstract class Level implements Bundlable {
 			break;
 		}
 
+		if (map[cell] != Terrain.CHASM && Dungeon.hero.pos == cell) {
+			Dungeon.hero.lastFloor = cell;
+		}
+
 		if (trap != null) {
-			
+
 			com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble bubble =
 					Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
-			
+
 			if (bubble != null){
-				
+
 				Sample.INSTANCE.play(Assets.Sounds.TRAP);
-				
+
 				discover(cell);
-				
+
 				bubble.setDelayedPress(cell);
-				
+
 			} else {
 
 				if (Dungeon.hero.pos == cell) {
@@ -916,7 +903,7 @@ public abstract class Level implements Bundlable {
 
 			}
 		}
-		
+
 		Plant plant = plants.get( cell );
 		if (plant != null) {
 			plant.trigger();

@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
+import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.windows.WndError;
 import com.quasistellar.hollowdungeon.windows.WndStory;
 import com.quasistellar.hollowdungeon.Assets;
@@ -54,7 +55,7 @@ public class InterlevelScene extends PixelScene {
 	
 	//slow fade on entering a new region
 	private static final float SLOW_FADE = 1f; //.33 in, 1.33 steady, .33 out, 2 seconds total
-	//norm fade when loading, falling, returning, or descending to a new floor
+	//norm fade when loading, returning, or descending to a new floor
 	private static final float NORM_FADE = 0.67f; //.33 in, .67 steady, .33 out, 1.33 seconds total
 	//fast fade when ascending, or descending to a floor you've been on
 	private static final float FAST_FADE = 0.50f; //.33 in, .33 steady, .33 out, 1 second total
@@ -62,7 +63,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 	
 	public enum Mode {
-		DESCEND, TRANSIT, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE
+		DESCEND, TRANSIT, ASCEND, CONTINUE, RESURRECT, RETURN, RESET, NONE
 	}
 	public static Mode mode;
 	
@@ -70,8 +71,6 @@ public class InterlevelScene extends PixelScene {
 	public static int returnPos;
 	
 	public static boolean noStory = false;
-
-	public static boolean fallIntoPit;
 	
 	private enum Phase {
 		FADE_IN, STATIC, FADE_OUT
@@ -119,10 +118,6 @@ public class InterlevelScene extends PixelScene {
 				break;
 			case TRANSIT:
 				scrollSpeed = 5;
-				break;
-			case FALL:
-				loadingLocation = Dungeon.exitDestination;
-				scrollSpeed = 50;
 				break;
 			case RETURN:
 				loadingLocation = returnLocation;
@@ -216,9 +211,6 @@ public class InterlevelScene extends PixelScene {
 								break;
 							case RETURN:
 								returnTo();
-								break;
-							case FALL:
-								fall();
 								break;
 							case RESET:
 								reset();
@@ -350,24 +342,6 @@ public class InterlevelScene extends PixelScene {
 		}
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.transition );
-	}
-	
-	private void fall() throws IOException {
-		
-		Mob.holdAllies( Dungeon.level );
-		
-		Buff.affect( Dungeon.hero, Chasm.Falling.class );
-		Dungeon.saveAll();
-
-		Level level;
-		Dungeon.location = Dungeon.exitDestination;
-		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-		} catch (IOException e) {
-			level = Dungeon.newLevel();
-		}
-		Dungeon.changeConnections(Dungeon.location);
-		Dungeon.switchLevel( level, level.fallCell( fallIntoPit ));
 	}
 	
 	private void ascend() throws IOException {

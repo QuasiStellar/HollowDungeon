@@ -56,7 +56,6 @@ public class LastShopLevel extends RegularLevel {
 	
 	@Override
 	protected boolean build() {
-		feeling = Level.Feeling.CHASM;
 		if (super.build()){
 			
 			for (int i=0; i < length(); i++) {

@@ -122,6 +122,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 	public int dreamgatePos;
 	public String dreamgateLocation = "";
+
+	public int lastFloor = 0;
 	
 	private ArrayList<com.quasistellar.hollowdungeon.actors.mobs.Mob> visibleEnemies;
 
@@ -955,10 +957,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 			search(false);
 
-			//FIXME this is a fairly sloppy fix for a crash involving pitfall traps.
-			//really there should be a way for traps to specify whether action should continue or
-			//not when they are pressed.
-			return InterlevelScene.mode != com.quasistellar.hollowdungeon.scenes.InterlevelScene.Mode.FALL;
+			return true;
 
 		} else {
 

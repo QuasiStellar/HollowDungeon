@@ -444,7 +444,7 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 	
 	public void die( Object src ) {
 		destroy();
-		if (src != Chasm.class) sprite.die();
+		if (src != Chasm.class || this instanceof Hero) sprite.die();
 	}
 	
 	public boolean isAlive() {

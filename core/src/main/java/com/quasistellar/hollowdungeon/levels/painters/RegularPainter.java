@@ -78,7 +78,7 @@ public abstract class RegularPainter extends com.quasistellar.hollowdungeon.leve
 		//painter can be used without rooms
 		if (rooms != null) {
 			
-			int padding = level.feeling == Level.Feeling.CHASM ? 2 : 1;
+			int padding = 1;
 			
 			int leftMost = Integer.MAX_VALUE, topMost = Integer.MAX_VALUE;
 			

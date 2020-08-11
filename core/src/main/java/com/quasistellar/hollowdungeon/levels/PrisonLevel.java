@@ -71,8 +71,8 @@ public class PrisonLevel extends RegularLevel {
 	@Override
 	protected Painter painter() {
 		return new PrisonPainter()
-				.setWater(feeling == Level.Feeling.WATER ? 0.90f : 0.30f, 4)
-				.setGrass(feeling == Level.Feeling.GRASS ? 0.80f : 0.20f, 3)
+				.setWater(0, 4)
+				.setGrass(0, 3)
 				.setTraps(nTraps(), trapClasses(), trapChances());
 	}
 	

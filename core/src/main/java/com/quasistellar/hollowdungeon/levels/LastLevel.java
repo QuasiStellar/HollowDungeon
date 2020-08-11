@@ -115,7 +115,6 @@ public class LastLevel extends Level {
 		Painter.fill( this, MID - 2, 9, 5, 7, Terrain.EMPTY);
 		Painter.fill( this, MID - 3, 10, 7, 5, Terrain.EMPTY);
 
-		feeling = Feeling.NONE;
 		viewDistance = 4;
 
 		CustomTilemap vis = new CustomFloor();

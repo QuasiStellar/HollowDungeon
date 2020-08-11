@@ -69,6 +69,9 @@ public class SewerPainter extends RegularPainter {
 					map[i] = com.quasistellar.hollowdungeon.levels.Terrain.EMPTY_DECO;
 				}
 			}
+			if (map[i] == Terrain.DOOR) {
+				map[i] = Terrain.EMPTY;
+			}
 		}
 	}
 }

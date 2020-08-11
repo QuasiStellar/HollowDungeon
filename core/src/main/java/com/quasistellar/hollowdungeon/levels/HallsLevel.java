@@ -95,8 +95,8 @@ public class HallsLevel extends RegularLevel {
 	@Override
 	protected Painter painter() {
 		return new HallsPainter()
-				.setWater(feeling == Level.Feeling.WATER ? 0.70f : 0.15f, 6)
-				.setGrass(feeling == Level.Feeling.GRASS ? 0.65f : 0.10f, 3)
+				.setWater(0, 6)
+				.setGrass(0, 3)
 				.setTraps(nTraps(), trapClasses(), trapChances());
 	}
 	
