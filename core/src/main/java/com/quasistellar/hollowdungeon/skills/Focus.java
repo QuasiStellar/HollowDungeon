@@ -42,7 +42,12 @@ public class Focus extends Skill {
 
     @Override
     public int manaCost() {
-        return 0;
+        return 33;
+    }
+
+    @Override
+    public boolean visible() {
+        return Dungeon.hero.MP >= 33;
     }
 
     @Override

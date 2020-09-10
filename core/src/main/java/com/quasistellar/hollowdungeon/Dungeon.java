@@ -1027,6 +1027,7 @@ public class Dungeon {
 		}
 
 		hero.pos = pos;
+		hero.lastFloor = pos;
 		
 		for(Mob m : level.mobs){
 			if (m.pos == hero.pos){

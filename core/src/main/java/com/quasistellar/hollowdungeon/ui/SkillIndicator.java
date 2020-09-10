@@ -96,7 +96,7 @@ public class SkillIndicator extends Tag {
 	public synchronized void update() {
 		if (!Dungeon.hero.isAlive())
 			visible = false;
-		else if (Dungeon.hero.MP >= skill.manaCost() && skill.visible()) {
+		else if (skill.visible()) {
 			if (!visible) {
 				visible = true;
 				updateImage();
@@ -115,9 +115,13 @@ public class SkillIndicator extends Tag {
 	public void enable( boolean value ) {
 		if (value != active) {
 			if (value) {
-				skillIcon.resetColor();
+				if (skillIcon != null) {
+					skillIcon.resetColor();
+				}
 			} else {
-				skillIcon.tint( BGCOLOR, 0.7f );
+				if (skillIcon != null) {
+					skillIcon.tint( BGCOLOR, 0.7f );
+				}
 			}
 			active = value;
 		}

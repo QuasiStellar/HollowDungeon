@@ -71,6 +71,12 @@ public class CrystalHeart extends Skill {
     }
 
     @Override
+    public boolean visible() {
+        Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
+        return delay != null && delay.cooldown() >= 2;
+    }
+
+    @Override
     public int icon() {
         return Skill.CRYSTAL_HEART;
     }

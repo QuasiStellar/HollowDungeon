@@ -99,6 +99,8 @@ public class Chasm {
 		}
 	}
 
+
+
 	public static void mobFall( Mob mob ) {
 		if (mob.isAlive()) mob.die( Chasm.class );
 		

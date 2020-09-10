@@ -73,6 +73,11 @@ public class MonarchWings extends Skill {
     }
 
     @Override
+    public boolean visible() {
+        return Dungeon.hero.buff(MonarchWingsDelay.class) == null;
+    }
+
+    @Override
     public int icon() {
         return Skill.MONARCH_WINGS;
     }

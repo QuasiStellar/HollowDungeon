@@ -74,6 +74,11 @@ public class MothwingCloak extends Skill {
     }
 
     @Override
+    public boolean visible() {
+        return Dungeon.hero.buff(MothwingCloakDelay.class) == null;
+    }
+
+    @Override
     public int icon() {
         return Skill.MOTHWING_CLOAK;
     }

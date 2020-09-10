@@ -134,7 +134,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public Hero() {
 		super();
 
-		MM = 20;
+		MM = 99;
 		MP = 0;
 		HP = HT = 5;
 		
@@ -1184,7 +1184,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		trajectory = new Ballistica(trajectory.collisionPos, trajectory.path.get(trajectory.path.size()-1), Ballistica.PROJECTILE);
 		//knock them back along that ballistica
 		Utils.throwChar(enemy, trajectory, 1);
-		
+
+		earnMana(11);
+
 		Invisibility.dispel();
 		spend( attackDelay() );
 

@@ -21,7 +21,11 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
+import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
+import com.quasistellar.hollowdungeon.mechanics.Utils;
+import com.quasistellar.hollowdungeon.skills.MonarchWings;
+import com.quasistellar.hollowdungeon.skills.MothwingCloak;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.sprites.DiscardedItemSprite;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
@@ -149,11 +153,19 @@ public class GameScene extends PixelScene {
 	private ActionIndicator action;
 	private ResumeIndicator resume;
 
-	private boolean lastEnabled = true;
-	
+	private boolean mothwingCloakLastEnabled  = false;
+	private boolean crystalHeartLastEnabled   = false;
+	private boolean monarchWingsLastEnabled   = false;
+	private boolean dreamNailLastEnabled      = false;
+	private boolean dreamgateLastEnabled      = false;
+	private boolean focusLastEnabled          = false;
+	private boolean vengefulSpiritLastEnabled = false;
+	private boolean desolateDiveLastEnabled   = false;
+	private boolean howlingWraithsLastEnabled = false;
+
 	@Override
 	public void create() {
-		
+
 		if (Dungeon.hero == null){
 			ShatteredPixelDungeon.switchNoFade(TitleScene.class);
 			return;
@@ -304,38 +316,47 @@ public class GameScene extends PixelScene {
 
 		mothwingCloak = new SkillIndicator(Dungeon.hero.mothwingCloak);
 		mothwingCloak.camera = uiCamera;
+		mothwingCloak.active = false;
 		add(mothwingCloak);
 
 		crystalHeart = new SkillIndicator(Dungeon.hero.crystalHeart);
 		crystalHeart.camera = uiCamera;
+		crystalHeart.active = false;
 		add(crystalHeart);
 
 		monarchWings = new SkillIndicator(Dungeon.hero.monarchWings);
 		monarchWings.camera = uiCamera;
+		monarchWings.active = false;
 		add(monarchWings);
 
 		dreamNail = new SkillIndicator(Dungeon.hero.dreamNail);
 		dreamNail.camera = uiCamera;
+		dreamNail.active = false;
 		add(dreamNail);
 
 		dreamgate = new SkillIndicator(Dungeon.hero.dreamgate);
 		dreamgate.camera = uiCamera;
+		dreamgate.active = false;
 		add(dreamgate);
 
 		focus = new SpellIndicator(Dungeon.hero.focus);
 		focus.camera = uiCamera;
+		focus.active = false;
 		add(focus);
 
 		vengefulSpirit = new SpellIndicator(Dungeon.hero.vengefulSpirit);
 		vengefulSpirit.camera = uiCamera;
+		vengefulSpirit.active = false;
 		add(vengefulSpirit);
 
 		desolateDive = new SpellIndicator(Dungeon.hero.desolateDive);
 		desolateDive.camera = uiCamera;
+		desolateDive.active = false;
 		add(desolateDive);
 
 		howlingWraiths = new SpellIndicator(Dungeon.hero.howlingWraiths);
 		howlingWraiths.camera = uiCamera;
+		howlingWraiths.active = false;
 		add(howlingWraiths);
 
 		attack = new AttackIndicator();
@@ -641,17 +662,49 @@ public class GameScene extends PixelScene {
 			layoutSkillTags();
 		}
 
-		if ((lastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
-			lastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+		if ((mothwingCloakLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			mothwingCloakLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			mothwingCloak.enable( mothwingCloakLastEnabled );
+		}
 
-			for (Gizmo indicator : members) {
-				if (indicator instanceof SkillIndicator) {
-					((SkillIndicator)indicator).enable( lastEnabled );
-				}
-				if (indicator instanceof SpellIndicator) {
-					((SpellIndicator)indicator).enable( lastEnabled );
-				}
-			}
+		if ((crystalHeartLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			crystalHeartLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			crystalHeart.enable( crystalHeartLastEnabled );
+		}
+
+		if ((monarchWingsLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			monarchWingsLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			monarchWings.enable( monarchWingsLastEnabled );
+		}
+
+		if ((dreamNailLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			dreamNailLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			dreamNail.enable( dreamNailLastEnabled );
+		}
+
+		if ((dreamgateLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			dreamgateLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			dreamgate.enable( dreamgateLastEnabled );
+		}
+
+		if ((focusLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			focusLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			focus.enable( focusLastEnabled );
+		}
+
+		if ((vengefulSpiritLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			vengefulSpiritLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			vengefulSpirit.enable( vengefulSpiritLastEnabled );
+		}
+
+		if ((desolateDiveLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			desolateDiveLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			desolateDive.enable( desolateDiveLastEnabled );
+		}
+
+		if ((howlingWraithsLastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive()))) {
+			howlingWraithsLastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
+			howlingWraiths.enable( howlingWraithsLastEnabled );
 		}
 
 		cellSelector.enable(Dungeon.hero.ready);
@@ -733,14 +786,14 @@ public class GameScene extends PixelScene {
 			scene.mothwingCloak.flip(tagLeft == 0);
 		}
 
-		if (scene.tagCrystalHeart) {
-			scene.crystalHeart.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height());
-			scene.crystalHeart.flip(tagLeft == 0);
+		if (scene.tagMonarchWings) {
+			scene.monarchWings.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height());
+			scene.monarchWings.flip(tagLeft == 0);
 		}
 
-		if (scene.tagMonarchWings) {
-			scene.monarchWings.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height());
-			scene.monarchWings.flip(tagLeft == 0);
+		if (scene.tagCrystalHeart) {
+			scene.crystalHeart.setPos( tagLeft, upper_pos + 10 + scene.mothwingCloak.height() + scene.crystalHeart.height());
+			scene.crystalHeart.flip(tagLeft == 0);
 		}
 
 		if (scene.tagDreamNail) {

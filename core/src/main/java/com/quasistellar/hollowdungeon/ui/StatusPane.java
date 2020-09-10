@@ -24,6 +24,7 @@ package com.quasistellar.hollowdungeon.ui;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
+import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndGame;
 import com.quasistellar.hollowdungeon.windows.WndHero;
 import com.quasistellar.hollowdungeon.windows.WndJournal;
@@ -34,12 +35,15 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.SPDAction;
 import com.quasistellar.hollowdungeon.Statistics;
+import com.watabou.gltextures.SmartTexture;
+import com.watabou.gltextures.TextureCache;
 import com.watabou.input.GameAction;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 import com.watabou.noosa.ui.Component;
@@ -77,7 +81,15 @@ public class StatusPane extends Component {
 		btnMenu = new MenuButton();
 		add( btnMenu );
 
-		soulMeter = new Image(Assets.Interfaces.SOUL_METER);
+		SmartTexture icons;
+		TextureFilm film;
+
+		icons = TextureCache.get( Assets.Interfaces.SOUL_METER );
+		film = new TextureFilm( icons, 27, 27 );
+
+		soulMeter = new Image( icons );
+		soulMeter.frame( film.get( Math.round(Dungeon.hero.MP / (float)Dungeon.hero.MM * 27) ) );
+
 		add( soulMeter );
 
 		hp = new HpIndicator( Dungeon.hero );
@@ -159,6 +171,14 @@ public class StatusPane extends Component {
 		super.update();
 
 		amt.text(Integer.toString(Dungeon.geo));
+
+		SmartTexture icons;
+		TextureFilm film;
+
+		icons = TextureCache.get( Assets.Interfaces.SOUL_METER );
+		film = new TextureFilm( icons, 27, 27 );
+		soulMeter.frame( film.get( Math.round(Dungeon.hero.MP / (float)Dungeon.hero.MM * 27) ) );
+
 	}
 
 	public void pickup(com.quasistellar.hollowdungeon.items.Item item, int cell ) {
