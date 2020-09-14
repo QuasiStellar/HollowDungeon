@@ -52,13 +52,13 @@ public class Archs extends Component {
 				return NoosaScriptNoLighting.get();
 			}
 
-			@Override
-			public void draw() {
-				//arch bg has no alpha component, this improves performance
-				Blending.disable();
-				super.draw();
-				Blending.enable();
-			}
+//			@Override
+//			public void draw() {
+//				//arch bg has no alpha component, this improves performance
+//				Blending.disable();
+//				super.draw();
+//				Blending.enable();
+//			}
 		};
 		arcsBg.autoAdjust = true;
 		arcsBg.offsetTo( 0,  offsB );

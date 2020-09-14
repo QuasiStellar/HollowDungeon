@@ -23,12 +23,12 @@ package com.quasistellar.hollowdungeon.actors.mobs;
 
 import com.quasistellar.hollowdungeon.sprites.RatSprite;
 
-public class Tiktik extends Mob {
+public class WanderingHusk extends Mob {
 
     {
         spriteClass = RatSprite.class;
 
-        HP = HT = 8;
+        HP = HT = 15;
 
     }
 }

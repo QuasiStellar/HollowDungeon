@@ -21,14 +21,15 @@
 
 package com.quasistellar.hollowdungeon.actors.mobs;
 
-import com.quasistellar.hollowdungeon.sprites.RatSprite;
+import com.quasistellar.hollowdungeon.sprites.SwarmSprite;
 
-public class Crawlid extends Mob {
+public class Vengefly extends Mob {
 
     {
-        spriteClass = RatSprite.class;
+        spriteClass = SwarmSprite.class;
 
         HP = HT = 8;
 
+        baseSpeed = 2;
     }
 }

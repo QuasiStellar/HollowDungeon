@@ -39,13 +39,12 @@ public class Bestiary {
 	//returns a rotation of standard mobs, unshuffled.
 	private static ArrayList<Class<? extends Mob>> standardMobRotation( String location ){
 		switch(location){
-			
-			// Sewers
+
 			default:
-				//3x crawlid, 1x tiktik
+				//3x whusk, 1x vengefly
 				return new ArrayList<>(Arrays.asList(
-						Crawlid.class, Crawlid.class, Crawlid.class,
-						Tiktik.class));
+						WanderingHusk.class, WanderingHusk.class, WanderingHusk.class,
+						Vengefly.class));
 		}
 		
 	}

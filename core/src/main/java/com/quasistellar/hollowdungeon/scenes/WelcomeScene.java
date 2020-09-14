@@ -76,24 +76,24 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 
 		align(title);
 
-		Image signs = new Image( BannerSprites.get( com.quasistellar.hollowdungeon.effects.BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
-			private float time = 0;
-			@Override
-			public void update() {
-				super.update();
-				am = Math.max(0f, (float)Math.sin( time += Game.elapsed ));
-				if (time >= 1.5f*Math.PI) time = 0;
-			}
-			@Override
-			public void draw() {
-				Blending.setLightMode();
-				super.draw();
-				Blending.setNormalMode();
-			}
-		};
-		signs.x = title.x + (title.width() - signs.width())/2f;
-		signs.y = title.y;
-		add( signs );
+//		Image signs = new Image( BannerSprites.get( com.quasistellar.hollowdungeon.effects.BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
+//			private float time = 0;
+//			@Override
+//			public void update() {
+//				super.update();
+//				am = Math.max(0f, (float)Math.sin( time += Game.elapsed ));
+//				if (time >= 1.5f*Math.PI) time = 0;
+//			}
+//			@Override
+//			public void draw() {
+//				Blending.setLightMode();
+//				super.draw();
+//				Blending.setNormalMode();
+//			}
+//		};
+//		signs.x = title.x + (title.width() - signs.width())/2f;
+//		signs.y = title.y;
+//		add( signs );
 		
 		StyledButton okay = new StyledButton(Chrome.Type.GREY_BUTTON_TR, Messages.get(this, "continue")){
 			@Override

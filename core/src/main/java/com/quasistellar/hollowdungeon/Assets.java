@@ -205,6 +205,7 @@ public class Assets {
 	public static class Splashes {
 		public static final String KNIGHT	= "splashes/knight.jpg";
 		public static final String HORNET	= "splashes/hornet.jpg";
+		public static final String THEME	= "splashes/theme.png";
 	}
 
 	public static class Sprites {

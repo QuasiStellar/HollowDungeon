@@ -21,7 +21,9 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.effects.Fireball;
+import com.quasistellar.hollowdungeon.ui.IconButton;
 import com.quasistellar.hollowdungeon.windows.WndOptions;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
 import com.quasistellar.hollowdungeon.Assets;
@@ -36,12 +38,14 @@ import com.quasistellar.hollowdungeon.ui.LanguageButton;
 import com.quasistellar.hollowdungeon.ui.PrefsButton;
 import com.quasistellar.hollowdungeon.ui.StyledButton;
 import com.quasistellar.hollowdungeon.ui.UpdateNotification;
+import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Blending;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Music;
+import com.watabou.noosa.ui.Button;
 import com.watabou.utils.DeviceCompat;
 
 public class TitleScene extends PixelScene {
@@ -57,10 +61,42 @@ public class TitleScene extends PixelScene {
 		
 		int w = Camera.main.width;
 		int h = Camera.main.height;
-		
+
+		Image background = new Image(Assets.Splashes.THEME){
+			@Override
+			public void update() {
+				if (rm > 1f){
+					rm -= Game.elapsed;
+					gm = bm = rm;
+				} else {
+					rm = gm = bm = 1;
+				}
+			}
+		};
+		background.scale.set(Camera.main.height/background.height);
+
+		background.x = (Camera.main.width - background.width())/2f;
+		background.y = (Camera.main.height - background.height())/2f;
+		//background.visible = false;
+		PixelScene.align(background);
+		add(background);
+
 		Archs archs = new Archs();
 		archs.setSize( w, h );
 		add( archs );
+
+		if (background.x > 0){
+			Image fadeLeft = new Image(TextureCache.createGradient(0xFF000000, 0x00000000));
+			fadeLeft.x = background.x-2;
+			fadeLeft.scale.set(4, background.height());
+			add(fadeLeft);
+
+			Image fadeRight = new Image(fadeLeft);
+			fadeRight.x = background.x + background.width() + 2;
+			fadeRight.y = background.y + background.height();
+			fadeRight.angle = 180;
+			add(fadeRight);
+		}
 		
 		Image title = BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON );
 		add( title );
@@ -76,29 +112,29 @@ public class TitleScene extends PixelScene {
 
 		align(title);
 
-		placeTorch(title.x + 22, title.y + 46);
-		placeTorch(title.x + title.width - 22, title.y + 46);
+//		placeTorch(title.x + 22, title.y + 46);
+//		placeTorch(title.x + title.width - 22, title.y + 46);
 
-		Image signs = new Image( BannerSprites.get( com.quasistellar.hollowdungeon.effects.BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
-			private float time = 0;
-			@Override
-			public void update() {
-				super.update();
-				am = Math.max(0f, (float)Math.sin( time += Game.elapsed ));
-				if (time >= 1.5f*Math.PI) time = 0;
-			}
-			@Override
-			public void draw() {
-				Blending.setLightMode();
-				super.draw();
-				Blending.setNormalMode();
-			}
-		};
-		signs.x = title.x + (title.width() - signs.width())/2f;
-		signs.y = title.y;
-		add( signs );
+//		Image signs = new Image( BannerSprites.get( com.quasistellar.hollowdungeon.effects.BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
+//			private float time = 0;
+//			@Override
+//			public void update() {
+//				super.update();
+//				am = Math.max(0f, (float)Math.sin( time += Game.elapsed ));
+//				if (time >= 1.5f*Math.PI) time = 0;
+//			}
+//			@Override
+//			public void draw() {
+//				Blending.setLightMode();
+//				super.draw();
+//				Blending.setNormalMode();
+//			}
+//		};
+//		signs.x = title.x + (title.width() - signs.width())/2f;
+//		signs.y = title.y;
+//		add( signs );
 		
-		TitleButton btnPlay = new TitleButton(Messages.get(this, "enter")){
+		IconButton btnPlay = new IconButton(){
 			@Override
 			protected void onClick() {
 				if (GamesInProgress.checkAll().size() == 0){
@@ -123,91 +159,23 @@ public class TitleScene extends PixelScene {
 				return super.onLongClick();
 			}
 		};
-		btnPlay.icon(Icons.get(Icons.ENTER));
+		btnPlay.icon(BannerSprites.get( BannerSprites.Type.START_GAME ));
 		add(btnPlay);
-		
-		TitleButton btnSupport = new TitleButton(Messages.get(this, "support")){
-			@Override
-			protected void onClick() {
-				com.quasistellar.hollowdungeon.windows.WndOptions wnd = new WndOptions(Messages.get(TitleScene.class, "support"),
-						Messages.get(TitleScene.class, "patreon_body"),
-						Messages.get(TitleScene.class, "patreon_button")){
-					@Override
-					protected void onSelect(int index) {
-						if (index == 0){
-							DeviceCompat.openURI("https://www.patreon.com/ShatteredPixel");
-						} else {
-							hide();
-						}
-					}
-				};
-				parent.add(wnd);
-			}
-		};
-		btnSupport.icon(Icons.get(Icons.GOLD));
-		add(btnSupport);
-		
-		TitleButton btnRankings = new TitleButton(Messages.get(this, "rankings")){
-			@Override
-			protected void onClick() {
-				ShatteredPixelDungeon.switchNoFade( RankingsScene.class );
-			}
-		};
-		btnRankings.icon(Icons.get(Icons.RANKINGS));
-		add(btnRankings);
-		
-		TitleButton btnBadges = new TitleButton(Messages.get(this, "badges")){
-			@Override
-			protected void onClick() {
-				ShatteredPixelDungeon.switchNoFade( BadgesScene.class );
-			}
-		};
-		btnBadges.icon(Icons.get(Icons.BADGES));
-		add(btnBadges);
-		
-		TitleButton btnChanges = new TitleButton(Messages.get(this, "changes")){
-			@Override
-			protected void onClick() {
-				com.quasistellar.hollowdungeon.scenes.ChangesScene.changesSelected = 0;
-				ShatteredPixelDungeon.switchNoFade( ChangesScene.class );
-			}
-		};
-		btnChanges.icon(Icons.get(Icons.CHANGES));
-		add(btnChanges);
-		
-		TitleButton btnAbout = new TitleButton(Messages.get(this, "about")){
+
+		IconButton btnAbout = new IconButton(){
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchScene( AboutScene.class );
 			}
 		};
-		btnAbout.icon(Icons.get(Icons.SHPX));
+		btnAbout.icon(BannerSprites.get( BannerSprites.Type.ABOUT ));
 		add(btnAbout);
-		
-		final int BTN_HEIGHT = 21;
-		int GAP = (int)(h - topRegion - (landscape() ? 3 : 4)*BTN_HEIGHT)/3;
-		GAP /= landscape() ? 3 : 4;
-		GAP = Math.max(GAP, 2);
 
-		if (landscape()) {
-			btnPlay.setRect(title.x-50, topRegion+GAP, ((title.width()+100)/2)-1, BTN_HEIGHT);
-			align(btnPlay);
-			btnSupport.setRect(btnPlay.right()+2, btnPlay.top(), btnPlay.width(), BTN_HEIGHT);
-			btnRankings.setRect(btnPlay.left() + (btnPlay.width()*.33f)+1, btnPlay.bottom()+ GAP, (btnPlay.width()*.67f)-1, BTN_HEIGHT);
-			btnBadges.setRect(btnRankings.right()+2, btnRankings.top(), btnRankings.width(), BTN_HEIGHT);
-			btnChanges.setRect(btnRankings.left(), btnRankings.bottom() + GAP, btnRankings.width(), BTN_HEIGHT);
-			btnAbout.setRect(btnChanges.right()+2, btnChanges.top(), btnRankings.width(), BTN_HEIGHT);
-		} else {
-			btnPlay.setRect(title.x, topRegion+GAP, title.width(), BTN_HEIGHT);
-			align(btnPlay);
-			btnRankings.setRect(btnPlay.left(), btnPlay.bottom()+ GAP, (btnPlay.width()/2)-1, BTN_HEIGHT);
-			btnBadges.setRect(btnRankings.right()+2, btnRankings.top(), btnRankings.width(), BTN_HEIGHT);
-			btnChanges.setRect(btnRankings.left(), btnRankings.bottom()+ GAP, btnRankings.width(), BTN_HEIGHT);
-			btnAbout.setRect(btnChanges.right()+2, btnChanges.top(), btnChanges.width(), BTN_HEIGHT);
-			btnSupport.setRect(btnPlay.left(), btnAbout.bottom()+ GAP, btnPlay.width(), BTN_HEIGHT);
-		}
+		btnPlay.setRect((w - 96) / 2f, topRegion + 5, 96, 16);
+		align(btnPlay);
+		btnAbout.setRect((w - 96) / 2f, btnPlay.bottom() + 10, 96, 16);
 
-		BitmapText version = new BitmapText( "v" + Game.version, pixelFont);
+		BitmapText version = new BitmapText( "DEMO", pixelFont);
 		version.measure();
 		version.hardlight( 0x888888 );
 		version.x = w - version.width() - 4;
@@ -222,16 +190,12 @@ public class TitleScene extends PixelScene {
 		
 		pos += btnPrefs.width();
 
-		LanguageButton btnLang = new LanguageButton();
-		btnLang.setRect(pos, 0, 16, 20);
-		add( btnLang );
-
 		ExitButton btnExit = new ExitButton();
 		btnExit.setPos( w - btnExit.width(), 0 );
 		add( btnExit );
 
 		UpdateNotification updInfo = new UpdateNotification();
-		updInfo.setRect(4, h-BTN_HEIGHT, updInfo.reqWidth() + 6, BTN_HEIGHT-4);
+		updInfo.setRect(4, h-16, updInfo.reqWidth() + 6, 16-4);
 		add(updInfo);
 
 		fadeIn();
