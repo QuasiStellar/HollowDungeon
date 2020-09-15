@@ -22,10 +22,9 @@
 package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
+import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
-import com.quasistellar.hollowdungeon.skills.MonarchWings;
-import com.quasistellar.hollowdungeon.skills.MothwingCloak;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.sprites.DiscardedItemSprite;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
@@ -37,15 +36,14 @@ import com.quasistellar.hollowdungeon.journal.Journal;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.Statistics;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.blobs.Blob;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
 import com.quasistellar.hollowdungeon.levels.RegularLevel;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -97,6 +95,10 @@ import java.util.Locale;
 public class GameScene extends PixelScene {
 
 	static GameScene scene;
+
+	public static float time = 0;
+
+	private static final float DELAY = 2;
 
 	private SkinnedBlock water;
 	private DungeonTerrainTilemap tiles;
@@ -167,16 +169,16 @@ public class GameScene extends PixelScene {
 	public void create() {
 
 		if (Dungeon.hero == null){
-			ShatteredPixelDungeon.switchNoFade(TitleScene.class);
+			HollowDungeon.switchNoFade(TitleScene.class);
 			return;
 		}
 		
 		Music.INSTANCE.play( Assets.Music.GAME, true );
 
-		SPDSettings.lastClass(Dungeon.hero.heroClass.ordinal());
+		HDSettings.lastClass(Dungeon.hero.heroClass.ordinal());
 		
 		super.create();
-		Camera.main.zoom( GameMath.gate(minZoom, defaultZoom + SPDSettings.zoom(), maxZoom));
+		Camera.main.zoom( GameMath.gate(minZoom, defaultZoom + HDSettings.zoom(), maxZoom));
 
 		scene = this;
 
@@ -494,7 +496,7 @@ public class GameScene extends PixelScene {
 				try {
 					GameScene.class.wait(5000);
 				} catch (InterruptedException e) {
-					ShatteredPixelDungeon.reportException(e);
+					HollowDungeon.reportException(e);
 				}
 				synchronized (actorThread) {
 					if (Actor.processing()) {
@@ -529,7 +531,7 @@ public class GameScene extends PixelScene {
 			Badges.saveGlobal();
 			com.quasistellar.hollowdungeon.journal.Journal.saveGlobal();
 		} catch (IOException e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 	}
 
@@ -543,6 +545,25 @@ public class GameScene extends PixelScene {
 	public synchronized void update() {
 		if (Dungeon.hero == null || scene == null) {
 			return;
+		}
+
+		time += Game.elapsed;
+		if (time >= DELAY) {
+
+			Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
+			if (delay == null) {
+				Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 2);
+			} else {
+				Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 3);
+			}
+
+			GameScene.layoutSkillTags();
+
+			Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 2);
+
+			GameScene.time = 0;
+
+			Dungeon.hero.rest(false);
 		}
 
 		super.update();
@@ -733,9 +754,9 @@ public class GameScene extends PixelScene {
 
 		if (scene == null) return;
 
-		float tagLeft = SPDSettings.flipTags() ? 0 : uiCamera.width - scene.attack.width();
+		float tagLeft = HDSettings.flipTags() ? 0 : uiCamera.width - scene.attack.width();
 
-		if (SPDSettings.flipTags()) {
+		if (HDSettings.flipTags()) {
 			scene.log.setRect(scene.attack.width(), scene.toolbar.top()-2, uiCamera.width - scene.attack.width(), 0);
 		} else {
 			scene.log.setRect(0, scene.toolbar.top()-2, uiCamera.width - scene.attack.width(),  0 );
@@ -771,9 +792,9 @@ public class GameScene extends PixelScene {
 
 		if (scene == null) return;
 
-		float tagLeft = SPDSettings.flipTags() ? uiCamera.width - scene.attack.width() : 0;
+		float tagLeft = HDSettings.flipTags() ? uiCamera.width - scene.attack.width() : 0;
 
-		if (SPDSettings.flipTags()) {
+		if (HDSettings.flipTags()) {
 			scene.log.setRect(scene.attack.width(), scene.toolbar.top(), uiCamera.width - scene.attack.width(), 0);
 		} else {
 			scene.log.setRect(0, scene.toolbar.top(), uiCamera.width - scene.attack.width(),  0 );
@@ -808,7 +829,7 @@ public class GameScene extends PixelScene {
 
 		if (scene.tagFocus) {
 			float xPos = 0;
-			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+			switch(Toolbar.Mode.valueOf(HDSettings.toolbarMode())){
 				case SPLIT:
 					xPos = uiCamera.width - scene.focus.width() - 25;
 					break;
@@ -819,7 +840,7 @@ public class GameScene extends PixelScene {
 					xPos = uiCamera.width - scene.focus.width() - 65;
 					break;
 			}
-			if (SPDSettings.flipToolbar()) {
+			if (HDSettings.flipToolbar()) {
 				xPos = uiCamera.width - xPos - scene.focus.width();
 			}
 			scene.focus.setPos( xPos, uiCamera.height - scene.focus.height());
@@ -827,7 +848,7 @@ public class GameScene extends PixelScene {
 
 		if (scene.tagVengefulSpirit) {
 			float xPos = 0;
-			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+			switch(Toolbar.Mode.valueOf(HDSettings.toolbarMode())){
 				case SPLIT:
 					xPos = uiCamera.width - scene.vengefulSpirit.width() * 2 - 25;
 					break;
@@ -838,7 +859,7 @@ public class GameScene extends PixelScene {
 					xPos = uiCamera.width - scene.vengefulSpirit.width() * 2 - 65;
 					break;
 			}
-			if (SPDSettings.flipToolbar()) {
+			if (HDSettings.flipToolbar()) {
 				xPos = uiCamera.width - xPos - scene.vengefulSpirit.width();
 			}
 			scene.vengefulSpirit.setPos( xPos, uiCamera.height - scene.vengefulSpirit.height());
@@ -846,7 +867,7 @@ public class GameScene extends PixelScene {
 
 		if (scene.tagDesolateDive) {
 			float xPos = 0;
-			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+			switch(Toolbar.Mode.valueOf(HDSettings.toolbarMode())){
 				case SPLIT:
 					xPos = uiCamera.width - scene.desolateDive.width() * 3 - 25;
 					break;
@@ -857,7 +878,7 @@ public class GameScene extends PixelScene {
 					xPos = uiCamera.width - scene.desolateDive.width() * 3 - 65;
 					break;
 			}
-			if (SPDSettings.flipToolbar()) {
+			if (HDSettings.flipToolbar()) {
 				xPos = uiCamera.width - xPos - scene.desolateDive.width();
 			}
 			scene.desolateDive.setPos( xPos, uiCamera.height - scene.desolateDive.height());
@@ -865,7 +886,7 @@ public class GameScene extends PixelScene {
 
 		if (scene.tagHowlingWraiths) {
 			float xPos = 0;
-			switch(Toolbar.Mode.valueOf(SPDSettings.toolbarMode())){
+			switch(Toolbar.Mode.valueOf(HDSettings.toolbarMode())){
 				case SPLIT:
 					xPos = uiCamera.width - scene.howlingWraiths.width() * 4 - 25;
 					break;
@@ -876,7 +897,7 @@ public class GameScene extends PixelScene {
 					xPos = uiCamera.width - scene.howlingWraiths.width() * 4 - 65;
 					break;
 			}
-			if (SPDSettings.flipToolbar()) {
+			if (HDSettings.flipToolbar()) {
 				xPos = uiCamera.width - xPos - scene.howlingWraiths.width();
 			}
 			scene.howlingWraiths.setPos( xPos, uiCamera.height - scene.howlingWraiths.height());

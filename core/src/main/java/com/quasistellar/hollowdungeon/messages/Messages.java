@@ -23,8 +23,8 @@ package com.quasistellar.hollowdungeon.messages;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.Assets;
 
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class Messages {
 	};
 
 	static{
-		setup(SPDSettings.language());
+		setup(HDSettings.language());
 	}
 
 	public static void setup( Languages lang ){
@@ -144,7 +144,7 @@ public class Messages {
 		try {
 			return String.format(Locale.ENGLISH, format, args);
 		} catch (IllegalFormatException e) {
-			ShatteredPixelDungeon.reportException( e );
+			HollowDungeon.reportException( e );
 			return format;
 		}
 	}

@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.items;
 
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
@@ -119,7 +119,7 @@ public abstract class Recipe {
 				result.quantity(outQuantity);
 				return result;
 			} catch (Exception e) {
-				ShatteredPixelDungeon.reportException( e );
+				HollowDungeon.reportException( e );
 				return null;
 			}
 		}

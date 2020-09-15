@@ -38,8 +38,8 @@ import android.widget.TextView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidGraphics;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.ui.RedButton;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.Window;
@@ -119,7 +119,7 @@ public class WndAndroidTextInput extends com.quasistellar.hollowdungeon.ui.Windo
 
 				textInput = new EditText((AndroidApplication)Gdx.app);
 				textInput.setText( initialValue );
-				if (!SPDSettings.systemFont()){
+				if (!HDSettings.systemFont()){
 					textInput.setTypeface( Typeface.createFromAsset(AndroidGame.instance.getAssets(), "fonts/pixel_font.ttf") );
 				}
 				textInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
@@ -220,7 +220,7 @@ public class WndAndroidTextInput extends com.quasistellar.hollowdungeon.ui.Windo
 					imm.hideSoftInputFromWindow(((AndroidGraphics)Gdx.app.getGraphics()).getView().getWindowToken(), 0);
 
 					//Soft keyboard sometimes triggers software buttons, so make sure to reassert immersive
-					ShatteredPixelDungeon.updateSystemUI();
+					HollowDungeon.updateSystemUI();
 
 					textInput = null;
 				}

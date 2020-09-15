@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.skills.Skill;
@@ -85,7 +85,7 @@ public class SpellIndicator extends VerticalTag {
 			PixelScene.align(skillIcon);
 
 		} catch (Exception e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 	}
 	

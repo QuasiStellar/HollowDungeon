@@ -26,7 +26,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.watabou.noosa.Game;
 import com.watabou.utils.PlatformSupport;
 import com.watabou.utils.Point;
@@ -40,8 +40,8 @@ public class DesktopPlatformSupport extends PlatformSupport {
 	
 	@Override
 	public void updateDisplaySize() {
-		if (!SPDSettings.fullscreen()) {
-			SPDSettings.windowResolution( new Point( Game.width, Game.height ) );
+		if (!HDSettings.fullscreen()) {
+			HDSettings.windowResolution( new Point( Game.width, Game.height ) );
 		}
 	}
 	
@@ -50,10 +50,10 @@ public class DesktopPlatformSupport extends PlatformSupport {
 		Gdx.app.postRunnable( new Runnable() {
 			@Override
 			public void run () {
-				if (SPDSettings.fullscreen()){
+				if (HDSettings.fullscreen()){
 					Gdx.graphics.setFullscreenMode( Gdx.graphics.getDisplayMode() );
 				} else {
-					Point p = SPDSettings.windowResolution();
+					Point p = HDSettings.windowResolution();
 					Gdx.graphics.setWindowedMode( p.x, p.y );
 				}
 			}

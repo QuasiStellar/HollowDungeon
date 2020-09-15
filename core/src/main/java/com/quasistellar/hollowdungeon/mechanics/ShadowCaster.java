@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.mechanics;
 
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.utils.BArray;
 
@@ -68,7 +68,7 @@ public final class ShadowCaster {
 			scanOctant(distance, fieldOfView, blocking, 1, x, y, 0.0, 1.0, -1, -1, true);
 			scanOctant(distance, fieldOfView, blocking, 1, x, y, 0.0, 1.0, -1, -1, false);
 		} catch (Exception e){
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 			com.quasistellar.hollowdungeon.utils.BArray.setFalse(fieldOfView);
 		}
 

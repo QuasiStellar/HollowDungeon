@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Chrome;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
@@ -163,7 +163,7 @@ public class ChangesScene extends PixelScene {
 				super.onClick();
 				if (changesSelected != 0) {
 					changesSelected = 0;
-					ShatteredPixelDungeon.seamlessResetScene();
+					HollowDungeon.seamlessResetScene();
 				}
 			}
 		};
@@ -177,7 +177,7 @@ public class ChangesScene extends PixelScene {
 				super.onClick();
 				if (changesSelected != 1) {
 					changesSelected = 1;
-					ShatteredPixelDungeon.seamlessResetScene();
+					HollowDungeon.seamlessResetScene();
 				}
 			}
 		};
@@ -191,7 +191,7 @@ public class ChangesScene extends PixelScene {
 				super.onClick();
 				if (changesSelected != 2) {
 					changesSelected = 2;
-					ShatteredPixelDungeon.seamlessResetScene();
+					HollowDungeon.seamlessResetScene();
 				}
 			}
 		};
@@ -205,7 +205,7 @@ public class ChangesScene extends PixelScene {
 				super.onClick();
 				if (changesSelected != 3) {
 					changesSelected = 3;
-					ShatteredPixelDungeon.seamlessResetScene();
+					HollowDungeon.seamlessResetScene();
 				}
 			}
 		};
@@ -222,7 +222,7 @@ public class ChangesScene extends PixelScene {
 	
 	@Override
 	protected void onBackPressed() {
-		ShatteredPixelDungeon.switchNoFade(TitleScene.class);
+		HollowDungeon.switchNoFade(TitleScene.class);
 	}
 
 }

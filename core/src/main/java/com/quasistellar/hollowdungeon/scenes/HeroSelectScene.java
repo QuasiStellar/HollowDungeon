@@ -22,7 +22,6 @@
 package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.journal.Journal;
-import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.windows.WndChallenges;
 import com.quasistellar.hollowdungeon.windows.WndMessage;
 import com.quasistellar.hollowdungeon.windows.WndStartGame;
@@ -33,8 +32,8 @@ import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.ActionIndicator;
@@ -123,8 +122,8 @@ public class HeroSelectScene extends PixelScene {
 				ActionIndicator.action = null;
 				InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
 
-				if (SPDSettings.intro()) {
-					SPDSettings.intro( false );
+				if (HDSettings.intro()) {
+					HDSettings.intro( false );
 					Game.switchScene( IntroScene.class );
 				} else {
 					Game.switchScene( InterlevelScene.class );
@@ -141,7 +140,7 @@ public class HeroSelectScene extends PixelScene {
 			@Override
 			protected void onClick() {
 				super.onClick();
-				ShatteredPixelDungeon.scene().addToFront(new WndHeroInfo(GamesInProgress.selectedClass));
+				HollowDungeon.scene().addToFront(new WndHeroInfo(GamesInProgress.selectedClass));
 			}
 		};
 		infoButton.visible = false;
@@ -167,13 +166,13 @@ public class HeroSelectScene extends PixelScene {
 		}
 
 		challengeButton = new IconButton(
-				Icons.get( SPDSettings.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF)){
+				Icons.get( HDSettings.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF)){
 			@Override
 			protected void onClick() {
-				ShatteredPixelDungeon.scene().addToFront(new WndChallenges(SPDSettings.challenges(), true) {
+				HollowDungeon.scene().addToFront(new WndChallenges(HDSettings.challenges(), true) {
 					public void onBackPressed() {
 						super.onBackPressed();
-						icon(Icons.get(SPDSettings.challenges() > 0 ? Icons.CHALLENGE_ON : Icons.CHALLENGE_OFF));
+						icon(Icons.get(HDSettings.challenges() > 0 ? Icons.CHALLENGE_ON : Icons.CHALLENGE_OFF));
 					}
 				} );
 			}
@@ -193,7 +192,7 @@ public class HeroSelectScene extends PixelScene {
 			add(challengeButton);
 		} else {
 			Dungeon.challenges = 0;
-			SPDSettings.challenges(0);
+			HDSettings.challenges(0);
 		}
 
 		btnExit = new ExitButton();
@@ -271,7 +270,7 @@ public class HeroSelectScene extends PixelScene {
 
 	@Override
 	protected void onBackPressed() {
-		ShatteredPixelDungeon.switchScene( TitleScene.class );
+		HollowDungeon.switchScene( TitleScene.class );
 	}
 
 	private class HeroBtn extends StyledButton {
@@ -309,9 +308,9 @@ public class HeroSelectScene extends PixelScene {
 			super.onClick();
 
 			if( !cl.isUnlocked() ){
-				ShatteredPixelDungeon.scene().addToFront( new WndMessage(cl.unlockMsg()));
+				HollowDungeon.scene().addToFront( new WndMessage(cl.unlockMsg()));
 			} else if (GamesInProgress.selectedClass == cl) {
-				ShatteredPixelDungeon.scene().add(new WndHeroInfo(cl));
+				HollowDungeon.scene().add(new WndHeroInfo(cl));
 			} else {
 				setSelectedHero(cl);
 			}

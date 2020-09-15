@@ -21,13 +21,10 @@
 
 package com.quasistellar.hollowdungeon.windows;
 
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.ui.CheckBox;
-import com.quasistellar.hollowdungeon.ui.IconButton;
-import com.quasistellar.hollowdungeon.ui.Icons;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.Window;
 
@@ -71,7 +68,7 @@ public class WndChallenges extends Window {
 		if (editable) {
 			int value = 0;
 
-			SPDSettings.challenges( value );
+			HDSettings.challenges( value );
 		}
 
 		super.onBackPressed();

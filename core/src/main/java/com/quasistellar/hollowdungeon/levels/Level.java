@@ -27,7 +27,7 @@ import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.Statistics;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -50,7 +50,6 @@ import com.quasistellar.hollowdungeon.effects.particles.FlowParticle;
 import com.quasistellar.hollowdungeon.effects.particles.WindParticle;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.Torch;
 import com.quasistellar.hollowdungeon.levels.features.Chasm;
 import com.quasistellar.hollowdungeon.levels.features.Door;
 import com.quasistellar.hollowdungeon.levels.features.HighGrass;
@@ -260,7 +259,7 @@ public abstract class Level implements Bundlable {
 		version = bundle.getInt( VERSION );
 		
 		//saves from before 0.6.5c are not supported
-		if (version < ShatteredPixelDungeon.v0_6_5c){
+		if (version < HollowDungeon.vSOME_OLD_VERSION){
 			throw new RuntimeException("old save");
 		}
 
@@ -708,7 +707,7 @@ public abstract class Level implements Bundlable {
 			heap.drop(item);
 		}
 		
-		if (Dungeon.level != null && ShatteredPixelDungeon.scene() instanceof com.quasistellar.hollowdungeon.scenes.GameScene) {
+		if (Dungeon.level != null && HollowDungeon.scene() instanceof com.quasistellar.hollowdungeon.scenes.GameScene) {
 			pressCell( cell );
 		}
 		

@@ -36,7 +36,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.PixmapPacker;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.quasistellar.hollowdungeon.android.windows.WndAndroidTextInput;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
@@ -48,8 +48,8 @@ import java.util.regex.Pattern;
 public class AndroidPlatformSupport extends PlatformSupport {
 	
 	public void updateDisplaySize(){
-		if (SPDSettings.landscape() != null) {
-			AndroidGame.instance.setRequestedOrientation( SPDSettings.landscape() ?
+		if (HDSettings.landscape() != null) {
+			AndroidGame.instance.setRequestedOrientation( HDSettings.landscape() ?
 					ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE :
 					ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT );
 		}
@@ -63,8 +63,8 @@ public class AndroidPlatformSupport extends PlatformSupport {
 		boolean fullscreen = Build.VERSION.SDK_INT < Build.VERSION_CODES.N
 				|| !AndroidGame.instance.isInMultiWindowMode();
 
-		if (fullscreen && SPDSettings.landscape() != null
-				&& (Game.dispWidth >= Game.dispHeight) != SPDSettings.landscape()){
+		if (fullscreen && HDSettings.landscape() != null
+				&& (Game.dispWidth >= Game.dispHeight) != HDSettings.landscape()){
 			int tmp = Game.dispWidth;
 			Game.dispWidth = Game.dispHeight;
 			Game.dispHeight = tmp;
@@ -77,9 +77,9 @@ public class AndroidPlatformSupport extends PlatformSupport {
 		
 		//force power saver in this case as all devices must run at at least 2x scale.
 		if (Game.dispWidth < renderWidth*2 || Game.dispHeight < renderHeight*2)
-			SPDSettings.put( SPDSettings.KEY_POWER_SAVER, true );
+			HDSettings.put( HDSettings.KEY_POWER_SAVER, true );
 		
-		if (SPDSettings.powerSaver() && fullscreen){
+		if (HDSettings.powerSaver() && fullscreen){
 			
 			int maxZoom = (int)Math.min(Game.dispWidth/renderWidth, Game.dispHeight/renderHeight);
 			
@@ -132,7 +132,7 @@ public class AndroidPlatformSupport extends PlatformSupport {
 				}
 				
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-					if (SPDSettings.fullscreen()) {
+					if (HDSettings.fullscreen()) {
 						AndroidGame.instance.getWindow().getDecorView().setSystemUiVisibility(
 								View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 										| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -247,7 +247,7 @@ public class AndroidPlatformSupport extends PlatformSupport {
 		if (Gdx.files.absolute("/system/fonts/NotoSansCJK-Regular.ttc").exists()) {
 			//typefaces are 0-JP, 1-KR, 2-SC, 3-TC.
 			int typeFace;
-			switch (com.quasistellar.hollowdungeon.SPDSettings.language()) {
+			switch (HDSettings.language()) {
 				case JAPANESE:
 					typeFace = 0;
 					break;

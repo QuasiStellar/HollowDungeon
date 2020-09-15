@@ -25,7 +25,7 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.watabou.input.GameAction;
 import com.watabou.noosa.Game;
@@ -61,7 +61,7 @@ public class AttackIndicator extends Tag {
 	
 	@Override
 	public GameAction keyAction() {
-		return SPDAction.TAG_ATTACK;
+		return HDAction.TAG_ATTACK;
 	}
 	
 	@Override

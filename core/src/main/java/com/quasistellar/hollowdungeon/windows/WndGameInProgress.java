@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.windows;
 
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.InterlevelScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
@@ -69,7 +69,7 @@ public class WndGameInProgress extends Window {
 			protected boolean onLongClick() {
 				try {
 					Bundle bundle = FileUtils.bundleFromFile(GamesInProgress.gameFile(slot));
-					ShatteredPixelDungeon.scene().addToFront(new WndMessage("_Debug Info:_\n\n" +
+					HollowDungeon.scene().addToFront(new WndMessage("_Debug Info:_\n\n" +
 							"Version: " + Game.version + " (" + Game.versionCode + ")\n" +
 							"Seed: " + bundle.getLong("seed") + "\n" +
 							"Challenge Mask: " + info.challenges));
@@ -120,7 +120,7 @@ public class WndGameInProgress extends Window {
 				Dungeon.hero = null;
 				ActionIndicator.action = null;
 				InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
-				ShatteredPixelDungeon.switchScene(InterlevelScene.class);
+				HollowDungeon.switchScene(InterlevelScene.class);
 			}
 		};
 		
@@ -129,7 +129,7 @@ public class WndGameInProgress extends Window {
 			protected void onClick() {
 				super.onClick();
 				
-				ShatteredPixelDungeon.scene().add(new WndOptions(
+				HollowDungeon.scene().add(new WndOptions(
 						Messages.get(WndGameInProgress.class, "erase_warn_title"),
 						Messages.get(WndGameInProgress.class, "erase_warn_body"),
 						Messages.get(WndGameInProgress.class, "erase_warn_yes"),
@@ -139,7 +139,7 @@ public class WndGameInProgress extends Window {
 						if (index == 0) {
 							FileUtils.deleteDir(GamesInProgress.gameFolder(slot));
 							GamesInProgress.setUnknown(slot);
-							ShatteredPixelDungeon.switchNoFade(StartScene.class);
+							HollowDungeon.switchNoFade(StartScene.class);
 						}
 					}
 				} );

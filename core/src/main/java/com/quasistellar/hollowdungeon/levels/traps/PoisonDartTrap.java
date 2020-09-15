@@ -22,7 +22,7 @@
 package com.quasistellar.hollowdungeon.levels.traps;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.sprites.MissileSprite;
@@ -84,7 +84,7 @@ public class PoisonDartTrap extends Trap {
 					@Override
 					protected boolean act() {
 						final com.quasistellar.hollowdungeon.actors.Actor toRemove = this;
-						((com.quasistellar.hollowdungeon.sprites.MissileSprite) ShatteredPixelDungeon.scene().recycle(MissileSprite.class)).
+						((com.quasistellar.hollowdungeon.sprites.MissileSprite) HollowDungeon.scene().recycle(MissileSprite.class)).
 							reset(pos, finalTarget.sprite, new Geo(), new Callback() {
 								@Override
 								public void call() {

@@ -29,8 +29,8 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3FileHandle;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Preferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.services.updates.UpdateImpl;
 import com.quasistellar.hollowdungeon.services.updates.Updates;
 import com.watabou.noosa.Game;
@@ -69,14 +69,14 @@ public class DesktopLauncher {
 
 				//shorten/simplify exception message to make it easier to fit into a message box
 				exceptionMsg = exceptionMsg.replaceAll("\\(.*:([0-9]*)\\)", "($1)");
-				exceptionMsg = exceptionMsg.replace("com.quasistellar.shatteredpixeldungeon.", "");
+				exceptionMsg = exceptionMsg.replace("com.quasistellar.hollowdungeon.", "");
 				exceptionMsg = exceptionMsg.replace("com.watabou.", "");
 				exceptionMsg = exceptionMsg.replace("com.badlogic.gdx.", "");
 				exceptionMsg = exceptionMsg.replace("\t", "    ");
 
 				TinyFileDialogs.tinyfd_messageBox(title + " Has Crashed!",
 						title + " has run into an error it can't recover from and has crashed, sorry about that!\n\n" +
-						"If you could, please email this error message to the developer (Evan@ShatteredPixel.com):\n\n" +
+						"If you could, please email this error message to the developer (quasistellar.official@gmail.com):\n\n" +
 						"version: " + Game.version + "\n" +
 						exceptionMsg,
 						"ok", "error", false );
@@ -106,29 +106,29 @@ public class DesktopLauncher {
 		String basePath = "";
 		if (SharedLibraryLoader.isWindows) {
 			if (System.getProperties().getProperty("os.name").equals("Windows XP")) {
-				basePath = "Application Data/.shatteredpixel/Shattered Pixel Dungeon/";
+				basePath = "Application Data/.quasistellar/Hollow Dungeon/";
 			} else {
-				basePath = "AppData/Roaming/.shatteredpixel/Shattered Pixel Dungeon/";
+				basePath = "AppData/Roaming/.quasistellar/Hollow Dungeon/";
 			}
 		} else if (SharedLibraryLoader.isMac) {
-			basePath = "Library/Application Support/Shattered Pixel Dungeon/";
+			basePath = "Library/Application Support/Hollow Dungeon/";
 		} else if (SharedLibraryLoader.isLinux) {
-			basePath = ".shatteredpixel/shattered-pixel-dungeon/";
+			basePath = ".quasistellar/hollow-dungeon/";
 		}
 
 		//copy over prefs from old file location from legacy desktop codebase
 		FileHandle oldPrefs = new Lwjgl3FileHandle(basePath + "pd-prefs", Files.FileType.External);
-		FileHandle newPrefs = new Lwjgl3FileHandle(basePath + SPDSettings.DEFAULT_PREFS_FILE, Files.FileType.External);
+		FileHandle newPrefs = new Lwjgl3FileHandle(basePath + HDSettings.DEFAULT_PREFS_FILE, Files.FileType.External);
 		if (oldPrefs.exists() && !newPrefs.exists()){
 			oldPrefs.copyTo(newPrefs);
 		}
 
 		config.setPreferencesConfig( basePath, Files.FileType.External );
-		SPDSettings.set( new Lwjgl3Preferences( SPDSettings.DEFAULT_PREFS_FILE, basePath) );
+		HDSettings.set( new Lwjgl3Preferences( HDSettings.DEFAULT_PREFS_FILE, basePath) );
 		FileUtils.setDefaultFileProperties( Files.FileType.External, basePath );
 		
 		config.setWindowSizeLimits( 480, 320, -1, -1 );
-		Point p = SPDSettings.windowResolution();
+		Point p = HDSettings.windowResolution();
 		config.setWindowedMode( p.x, p.y );
 		config.setAutoIconify( true );
 		
@@ -139,6 +139,6 @@ public class DesktopLauncher {
 		config.setWindowIcon("icons/icon_16.png", "icons/icon_32.png", "icons/icon_64.png",
 				"icons/icon_128.png", "icons/icon_256.png");
 
-		new Lwjgl3Application(new ShatteredPixelDungeon(new DesktopPlatformSupport()), config);
+		new Lwjgl3Application(new HollowDungeon(new DesktopPlatformSupport()), config);
 	}
 }

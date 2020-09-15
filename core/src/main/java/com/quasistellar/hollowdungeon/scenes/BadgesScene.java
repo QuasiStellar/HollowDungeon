@@ -25,7 +25,7 @@ import com.quasistellar.hollowdungeon.windows.WndBadge;
 import com.quasistellar.hollowdungeon.effects.BadgeBanner;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
@@ -118,7 +118,7 @@ public class BadgesScene extends PixelScene {
 
 	@Override
 	protected void onBackPressed() {
-		ShatteredPixelDungeon.switchNoFade( TitleScene.class );
+		HollowDungeon.switchNoFade( TitleScene.class );
 	}
 
 	private static class BadgeButton extends Button {

@@ -22,17 +22,14 @@
 package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.Assets;
-import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.skills.Skill;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndInfoSkill;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
-import com.watabou.noosa.Gizmo;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 
@@ -88,7 +85,7 @@ public class SkillIndicator extends Tag {
 			PixelScene.align(skillIcon);
 
 		} catch (Exception e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 	}
 	

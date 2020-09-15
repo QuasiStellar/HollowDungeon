@@ -22,7 +22,7 @@
 package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.scenes.TitleScene;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.watabou.noosa.Game;
 
 public class ExitButton extends IconButton {
@@ -39,7 +39,7 @@ public class ExitButton extends IconButton {
 		if (Game.scene() instanceof com.quasistellar.hollowdungeon.scenes.TitleScene) {
 			Game.instance.finish();
 		} else {
-			ShatteredPixelDungeon.switchNoFade( TitleScene.class );
+			HollowDungeon.switchNoFade( TitleScene.class );
 		}
 	}
 }

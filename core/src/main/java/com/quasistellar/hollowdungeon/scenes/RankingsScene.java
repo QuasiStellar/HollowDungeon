@@ -28,8 +28,7 @@ import com.quasistellar.hollowdungeon.windows.WndRanking;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Rankings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
@@ -143,7 +142,7 @@ public class RankingsScene extends PixelScene {
 	
 	@Override
 	protected void onBackPressed() {
-		ShatteredPixelDungeon.switchNoFade(TitleScene.class);
+		HollowDungeon.switchNoFade(TitleScene.class);
 	}
 	
 	public static class Record extends Button {

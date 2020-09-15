@@ -21,20 +21,15 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
-import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.windows.WndError;
 import com.quasistellar.hollowdungeon.windows.WndStory;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.Statistics;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
-import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.levels.Level;
-import com.quasistellar.hollowdungeon.levels.features.Chasm;
-import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.GameLog;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
@@ -292,7 +287,7 @@ public class InterlevelScene extends PixelScene {
 					s += "\n";
 					s += t.toString();
 				}
-				ShatteredPixelDungeon.reportException(
+				HollowDungeon.reportException(
 						new RuntimeException("waited more than 10 seconds on levelgen. " +
 								"Seed:" + Dungeon.seed + " location:" + Dungeon.location + " trace:" +
 								s)

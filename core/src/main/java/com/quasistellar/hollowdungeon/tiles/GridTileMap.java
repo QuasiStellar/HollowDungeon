@@ -24,7 +24,7 @@ package com.quasistellar.hollowdungeon.tiles;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDSettings;
 
 public class GridTileMap extends DungeonTilemap {
 
@@ -38,7 +38,7 @@ public class GridTileMap extends DungeonTilemap {
 
 	@Override
 	public synchronized void updateMap() {
-		gridSetting = SPDSettings.visualGrid();
+		gridSetting = HDSettings.visualGrid();
 		super.updateMap();
 	}
 

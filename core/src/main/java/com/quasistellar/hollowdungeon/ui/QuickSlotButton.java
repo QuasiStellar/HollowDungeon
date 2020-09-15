@@ -30,7 +30,7 @@ import com.quasistellar.hollowdungeon.utils.BArray;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.windows.WndBag;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.input.GameAction;
 import com.watabou.noosa.Image;
@@ -146,13 +146,13 @@ public class QuickSlotButton extends Button implements com.quasistellar.hollowdu
 	public GameAction keyAction() {
 		switch (slotNum){
 			case 0:
-				return SPDAction.QUICKSLOT_1;
+				return HDAction.QUICKSLOT_1;
 			case 1:
-				return SPDAction.QUICKSLOT_2;
+				return HDAction.QUICKSLOT_2;
 			case 2:
-				return SPDAction.QUICKSLOT_3;
+				return HDAction.QUICKSLOT_3;
 			case 3:
-				return SPDAction.QUICKSLOT_4;
+				return HDAction.QUICKSLOT_4;
 			default:
 				return super.keyAction();
 		}

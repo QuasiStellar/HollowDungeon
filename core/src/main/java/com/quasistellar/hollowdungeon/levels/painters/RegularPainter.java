@@ -21,17 +21,12 @@
 
 package com.quasistellar.hollowdungeon.levels.painters;
 
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.EmptyRoom;
-import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
-import com.quasistellar.hollowdungeon.Badges;
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Patch;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
-import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.watabou.utils.Graph;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Point;
@@ -151,7 +146,7 @@ public abstract class RegularPainter extends com.quasistellar.hollowdungeon.leve
 						doorSpots.add(p);
 				}
 				if (doorSpots.isEmpty()){
-					ShatteredPixelDungeon.reportException(
+					HollowDungeon.reportException(
 							new RuntimeException("Could not place a door! " +
 									"r=" + r.getClass().getSimpleName() +
 									" n=" + n.getClass().getSimpleName()));

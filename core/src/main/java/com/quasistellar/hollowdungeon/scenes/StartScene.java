@@ -26,7 +26,7 @@ import com.quasistellar.hollowdungeon.windows.WndGameInProgress;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
@@ -111,7 +111,7 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 	
 	@Override
 	protected void onBackPressed() {
-		ShatteredPixelDungeon.switchNoFade( TitleScene.class );
+		HollowDungeon.switchNoFade( TitleScene.class );
 	}
 	
 	private static class SaveSlotButton extends Button {
@@ -254,9 +254,9 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 			if (newGame) {
 				GamesInProgress.selectedClass = null;
 				GamesInProgress.curSlot = slot;
-				ShatteredPixelDungeon.switchScene(HeroSelectScene.class);
+				HollowDungeon.switchScene(HeroSelectScene.class);
 			} else {
-				ShatteredPixelDungeon.scene().add( new WndGameInProgress(slot));
+				HollowDungeon.scene().add( new WndGameInProgress(slot));
 			}
 		}
 	}

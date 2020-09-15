@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.levels.features;
 
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
@@ -29,7 +29,6 @@ import com.quasistellar.hollowdungeon.effects.particles.LeafParticle;
 import com.quasistellar.hollowdungeon.items.Dewdrop;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
@@ -77,7 +76,7 @@ public class HighGrass {
 		
 		freezeTrample = false;
 		
-		if (ShatteredPixelDungeon.scene() instanceof com.quasistellar.hollowdungeon.scenes.GameScene) {
+		if (HollowDungeon.scene() instanceof com.quasistellar.hollowdungeon.scenes.GameScene) {
 			GameScene.updateMap(pos);
 			
 			CellEmitter.get(pos).burst(LeafParticle.LEVEL_SPECIFIC, 4);

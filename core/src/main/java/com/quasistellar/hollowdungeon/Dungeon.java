@@ -146,7 +146,7 @@ public class Dungeon {
 	public static void init() {
 
 		version = Game.versionCode;
-		challenges = SPDSettings.challenges();
+		challenges = HDSettings.challenges();
 
 		seed = DungeonSeed.randomSeed();
 
@@ -1050,7 +1050,7 @@ public class Dungeon {
 		try {
 			saveAll();
 		} catch (IOException e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 			/*This only catches IO errors. Yes, this means things can go wrong, and they can go wrong catastrophically.
 			But when they do the user will get a nice 'report this issue' dialogue, and I can fix the bug.*/
 		}
@@ -1119,7 +1119,7 @@ public class Dungeon {
 			
 		} catch (IOException e) {
 			GamesInProgress.setUnknown( save );
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 	}
 	

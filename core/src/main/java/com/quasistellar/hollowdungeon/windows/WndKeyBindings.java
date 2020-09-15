@@ -21,8 +21,8 @@
 
 package com.quasistellar.hollowdungeon.windows;
 
-import com.quasistellar.hollowdungeon.SPDAction;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDAction;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
@@ -115,7 +115,7 @@ public class WndKeyBindings extends Window {
 		RedButton btnDefaults = new RedButton(Messages.get(this, "default"), 9){
 			@Override
 			protected void onClick() {
-				changedBindings = SPDAction.getDefaults();
+				changedBindings = HDAction.getDefaults();
 				for (BindingItem i : listItems){
 					int key1 = 0;
 					int key2 = 0;
@@ -136,7 +136,7 @@ public class WndKeyBindings extends Window {
 			@Override
 			protected void onClick() {
 				KeyBindings.setAllBindings(changedBindings);
-				SPDAction.saveBindings();
+				HDAction.saveBindings();
 				hide();
 			}
 		};
@@ -259,11 +259,11 @@ public class WndKeyBindings extends Window {
 			if (inside(x, y)){
 				//assigning second key
 				if (x >= this.x + 3*width()/4 && key1 != 0) {
-					ShatteredPixelDungeon.scene().addToFront( new WndChangeBinding(gameAction, this, false, key2, key1));
+					HollowDungeon.scene().addToFront( new WndChangeBinding(gameAction, this, false, key2, key1));
 
 				//assigning first key
 				} else if (x >= this.x + width()/2){
-					ShatteredPixelDungeon.scene().addToFront( new WndChangeBinding(gameAction, this, true, key1, key2));
+					HollowDungeon.scene().addToFront( new WndChangeBinding(gameAction, this, true, key1, key2));
 
 				}
 				return true;

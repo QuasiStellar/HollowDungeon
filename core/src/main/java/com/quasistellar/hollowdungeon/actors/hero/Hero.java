@@ -22,6 +22,7 @@
 package com.quasistellar.hollowdungeon.actors.hero;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
@@ -362,6 +363,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				actResult = false;
 			}
 		}
+
+		GameScene.time = 0;
 		
 		return actResult;
 	}
@@ -473,7 +476,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				alch.alchPos = dst;
 				AlchemyScene.setProvider( alch );
 			}
-			com.quasistellar.hollowdungeon.ShatteredPixelDungeon.switchScene(com.quasistellar.hollowdungeon.scenes.AlchemyScene.class);
+			HollowDungeon.switchScene(com.quasistellar.hollowdungeon.scenes.AlchemyScene.class);
 			return false;
 
 		} else if (getCloser( dst )) {

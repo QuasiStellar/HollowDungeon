@@ -32,7 +32,7 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Recipe;
@@ -286,7 +286,7 @@ public class AlchemyScene extends PixelScene {
 			Badges.saveGlobal();
 			Journal.saveGlobal();
 		} catch (IOException e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 	}
 	
@@ -395,7 +395,7 @@ public class AlchemyScene extends PixelScene {
 			try {
 				Dungeon.saveAll();
 			} catch (IOException e) {
-				ShatteredPixelDungeon.reportException(e);
+				HollowDungeon.reportException(e);
 			}
 			
 			synchronized (inputs) {
@@ -451,7 +451,7 @@ public class AlchemyScene extends PixelScene {
 			Badges.saveGlobal();
 			com.quasistellar.hollowdungeon.journal.Journal.saveGlobal();
 		} catch (IOException e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 		super.destroy();
 	}

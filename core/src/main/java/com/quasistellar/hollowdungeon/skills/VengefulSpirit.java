@@ -1,24 +1,17 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
-import com.quasistellar.hollowdungeon.effects.Speck;
-import com.quasistellar.hollowdungeon.items.Dewdrop;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
-import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.CellSelector;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
-import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.sprites.MissileSprite;
-import com.quasistellar.hollowdungeon.ui.HpIndicator;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.utils.Callback;
 
 import java.util.ArrayList;
@@ -48,7 +41,7 @@ public class VengefulSpirit extends Skill {
 
             final Ballistica shot = new Ballistica( Dungeon.hero.pos, targetCell, Ballistica.STOP_TERRAIN);
 
-            ((MissileSprite) ShatteredPixelDungeon.scene().recycle(MissileSprite.class)).
+            ((MissileSprite) HollowDungeon.scene().recycle(MissileSprite.class)).
                     reset(Dungeon.hero.pos, shot.collisionPos, new VengefulSpiritShot(), new Callback() {
                         @Override
                         public void call() {

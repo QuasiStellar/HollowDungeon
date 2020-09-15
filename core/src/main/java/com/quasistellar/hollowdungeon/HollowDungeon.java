@@ -29,16 +29,12 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.PlatformSupport;
 
-public class ShatteredPixelDungeon extends Game {
+public class HollowDungeon extends Game {
 
-	//variable constants for specific older versions of shattered, used for data conversion
-	//versions older than v0.6.5c are no longer supported, and data from them is ignored
-	public static final int v0_6_5c = -1;
-
-	public static final int v0_7_0c = -1;
-	public static final int v0_8_1  = 1;
+	public static final int vSOME_OLD_VERSION  = -1;
+	public static final int v0_0  = 1;
 	
-	public ShatteredPixelDungeon( PlatformSupport platform ) {
+	public HollowDungeon(PlatformSupport platform ) {
 		super( sceneClass == null ? WelcomeScene.class : sceneClass, platform );
 	}
 	
@@ -47,12 +43,12 @@ public class ShatteredPixelDungeon extends Game {
 		super.create();
 
 		updateSystemUI();
-		SPDAction.loadBindings();
+		HDAction.loadBindings();
 		
-		Music.INSTANCE.enable( SPDSettings.music() );
-		Music.INSTANCE.volume( SPDSettings.musicVol()*SPDSettings.musicVol()/100f );
-		Sample.INSTANCE.enable( SPDSettings.soundFx() );
-		Sample.INSTANCE.volume( SPDSettings.SFXVol()*SPDSettings.SFXVol()/100f );
+		Music.INSTANCE.enable( HDSettings.music() );
+		Music.INSTANCE.volume( HDSettings.musicVol()* HDSettings.musicVol()/100f );
+		Sample.INSTANCE.enable( HDSettings.soundFx() );
+		Sample.INSTANCE.volume( HDSettings.SFXVol()* HDSettings.SFXVol()/100f );
 
 		Sample.INSTANCE.load( Assets.Sounds.all );
 		

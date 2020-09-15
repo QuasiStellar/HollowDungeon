@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.watabou.input.GameAction;
 import com.watabou.noosa.Image;
 
@@ -45,7 +45,7 @@ public class ActionIndicator extends Tag {
 	
 	@Override
 	public GameAction keyAction() {
-		return SPDAction.TAG_ACTION;
+		return HDAction.TAG_ACTION;
 	}
 	
 	@Override

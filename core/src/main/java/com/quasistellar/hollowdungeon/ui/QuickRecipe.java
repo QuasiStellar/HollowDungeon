@@ -21,26 +21,17 @@
 
 package com.quasistellar.hollowdungeon.ui;
 
-import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.items.Recipe;
-import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.scenes.AlchemyScene;
-import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
-import com.quasistellar.hollowdungeon.windows.WndBag;
 import com.quasistellar.hollowdungeon.windows.WndInfoItem;
-import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.messages.Messages;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Component;
-import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class QuickRecipe extends Component {
 	
@@ -65,7 +56,7 @@ public class QuickRecipe extends Component {
 			curr = new com.quasistellar.hollowdungeon.ui.ItemSlot(in) {
 				@Override
 				protected void onClick() {
-					ShatteredPixelDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndInfoItem(in));
+					HollowDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndInfoItem(in));
 				}
 			};
 			
@@ -93,7 +84,7 @@ public class QuickRecipe extends Component {
 		}
 		if (hasInputs) {
 			arrow.icon.tint(1, 1, 0, 1);
-			if (!(ShatteredPixelDungeon.scene() instanceof com.quasistellar.hollowdungeon.scenes.AlchemyScene)) {
+			if (!(HollowDungeon.scene() instanceof com.quasistellar.hollowdungeon.scenes.AlchemyScene)) {
 				arrow.enable(false);
 			}
 		} else {
@@ -105,7 +96,7 @@ public class QuickRecipe extends Component {
 		this.output = new com.quasistellar.hollowdungeon.ui.ItemSlot(output){
 			@Override
 			protected void onClick() {
-				ShatteredPixelDungeon.scene().addToFront(new WndInfoItem(output));
+				HollowDungeon.scene().addToFront(new WndInfoItem(output));
 			}
 		};
 		if (!hasInputs){
@@ -180,7 +171,7 @@ public class QuickRecipe extends Component {
 				}
 			}
 			
-			((AlchemyScene)ShatteredPixelDungeon.scene()).populate(ingredients, Dungeon.hero.belongings);
+			((AlchemyScene) HollowDungeon.scene()).populate(ingredients, Dungeon.hero.belongings);
 		}
 		
 		public void hardlightText(int color ){

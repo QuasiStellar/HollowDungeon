@@ -25,8 +25,6 @@ import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.scenes.CellSelector;
-import com.quasistellar.hollowdungeon.skills.CrystalHeart;
-import com.quasistellar.hollowdungeon.skills.DreamNail;
 import com.quasistellar.hollowdungeon.tiles.DungeonTerrainTilemap;
 import com.quasistellar.hollowdungeon.windows.WndBag;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
@@ -34,8 +32,8 @@ import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.windows.WndJournal;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDAction;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.input.GameAction;
 import com.watabou.noosa.Camera;
@@ -99,7 +97,7 @@ public class Toolbar extends Component {
 			
 			@Override
 			public GameAction keyAction() {
-				return SPDAction.WAIT;
+				return HDAction.WAIT;
 			}
 			
 //			protected boolean onLongClick() {
@@ -118,7 +116,7 @@ public class Toolbar extends Component {
 
 			@Override
 			public GameAction keyAction() {
-				return SPDAction.REST;
+				return HDAction.REST;
 			}
 		});
 		
@@ -136,7 +134,7 @@ public class Toolbar extends Component {
 			
 			@Override
 			public GameAction keyAction() {
-				return SPDAction.SEARCH;
+				return HDAction.SEARCH;
 			}
 			
 			@Override
@@ -155,7 +153,7 @@ public class Toolbar extends Component {
 			
 			@Override
 			public GameAction keyAction() {
-				return SPDAction.INVENTORY;
+				return HDAction.INVENTORY;
 			}
 			
 			@Override
@@ -173,7 +171,7 @@ public class Toolbar extends Component {
 	protected void layout() {
 
 		float right = width;
-		switch(Mode.valueOf(SPDSettings.toolbarMode())){
+		switch(Mode.valueOf(HDSettings.toolbarMode())){
 			case SPLIT:
 				btnWait.setPos(x, y);
 				btnSearch.setPos(btnWait.right(), y);
@@ -193,7 +191,7 @@ public class Toolbar extends Component {
 		}
 		right = width;
 
-		if (SPDSettings.flipToolbar()) {
+		if (HDSettings.flipToolbar()) {
 
 			btnWait.setPos( (right - btnWait.right()), y);
 			btnSearch.setPos( (right - btnSearch.right()), y);

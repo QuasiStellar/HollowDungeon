@@ -21,31 +21,24 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
-import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.effects.Fireball;
 import com.quasistellar.hollowdungeon.ui.IconButton;
-import com.quasistellar.hollowdungeon.windows.WndOptions;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
-import com.quasistellar.hollowdungeon.messages.Messages;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
-import com.quasistellar.hollowdungeon.ui.Icons;
-import com.quasistellar.hollowdungeon.ui.LanguageButton;
 import com.quasistellar.hollowdungeon.ui.PrefsButton;
 import com.quasistellar.hollowdungeon.ui.StyledButton;
 import com.quasistellar.hollowdungeon.ui.UpdateNotification;
 import com.watabou.gltextures.TextureCache;
-import com.watabou.glwrap.Blending;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.audio.Music;
-import com.watabou.noosa.ui.Button;
 import com.watabou.utils.DeviceCompat;
 
 public class TitleScene extends PixelScene {
@@ -140,9 +133,9 @@ public class TitleScene extends PixelScene {
 				if (GamesInProgress.checkAll().size() == 0){
 					GamesInProgress.selectedClass = null;
 					GamesInProgress.curSlot = 1;
-					ShatteredPixelDungeon.switchScene(com.quasistellar.hollowdungeon.scenes.HeroSelectScene.class);
+					HollowDungeon.switchScene(com.quasistellar.hollowdungeon.scenes.HeroSelectScene.class);
 				} else {
-					ShatteredPixelDungeon.switchNoFade( StartScene.class );
+					HollowDungeon.switchNoFade( StartScene.class );
 				}
 			}
 			
@@ -152,7 +145,7 @@ public class TitleScene extends PixelScene {
 				if (DeviceCompat.isDebug()) {
 					GamesInProgress.selectedClass = null;
 					GamesInProgress.curSlot = 1;
-					ShatteredPixelDungeon.switchScene(HeroSelectScene.class);
+					HollowDungeon.switchScene(HeroSelectScene.class);
 					//TitleScene.this.add( new WndStartGame(1) );
 					return true;
 				}
@@ -165,7 +158,7 @@ public class TitleScene extends PixelScene {
 		IconButton btnAbout = new IconButton(){
 			@Override
 			protected void onClick() {
-				ShatteredPixelDungeon.switchScene( AboutScene.class );
+				HollowDungeon.switchScene( AboutScene.class );
 			}
 		};
 		btnAbout.icon(BannerSprites.get( BannerSprites.Type.ABOUT ));

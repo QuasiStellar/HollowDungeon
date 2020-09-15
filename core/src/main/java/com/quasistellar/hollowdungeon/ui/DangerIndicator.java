@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.watabou.input.GameAction;
 import com.watabou.noosa.BitmapText;
@@ -51,7 +51,7 @@ public class DangerIndicator extends Tag {
 	
 	@Override
 	public GameAction keyAction() {
-		return SPDAction.TAG_DANGER;
+		return HDAction.TAG_DANGER;
 	}
 	
 	@Override

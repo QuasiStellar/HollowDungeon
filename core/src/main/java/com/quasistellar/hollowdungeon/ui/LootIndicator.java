@@ -24,7 +24,7 @@ package com.quasistellar.hollowdungeon.ui;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.watabou.input.GameAction;
 
 public class LootIndicator extends Tag {
@@ -56,7 +56,7 @@ public class LootIndicator extends Tag {
 
 			@Override
 			public GameAction keyAction() {
-				return SPDAction.TAG_LOOT;
+				return HDAction.TAG_LOOT;
 			}
 		};
 		slot.showExtraInfo( false );

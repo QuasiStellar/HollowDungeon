@@ -26,7 +26,7 @@ import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.scenes.AmuletScene;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.Statistics;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.watabou.noosa.Game;
@@ -93,7 +93,7 @@ public class Amulet extends Item {
 			AmuletScene.noText = !showText;
 			Game.switchScene( com.quasistellar.hollowdungeon.scenes.AmuletScene.class );
 		} catch (IOException e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 	}
 	

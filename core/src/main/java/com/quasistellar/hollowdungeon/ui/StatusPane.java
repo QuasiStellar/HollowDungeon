@@ -21,25 +21,15 @@
 
 package com.quasistellar.hollowdungeon.ui;
 
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndGame;
-import com.quasistellar.hollowdungeon.windows.WndHero;
-import com.quasistellar.hollowdungeon.windows.WndJournal;
-import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
-import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
-import com.quasistellar.hollowdungeon.Statistics;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
-import com.watabou.input.GameAction;
 import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;

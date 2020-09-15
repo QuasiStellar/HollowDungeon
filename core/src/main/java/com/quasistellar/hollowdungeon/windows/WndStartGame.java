@@ -25,8 +25,8 @@ import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.journal.Journal;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -96,8 +96,8 @@ public class WndStartGame extends Window {
 				ActionIndicator.action = null;
 				InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
 				
-				if (SPDSettings.intro()) {
-					SPDSettings.intro( false );
+				if (HDSettings.intro()) {
+					HDSettings.intro( false );
 					Game.switchScene( IntroScene.class );
 				} else {
 					Game.switchScene( InterlevelScene.class );
@@ -118,14 +118,14 @@ public class WndStartGame extends Window {
 		
 		if (DeviceCompat.isDebug() || Badges.isUnlocked(Badges.Badge.VICTORY)){
 			IconButton challengeButton = new IconButton(
-					Icons.get( SPDSettings.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF)){
+					Icons.get( HDSettings.challenges() > 0 ? Icons.CHALLENGE_ON :Icons.CHALLENGE_OFF)){
 				@Override
 				protected void onClick() {
-					ShatteredPixelDungeon.scene().addToFront(new WndChallenges(SPDSettings.challenges(), true) {
+					HollowDungeon.scene().addToFront(new WndChallenges(HDSettings.challenges(), true) {
 						public void onBackPressed() {
 							super.onBackPressed();
 							if (parent != null) {
-								icon(Icons.get(SPDSettings.challenges() > 0 ?
+								icon(Icons.get(HDSettings.challenges() > 0 ?
 										Icons.CHALLENGE_ON : Icons.CHALLENGE_OFF));
 							}
 						}
@@ -146,7 +146,7 @@ public class WndStartGame extends Window {
 			
 		} else {
 			Dungeon.challenges = 0;
-			SPDSettings.challenges(0);
+			HDSettings.challenges(0);
 		}
 		
 		resize(WIDTH, HEIGHT);
@@ -200,7 +200,7 @@ public class WndStartGame extends Window {
 			super.onClick();
 			
 			if( !cl.isUnlocked() ){
-				ShatteredPixelDungeon.scene().addToFront( new com.quasistellar.hollowdungeon.windows.WndMessage(cl.unlockMsg()));
+				HollowDungeon.scene().addToFront( new com.quasistellar.hollowdungeon.windows.WndMessage(cl.unlockMsg()));
 			} else {
 				GamesInProgress.selectedClass = cl;
 			}
@@ -234,7 +234,7 @@ public class WndStartGame extends Window {
 				@Override
 				protected void onClick() {
 					if (cl == null) return;
-					ShatteredPixelDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndMessage(Messages.get(cl, cl.name() + "_desc_item")));
+					HollowDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndMessage(Messages.get(cl, cl.name() + "_desc_item")));
 				}
 			};
 			heroItem.setSize(BTN_SIZE, BTN_SIZE);
@@ -244,7 +244,7 @@ public class WndStartGame extends Window {
 				@Override
 				protected void onClick() {
 					if (cl == null) return;
-					ShatteredPixelDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndMessage(Messages.get(cl, cl.name() + "_desc_loadout")));
+					HollowDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndMessage(Messages.get(cl, cl.name() + "_desc_loadout")));
 				}
 			};
 			heroLoadout.setSize(BTN_SIZE, BTN_SIZE);
@@ -254,7 +254,7 @@ public class WndStartGame extends Window {
 				@Override
 				protected void onClick() {
 					if (cl == null) return;
-					ShatteredPixelDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndMessage(Messages.get(cl, cl.name() + "_desc_misc")));
+					HollowDungeon.scene().addToFront(new com.quasistellar.hollowdungeon.windows.WndMessage(Messages.get(cl, cl.name() + "_desc_misc")));
 				}
 			};
 			heroMisc.setSize(BTN_SIZE, BTN_SIZE);

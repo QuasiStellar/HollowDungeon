@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.tiles;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Texture;
@@ -175,7 +175,7 @@ public class FogOfWar extends Image {
 		this.visible = visible;
 		this.visited = visited;
 		this.mapped = mapped;
-		this.brightness = SPDSettings.brightness() + 1;
+		this.brightness = HDSettings.brightness() + 1;
 
 		moveToUpdating();
 		

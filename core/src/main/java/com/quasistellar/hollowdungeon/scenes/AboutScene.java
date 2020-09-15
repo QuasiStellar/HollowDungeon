@@ -22,7 +22,7 @@
 package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.effects.Flare;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
 import com.quasistellar.hollowdungeon.ui.Icons;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
@@ -232,7 +232,7 @@ public class AboutScene extends PixelScene {
 	
 	@Override
 	protected void onBackPressed() {
-		ShatteredPixelDungeon.switchScene(TitleScene.class);
+		HollowDungeon.switchScene(TitleScene.class);
 	}
 
 	private void addLine( float y, Group content ){

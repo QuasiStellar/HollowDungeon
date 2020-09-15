@@ -24,13 +24,13 @@ package com.quasistellar.hollowdungeon.desktop;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowListener;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDSettings;
 
 public class DesktopWindowListener implements Lwjgl3WindowListener {
 	
 	@Override
 	public void created ( Lwjgl3Window lwjgl3Window ) {
-		if (SPDSettings.fullscreen()){
+		if (HDSettings.fullscreen()){
 			lwjgl3Window.postRunnable( new Runnable() {
 				@Override
 				public void run () {
@@ -38,14 +38,14 @@ public class DesktopWindowListener implements Lwjgl3WindowListener {
 				}
 			} );
 		}
-		if (SPDSettings.windowMaximized()) {
+		if (HDSettings.windowMaximized()) {
 			lwjgl3Window.maximizeWindow();
 		}
 	}
 	
 	@Override
 	public void maximized ( boolean b ) {
-		SPDSettings.windowMaximized( b );
+		HDSettings.windowMaximized( b );
 	}
 	
 	@Override

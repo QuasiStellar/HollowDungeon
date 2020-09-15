@@ -22,7 +22,7 @@
 package com.quasistellar.hollowdungeon.levels.rooms.secret;
 
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
 import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.watabou.utils.Bundle;
@@ -123,7 +123,7 @@ public abstract class SecretRoom extends SpecialRoom {
 			regionSecretsThisRun = bundle.getIntArray(REGIONS);
 		} else {
 			initForRun();
-			ShatteredPixelDungeon.reportException(new Exception("secrets array didn't exist!"));
+			HollowDungeon.reportException(new Exception("secrets array didn't exist!"));
 		}
 	}
 	

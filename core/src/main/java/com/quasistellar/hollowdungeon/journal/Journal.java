@@ -21,7 +21,7 @@
 
 package com.quasistellar.hollowdungeon.journal;
 
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.FileUtils;
 
@@ -69,7 +69,7 @@ public class Journal {
 			FileUtils.bundleToFile( JOURNAL_FILE, bundle );
 			saveNeeded = false;
 		} catch (IOException e) {
-			ShatteredPixelDungeon.reportException(e);
+			HollowDungeon.reportException(e);
 		}
 		
 	}

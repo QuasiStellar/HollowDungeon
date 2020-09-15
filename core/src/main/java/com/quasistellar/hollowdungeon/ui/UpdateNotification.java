@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.windows.WndOptions;
 import com.quasistellar.hollowdungeon.Chrome;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.services.updates.AvailableUpdateData;
 import com.quasistellar.hollowdungeon.services.updates.Updates;
@@ -55,7 +55,7 @@ public class UpdateNotification extends StyledButton {
 	@Override
 	protected void onClick() {
 		if (Updates.updateAvailable()){
-			ShatteredPixelDungeon.scene().addToFront( new WndUpdate( Updates.updateData() ) );
+			HollowDungeon.scene().addToFront( new WndUpdate( Updates.updateData() ) );
 		}
 	}
 

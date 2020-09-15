@@ -31,7 +31,7 @@ import com.watabou.utils.Point;
 
 import java.util.Locale;
 
-public class SPDSettings extends GameSettings {
+public class HDSettings extends GameSettings {
 	
 	//Version info
 	
@@ -58,7 +58,7 @@ public class SPDSettings extends GameSettings {
 	public static void fullscreen( boolean value ) {
 		put( KEY_FULLSCREEN, value );
 		
-		com.quasistellar.hollowdungeon.ShatteredPixelDungeon.updateSystemUI();
+		HollowDungeon.updateSystemUI();
 	}
 	
 	public static boolean fullscreen() {
@@ -67,7 +67,7 @@ public class SPDSettings extends GameSettings {
 	
 	public static void landscape( boolean value ){
 		put( KEY_LANDSCAPE, value );
-		((com.quasistellar.hollowdungeon.ShatteredPixelDungeon) com.quasistellar.hollowdungeon.ShatteredPixelDungeon.instance).updateDisplaySize();
+		((HollowDungeon) HollowDungeon.instance).updateDisplaySize();
 	}
 	
 	//can return null because we need to directly handle the case of landscape not being set
@@ -82,7 +82,7 @@ public class SPDSettings extends GameSettings {
 	
 	public static void powerSaver( boolean value ){
 		put( KEY_POWER_SAVER, value );
-		((com.quasistellar.hollowdungeon.ShatteredPixelDungeon) ShatteredPixelDungeon.instance).updateDisplaySize();
+		((HollowDungeon) HollowDungeon.instance).updateDisplaySize();
 	}
 	
 	public static boolean powerSaver(){

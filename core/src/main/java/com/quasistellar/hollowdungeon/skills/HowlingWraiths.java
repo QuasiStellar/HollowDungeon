@@ -1,21 +1,15 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.actors.blobs.Blob;
-import com.quasistellar.hollowdungeon.actors.blobs.Fire;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.effects.MagicMissile;
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.mechanics.ConeAOE;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.CellSelector;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
-import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
-import com.quasistellar.hollowdungeon.sprites.MissileSprite;
 import com.watabou.utils.Callback;
 
 import java.util.ArrayList;

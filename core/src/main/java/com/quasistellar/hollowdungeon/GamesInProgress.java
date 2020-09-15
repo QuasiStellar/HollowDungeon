@@ -102,14 +102,14 @@ public class GamesInProgress {
 				Dungeon.preview(info, bundle);
 				
 				//saves from before 0.6.5c are not supported
-				if (info.version < ShatteredPixelDungeon.v0_6_5c) {
+				if (info.version < HollowDungeon.vSOME_OLD_VERSION) {
 					info = null;
 				}
 
 			} catch (IOException e) {
 				info = null;
 			} catch (Exception e){
-				ShatteredPixelDungeon.reportException( e );
+				HollowDungeon.reportException( e );
 				info = null;
 			}
 			

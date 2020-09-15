@@ -24,7 +24,7 @@ package com.quasistellar.hollowdungeon.ui;
 import com.quasistellar.hollowdungeon.effects.ShadowBox;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.Chrome;
-import com.quasistellar.hollowdungeon.SPDAction;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.watabou.input.KeyBindings;
 import com.watabou.input.KeyEvent;
 import com.watabou.input.PointerEvent;
@@ -46,8 +46,8 @@ public class Window extends Group implements Signal.Listener<KeyEvent> {
 	protected com.quasistellar.hollowdungeon.effects.ShadowBox shadow;
 	protected NinePatch chrome;
 	
-	public static final int TITLE_COLOR = 0xFFFF44;
-	public static final int SHPX_COLOR = 0x33BB33;
+	public static final int TITLE_COLOR = 0x555555;
+	public static final int SHPX_COLOR = 0x777777;
 	
 	public Window() {
 		this( 0, 0, 0, Chrome.get( Chrome.Type.WINDOW ) );
@@ -158,7 +158,7 @@ public class Window extends Group implements Signal.Listener<KeyEvent> {
 	@Override
 	public boolean onSignal( KeyEvent event ) {
 		if (event.pressed) {
-			if (KeyBindings.getActionForKey( event ) == SPDAction.BACK){
+			if (KeyBindings.getActionForKey( event ) == HDAction.BACK){
 				onBackPressed();
 			}
 		}

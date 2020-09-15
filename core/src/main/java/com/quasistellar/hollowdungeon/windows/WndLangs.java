@@ -23,8 +23,8 @@ package com.quasistellar.hollowdungeon.windows;
 
 import com.quasistellar.hollowdungeon.messages.Languages;
 import com.quasistellar.hollowdungeon.Chrome;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
@@ -96,10 +96,10 @@ public class WndLangs extends Window {
 				protected void onClick() {
 					super.onClick();
 					Messages.setup(langs.get(langIndex));
-					ShatteredPixelDungeon.seamlessResetScene(new Game.SceneChangeCallback() {
+					HollowDungeon.seamlessResetScene(new Game.SceneChangeCallback() {
 						@Override
 						public void beforeCreate() {
-							SPDSettings.language(langs.get(langIndex));
+							HDSettings.language(langs.get(langIndex));
 							Game.platform.resetGenerators();
 						}
 						@Override
@@ -235,7 +235,7 @@ public class WndLangs extends Window {
 	public void hide() {
 		super.hide();
 		//resets generators because there's no need to retain chars for languages not selected
-		ShatteredPixelDungeon.seamlessResetScene(new Game.SceneChangeCallback() {
+		HollowDungeon.seamlessResetScene(new Game.SceneChangeCallback() {
 			@Override
 			public void beforeCreate() {
 				Game.platform.resetGenerators();

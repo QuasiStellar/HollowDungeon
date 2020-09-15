@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.windows;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.hero.Belongings;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.items.Geo;
@@ -33,8 +33,6 @@ import com.quasistellar.hollowdungeon.items.bags.Bag;
 import com.quasistellar.hollowdungeon.items.bags.VelvetPouch;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
-import com.quasistellar.hollowdungeon.sprites.ItemSprite;
-import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.ui.Icons;
 import com.quasistellar.hollowdungeon.ui.ItemSlot;
 import com.quasistellar.hollowdungeon.ui.QuickSlotButton;
@@ -42,7 +40,6 @@ import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.input.KeyBindings;
 import com.watabou.input.KeyEvent;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
@@ -214,7 +211,7 @@ public class WndBag extends WndTabbed {
 
 	@Override
 	public boolean onSignal(KeyEvent event) {
-		if (event.pressed && KeyBindings.getActionForKey( event ) == SPDAction.INVENTORY) {
+		if (event.pressed && KeyBindings.getActionForKey( event ) == HDAction.INVENTORY) {
 			hide();
 			return true;
 		} else {

@@ -30,9 +30,9 @@ import android.os.Bundle;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.services.updates.Updates;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.services.updates.UpdateImpl;
 import com.watabou.noosa.Game;
 import com.watabou.utils.FileUtils;
@@ -71,11 +71,11 @@ public class AndroidGame extends AndroidApplication {
 		// so that we don't need to rely on Gdx.app, which isn't initialized yet.
 		// Note that we use a different prefs name on android for legacy purposes,
 		// this is the default prefs filename given to an android app (.xml is automatically added to it)
-		SPDSettings.set(instance.getPreferences("ShatteredPixelDungeon"));
+		HDSettings.set(instance.getPreferences("HollowDungeon"));
 		
 		//set desired orientation (if it exists) before initializing the app.
-		if (SPDSettings.landscape() != null) {
-			AndroidGame.instance.setRequestedOrientation( com.quasistellar.hollowdungeon.SPDSettings.landscape() ?
+		if (HDSettings.landscape() != null) {
+			AndroidGame.instance.setRequestedOrientation( HDSettings.landscape() ?
 					ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE :
 					ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT );
 		}
@@ -97,7 +97,7 @@ public class AndroidGame extends AndroidApplication {
 		
 		support.updateSystemUI();
 		
-		initialize(new ShatteredPixelDungeon(support), config);
+		initialize(new HollowDungeon(support), config);
 		
 		view = (GLSurfaceView)graphics.getView();
 		

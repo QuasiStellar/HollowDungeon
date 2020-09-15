@@ -23,7 +23,7 @@ package com.quasistellar.hollowdungeon.windows;
 
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.GamesInProgress;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.HeroSelectScene;
@@ -77,7 +77,7 @@ public class WndGame extends Window {
 					InterlevelScene.noStory = true;
 					GamesInProgress.selectedClass = Dungeon.hero.heroClass;
 					GamesInProgress.curSlot = GamesInProgress.firstEmpty();
-					ShatteredPixelDungeon.switchScene(HeroSelectScene.class);
+					HollowDungeon.switchScene(HeroSelectScene.class);
 				}
 			} );
 			btnStart.textColor(Window.TITLE_COLOR);
@@ -99,7 +99,7 @@ public class WndGame extends Window {
 						try {
 							Dungeon.saveAll();
 						} catch (IOException e) {
-							ShatteredPixelDungeon.reportException(e);
+							HollowDungeon.reportException(e);
 						}
 						Game.switchScene(TitleScene.class);
 					}
@@ -111,7 +111,7 @@ public class WndGame extends Window {
 						try {
 							Dungeon.saveAll();
 						} catch (IOException e) {
-							ShatteredPixelDungeon.reportException(e);
+							HollowDungeon.reportException(e);
 						}
 						Game.instance.finish();
 					}

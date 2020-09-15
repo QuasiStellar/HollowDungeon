@@ -23,8 +23,8 @@ package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.SPDAction;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDAction;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
@@ -116,7 +116,7 @@ public class CellSelector extends ScrollArea {
 	private float zoom( float value ) {
 
 		value = GameMath.gate( PixelScene.minZoom, value, PixelScene.maxZoom );
-		SPDSettings.zoom((int) (value - PixelScene.defaultZoom));
+		HDSettings.zoom((int) (value - PixelScene.defaultZoom));
 		camera.zoom( value );
 
 		//Resets character sprite positions with the new camera zoom
@@ -219,7 +219,7 @@ public class CellSelector extends ScrollArea {
 		
 	}
 	
-	private GameAction heldAction = SPDAction.NONE;
+	private GameAction heldAction = HDAction.NONE;
 	private int heldTurns = 0;
 	
 	private Signal.Listener<KeyEvent> keyListener = new Signal.Listener<KeyEvent>() {
@@ -228,15 +228,15 @@ public class CellSelector extends ScrollArea {
 			GameAction action = KeyBindings.getActionForKey( event );
 			if (!event.pressed){
 				
-				if (heldAction != SPDAction.NONE && heldAction == action) {
+				if (heldAction != HDAction.NONE && heldAction == action) {
 					resetKeyHold();
 					return true;
 				} else {
-					if (action == SPDAction.ZOOM_IN){
+					if (action == HDAction.ZOOM_IN){
 						zoom( camera.zoom+1 );
 						return true;
 
-					} else if (action == SPDAction.ZOOM_OUT){
+					} else if (action == HDAction.ZOOM_OUT){
 						zoom( camera.zoom-1 );
 						return true;
 					}
@@ -253,14 +253,14 @@ public class CellSelector extends ScrollArea {
 	private boolean moveFromAction(GameAction action){
 		int cell = Dungeon.hero.pos;
 
-		if (action == SPDAction.N)  cell += -Dungeon.level.width();
-		if (action == SPDAction.NE) cell += +1-Dungeon.level.width();
-		if (action == SPDAction.E)  cell += +1;
-		if (action == SPDAction.SE) cell += +1+Dungeon.level.width();
-		if (action == SPDAction.S)  cell += +Dungeon.level.width();
-		if (action == SPDAction.SW) cell += -1+Dungeon.level.width();
-		if (action == SPDAction.W)  cell += -1;
-		if (action == SPDAction.NW) cell += -1-Dungeon.level.width();
+		if (action == HDAction.N)  cell += -Dungeon.level.width();
+		if (action == HDAction.NE) cell += +1-Dungeon.level.width();
+		if (action == HDAction.E)  cell += +1;
+		if (action == HDAction.SE) cell += +1+Dungeon.level.width();
+		if (action == HDAction.S)  cell += +Dungeon.level.width();
+		if (action == HDAction.SW) cell += -1+Dungeon.level.width();
+		if (action == HDAction.W)  cell += -1;
+		if (action == HDAction.NW) cell += -1-Dungeon.level.width();
 		
 		if (cell != Dungeon.hero.pos){
 			//each step when keyboard moving takes 0.15s, 0.125s, 0.1s, 0.1s, ...
@@ -277,7 +277,7 @@ public class CellSelector extends ScrollArea {
 	}
 	
 	public void processKeyHold(){
-		if (heldAction != SPDAction.NONE){
+		if (heldAction != HDAction.NONE){
 			enabled = true;
 			heldTurns++;
 			moveFromAction(heldAction);
@@ -285,7 +285,7 @@ public class CellSelector extends ScrollArea {
 	}
 	
 	public void resetKeyHold(){
-		heldAction = SPDAction.NONE;
+		heldAction = HDAction.NONE;
 		heldTurns = 0;
 		CharSprite.setMoveInterval( com.quasistellar.hollowdungeon.sprites.CharSprite.DEFAULT_MOVE_INTERVAL );
 	}

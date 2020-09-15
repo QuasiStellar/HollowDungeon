@@ -25,7 +25,7 @@ import com.quasistellar.hollowdungeon.effects.BadgeBanner;
 import com.quasistellar.hollowdungeon.messages.Languages;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Badges;
-import com.quasistellar.hollowdungeon.SPDSettings;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.Window;
@@ -84,7 +84,7 @@ public class PixelScene extends Scene {
 
 		maxDefaultZoom = (int)Math.min(Game.width/minWidth, Game.height/minHeight);
 		maxScreenZoom = (int)Math.min(Game.dispWidth/minWidth, Game.dispHeight/minHeight);
-		defaultZoom = SPDSettings.scale();
+		defaultZoom = HDSettings.scale();
 
 		if (defaultZoom < Math.ceil( Game.density * 2 ) || defaultZoom > maxDefaultZoom){
 			defaultZoom = (int)Math.ceil( Game.density * 2.5 );
@@ -130,7 +130,7 @@ public class PixelScene extends Scene {
 				Messages.lang() == com.quasistellar.hollowdungeon.messages.Languages.JAPANESE){
 			renderedTextPageSize *= 2;
 		}
-		Game.platform.setupFontGenerators(renderedTextPageSize, SPDSettings.systemFont());
+		Game.platform.setupFontGenerators(renderedTextPageSize, HDSettings.systemFont());
 		
 	}
 	

@@ -21,8 +21,7 @@
 
 package com.quasistellar.hollowdungeon.windows;
 
-import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.journal.Document;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
@@ -131,7 +130,7 @@ public class WndDocument extends Window {
 		
 		public boolean onClick( float x, float y ) {
 			if (inside( x, y ) && found) {
-				ShatteredPixelDungeon.scene().addToFront( new WndStory( doc.pageBody(page) ));
+				HollowDungeon.scene().addToFront( new WndStory( doc.pageBody(page) ));
 				return true;
 			} else {
 				return false;

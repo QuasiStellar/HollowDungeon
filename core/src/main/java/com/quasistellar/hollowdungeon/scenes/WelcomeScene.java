@@ -23,36 +23,32 @@ package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.effects.Fireball;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
-import com.quasistellar.hollowdungeon.journal.Document;
-import com.quasistellar.hollowdungeon.journal.Journal;
-import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.GamesInProgress;
 import com.quasistellar.hollowdungeon.Rankings;
-import com.quasistellar.hollowdungeon.SPDSettings;
-import com.quasistellar.hollowdungeon.ShatteredPixelDungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
+import com.quasistellar.hollowdungeon.ui.IconButton;
 import com.quasistellar.hollowdungeon.ui.Icons;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.StyledButton;
-import com.watabou.glwrap.Blending;
 import com.watabou.noosa.Camera;
-import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.utils.FileUtils;
 
 public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelScene {
 
-	private static int LATEST_UPDATE = ShatteredPixelDungeon.v0_8_1;
+	private static int LATEST_UPDATE = HollowDungeon.v0_0;
 
 	@Override
 	public void create() {
 		super.create();
 
-		final int previousVersion = SPDSettings.version();
+		final int previousVersion = HDSettings.version();
 
-		if (ShatteredPixelDungeon.versionCode == previousVersion) {
-			ShatteredPixelDungeon.switchNoFade(TitleScene.class);
+		if (HollowDungeon.versionCode == previousVersion) {
+			HollowDungeon.switchNoFade(TitleScene.class);
 			return;
 		}
 
@@ -95,21 +91,22 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 //		signs.y = title.y;
 //		add( signs );
 		
-		StyledButton okay = new StyledButton(Chrome.Type.GREY_BUTTON_TR, Messages.get(this, "continue")){
+		IconButton okay = new IconButton(){
 			@Override
 			protected void onClick() {
 				super.onClick();
 				if (previousVersion == 0){
-					SPDSettings.version(ShatteredPixelDungeon.versionCode);
+					HDSettings.version(HollowDungeon.versionCode);
 					GamesInProgress.selectedClass = null;
 					GamesInProgress.curSlot = 1;
-					ShatteredPixelDungeon.switchScene(HeroSelectScene.class);
+					HollowDungeon.switchScene(HeroSelectScene.class);
 				} else {
 					updateVersion(previousVersion);
-					ShatteredPixelDungeon.switchScene(TitleScene.class);
+					HollowDungeon.switchScene(TitleScene.class);
 				}
 			}
 		};
+		okay.icon(BannerSprites.get( BannerSprites.Type.START_GAME ));
 
 		//FIXME these buttons are very low on 18:9 devices
 		if (previousVersion != 0){
@@ -118,7 +115,7 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 				protected void onClick() {
 					super.onClick();
 					updateVersion(previousVersion);
-					ShatteredPixelDungeon.switchScene(ChangesScene.class);
+					HollowDungeon.switchScene(ChangesScene.class);
 				}
 			};
 			okay.setRect(title.x, h-25, (title.width()/2)-2, 21);
@@ -128,9 +125,7 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 			changes.icon(Icons.get(Icons.CHANGES));
 			add(changes);
 		} else {
-			okay.text(Messages.get(TitleScene.class, "enter"));
 			okay.setRect(title.x, h-25, title.width(), 21);
-			okay.icon(Icons.get(Icons.ENTER));
 			add(okay);
 		}
 
@@ -138,7 +133,7 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 		String message;
 		if (previousVersion == 0) {
 			message = Messages.get(this, "welcome_msg");
-		} else if (previousVersion <= ShatteredPixelDungeon.versionCode) {
+		} else if (previousVersion <= HollowDungeon.versionCode) {
 			if (previousVersion < LATEST_UPDATE){
 				message = Messages.get(this, "update_intro");
 				message += "\n\n" + Messages.get(this, "update_msg");
@@ -174,18 +169,18 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 					} catch (Exception e) {
 						//if we encounter a fatal per-record error, then clear that record
 						Rankings.INSTANCE.records.remove(rec);
-						ShatteredPixelDungeon.reportException(e);
+						HollowDungeon.reportException(e);
 					}
 				}
 				Rankings.INSTANCE.save();
 			} catch (Exception e) {
 				//if we encounter a fatal error, then just clear the rankings
 				FileUtils.deleteFile( Rankings.RANKINGS_FILE );
-				ShatteredPixelDungeon.reportException(e);
+				HollowDungeon.reportException(e);
 			}
 		}
 		
-		SPDSettings.version(ShatteredPixelDungeon.versionCode);
+		HDSettings.version(HollowDungeon.versionCode);
 	}
 
 	private void placeTorch( float x, float y ) {
