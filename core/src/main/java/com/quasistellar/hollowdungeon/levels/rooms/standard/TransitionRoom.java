@@ -31,12 +31,12 @@ public class TransitionRoom extends StandardRoom {
 
 	@Override
 	public int minWidth() {
-		return Math.max(super.minWidth(), 3);
+		return Math.max(super.minWidth(), 6);
 	}
 
 	@Override
 	public int minHeight() {
-		return Math.max(super.minHeight(), 3);
+		return Math.max(super.minHeight(), 6);
 	}
 
 	public void paint(com.quasistellar.hollowdungeon.levels.Level level) {
@@ -48,7 +48,7 @@ public class TransitionRoom extends StandardRoom {
 			door.set( Room.Door.Type.REGULAR );
 		}
 
-		level.transition = level.pointToCell(random( 2 ));
+		level.transition = level.pointToCell(random( 3 ));
 		Painter.set( level, level.transition, Terrain.UNLOCKED_EXIT );
 	}
 	

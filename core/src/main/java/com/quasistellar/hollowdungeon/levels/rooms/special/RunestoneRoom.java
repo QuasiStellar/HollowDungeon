@@ -48,8 +48,7 @@ public class RunestoneRoom extends SpecialRoom {
 		
 		Painter.drawInside( level, this, entrance(), 2, Terrain.EMPTY_SP);
 		Painter.fill( level, this, 2, Terrain.EMPTY );
-		
-		entrance().set( Door.Type.LOCKED );
-		level.addItemToSpawn( new IronKey( Dungeon.location ) );
+
+		entrance().set( Door.Type.REGULAR );
 	}
 }

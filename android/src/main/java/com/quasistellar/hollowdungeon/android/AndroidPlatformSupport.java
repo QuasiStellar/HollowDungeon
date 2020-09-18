@@ -248,13 +248,13 @@ public class AndroidPlatformSupport extends PlatformSupport {
 			//typefaces are 0-JP, 1-KR, 2-SC, 3-TC.
 			int typeFace;
 			switch (HDSettings.language()) {
-				case JAPANESE:
-					typeFace = 0;
-					break;
-				case KOREAN:
-					typeFace = 1;
-					break;
-				case CHINESE:
+//				case JAPANESE:
+//					typeFace = 0;
+//					break;
+//				case KOREAN:
+//					typeFace = 1;
+//					break;
+//				case CHINESE:
 				default:
 					typeFace = 2;
 			}

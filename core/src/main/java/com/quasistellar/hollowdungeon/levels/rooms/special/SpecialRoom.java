@@ -79,8 +79,16 @@ public abstract class SpecialRoom extends Room {
 	}
 	
 	private static final ArrayList<Class<? extends SpecialRoom>> ALL_SPEC = new ArrayList<>( Arrays.asList(
-			WeakFloorRoom.class, MagicWellRoom.class, com.quasistellar.hollowdungeon.levels.rooms.special.CryptRoom.class, PoolRoom.class, GardenRoom.class, com.quasistellar.hollowdungeon.levels.rooms.special.LibraryRoom.class, com.quasistellar.hollowdungeon.levels.rooms.special.ArmoryRoom.class,
-			TreasuryRoom.class, TrapsRoom.class, StorageRoom.class, com.quasistellar.hollowdungeon.levels.rooms.special.StatueRoom.class, com.quasistellar.hollowdungeon.levels.rooms.special.RunestoneRoom.class
+			//WeakFloorRoom.class,
+			MagicWellRoom.class,
+			//CryptRoom.class, PoolRoom.class, GardenRoom.class,
+			LibraryRoom.class,
+			//ArmoryRoom.class,
+			//TreasuryRoom.class,
+			//TrapsRoom.class,
+			//StorageRoom.class
+			//StatueRoom.class,
+			RunestoneRoom.class
 	) );
 	
 	public static ArrayList<Class<? extends Room>> runSpecials = new ArrayList<>();

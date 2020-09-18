@@ -98,7 +98,7 @@ public class GameScene extends PixelScene {
 
 	public static float time = 0;
 
-	private static final float DELAY = 2;
+	private static final float DELAY = 1.5f;
 
 	private SkinnedBlock water;
 	private DungeonTerrainTilemap tiles;
@@ -550,16 +550,9 @@ public class GameScene extends PixelScene {
 		time += Game.elapsed;
 		if (time >= DELAY) {
 
-			Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
-			if (delay == null) {
-				Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 2);
-			} else {
-				Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 3);
-			}
-
 			GameScene.layoutSkillTags();
 
-			Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 2);
+			Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 1);
 
 			GameScene.time = 0;
 

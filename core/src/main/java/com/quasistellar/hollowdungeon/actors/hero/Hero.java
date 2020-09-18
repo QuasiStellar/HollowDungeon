@@ -283,7 +283,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	@Override
 	public boolean act() {
-		
+
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = com.quasistellar.hollowdungeon.Dungeon.level.heroFOV;
 		

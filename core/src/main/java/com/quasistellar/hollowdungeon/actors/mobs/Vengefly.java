@@ -31,5 +31,6 @@ public class Vengefly extends Mob {
         HP = HT = 8;
 
         baseSpeed = 2;
+        flying = true;
     }
 }

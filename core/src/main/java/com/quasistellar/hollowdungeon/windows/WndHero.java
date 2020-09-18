@@ -103,9 +103,9 @@ public class WndHero extends WndTabbed {
 			com.quasistellar.hollowdungeon.windows.IconTitle title = new IconTitle();
 			title.icon( HeroSprite.avatar(hero.heroClass, 1) );
 			if (hero.name().equals(hero.className()))
-				title.label( Messages.get(this, "title", 0, hero.className() ).toUpperCase( Locale.ENGLISH ) );
+				title.label( Messages.get(this, "title", hero.className() ).toUpperCase( Locale.ENGLISH ) );
 			else
-				title.label((hero.name() + "\n" + Messages.get(this, "title", 1, hero.className())).toUpperCase(Locale.ENGLISH));
+				title.label((hero.name() + "\n" + Messages.get(this, "title", hero.className())).toUpperCase(Locale.ENGLISH));
 			title.color(Window.SHPX_COLOR);
 			title.setRect( 0, 0, WIDTH, 0 );
 			add(title);

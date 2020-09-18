@@ -21,8 +21,11 @@
 
 package com.quasistellar.hollowdungeon.items.bags;
 
+import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
+
+import java.util.ArrayList;
 
 public class VelvetPouch extends Bag {
 
@@ -37,6 +40,11 @@ public class VelvetPouch extends Bag {
 //		} else {
 			return super.canHold(item);
 //		}
+	}
+
+	@Override
+	public ArrayList<String> actions(Hero hero) {
+		return new ArrayList<>(); //yup, no dropping this one
 	}
 
 	public int capacity(){

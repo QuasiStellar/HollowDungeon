@@ -135,8 +135,7 @@ public abstract class StandardRoom extends Room {
 	
 	private static HashMap<String, float[]> chances = new HashMap<>();
 	static {
-		chances.put("King's Pass", new float[]{5,  0,0, 0,0, 15,0, 0,0, 0,0,    1,1,1,1,1,1,1,1,1,1});
-		chances.put("Dirtmouth", new float[]{5,  0,0, 0,0, 15,0, 0,0, 0,0,    1,1,1,1,1,1,1,1,1,1});
+		chances.put("King's Pass", new float[]{5,  0,0, 0,0, 15,0, 0,0, 0,0,    0,0,0,0,0,0,0,0,0,0});
 	}
 
 	public static StandardRoom createRoom(){

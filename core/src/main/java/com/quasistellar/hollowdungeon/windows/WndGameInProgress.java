@@ -58,7 +58,7 @@ public class WndGameInProgress extends Window {
 		
 		com.quasistellar.hollowdungeon.windows.IconTitle title = new IconTitle();
 		title.icon( HeroSprite.avatar(info.heroClass, info.armorTier) );
-		title.label((Messages.get(this, "title", info.level, className)).toUpperCase(Locale.ENGLISH));
+		title.label((Messages.get(this, "title", className)).toUpperCase(Locale.ENGLISH));
 		title.color(Window.SHPX_COLOR);
 		title.setRect( 0, 0, WIDTH, 0 );
 		add(title);
@@ -99,16 +99,13 @@ public class WndGameInProgress extends Window {
 		}
 		
 		pos += GAP;
-		
-		statSlot( Messages.get(this, "str"), info.str );
+
 		if (info.shld > 0) statSlot( Messages.get(this, "health"), info.hp + "+" + info.shld + "/" + info.ht );
 		else statSlot( Messages.get(this, "health"), (info.hp) + "/" + info.ht );
-		statSlot( Messages.get(this, "health"), (info.mp) + "/" + info.mm );
+		statSlot( Messages.get(this, "soul"), (info.mp) + "/" + info.mm );
 		
 		pos += GAP;
 		statSlot( Messages.get(this, "gold"), info.goldCollected );
-		
-		pos += GAP;
 		
 		RedButton cont = new RedButton(Messages.get(this, "continue")){
 			@Override

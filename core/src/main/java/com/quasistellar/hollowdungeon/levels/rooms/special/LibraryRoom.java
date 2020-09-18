@@ -42,8 +42,6 @@ public class LibraryRoom extends SpecialRoom {
 		Painter.fill( level, left + 1, top+1, width() - 2, 1 , Terrain.BOOKSHELF );
 		Painter.drawInside(level, this, entrance, 1, Terrain.EMPTY_SP );
 		
-		entrance.set( Door.Type.LOCKED );
-		
-		level.addItemToSpawn( new IronKey( Dungeon.location ) );
+		entrance.set( Door.Type.REGULAR );
 	}
 }

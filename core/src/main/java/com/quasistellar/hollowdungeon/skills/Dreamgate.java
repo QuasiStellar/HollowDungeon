@@ -21,8 +21,8 @@ public class Dreamgate extends Skill {
 
     @Override
     public void act() {
-        Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
-        if (delay == null || delay.cooldown() < 2) {
+        Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
+        if (delay == null) {
             GLog.w(Messages.get(this, "delay"));
             return;
         }
@@ -104,8 +104,8 @@ public class Dreamgate extends Skill {
 
     @Override
     public boolean visible() {
-        Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
-        return delay != null && delay.cooldown() >= 2;
+        Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
+        return delay != null;
     }
 
     @Override

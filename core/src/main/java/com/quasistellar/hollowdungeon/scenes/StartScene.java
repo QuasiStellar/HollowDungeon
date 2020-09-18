@@ -30,10 +30,8 @@ import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.Archs;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
-import com.quasistellar.hollowdungeon.ui.Icons;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.Window;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.NinePatch;
@@ -119,12 +117,12 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 		private NinePatch bg;
 		
 		private Image hero;
-		private RenderedTextBlock name;
+		private RenderedTextBlock location;
 		
-		private Image steps;
-		private BitmapText location;
-		private Image classIcon;
-		private BitmapText level;
+//		private Image steps;
+//		private BitmapText location;
+//		private Image classIcon;
+//		private BitmapText level;
 		
 		private int slot;
 		private boolean newGame;
@@ -135,9 +133,9 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 			
 			bg = Chrome.get(Chrome.Type.GEM);
 			add( bg);
-			
-			name = com.quasistellar.hollowdungeon.scenes.PixelScene.renderTextBlock(9);
-			add(name);
+
+			location = com.quasistellar.hollowdungeon.scenes.PixelScene.renderTextBlock(9);
+			add(location);
 		}
 		
 		public void set( int slot ){
@@ -145,57 +143,57 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 			GamesInProgress.Info info = GamesInProgress.check(slot);
 			newGame = info == null;
 			if (newGame){
-				name.text( Messages.get(StartScene.class, "new"));
-				
+				location.text( Messages.get(StartScene.class, "new"));
+
 				if (hero != null){
 					remove(hero);
 					hero = null;
-					remove(steps);
-					steps = null;
-					remove(location);
-					location = null;
-					remove(classIcon);
-					classIcon = null;
-					remove(level);
-					level = null;
+//					remove(steps);
+//					steps = null;
+//					remove(location);
+//					location = null;
+//					remove(classIcon);
+//					classIcon = null;
+//					remove(level);
+//					level = null;
 				}
 			} else {
 
-				name.text(Messages.titleCase(info.heroClass.title()));
-				
+				location.text(info.location);
+
 				if (hero == null){
 					hero = new Image(info.heroClass.spritesheet(), 0, 15*info.armorTier, 12, 15);
 					add(hero);
-					
-					steps = new Image(Icons.get(Icons.DEPTH));
-					add(steps);
-					location = new BitmapText(com.quasistellar.hollowdungeon.scenes.PixelScene.pixelFont);
-					add(location);
-					
-					classIcon = new Image(Icons.get(info.heroClass));
-					add(classIcon);
-					level = new BitmapText(PixelScene.pixelFont);
-					add(level);
+
+//					steps = new Image(Icons.get(Icons.DEPTH));
+//					add(steps);
+//					location = new BitmapText(com.quasistellar.hollowdungeon.scenes.PixelScene.pixelFont);
+//					add(location);
+//
+//					classIcon = new Image(Icons.get(info.heroClass));
+//					add(classIcon);
+//					level = new BitmapText(PixelScene.pixelFont);
+//					add(level);
 				} else {
 					hero.copy(new Image(info.heroClass.spritesheet(), 0, 15*info.armorTier, 12, 15));
-					
-					classIcon.copy(Icons.get(info.heroClass));
+
+					//classIcon.copy(Icons.get(info.heroClass));
 				}
 				
-				location.text(info.location);
-				location.measure();
-				
-				level.text(Integer.toString(info.level));
-				level.measure();
-				
+//				location.text(info.location);
+//				location.measure();
+//
+//				level.text(Integer.toString(info.level));
+//				level.measure();
+
 				if (info.challenges > 0){
-					name.hardlight(Window.TITLE_COLOR);
 					location.hardlight(Window.TITLE_COLOR);
-					level.hardlight(Window.TITLE_COLOR);
+//					location.hardlight(Window.TITLE_COLOR);
+//					level.hardlight(Window.TITLE_COLOR);
 				} else {
-					name.resetColor();
 					location.resetColor();
-					level.resetColor();
+//					location.resetColor();
+//					level.resetColor();
 				}
 				
 			}
@@ -215,35 +213,35 @@ public class StartScene extends com.quasistellar.hollowdungeon.scenes.PixelScene
 				hero.x = x+8;
 				hero.y = y + (height - hero.height())/2f;
 				align(hero);
-				
-				name.setPos(
+
+				location.setPos(
 						hero.x + hero.width() + 6,
-						y + (height - name.height())/2f
+						y + (height - location.height())/2f
 				);
-				align(name);
-				
-				classIcon.x = x + width - 24 + (16 - classIcon.width())/2f;
-				classIcon.y = y + (height - classIcon.height())/2f;
-				align(classIcon);
-				
-				level.x = classIcon.x + (classIcon.width() - level.width()) / 2f;
-				level.y = classIcon.y + (classIcon.height() - level.height()) / 2f + 1;
-				align(level);
-				
-				steps.x = x + width - 40 + (16 - steps.width())/2f;
-				steps.y = y + (height - steps.height())/2f;
-				align(steps);
-				
-				location.x = steps.x + (steps.width() - location.width()) / 2f;
-				location.y = steps.y + (steps.height() - location.height()) / 2f + 1;
 				align(location);
+
+//				classIcon.x = x + width - 24 + (16 - classIcon.width())/2f;
+//				classIcon.y = y + (height - classIcon.height())/2f;
+//				align(classIcon);
+
+//				level.x = classIcon.x + (classIcon.width() - level.width()) / 2f;
+//				level.y = classIcon.y + (classIcon.height() - level.height()) / 2f + 1;
+//				align(level);
+
+//				steps.x = x + width - 40 + (16 - steps.width())/2f;
+//				steps.y = y + (height - steps.height())/2f;
+//				align(steps);
+				
+//				location.x = steps.x + (steps.width() - location.width()) / 2f;
+//				location.y = steps.y + (steps.height() - location.height()) / 2f + 1;
+//				align(location);
 				
 			} else {
-				name.setPos(
-						x + (width - name.width())/2f,
-						y + (height - name.height())/2f
+				location.setPos(
+						x + (width - location.width())/2f,
+						y + (height - location.height())/2f
 				);
-				align(name);
+				align(location);
 			}
 			
 			

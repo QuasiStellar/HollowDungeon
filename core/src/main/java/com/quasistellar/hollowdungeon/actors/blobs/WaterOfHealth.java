@@ -39,6 +39,7 @@ import com.quasistellar.hollowdungeon.items.Ankh;
 import com.quasistellar.hollowdungeon.items.DewVial;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.journal.Notes;
+import com.quasistellar.hollowdungeon.ui.HpIndicator;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
@@ -57,6 +58,7 @@ public class WaterOfHealth extends WellWater {
 		Sample.INSTANCE.play( Assets.Sounds.DRINK );
 
 		hero.HP = hero.HT;
+		HpIndicator.refreshHero();
 		hero.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.4f, 4 );
 
 		Buff.detach( hero, Poison.class );

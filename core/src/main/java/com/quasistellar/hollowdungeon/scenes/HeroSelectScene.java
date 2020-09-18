@@ -136,16 +136,16 @@ public class HeroSelectScene extends PixelScene {
 		add(startBtn);
 		startBtn.visible = false;
 
-		infoButton = new IconButton(Icons.get(Icons.INFO)){
-			@Override
-			protected void onClick() {
-				super.onClick();
-				HollowDungeon.scene().addToFront(new WndHeroInfo(GamesInProgress.selectedClass));
-			}
-		};
-		infoButton.visible = false;
-		infoButton.setSize(21, 21);
-		add(infoButton);
+//		infoButton = new IconButton(Icons.get(Icons.INFO)){
+//			@Override
+//			protected void onClick() {
+//				super.onClick();
+//				HollowDungeon.scene().addToFront(new WndHeroInfo(GamesInProgress.selectedClass));
+//			}
+//		};
+//		infoButton.visible = false;
+//		infoButton.setSize(21, 21);
+//		add(infoButton);
 
 		HeroClass[] classes = HeroClass.values();
 
@@ -232,8 +232,8 @@ public class HeroSelectScene extends PixelScene {
 		startBtn.setPos((Camera.main.width - startBtn.width())/2f, startBtn.top());
 		PixelScene.align(startBtn);
 
-		infoButton.visible = true;
-		infoButton.setPos(startBtn.right(), startBtn.top());
+//		infoButton.visible = true;
+//		infoButton.setPos(startBtn.right(), startBtn.top());
 
 		challengeButton.visible = true;
 		challengeButton.setPos(startBtn.left()-challengeButton.width(), startBtn.top());
@@ -259,7 +259,7 @@ public class HeroSelectScene extends PixelScene {
 			startBtn.alpha(alpha);
 			btnExit.icon().alpha(alpha);
 			challengeButton.icon().alpha(alpha);
-			infoButton.icon().alpha(alpha);
+//			infoButton.icon().alpha(alpha);
 		}
 	}
 
@@ -310,88 +310,88 @@ public class HeroSelectScene extends PixelScene {
 			if( !cl.isUnlocked() ){
 				HollowDungeon.scene().addToFront( new WndMessage(cl.unlockMsg()));
 			} else if (GamesInProgress.selectedClass == cl) {
-				HollowDungeon.scene().add(new WndHeroInfo(cl));
+//				HollowDungeon.scene().add(new WndHeroInfo(cl));
 			} else {
 				setSelectedHero(cl);
 			}
 		}
 	}
 
-	private static class WndHeroInfo extends WndTabbed {
-
-		private RenderedTextBlock info;
-
-		private int WIDTH = 120;
-		private int MARGIN = 4;
-		private int INFO_WIDTH = WIDTH - MARGIN*2;
-
-		public WndHeroInfo( HeroClass cl ){
-
-			Tab tab;
-			Image[] tabIcons;
-			switch (cl){
-				case KNIGHT: default:
-					tabIcons = new Image[]{
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SEAL, null),
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD, null),
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RATION, null)
-					};
-					break;
-				case HORNET:
-					tabIcons = new Image[]{
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SPIRIT_BOW, null),
-							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.GLOVES, null),
-							new Image(Assets.Environment.TILES_SEWERS, 112, 96, 16, 16 )
-					};
-					break;
-			}
-
-			tab = new IconTab( tabIcons[0] ){
-				@Override
-				protected void select(boolean value) {
-					super.select(value);
-					if (value){
-						info.text(Messages.get(cl, cl.name() + "_desc_item"), INFO_WIDTH);
-					}
-				}
-			};
-			add(tab);
-
-			tab = new IconTab( tabIcons[1] ){
-				@Override
-				protected void select(boolean value) {
-					super.select(value);
-					if (value){
-						info.text(Messages.get(cl, cl.name() + "_desc_loadout"), INFO_WIDTH);
-					}
-				}
-			};
-			add(tab);
-
-			tab = new IconTab( tabIcons[2] ){
-				@Override
-				protected void select(boolean value) {
-					super.select(value);
-					if (value){
-						info.text(Messages.get(cl, cl.name() + "_desc_misc"), INFO_WIDTH);
-					}
-				}
-			};
-			add(tab);
-
-			info = PixelScene.renderTextBlock(6);
-			info.setPos(MARGIN, MARGIN);
-			add(info);
-
-			select(0);
-
-		}
-
-		@Override
-		public void select(Tab tab) {
-			super.select(tab);
-			resize(WIDTH, (int)info.bottom()+MARGIN);
-			layoutTabs();
-		}
-	}
+//	private static class WndHeroInfo extends WndTabbed {
+//
+//		private RenderedTextBlock info;
+//
+//		private int WIDTH = 120;
+//		private int MARGIN = 4;
+//		private int INFO_WIDTH = WIDTH - MARGIN*2;
+//
+//		public WndHeroInfo( HeroClass cl ){
+//
+//			Tab tab;
+//			Image[] tabIcons;
+//			switch (cl){
+//				case KNIGHT: default:
+//					tabIcons = new Image[]{
+//							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SEAL, null),
+//							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD, null),
+//							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.RATION, null)
+//					};
+//					break;
+//				case HORNET:
+//					tabIcons = new Image[]{
+//							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.SPIRIT_BOW, null),
+//							new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.GLOVES, null),
+//							new Image(Assets.Environment.TILES_SEWERS, 112, 96, 16, 16 )
+//					};
+//					break;
+//			}
+//
+//			tab = new IconTab( tabIcons[0] ){
+//				@Override
+//				protected void select(boolean value) {
+//					super.select(value);
+//					if (value){
+//						info.text(Messages.get(cl, cl.name() + "_desc_item"), INFO_WIDTH);
+//					}
+//				}
+//			};
+//			add(tab);
+//
+//			tab = new IconTab( tabIcons[1] ){
+//				@Override
+//				protected void select(boolean value) {
+//					super.select(value);
+//					if (value){
+//						info.text(Messages.get(cl, cl.name() + "_desc_loadout"), INFO_WIDTH);
+//					}
+//				}
+//			};
+//			add(tab);
+//
+//			tab = new IconTab( tabIcons[2] ){
+//				@Override
+//				protected void select(boolean value) {
+//					super.select(value);
+//					if (value){
+//						info.text(Messages.get(cl, cl.name() + "_desc_misc"), INFO_WIDTH);
+//					}
+//				}
+//			};
+//			add(tab);
+//
+//			info = PixelScene.renderTextBlock(6);
+//			info.setPos(MARGIN, MARGIN);
+//			add(info);
+//
+//			select(0);
+//
+//		}
+//
+//		@Override
+//		public void select(Tab tab) {
+//			super.select(tab);
+//			resize(WIDTH, (int)info.bottom()+MARGIN);
+//			layoutTabs();
+//		}
+//	}
 }

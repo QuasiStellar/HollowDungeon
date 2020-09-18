@@ -103,8 +103,4 @@ public class Utils {
     public static class OneTurnDelay extends FlavourBuff {
         //does nothing
     }
-
-    public static class TwoTurnsDelay extends FlavourBuff {
-        //does nothing
-    }
 }

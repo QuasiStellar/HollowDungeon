@@ -87,7 +87,7 @@ public class PixelScene extends Scene {
 		defaultZoom = HDSettings.scale();
 
 		if (defaultZoom < Math.ceil( Game.density * 2 ) || defaultZoom > maxDefaultZoom){
-			defaultZoom = (int)Math.ceil( Game.density * 2.5 );
+			defaultZoom = (int)Math.ceil( Game.density * 2 ); //TODO: !!!
 			while ((
 				Game.width / defaultZoom < minWidth ||
 				Game.height / defaultZoom < minHeight
@@ -125,9 +125,7 @@ public class PixelScene extends Scene {
 			renderedTextPageSize = 1024;
 		}
 		//asian languages have many more unique characters, so increase texture size to anticipate that
-		if (Messages.lang() == Languages.KOREAN ||
-				Messages.lang() == Languages.CHINESE ||
-				Messages.lang() == com.quasistellar.hollowdungeon.messages.Languages.JAPANESE){
+		if (false){
 			renderedTextPageSize *= 2;
 		}
 		Game.platform.setupFontGenerators(renderedTextPageSize, HDSettings.systemFont());

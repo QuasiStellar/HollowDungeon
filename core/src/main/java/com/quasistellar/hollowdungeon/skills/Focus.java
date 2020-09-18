@@ -23,8 +23,8 @@ public class Focus extends Skill {
 
     @Override
     public void act() {
-        Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
-        if (delay == null || delay.cooldown() < 2) {
+        Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
+        if (delay == null) {
             GLog.w(Messages.get(this, "delay"));
             return;
         }
@@ -35,6 +35,7 @@ public class Focus extends Skill {
             Dungeon.hero.sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "value", effect) );
             HpIndicator.refreshHero();
             Dungeon.hero.spendAndNext(1);
+            Dungeon.hero.loseMana(manaCost());
         } else {
             GLog.i( Messages.get(this, "already_full") );
         }
@@ -47,7 +48,7 @@ public class Focus extends Skill {
 
     @Override
     public boolean visible() {
-        return Dungeon.hero.MP >= 33;
+        return Dungeon.hero.MP >= 33 && Dungeon.hero.buff(Utils.OneTurnDelay.class) != null;
     }
 
     @Override

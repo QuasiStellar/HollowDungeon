@@ -671,7 +671,7 @@ public class ItemSpriteSheet {
 	public static final int HOLSTER     = BAGS+4;
 	static{
 		assignItemRect(VIAL,        12, 12);
-		assignItemRect(POUCH,       14, 15);
+		assignItemRect(POUCH,       15, 15);
 		assignItemRect(HOLDER,      16, 16);
 		assignItemRect(BANDOLIER,   15, 16);
 		assignItemRect(HOLSTER,     15, 16);

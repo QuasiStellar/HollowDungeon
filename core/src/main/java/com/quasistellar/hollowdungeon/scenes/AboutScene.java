@@ -21,12 +21,15 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
+import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.effects.Flare;
 import com.quasistellar.hollowdungeon.HollowDungeon;
+import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.ui.ExitButton;
 import com.quasistellar.hollowdungeon.ui.Icons;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.ScrollPane;
+import com.quasistellar.hollowdungeon.ui.StyledButton;
 import com.quasistellar.hollowdungeon.ui.Window;
 import com.watabou.input.PointerEvent;
 import com.watabou.noosa.Camera;
@@ -44,7 +47,7 @@ public class AboutScene extends PixelScene {
 		super.create();
 
 		final float colWidth = 120;
-		final float fullWidth = colWidth * (landscape() ? 2 : 1);
+		final float fullWidth = colWidth;
 
 		int w = Camera.main.width;
 		int h = Camera.main.height;
@@ -55,39 +58,63 @@ public class AboutScene extends PixelScene {
 		Component content = list.content();
 		content.clear();
 
+		//*** Hollow Dungeon Credits ***
+
+		CreditsBlock hd = new CreditsBlock(true, Window.SHPX_COLOR,
+				"Hollow Dungeon",
+				Icons.CUBE_CODE.get(),
+				"Developed by: _QuasiStellar_\nBased on Shattered Pixel Dungeon's open source",
+				"quasistellar.tech",
+				"https://quasistellar.tech");
+		hd.setRect((w - fullWidth)/2f, 6, 120, 0);
+		content.add(hd);
+
+		CreditsBlock drb = new CreditsBlock(false, Window.SHPX_COLOR,
+				"Music:",
+				Icons.ALEKS.get(),
+				"DrBlacker",
+				"youtube",
+				"https://www.youtube.com/channel/UCGiKaUDPgtD-TyYN6iFNDYA");
+		drb.setSize(colWidth/2f, 0);
+
+		drb.setPos(w/2f - colWidth/2f, hd.bottom()+5);
+
+		content.add(drb);
+
+		CreditsBlock yog = new CreditsBlock(false, Window.SHPX_COLOR,
+				"Support:",
+				Icons.CHARLIE.get(),
+				"Yog Dzewa",
+				"vk",
+				"https://vk.com/yogdzewa");
+		yog.setRect(drb.right(), drb.top(), colWidth/2f, 0);
+		content.add(yog);
+
+		StyledButton btnSupport = new StyledButton( Chrome.Type.GREY_BUTTON_TR, "Support the project"){
+			@Override
+			protected void onClick() {
+				DeviceCompat.openURI( "https://liberapay.com/QuasiStellar/" );
+			}
+		};
+		btnSupport.icon(Icons.get(Icons.GOLD));
+		btnSupport.setRect(drb.right() - 54, drb.bottom() + 5, 108, 20);
+		add(btnSupport);
+
 		//*** Shattered Pixel Dungeon Credits ***
 
-		CreditsBlock shpx = new CreditsBlock(true, Window.SHPX_COLOR,
+		final int SHPD_COLOR = 0x33BB33;
+		CreditsBlock shpd = new CreditsBlock(true, SHPD_COLOR,
 				"Shattered Pixel Dungeon",
 				Icons.SHPX.get(),
-				"Developed by: _Evan Debenham_\nBased on Pixel Dungeon's open source",
+				"Developed by: _00-Evan_\nBased on Pixel Dungeon's open source",
 				"ShatteredPixel.com",
 				"https://ShatteredPixel.com");
-		shpx.setRect((w - fullWidth)/2f, 6, 120, 0);
-		content.add(shpx);
 
-		CreditsBlock alex = new CreditsBlock(false, Window.SHPX_COLOR,
-				"Hero Art & Design:",
-				Icons.ALEKS.get(),
-				"Aleksandar Komitov",
-				"alekskomitov.com",
-				"https://www.alekskomitov.com");
-		alex.setSize(colWidth/2f, 0);
-		if (landscape()){
-			alex.setPos(shpx.right(), shpx.top() + (shpx.height() - alex.height())/2f);
-		} else {
-			alex.setPos(w/2f - colWidth/2f, shpx.bottom()+5);
-		}
-		content.add(alex);
+		shpd.setRect(hd.left(), btnSupport.bottom() + 8, colWidth, 0);
 
-		CreditsBlock charlie = new CreditsBlock(false, Window.SHPX_COLOR,
-				"Sound Effects:",
-				Icons.CHARLIE.get(),
-				"Charlie",
-				"s9menine.itch.io",
-				"https://s9menine.itch.io");
-		charlie.setRect(alex.right(), alex.top(), colWidth/2f, 0);
-		content.add(charlie);
+		content.add(shpd);
+
+		addLine(shpd.top() - 4, content);
 
 		//*** Pixel Dungeon Credits ***
 
@@ -98,28 +125,12 @@ public class AboutScene extends PixelScene {
 				"Developed by: _Watabou_\nInspired by Brian Walker's Brogue",
 				"pixeldungeon.watabou.ru",
 				"http://pixeldungeon.watabou.ru");
-		if (landscape()){
-			wata.setRect(shpx.left(), shpx.bottom() + 8, colWidth, 0);
-		} else {
-			wata.setRect(shpx.left(), alex.bottom() + 8, colWidth, 0);
-		}
+
+		wata.setRect(hd.left(), shpd.bottom() + 8, colWidth, 0);
+
 		content.add(wata);
 
 		addLine(wata.top() - 4, content);
-
-		CreditsBlock cube = new CreditsBlock(false, WATA_COLOR,
-				"Music:",
-				Icons.CUBE_CODE.get(),
-				"Cube Code",
-				null,
-				null);
-		cube.setSize(colWidth/2f, 0);
-		if (landscape()){
-			cube.setPos(wata.right(), wata.top() + (wata.height() - cube.height())/2f);
-		} else {
-			cube.setPos(alex.left(), wata.bottom()+5);
-		}
-		content.add(cube);
 
 		//*** LibGDX Credits ***
 
@@ -128,14 +139,12 @@ public class AboutScene extends PixelScene {
 				GDX_COLOR,
 				null,
 				Icons.LIBGDX.get(),
-				"ShatteredPD is powered by _LibGDX_!",
+				"Hollow Dungeon is powered by _LibGDX_!",
 				"libgdx.badlogicgames.com",
 				"http://libgdx.badlogicgames.com");
-		if (landscape()){
-			gdx.setRect(wata.left(), wata.bottom() + 8, colWidth, 0);
-		} else {
-			gdx.setRect(wata.left(), cube.bottom() + 8, colWidth, 0);
-		}
+
+		gdx.setRect(wata.left(), wata.bottom() + 8, colWidth, 0);
+
 		content.add(gdx);
 
 		addLine(gdx.top() - 4, content);
@@ -153,11 +162,9 @@ public class AboutScene extends PixelScene {
 				"twitter.com/arcnor",
 				"https://twitter.com/arcnor");
 		arcnor.setSize(colWidth/2f, 0);
-		if (landscape()){
-			arcnor.setPos(gdx.right(), gdx.top() + (gdx.height() - arcnor.height())/2f);
-		} else {
-			arcnor.setPos(alex.left(), gdx.bottom()+5);
-		}
+
+		arcnor.setPos(drb.left(), gdx.bottom()+5);
+
 		content.add(arcnor);
 
 		CreditsBlock purigro = new CreditsBlock(false, GDX_COLOR,
@@ -175,9 +182,9 @@ public class AboutScene extends PixelScene {
 				Window.TITLE_COLOR,
 				null,
 				null,
-				"ShatteredPD is community-translated via _Transifex_! Thank you so much to all of Shattered's volunteer translators!",
-				"www.transifex.com/shattered-pixel/",
-				"https://www.transifex.com/shattered-pixel/shattered-pixel-dungeon/");
+				"Hollow Dungeon is based on Hollow Knight by Team Cherry, the greatest game I've ever played.",
+				"hollowknight.com",
+				"https://www.hollowknight.com/");
 		transifex.setRect((Camera.main.width - colWidth)/2f, purigro.bottom() + 8, colWidth, 0);
 		content.add(transifex);
 
@@ -185,40 +192,29 @@ public class AboutScene extends PixelScene {
 
 		addLine(transifex.bottom() + 4, content);
 
-		//*** Freesound Credits ***
+		//*** GH ***
 
-		CreditsBlock freesound = new CreditsBlock(true,
+		CreditsBlock gh = new CreditsBlock(true,
 				Window.TITLE_COLOR,
 				null,
 				null,
-				"Shattered Pixel Dungeon uses the following sound samples from _freesound.org_:\n\n" +
+				"Github repository:",
+				"github.com",
+				"https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+		gh.setRect(transifex.left()-10, transifex.bottom() + 8, colWidth+20, 0);
+		content.add(gh);
 
-				"Creative Commons Attribution License:\n" +
-				"_SFX ATTACK SWORD 001.wav_ by _JoelAudio_\n" +
-				"_Pack: Slingshots and Longbows_ by _saturdaysoundguy_\n" +
-				"_Cracking/Crunching, A.wav_ by _InspectorJ_\n" +
-				"_Extracting a sword.mp3_ by _Taira Komori_\n" +
-				"_Pack: Uni Sound Library_ by _timmy h123_\n\n" +
+		CreditsBlock gh2 = new CreditsBlock(true,
+				Window.TITLE_COLOR,
+				null,
+				null,
+				"Actual Github repository:",
+				"github.com",
+				"https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+		gh2.setRect(transifex.left()-10, transifex.bottom() + 800, colWidth+20, 0);
+		content.add(gh2);
 
-				"Creative Commons Zero License:\n" +
-				"_Pack: Movie Foley: Swords_ by _Black Snow_\n" +
-				"_machine gun shot 2.flac_ by _qubodup_\n" +
-				"_m240h machine gun burst 4.flac_ by _qubodup_\n" +
-				"_Pack: Onomatopoeia_ by _Adam N_\n" +
-				"_Pack: Watermelon_ by _lolamadeus_\n" +
-				"_metal chain_ by _Mediapaja2009_\n" +
-				"_Pack: Sword Clashes Pack_ by _JohnBuhr_\n" +
-				"_Pack: Metal Clangs and Pings_ by _wilhellboy_\n" +
-				"_Pack: Stabbing Stomachs & Crushing Skulls_ by _TheFilmLook_\n" +
-				"_Sheep bleating_ by _zachrau_\n" +
-				"_Lemon,Juicy,Squeeze,Fruit.wav_ by _Filipe Chagas_\n" +
-				"_Lemon,Squeeze,Squishy,Fruit.wav_ by _Filipe Chagas_",
-				"www.freesound.org",
-				"https://www.freesound.org");
-		freesound.setRect(transifex.left()-10, transifex.bottom() + 8, colWidth+20, 0);
-		content.add(freesound);
-
-		content.setSize( fullWidth, freesound.bottom()+10 );
+		content.setSize( fullWidth, gh2.bottom()+10 );
 
 		list.setRect( 0, 0, w, h );
 		list.scrollTo(0, 0);

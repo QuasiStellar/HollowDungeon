@@ -81,16 +81,9 @@ public class Toolbar extends Component {
 
 				examining = false;
 
-				Buff delay = Dungeon.hero.buff(Utils.TwoTurnsDelay.class);
-				if (delay == null) {
-					Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 2);
-				} else {
-					Buff.prolong(Dungeon.hero, Utils.TwoTurnsDelay.class, 3);
-				}
-
 				GameScene.layoutSkillTags();
 
-				Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 2);
+				Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 1);
 
 				Dungeon.hero.rest(false);
 			}
@@ -156,12 +149,12 @@ public class Toolbar extends Component {
 				return HDAction.INVENTORY;
 			}
 			
-			@Override
-			protected boolean onLongClick() {
-				WndJournal.last_index = 3; //catalog page
-				GameScene.show(new com.quasistellar.hollowdungeon.windows.WndJournal());
-				return true;
-			}
+//			@Override
+//			protected boolean onLongClick() {
+//				WndJournal.last_index = 3; //catalog page
+//				GameScene.show(new com.quasistellar.hollowdungeon.windows.WndJournal());
+//				return true;
+//			}
 		});
 
 		add(pickedUp = new PickedUpItem());
