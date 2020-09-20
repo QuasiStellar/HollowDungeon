@@ -173,7 +173,7 @@ public class GameScene extends PixelScene {
 			return;
 		}
 		
-		Music.INSTANCE.play( Assets.Music.GAME, true );
+		Music.INSTANCE.mute();
 
 		HDSettings.lastClass(Dungeon.hero.heroClass.ordinal());
 		

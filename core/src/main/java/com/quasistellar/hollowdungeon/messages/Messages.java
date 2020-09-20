@@ -63,6 +63,7 @@ public class Messages {
 			Assets.Messages.MISC,
 			Assets.Messages.PLANTS,
 			Assets.Messages.SCENES,
+			Assets.Messages.SKILLS,
 			Assets.Messages.UI,
 			com.quasistellar.hollowdungeon.Assets.Messages.WINDOWS
 	};

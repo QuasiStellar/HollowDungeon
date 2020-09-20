@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         //FIXME the version of R8 coming with gradle plugin 4.0.0 causes serious problems
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:3.6.0'
     }
 }
 
@@ -14,7 +14,7 @@ allprojects {
 
     ext {
         appName = 'Hollow Dungeon'
-        appPackageName = 'com.quasistellar.shatteredpixeldungeon'
+        appPackageName = 'com.quasistellar.hollowdungeon'
 
         appVersionCode = 1
         appVersionName = '0.1a'

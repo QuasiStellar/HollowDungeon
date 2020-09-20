@@ -111,7 +111,7 @@ public class StatusPane extends Component {
 
 		add( pickedUp = new Toolbar.PickedUpItem());
 		
-		version = new BitmapText( "HD v" + Game.version, PixelScene.pixelFont);
+		version = new BitmapText( "DEMO", PixelScene.pixelFont); //FIXME
 		version.alpha( 0.5f );
 		add(version);
 	}

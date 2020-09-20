@@ -88,17 +88,13 @@ public class SewerLevel extends RegularLevel {
 	@Override
 	protected Class<?>[] trapClasses() {
 		return new Class<?>[]{
-						ChillingTrap.class, ShockingTrap.class, ToxicTrap.class, WornDartTrap.class,
-						AlarmTrap.class, OozeTrap.class,
-						ConfusionTrap.class, FlockTrap.class, SummoningTrap.class, TeleportationTrap.class };
+						ToxicTrap.class, WornDartTrap.class };
 }
 
 	@Override
 	protected float[] trapChances() {
 		return new float[]{
-						4, 4, 4, 4,
-						2, 2,
-						1, 1, 1, 1};
+						1, 1};
 	}
 	
 	@Override

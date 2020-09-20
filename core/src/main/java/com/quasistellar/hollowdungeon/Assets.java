@@ -108,12 +108,13 @@ public class Assets {
 		public static final String MISC     = "messages/misc/misc";
 		public static final String PLANTS   = "messages/plants/plants";
 		public static final String SCENES   = "messages/scenes/scenes";
+		public static final String SKILLS   = "messages/skills/skills";
 		public static final String UI       = "messages/ui/ui";
 		public static final String WINDOWS  = "messages/windows/windows";
 	}
 
 	public static class Music {
-		public static final String GAME		= "music/game.ogg";
+		//public static final String GAME		= "music/game.ogg";
 		public static final String SURFACE	= "music/surface.ogg";
 		public static final String THEME	= "music/theme.ogg";
 	}

@@ -74,7 +74,7 @@ public class WornDartTrap extends Trap {
 							reset(pos, finalTarget.sprite, new Geo(), new Callback() {
 								@Override
 								public void call() {
-								int dmg = Random.NormalIntRange(4, 8);
+								int dmg = 1;
 								finalTarget.damage(dmg, trap);
 								if (finalTarget == Dungeon.hero && !finalTarget.isAlive()){
 									com.quasistellar.hollowdungeon.Dungeon.fail( trap.getClass()  );

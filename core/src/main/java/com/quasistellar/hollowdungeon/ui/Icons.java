@@ -35,6 +35,7 @@ public enum Icons {
 	CHALLENGE_OFF,
 	CHALLENGE_ON,
 	PREFS,
+	DISCORD,
 	LANGS,
 	EXIT,
 	CLOSE,
@@ -108,6 +109,9 @@ public enum Icons {
 			break;
 		case PREFS:
 			icon.frame( icon.texture.uvRect( 80, 0, 94, 14 ) );
+			break;
+		case DISCORD:
+			icon.frame( icon.texture.uvRect( 80, 16, 95, 27 ) );
 			break;
 		case LANGS:
 			icon.frame( icon.texture.uvRect( 96, 0, 110, 11 ) );

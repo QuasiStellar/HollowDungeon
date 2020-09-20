@@ -82,13 +82,13 @@ public class WndGame extends Window {
 			} );
 			btnStart.textColor(Window.TITLE_COLOR);
 			
-			addButton( new RedButton( Messages.get(this, "rankings") ) {
-				@Override
-				protected void onClick() {
-					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-					Game.switchScene( RankingsScene.class );
-				}
-			} );
+//			addButton( new RedButton( Messages.get(this, "rankings") ) {
+//				@Override
+//				protected void onClick() {
+//					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
+//					Game.switchScene( RankingsScene.class );
+//				}
+//			} );
 		}
 
 		addButtons(

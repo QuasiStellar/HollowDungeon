@@ -131,7 +131,7 @@ public enum HeroClass {
 			case KNIGHT: default:
 				return true;
 			case HORNET:
-				return Badges.isUnlocked(com.quasistellar.hollowdungeon.Badges.Badge.UNLOCK_HORNET);
+				return true;
 		}
 	}
 	

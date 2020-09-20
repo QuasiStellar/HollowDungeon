@@ -22,6 +22,7 @@
 package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.effects.Fireball;
+import com.quasistellar.hollowdungeon.ui.DiscordButton;
 import com.quasistellar.hollowdungeon.ui.IconButton;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
 import com.quasistellar.hollowdungeon.Assets;
@@ -183,13 +184,17 @@ public class TitleScene extends PixelScene {
 		
 		pos += btnPrefs.width();
 
+		DiscordButton btnDiscord = new DiscordButton();
+		btnDiscord.setRect( pos, 0, 16, 20 );
+		add( btnDiscord );
+
 		ExitButton btnExit = new ExitButton();
 		btnExit.setPos( w - btnExit.width(), 0 );
 		add( btnExit );
 
-		UpdateNotification updInfo = new UpdateNotification();
-		updInfo.setRect(4, h-16, updInfo.reqWidth() + 6, 16-4);
-		add(updInfo);
+//		UpdateNotification updInfo = new UpdateNotification();
+//		updInfo.setRect(4, h-16, updInfo.reqWidth() + 6, 16-4);
+//		add(updInfo);
 
 		fadeIn();
 	}

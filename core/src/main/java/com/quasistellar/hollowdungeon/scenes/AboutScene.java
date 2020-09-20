@@ -98,7 +98,7 @@ public class AboutScene extends PixelScene {
 		};
 		btnSupport.icon(Icons.get(Icons.GOLD));
 		btnSupport.setRect(drb.right() - 54, drb.bottom() + 5, 108, 20);
-		add(btnSupport);
+		content.add(btnSupport);
 
 		//*** Shattered Pixel Dungeon Credits ***
 
