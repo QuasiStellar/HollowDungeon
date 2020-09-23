@@ -73,7 +73,7 @@ public class VengefulSpirit extends Skill {
 
         @Override
         public String prompt() {
-            return Messages.get(this, "prompt");
+            return Messages.get(VengefulSpirit.class, "prompt");
         }
     };
 

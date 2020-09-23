@@ -93,7 +93,7 @@ public class AboutScene extends PixelScene {
 		StyledButton btnSupport = new StyledButton( Chrome.Type.GREY_BUTTON_TR, "Support the project"){
 			@Override
 			protected void onClick() {
-				DeviceCompat.openURI( "https://liberapay.com/QuasiStellar/" );
+				DeviceCompat.openURI( "https://www.patreon.com/quasistellar_" );
 			}
 		};
 		btnSupport.icon(Icons.get(Icons.GOLD));

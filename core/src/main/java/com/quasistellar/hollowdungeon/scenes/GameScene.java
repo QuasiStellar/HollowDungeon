@@ -1275,8 +1275,8 @@ public class GameScene extends PixelScene {
 		final ArrayList<Object> objects = new ArrayList<>();
 
 		if (cell == Dungeon.hero.pos) {
-			objects.add(Dungeon.hero);
-			names.add(Dungeon.hero.className().toUpperCase(Locale.ENGLISH));
+//			objects.add(Dungeon.hero);
+//			names.add(Dungeon.hero.className().toUpperCase(Locale.ENGLISH));
 		} else {
 			if (Dungeon.level.heroFOV[cell]) {
 				Mob mob = (Mob) Actor.findChar(cell);

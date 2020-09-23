@@ -50,6 +50,8 @@ public class DreamNail extends Skill {
 
             enemy.sprite.flash();
 
+            Dungeon.hero.earnMana(33);
+
             Dungeon.hero.spendAndNext(1f);
         }
 

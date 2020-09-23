@@ -32,5 +32,7 @@ public class Vengefly extends Mob {
 
         baseSpeed = 2;
         flying = true;
+
+
     }
 }

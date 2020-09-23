@@ -92,7 +92,7 @@ public class HowlingWraiths extends Skill {
 
         @Override
         public String prompt() {
-            return Messages.get(this, "prompt");
+            return Messages.get(HowlingWraiths.class, "prompt");
         }
     };
 
