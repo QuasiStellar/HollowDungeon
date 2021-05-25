@@ -1,6 +1,7 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
@@ -10,6 +11,7 @@ import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.CellSelector;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.utils.GLog;
+import com.watabou.input.GameAction;
 
 public class MonarchWings extends Skill {
 
@@ -19,6 +21,7 @@ public class MonarchWings extends Skill {
             GLog.w(Messages.get(this, "delay"));
             return;
         }
+        GameScene.unpause = false;
         GameScene.selectCell( leaper );
     }
 
@@ -74,12 +77,17 @@ public class MonarchWings extends Skill {
 
     @Override
     public boolean visible() {
-        return Dungeon.hero.buff(MonarchWingsDelay.class) == null;
+        return super.visible() && Dungeon.hero.buff(MonarchWingsDelay.class) == null;
     }
 
     @Override
     public int icon() {
         return Skill.MONARCH_WINGS;
+    }
+
+    @Override
+    public GameAction action() {
+        return HDAction.MONARCH_WINGS;
     }
 
     @Override

@@ -127,7 +127,7 @@ public class ItemSpriteSheet {
 
 	private static final int SINGLE_USE     =                               xy(1, 4);   //16 slots
 	public static final int ANKH            = SINGLE_USE+0;
-	public static final int STYLUS          = SINGLE_USE+1;
+	public static final int MAP             = SINGLE_USE+1;
 	
 	public static final int SEAL            = SINGLE_USE+3;
 	public static final int TORCH           = SINGLE_USE+4;
@@ -144,7 +144,7 @@ public class ItemSpriteSheet {
 	public static final int AMULET          = SINGLE_USE+15;
 	static{
 		assignItemRect(ANKH,            10, 16);
-		assignItemRect(STYLUS,          12, 13);
+		assignItemRect(MAP,             16, 9);
 		
 		assignItemRect(SEAL,            9,  15);
 		assignItemRect(TORCH,           12, 15);
@@ -651,6 +651,7 @@ public class ItemSpriteSheet {
 	public static final int TOKEN   = QUEST+6;
 	public static final int BLOB    = QUEST+7;
 	public static final int SHARD   = QUEST+8;
+	public static final int CREST   = QUEST+9;
 	static{
 		assignItemRect(SKULL,   16, 11);
 		assignItemRect(DUST,    12, 11);
@@ -661,6 +662,7 @@ public class ItemSpriteSheet {
 		assignItemRect(TOKEN,   12, 12);
 		assignItemRect(BLOB,    10,  9);
 		assignItemRect(SHARD,    8, 10);
+		assignItemRect(CREST,    13, 16);
 	}
 
 	private static final int BAGS       =                                   xy(1, 31);  //16 slots

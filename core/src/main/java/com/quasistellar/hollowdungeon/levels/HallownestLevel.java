@@ -25,17 +25,8 @@ import com.quasistellar.hollowdungeon.effects.Ripple;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
-import com.quasistellar.hollowdungeon.items.DewVial;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
-import com.quasistellar.hollowdungeon.levels.painters.SewerPainter;
-import com.quasistellar.hollowdungeon.levels.traps.AlarmTrap;
-import com.quasistellar.hollowdungeon.levels.traps.ChillingTrap;
-import com.quasistellar.hollowdungeon.levels.traps.ConfusionTrap;
-import com.quasistellar.hollowdungeon.levels.traps.FlockTrap;
-import com.quasistellar.hollowdungeon.levels.traps.OozeTrap;
-import com.quasistellar.hollowdungeon.levels.traps.ShockingTrap;
-import com.quasistellar.hollowdungeon.levels.traps.SummoningTrap;
-import com.quasistellar.hollowdungeon.levels.traps.TeleportationTrap;
+import com.quasistellar.hollowdungeon.levels.painters.HallownestPainter;
 import com.quasistellar.hollowdungeon.levels.traps.ToxicTrap;
 import com.quasistellar.hollowdungeon.levels.traps.WornDartTrap;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -48,7 +39,7 @@ import com.watabou.utils.ColorMath;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
-public class SewerLevel extends RegularLevel {
+public class HallownestLevel extends RegularLevel {
 
 	{
 		color1 = 0x48763c;
@@ -69,7 +60,7 @@ public class SewerLevel extends RegularLevel {
 	
 	@Override
 	protected Painter painter() {
-		return new SewerPainter()
+		return new HallownestPainter()
 				.setWater(0, 5)
 				.setGrass(0, 4)
 				.setTraps(nTraps(), trapClasses(), trapChances());
@@ -116,7 +107,7 @@ public class SewerLevel extends RegularLevel {
 	public String tileName( int tile ) {
 		switch (tile) {
 			case Terrain.WATER:
-				return Messages.get(SewerLevel.class, "water_name");
+				return Messages.get(HallownestLevel.class, "water_name");
 			default:
 				return super.tileName( tile );
 		}
@@ -126,9 +117,9 @@ public class SewerLevel extends RegularLevel {
 	public String tileDesc(int tile) {
 		switch (tile) {
 			case Terrain.EMPTY_DECO:
-				return Messages.get(SewerLevel.class, "empty_deco_desc");
+				return Messages.get(HallownestLevel.class, "empty_deco_desc");
 			case Terrain.BOOKSHELF:
-				return Messages.get(SewerLevel.class, "bookshelf_desc");
+				return Messages.get(HallownestLevel.class, "bookshelf_desc");
 			default:
 				return super.tileDesc( tile );
 		}

@@ -56,7 +56,6 @@ public class EyeSprite extends MobSprite {
 		
 		attack = new Animation( 8, false );
 		attack.frames( frames, 4, 3 );
-		zap = attack.clone();
 		
 		die = new Animation( 8, false );
 		die.frames( frames, 7, 8, 9 );
@@ -109,28 +108,5 @@ public class EyeSprite extends MobSprite {
 	public void play(Animation anim) {
 		if (chargeParticles != null) chargeParticles.on = anim == charging;
 		super.play(anim);
-	}
-
-	@Override
-	public void zap( int pos ) {
-		zapPos = pos;
-		super.zap( pos );
-	}
-	
-	@Override
-	public void onComplete( Animation anim ) {
-		super.onComplete( anim );
-		
-		if (anim == zap) {
-			idle();
-			if (Actor.findChar(zapPos) != null){
-				parent.add(new Beam.DeathRay(center(), Actor.findChar(zapPos).sprite.center()));
-			} else {
-				parent.add(new Beam.DeathRay(center(), DungeonTilemap.raisedTileCenterToWorld(zapPos)));
-			}
-			ch.next();
-		} else if (anim == die){
-			chargeParticles.killAndErase();
-		}
 	}
 }

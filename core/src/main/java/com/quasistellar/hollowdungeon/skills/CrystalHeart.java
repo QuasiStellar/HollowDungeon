@@ -1,6 +1,7 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
@@ -11,7 +12,9 @@ import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.CellSelector;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.utils.GLog;
+import com.watabou.input.GameAction;
 import com.watabou.noosa.Camera;
+import com.watabou.noosa.Game;
 import com.watabou.utils.Callback;
 
 public class CrystalHeart extends Skill {
@@ -30,6 +33,7 @@ public class CrystalHeart extends Skill {
 
         @Override
         public void onSelect( Integer target ) {
+            GameScene.unpause = false;
             if (target != null && target != Dungeon.hero.pos) {
                 Ballistica route = new Ballistica(Dungeon.hero.pos, target, Ballistica.MAGIC_BOLT);
                 int cell = route.collisionPos;
@@ -73,12 +77,17 @@ public class CrystalHeart extends Skill {
     @Override
     public boolean visible() {
         Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
-        return delay != null;
+        return super.visible() && delay != null;
     }
 
     @Override
     public int icon() {
         return Skill.CRYSTAL_HEART;
+    }
+
+    @Override
+    public GameAction action() {
+        return HDAction.CRYSTAL_HEART;
     }
 
     @Override

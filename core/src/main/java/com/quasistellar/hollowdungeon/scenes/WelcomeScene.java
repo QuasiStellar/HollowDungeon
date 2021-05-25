@@ -39,7 +39,7 @@ import com.watabou.utils.FileUtils;
 
 public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelScene {
 
-	private static int LATEST_UPDATE = HollowDungeon.v0_0;
+	private static int LATEST_UPDATE = HollowDungeon.v0_3;
 
 	@Override
 	public void create() {
@@ -109,25 +109,25 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 		okay.icon(BannerSprites.get( BannerSprites.Type.START_GAME ));
 
 		//FIXME these buttons are very low on 18:9 devices
-		if (previousVersion != 0){
-			StyledButton changes = new StyledButton(Chrome.Type.GREY_BUTTON_TR, Messages.get(TitleScene.class, "changes")){
-				@Override
-				protected void onClick() {
-					super.onClick();
-					updateVersion(previousVersion);
-					HollowDungeon.switchScene(ChangesScene.class);
-				}
-			};
-			okay.setRect(title.x, h-25, (title.width()/2)-2, 21);
-			add(okay);
-
-			changes.setRect(okay.right()+2, h-25, (title.width()/2)-2, 21);
-			changes.icon(Icons.get(Icons.CHANGES));
-			add(changes);
-		} else {
+//		if (previousVersion != 0){
+//			StyledButton changes = new StyledButton(Chrome.Type.GREY_BUTTON_TR, Messages.get(TitleScene.class, "changes")){
+//				@Override
+//				protected void onClick() {
+//					super.onClick();
+//					updateVersion(previousVersion);
+//					HollowDungeon.switchScene(ChangesScene.class);
+//				}
+//			};
+//			okay.setRect(title.x, h-25, (title.width()/2)-2, 21);
+//			add(okay);
+//
+//			changes.setRect(okay.right()+2, h-25, (title.width()/2)-2, 21);
+//			changes.icon(Icons.get(Icons.CHANGES));
+//			add(changes);
+//		} else {
 			okay.setRect(title.x, h-25, title.width(), 21);
 			add(okay);
-		}
+//		}
 
 		RenderedTextBlock text = PixelScene.renderTextBlock(6);
 		String message;
@@ -142,8 +142,8 @@ public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelSce
 				message = Messages.get(this, "patch_intro");
 				message += "\n";
 				//message += "\n" + Messages.get(this, "patch_balance");
-				message += "\n" + Messages.get(this, "patch_bugfixes");
-				message += "\n" + Messages.get(this, "patch_translations");
+//				message += "\n" + Messages.get(this, "patch_bugfixes");
+//				message += "\n" + Messages.get(this, "patch_translations");
 
 			}
 		} else {

@@ -2,6 +2,7 @@ package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
@@ -13,6 +14,7 @@ import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.InterlevelScene;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndOptions;
+import com.watabou.input.GameAction;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.PathFinder;
@@ -68,6 +70,10 @@ public class Dreamgate extends Skill {
 //            }
 //        }
 
+        if (Dungeon.hero.dreamgateLocation.equals("")) {
+            GLog.w(Messages.get(this, "not_set"));
+            return;
+        }
         if (Dungeon.hero.dreamgateLocation.equals(Dungeon.location)) {
             Utils.appear( hero, Dungeon.hero.dreamgatePos );
             for(Mob m : Dungeon.level.mobs){
@@ -105,12 +111,17 @@ public class Dreamgate extends Skill {
     @Override
     public boolean visible() {
         Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
-        return delay != null;
+        return super.visible() && delay != null;
     }
 
     @Override
     public int icon() {
         return Skill.DREAMGATE;
+    }
+
+    @Override
+    public GameAction action() {
+        return HDAction.DREAMGATE;
     }
 
     @Override

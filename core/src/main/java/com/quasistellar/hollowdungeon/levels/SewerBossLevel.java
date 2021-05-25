@@ -24,12 +24,10 @@ package com.quasistellar.hollowdungeon.levels;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
-import com.quasistellar.hollowdungeon.items.Heap;
-import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.builders.Builder;
 import com.quasistellar.hollowdungeon.levels.builders.FigureEightBuilder;
 import com.quasistellar.hollowdungeon.levels.painters.Painter;
-import com.quasistellar.hollowdungeon.levels.painters.SewerPainter;
+import com.quasistellar.hollowdungeon.levels.painters.HallownestPainter;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.levels.rooms.secret.RatKingRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.sewerboss.GooBossRoom;
@@ -42,7 +40,7 @@ import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
-public class SewerBossLevel extends SewerLevel {
+public class SewerBossLevel extends HallownestLevel {
 
 	{
 		color1 = 0x48763c;
@@ -88,7 +86,7 @@ public class SewerBossLevel extends SewerLevel {
 	
 	@Override
 	protected Painter painter() {
-		return new SewerPainter()
+		return new HallownestPainter()
 				.setWater(0.50f, 5)
 				.setGrass(0.20f, 4)
 				.setTraps(nTraps(), trapClasses(), trapChances());

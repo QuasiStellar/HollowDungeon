@@ -143,22 +143,6 @@ public class QuickSlotButton extends Button implements com.quasistellar.hollowdu
 	}
 
 	@Override
-	public GameAction keyAction() {
-		switch (slotNum){
-			case 0:
-				return HDAction.QUICKSLOT_1;
-			case 1:
-				return HDAction.QUICKSLOT_2;
-			case 2:
-				return HDAction.QUICKSLOT_3;
-			case 3:
-				return HDAction.QUICKSLOT_4;
-			default:
-				return super.keyAction();
-		}
-	}
-	
-	@Override
 	protected void onClick() {
 		GameScene.selectItem( this, WndBag.Mode.QUICKSLOT, Messages.get(this, "select_item") );
 	}

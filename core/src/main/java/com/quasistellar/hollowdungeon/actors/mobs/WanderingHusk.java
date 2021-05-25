@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.actors.mobs;
 
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.sprites.RatSprite;
 
 public class WanderingHusk extends Mob {
@@ -30,5 +31,6 @@ public class WanderingHusk extends Mob {
 
         HP = HT = 15;
 
+        loot = new Geo(3);
     }
 }

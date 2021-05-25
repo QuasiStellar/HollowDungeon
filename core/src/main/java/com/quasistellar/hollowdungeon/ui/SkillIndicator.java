@@ -23,6 +23,7 @@ package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
@@ -30,6 +31,7 @@ import com.quasistellar.hollowdungeon.skills.Skill;
 import com.quasistellar.hollowdungeon.windows.WndInfoSkill;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
+import com.watabou.input.GameAction;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 
@@ -127,6 +129,15 @@ public class SkillIndicator extends Tag {
 	@Override
 	protected void onClick() {
 		skill.act();
+	}
+
+	@Override
+	public GameAction keyAction() {
+		if (skill.visible()) {
+			return this.skill.action();
+		} else {
+			return super.keyAction();
+		}
 	}
 
 	@Override

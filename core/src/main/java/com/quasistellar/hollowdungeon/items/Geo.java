@@ -85,7 +85,7 @@ public class Geo extends Item {
 	
 	@Override
 	public Item random() {
-		quantity = 10;
+		quantity = Random.Int(5, 10);
 		return this;
 	}
 	

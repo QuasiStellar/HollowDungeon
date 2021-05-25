@@ -23,12 +23,15 @@ package com.quasistellar.hollowdungeon;
 
 import com.quasistellar.hollowdungeon.items.Ankh;
 import com.quasistellar.hollowdungeon.items.Heap;
+import com.quasistellar.hollowdungeon.levels.FalseknightLevel;
+import com.quasistellar.hollowdungeon.levels.KingspassLevel;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.items.Generator;
 import com.quasistellar.hollowdungeon.journal.Notes;
-import com.quasistellar.hollowdungeon.levels.SewerLevel;
+import com.quasistellar.hollowdungeon.levels.HallownestLevel;
+import com.quasistellar.hollowdungeon.levels.DirtmouthLevel;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.ui.QuickSlotButton;
 import com.quasistellar.hollowdungeon.utils.BArray;
@@ -168,6 +171,8 @@ public class Dungeon {
 		
 		location = "King's Pass";
 		exitDestination = "King's Pass";
+//		location = "False Knight Arena";
+//		exitDestination = "False Knight Arena";
 		geo = 0;
 
 		for (LimitedDrops a : LimitedDrops.values())
@@ -192,295 +197,295 @@ public class Dungeon {
 		Level level;
 		switch (location) {
 			case "King's Pass":
-				level = new SewerLevel();
+				level = new KingspassLevel();
 				break;
 			case "Dirtmouth":
-				level = new SewerLevel();
+				level = new DirtmouthLevel();
 				break;
 			case "Forgotten Crossroads 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Forgotten Crossroads 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Forgotten Crossroads 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Forgotten Crossroads 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
-			case "Forgotten Crossroads 5":
-				level = new SewerLevel();
+			case "False Knight Arena":
+				level = new FalseknightLevel();
 				break;
 			case "Ancestral Mound":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Temple of the Black Egg":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Greenpath 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Greenpath 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Greenpath 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Greenpath 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Greenpath 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Lake of Unn":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fog Canyon 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fog Canyon 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fog Canyon 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fog Canyon 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Overgrown Mound":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Teacher's Archives":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fungal Wastes 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fungal Wastes 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fungal Wastes 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fungal Wastes 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Fungal Wastes 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "City of Tears 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "City of Tears 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "City of Tears 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "City of Tears 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "City of Tears 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Soul Sanctum 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Soul Sanctum 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Soul Sanctum 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Watcher's Spire 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Watcher's Spire 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Watcher's Spire 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Resting Grounds 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Resting Grounds 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Crystal Peak 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Crystal Peak 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Crystal Peak 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Crystal Peak 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Hallownest's Crown":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Crystallised Mound":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Crystal Core":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Howling Cliffs 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Howling Cliffs 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Howling Cliffs 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Joni's Repose":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Stag Nest":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Royal Waterways 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Royal Waterways 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Royal Waterways 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Royal Waterways 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Royal Waterways 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Isma's Grove":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Ancient Basin 0":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Ancient Basin 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Ancient Basin 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Ancient Basin 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Mawlek Nest 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Mawlek Nest 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Tower of Love":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Kingdom's Edge 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Kingdom's Edge 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Kingdom's Edge 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Kingdom's Edge 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Kingdom's Edge 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Cast-Off Shell":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "The Hive 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "The Hive 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "The Hive 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Queen's Gardens 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Queen's Gardens 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Queen's Gardens 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Queen's Gardens 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Queen's Gardens 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Deepnest 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Deepnest 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Deepnest 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Deepnest 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Deepnest 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Failed Tramway":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "The Abyss 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "The Abyss 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "The Abyss 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "White Palace 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "White Palace 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "White Palace 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "White Palace 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "White Palace 5":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Path of Pain 1":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Path of Pain 2":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Path of Pain 3":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			case "Path of Pain 4":
-				level = new SewerLevel();
+				level = new HallownestLevel();
 				break;
 			default:
-				level = new com.quasistellar.hollowdungeon.levels.DeadEndLevel();
+				level = new HallownestLevel();
 		}
 		return level;
 	}
@@ -514,16 +519,16 @@ public class Dungeon {
 				break;
 			case "Forgotten Crossroads 4":
 				entranceDestination = "Forgotten Crossroads 3";
-				exitDestination = "Forgotten Crossroads 5";
+				exitDestination = "False Knight Arena";
 				transitionDestination = "Fungal Wastes 1";
 				break;
-			case "Forgotten Crossroads 5":
+			case "False Knight Arena":
 				entranceDestination = "Forgotten Crossroads 4";
 				exitDestination = "Ancestral Mound";
 				transitionDestination = "";
 				break;
 			case "Ancestral Mound":
-				entranceDestination = "Forgotten Crossroads 5";
+				entranceDestination = "False Knight Arena";
 				exitDestination = "";
 				transitionDestination = "";
 				break;
@@ -998,7 +1003,7 @@ public class Dungeon {
 	public static long seedForDepth(String location){
 		Random.pushGenerator( seed );
 
-			for (int i = 0; i < location.length(); i ++) {
+			for (int i = 0; i < location.hashCode() % 200; i ++) {
 				Random.Long(); //we don't care about these values, just need to go through them
 			}
 			long result = Random.Long();

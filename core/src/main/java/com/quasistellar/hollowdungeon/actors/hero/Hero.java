@@ -21,13 +21,19 @@
 
 package com.quasistellar.hollowdungeon.actors.hero;
 
+import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
 import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight1;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight2;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight3;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
+import com.quasistellar.hollowdungeon.actors.mobs.Vengefly;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.CheckedCell;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
@@ -47,6 +53,8 @@ import com.quasistellar.hollowdungeon.skills.Skill;
 import com.quasistellar.hollowdungeon.skills.VengefulSpirit;
 import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.ui.HpIndicator;
+import com.quasistellar.hollowdungeon.ui.Icons;
+import com.quasistellar.hollowdungeon.windows.WndTitledMessage;
 import com.quasistellar.hollowdungeon.windows.WndTradeItem;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -156,6 +164,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	}
 
 
+	private static final String REALTIME    = "realtime";
+	private static final String DELAY       = "delay";
 	private static final String HTBOOST     = "htboost";
 	private static final String MANA_MAX	= "MM";
 	private static final String MANA		= "MP";
@@ -185,7 +195,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		super.restoreFromBundle( bundle );
 		
 		heroClass = HeroClass.restoreInBundle( bundle );
-		
+
 		HTBoost = bundle.getInt(HTBOOST);
 
 		MM = bundle.getInt( MANA_MAX );
@@ -218,7 +228,12 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 	@Override
 	public void hitSound(float pitch) {
-		super.hitSound(pitch * 1.1f);
+		float rand = Random.Float();
+		if (rand < 0.33f) {
+			Sample.INSTANCE.play(Assets.Sounds.HIT_STAB, 1, pitch);
+		} else {
+			Sample.INSTANCE.play(Assets.Sounds.HIT_SLASH, 1, pitch);
+		}
 	}
 
 	public void live() {
@@ -252,6 +267,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		//can always attack adjacent enemies
 		if (com.quasistellar.hollowdungeon.Dungeon.level.adjacent(pos, enemy.pos)) {
+			return true;
+		}
+
+		if ((enemy instanceof FalseKnight1 || enemy instanceof FalseKnight2 || enemy instanceof FalseKnight3) && Dungeon.level.distance(pos, enemy.pos) <= 2) {
 			return true;
 		}
 
@@ -365,6 +384,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		}
 
 		GameScene.time = 0;
+		GameScene.unpause = true;
 		
 		return actResult;
 	}
@@ -805,9 +825,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		// The flash intensity increases primarily based on damage taken and secondarily on missing HP.
 		float flashIntensity = 0.25f * (percentDMG * percentDMG) / percentHP;
 		//if the intensity is very low don't flash at all
+		GameScene.flash( (int)(0xFF*Math.min(1/3f, flashIntensity)) << 16 );
 		if (flashIntensity >= 0.05f){
 			flashIntensity = Math.min(1/3f, flashIntensity); //cap intensity at 1/3
-			GameScene.flash( (int)(0xFF*flashIntensity) << 16 );
 			if (isAlive()) {
 				if (flashIntensity >= 1/6f) {
 					Sample.INSTANCE.play(com.quasistellar.hollowdungeon.Assets.Sounds.HEALTH_CRITICAL, 1/3f + flashIntensity * 2f);
@@ -846,7 +866,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		com.quasistellar.hollowdungeon.actors.Char lastTarget = QuickSlotButton.lastTarget;
 		if (target != null && (lastTarget == null ||
 							!lastTarget.isAlive() ||
-							!fieldOfView[lastTarget.pos])){
+							(fieldOfView.length > lastTarget.pos && !fieldOfView[lastTarget.pos]))){
 			com.quasistellar.hollowdungeon.ui.QuickSlotButton.target(target);
 		}
 		
@@ -1111,18 +1131,18 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		boolean[] visited = com.quasistellar.hollowdungeon.Dungeon.level.visited;
 		boolean[] discoverable = com.quasistellar.hollowdungeon.Dungeon.level.discoverable;
 		
-		for (int i=0; i < length; i++) {
-			
-			int terr = map[i];
-			
-			if (discoverable[i]) {
-				
-				visited[i] = true;
-				if ((Terrain.flags[terr] & Terrain.SECRET) != 0) {
-					com.quasistellar.hollowdungeon.Dungeon.level.discover( i );
-				}
-			}
-		}
+//		for (int i=0; i < length; i++) {
+//
+//			int terr = map[i];
+//
+//			if (discoverable[i]) {
+//
+//				visited[i] = true;
+//				if ((Terrain.flags[terr] & Terrain.SECRET) != 0) {
+//					com.quasistellar.hollowdungeon.Dungeon.level.discover( i );
+//				}
+//			}
+//		}
 		
 		com.quasistellar.hollowdungeon.Dungeon.observe();
 		GameScene.updateFog();
@@ -1141,7 +1161,18 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		Collections.shuffle( passable );
 
 		GameScene.gameOver();
-		
+
+		if (!HDSettings.focus()) {
+			Game.runOnRenderThread(new Callback() {
+				@Override
+				public void call() {
+					GameScene.show(
+							new WndTitledMessage(Icons.get(Icons.FOCUS), Messages.get(Hero.class, "try_to_focus"), Messages.get(Hero.class, "try_to_focus_text"))
+					);
+				}
+			});
+		}
+
 		if (cause instanceof Hero.Doom) {
 			((Hero.Doom)cause).onDeath();
 		}
@@ -1181,14 +1212,21 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		
 		boolean hit = attack( enemy );
 
-		//trace a ballistica to our target (which will also extend past them
-		Ballistica trajectory = new Ballistica(this.pos, enemy.pos, Ballistica.STOP_TARGET);
-		//trim it to just be the part that goes past them
-		trajectory = new Ballistica(trajectory.collisionPos, trajectory.path.get(trajectory.path.size()-1), Ballistica.PROJECTILE);
-		//knock them back along that ballistica
-		Utils.throwChar(enemy, trajectory, 1);
+		if (!(enemy instanceof FalseKnight1 || enemy instanceof FalseKnight2 || enemy instanceof FalseKnight3)) {
+			//trace a ballistica to our target (which will also extend past them
+			Ballistica trajectory = new Ballistica(this.pos, enemy.pos, Ballistica.STOP_TARGET);
+			//trim it to just be the part that goes past them
+			trajectory = new Ballistica(trajectory.collisionPos, trajectory.path.get(trajectory.path.size() - 1), Ballistica.PROJECTILE);
+			//knock them back along that ballistica
+			if (enemy instanceof Vengefly) {
+				Utils.throwChar(enemy, trajectory, 2);
+			}
+			else {
+				Utils.throwChar(enemy, trajectory, 1);
+			}
+			earnMana(11);
+		}
 
-		earnMana(11);
 
 		Invisibility.dispel();
 		spend( attackDelay() );
@@ -1312,12 +1350,15 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 							chance = 1f;
 							
 						//unintentional trap detection scales from 40% at floor 0 to 30% at floor 25
-						} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[p] == Terrain.SECRET_TRAP) {
+						} else if (Dungeon.level.map[p] == Terrain.SECRET_TRAP) {
 							chance = 0.4f - (10 / 250f); //TODO: do smth with it
 							
-						//unintentional door detection scales from 20% at floor 0 to 0% at floor 20
+						} else if (Dungeon.location.equals("False Knight Arena") || Dungeon.location.equals("King's Pass")) {
+							chance = 0f;
+
+						//unintentional door detection is 10%
 						} else {
-							chance = 0.2f - (10 / 100f);
+							chance = 0.1f;
 						}
 						
 						if (Random.Float() < chance) {

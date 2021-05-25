@@ -41,18 +41,29 @@ public class HDAction extends GameAction {
 	public static final GameAction BACK  = GameAction.BACK;
 	//--
 
-	public static final GameAction HERO_INFO   = new HDAction("hero_info");
-	public static final GameAction JOURNAL     = new HDAction("journal");
+//	public static final GameAction HERO_INFO   = new HDAction("hero_info");
+//	public static final GameAction JOURNAL     = new HDAction("journal");
 
 	public static final GameAction WAIT        = new HDAction("wait");
 	public static final GameAction SEARCH      = new HDAction("search");
-	public static final GameAction REST        = new HDAction("rest");
+//	public static final GameAction REST        = new HDAction("rest");
 
 	public static final GameAction INVENTORY   = new HDAction("inventory");
-	public static final GameAction QUICKSLOT_1 = new HDAction("quickslot_1");
-	public static final GameAction QUICKSLOT_2 = new HDAction("quickslot_2");
-	public static final GameAction QUICKSLOT_3 = new HDAction("quickslot_3");
-	public static final GameAction QUICKSLOT_4 = new HDAction("quickslot_4");
+
+	public static final GameAction FOCUS   = new HDAction("focus");
+	public static final GameAction VENGEFUL_SPIRIT   = new HDAction("vengeful_spirit");
+	public static final GameAction DESOLATE_DIVE   = new HDAction("desolate_dive");
+	public static final GameAction HOWLING_WRAITHS   = new HDAction("howling_wraiths");
+	public static final GameAction MOTHWING_CLOAK   = new HDAction("mothwing_cloak");
+	public static final GameAction MONARCH_WINGS   = new HDAction("monarch_wings");
+	public static final GameAction CRYSTAL_HEART   = new HDAction("crystal_heart");
+	public static final GameAction DREAM_NAIL   = new HDAction("dream_nail");
+	public static final GameAction DREAMGATE   = new HDAction("dreamgate");
+
+//	public static final GameAction QUICKSLOT_1 = new HDAction("quickslot_1");
+//	public static final GameAction QUICKSLOT_2 = new HDAction("quickslot_2");
+//	public static final GameAction QUICKSLOT_3 = new HDAction("quickslot_3");
+//	public static final GameAction QUICKSLOT_4 = new HDAction("quickslot_4");
 
 	public static final GameAction TAG_ATTACK  = new HDAction("tag_attack");
 	public static final GameAction TAG_DANGER  = new HDAction("tag_danger");
@@ -77,24 +88,35 @@ public class HDAction extends GameAction {
 		defaultBindings.put( Input.Keys.ESCAPE,      HDAction.BACK );
 		defaultBindings.put( Input.Keys.BACKSPACE,   HDAction.BACK );
 
-		defaultBindings.put( Input.Keys.H,           HDAction.HERO_INFO );
-		defaultBindings.put( Input.Keys.J,           HDAction.JOURNAL );
+//		defaultBindings.put( Input.Keys.H,           HDAction.HERO_INFO );
+//		defaultBindings.put( Input.Keys.J,           HDAction.JOURNAL );
 
 		defaultBindings.put( Input.Keys.SPACE,       HDAction.WAIT );
 		defaultBindings.put( Input.Keys.S,           HDAction.SEARCH );
-		defaultBindings.put( Input.Keys.Z,           HDAction.REST );
+//		defaultBindings.put( Input.Keys.Z,           HDAction.REST );
 
 		defaultBindings.put( Input.Keys.I,           HDAction.INVENTORY );
-		defaultBindings.put( Input.Keys.Q,           HDAction.QUICKSLOT_1 );
-		defaultBindings.put( Input.Keys.W,           HDAction.QUICKSLOT_2 );
-		defaultBindings.put( Input.Keys.E,           HDAction.QUICKSLOT_3 );
-		defaultBindings.put( Input.Keys.R,           HDAction.QUICKSLOT_4 );
+
+		defaultBindings.put( Input.Keys.Q,           HDAction.FOCUS );
+		defaultBindings.put( Input.Keys.W,           HDAction.VENGEFUL_SPIRIT );
+		defaultBindings.put( Input.Keys.E,           HDAction.DESOLATE_DIVE );
+		defaultBindings.put( Input.Keys.R,           HDAction.HOWLING_WRAITHS );
+		defaultBindings.put( Input.Keys.T,           HDAction.MOTHWING_CLOAK );
+		defaultBindings.put( Input.Keys.Y,           HDAction.MONARCH_WINGS );
+		defaultBindings.put( Input.Keys.U,           HDAction.CRYSTAL_HEART );
+		defaultBindings.put( Input.Keys.O,           HDAction.DREAM_NAIL );
+		defaultBindings.put( Input.Keys.P,           HDAction.DREAMGATE );
+
+//		defaultBindings.put( Input.Keys.Q,           HDAction.QUICKSLOT_1 );
+//		defaultBindings.put( Input.Keys.W,           HDAction.QUICKSLOT_2 );
+//		defaultBindings.put( Input.Keys.E,           HDAction.QUICKSLOT_3 );
+//		defaultBindings.put( Input.Keys.R,           HDAction.QUICKSLOT_4 );
 
 		defaultBindings.put( Input.Keys.A,           HDAction.TAG_ATTACK );
 		defaultBindings.put( Input.Keys.TAB,         HDAction.TAG_DANGER );
 		defaultBindings.put( Input.Keys.D,           HDAction.TAG_ACTION );
 		defaultBindings.put( Input.Keys.ENTER,       HDAction.TAG_LOOT );
-		defaultBindings.put( Input.Keys.T,           HDAction.TAG_RESUME );
+		defaultBindings.put( Input.Keys.G,           HDAction.TAG_RESUME );
 
 		defaultBindings.put( Input.Keys.PLUS,        HDAction.ZOOM_IN );
 		defaultBindings.put( Input.Keys.EQUALS,      HDAction.ZOOM_IN );

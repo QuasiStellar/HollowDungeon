@@ -57,9 +57,10 @@ public class WaterOfHealth extends WellWater {
 		
 		Sample.INSTANCE.play( Assets.Sounds.DRINK );
 
-		hero.HP = hero.HT;
+//		hero.HP = hero.HT;
+		hero.MP = hero.MM;
 		HpIndicator.refreshHero();
-		hero.sprite.emitter().start( Speck.factory( Speck.HEALING ), 0.4f, 4 );
+		hero.sprite.emitter().start( Speck.factory( Speck.LIGHT ), 0.4f, 4 );
 
 		Buff.detach( hero, Poison.class );
 		Buff.detach( hero, Cripple.class );
@@ -83,7 +84,7 @@ public class WaterOfHealth extends WellWater {
 	protected com.quasistellar.hollowdungeon.items.Item affectItem(Item item, int pos ) {
 		if (item instanceof com.quasistellar.hollowdungeon.items.DewVial && !((com.quasistellar.hollowdungeon.items.DewVial)item).isFull()) {
 			((DewVial)item).fill();
-			CellEmitter.get( pos ).start( Speck.factory( Speck.HEALING ), 0.4f, 4 );
+			CellEmitter.get( pos ).start( Speck.factory( Speck.LIGHT ), 0.4f, 4 );
 			Sample.INSTANCE.play( Assets.Sounds.DRINK );
 			return item;
 		} else if ( item instanceof com.quasistellar.hollowdungeon.items.Ankh && !(((com.quasistellar.hollowdungeon.items.Ankh) item).isBlessed())){
@@ -103,7 +104,7 @@ public class WaterOfHealth extends WellWater {
 	@Override
 	public void use( BlobEmitter emitter ) {
 		super.use( emitter );
-		emitter.start( Speck.factory( com.quasistellar.hollowdungeon.effects.Speck.HEALING ), 0.5f, 0 );
+		emitter.start( Speck.factory( com.quasistellar.hollowdungeon.effects.Speck.LIGHT ), 0.5f, 0 );
 	}
 	
 	@Override

@@ -96,12 +96,12 @@ public class WndStartGame extends Window {
 				ActionIndicator.action = null;
 				InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
 				
-				if (HDSettings.intro()) {
-					HDSettings.intro( false );
-					Game.switchScene( IntroScene.class );
-				} else {
+//				if (HDSettings.intro()) {
+//					HDSettings.intro( false );
+//					Game.switchScene( IntroScene.class );
+//				} else {
 					Game.switchScene( InterlevelScene.class );
-				}
+//				}
 			}
 			
 			@Override

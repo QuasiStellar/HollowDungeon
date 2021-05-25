@@ -1,6 +1,7 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
@@ -11,6 +12,7 @@ import com.quasistellar.hollowdungeon.scenes.CellSelector;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.ui.AttackIndicator;
 import com.quasistellar.hollowdungeon.utils.GLog;
+import com.watabou.input.GameAction;
 
 public class DreamNail extends Skill {
 
@@ -36,6 +38,7 @@ public class DreamNail extends Skill {
                     || Dungeon.hero.isCharmedBy( enemy )){
                 GLog.w( Messages.get(DreamNail.class, "bad_target") );
             } else {
+                GameScene.unpause = false;
                 Dungeon.hero.sprite.attack(cell, () -> doAttack(enemy));
             }
         }
@@ -69,12 +72,17 @@ public class DreamNail extends Skill {
     @Override
     public boolean visible() {
         Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
-        return delay != null;
+        return super.visible() && delay != null;
     }
 
     @Override
     public int icon() {
         return Skill.DREAM_NAIL;
+    }
+
+    @Override
+    public GameAction action() {
+        return HDAction.DREAM_NAIL;
     }
 
     @Override

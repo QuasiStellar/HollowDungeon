@@ -1,6 +1,9 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.watabou.input.GameAction;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 
@@ -31,11 +34,15 @@ public class Skill implements Bundlable {
     }
 
     public boolean visible() {
-        return true;
+        return HDSettings.skills();
     }
 
     public int icon() {
         return NONE;
+    }
+
+    public GameAction action() {
+        return HDAction.NONE;
     }
 
     public String desc(){

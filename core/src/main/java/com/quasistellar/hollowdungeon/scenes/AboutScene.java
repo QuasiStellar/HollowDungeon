@@ -64,8 +64,8 @@ public class AboutScene extends PixelScene {
 				"Hollow Dungeon",
 				Icons.CUBE_CODE.get(),
 				"Developed by: _QuasiStellar_\nBased on Shattered Pixel Dungeon's open source",
-				"quasistellar.tech",
-				"https://quasistellar.tech");
+				"quasistellar.xyz",
+				"https://quasistellar.xyz");
 		hd.setRect((w - fullWidth)/2f, 6, 120, 0);
 		content.add(hd);
 
@@ -90,6 +90,15 @@ public class AboutScene extends PixelScene {
 		yog.setRect(drb.right(), drb.top(), colWidth/2f, 0);
 		content.add(yog);
 
+		CreditsBlock fid = new CreditsBlock(false, Window.SHPX_COLOR,
+				"Additional art:",
+				Icons.FID.get(),
+				"Fid",
+				"vk",
+				"https://vk.com/fidplay");
+		fid.setRect(w/2f - colWidth/4f, drb.bottom() + 5, colWidth/2f, 0);
+		content.add(fid);
+
 		StyledButton btnSupport = new StyledButton( Chrome.Type.GREY_BUTTON_TR, "Support the project"){
 			@Override
 			protected void onClick() {
@@ -97,7 +106,7 @@ public class AboutScene extends PixelScene {
 			}
 		};
 		btnSupport.icon(Icons.get(Icons.GOLD));
-		btnSupport.setRect(drb.right() - 54, drb.bottom() + 5, 108, 20);
+		btnSupport.setRect(w/2f - 108/2f, fid.bottom() + 5, 108, 20);
 		content.add(btnSupport);
 
 		//*** Shattered Pixel Dungeon Credits ***
@@ -163,7 +172,7 @@ public class AboutScene extends PixelScene {
 				"https://twitter.com/arcnor");
 		arcnor.setSize(colWidth/2f, 0);
 
-		arcnor.setPos(drb.left(), gdx.bottom()+5);
+		arcnor.setPos(w/2f - colWidth/2f, gdx.bottom()+5);
 
 		content.add(arcnor);
 
@@ -182,7 +191,7 @@ public class AboutScene extends PixelScene {
 				Window.TITLE_COLOR,
 				null,
 				null,
-				"Hollow Dungeon is based on Hollow Knight by Team Cherry, the greatest game I've ever played.",
+				"Hollow Dungeon is based on Hollow Knight by Team Cherry, the 2nd greatest game I've ever played.",
 				"hollowknight.com",
 				"https://www.hollowknight.com/");
 		transifex.setRect((Camera.main.width - colWidth)/2f, purigro.bottom() + 8, colWidth, 0);

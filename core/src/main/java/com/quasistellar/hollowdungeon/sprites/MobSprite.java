@@ -45,7 +45,7 @@ public class MobSprite extends CharSprite {
 		
 		super.onComplete( anim );
 		
-		if (anim == die) {
+		if (anim == die && !(this instanceof MaggotSprite)) {
 			parent.add( new AlphaTweener( this, 0, FADE_TIME ) {
 				@Override
 				protected void onComplete() {
@@ -53,6 +53,8 @@ public class MobSprite extends CharSprite {
 					parent.erase( this );
 				}
 			} );
+		} else if (anim == die) {
+			MobSprite.this.killAndErase();
 		}
 	}
 	

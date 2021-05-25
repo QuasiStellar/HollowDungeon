@@ -259,7 +259,7 @@ public class MagicMissile extends Emitter {
 		public MagicParticle() {
 			super();
 			
-			color( 0x88CCFF );
+			color( 0xFF8C00 );
 			lifespan = 0.5f;
 			
 			speed.set( Random.Float( -10, +10 ), Random.Float( -10, +10 ) );

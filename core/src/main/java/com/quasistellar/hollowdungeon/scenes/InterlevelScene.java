@@ -21,6 +21,9 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
+import com.quasistellar.hollowdungeon.actors.blobs.WaterOfAwareness;
+import com.quasistellar.hollowdungeon.items.FCMap;
+import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndError;
 import com.quasistellar.hollowdungeon.windows.WndStory;
 import com.quasistellar.hollowdungeon.Assets;
@@ -299,7 +302,9 @@ public class InterlevelScene extends PixelScene {
 
 	private void descend() throws IOException {
 
+		boolean starting = false;
 		if (Dungeon.hero == null) {
+			starting = true;
 			Mob.clearHeldAllies();
 			Dungeon.init();
 			if (noStory) {
@@ -320,7 +325,11 @@ public class InterlevelScene extends PixelScene {
 			level = Dungeon.newLevel();
 		}
 		Dungeon.changeConnections(Dungeon.location);
-		Dungeon.switchLevel( level, level.entrance );
+		// FIXME: magical number
+		Dungeon.switchLevel( level, starting ? 233 : level.entrance );
+		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
+			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
+		}
 	}
 
 	private void transit() throws IOException {
@@ -337,6 +346,9 @@ public class InterlevelScene extends PixelScene {
 		}
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.transition );
+		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
+			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
+		}
 	}
 	
 	private void ascend() throws IOException {
@@ -354,6 +366,9 @@ public class InterlevelScene extends PixelScene {
 		}
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.exit );
+		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
+			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
+		}
 	}
 	
 	private void returnTo() throws IOException {
@@ -365,6 +380,9 @@ public class InterlevelScene extends PixelScene {
 		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, returnPos );
+		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
+			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
+		}
 	}
 	
 	private void restore() throws IOException {

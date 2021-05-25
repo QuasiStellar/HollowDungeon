@@ -132,4 +132,8 @@ public abstract class WellWater extends Blob {
 			}
 		}
 	}
+
+	public static void affectHeroAnyway(WellWater water) {
+		water.affectHero(Dungeon.hero);
+	}
 }

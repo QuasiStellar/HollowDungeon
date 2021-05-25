@@ -219,7 +219,10 @@ public class Assets {
 		public static final String PET		= "sprites/pet.png";
 		public static final String AMULET	= "sprites/amulet.png";
 
+		public static final String ASPID	= "sprites/aspid.png";
 		public static final String RAT		= "sprites/rat.png";
+		public static final String ELDERBUG = "sprites/elderbug.png";
+		public static final String TABLET   = "sprites/tablet.png";
 		public static final String BRUTE	= "sprites/brute.png";
 		public static final String SPINNER	= "sprites/spinner.png";
 		public static final String DM300	= "sprites/dm300.png";
@@ -253,6 +256,7 @@ public class Assets {
 		public static final String MAKER	= "sprites/wandmaker.png";
 		public static final String TROLL	= "sprites/blacksmith.png";
 		public static final String IMP		= "sprites/demon.png";
+		public static final String MAGGOT	= "sprites/maggot.png";
 		public static final String RATKING	= "sprites/ratking.png";
 		public static final String BEE      = "sprites/bee.png";
 		public static final String MIMIC    = "sprites/mimic.png";
@@ -271,5 +275,7 @@ public class Assets {
 		public static final String PYLON	= "sprites/pylon.png";
 		public static final String DM200	= "sprites/dm200.png";
 		public static final String LOTUS	= "sprites/lotus.png";
+		public static final String FALSE_KNIGHT	= "sprites/false_knight.png";
+		public static final String CORNIFER	= "sprites/cornifer.png";
 	}
 }

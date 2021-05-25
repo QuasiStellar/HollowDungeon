@@ -28,7 +28,9 @@ import com.quasistellar.hollowdungeon.levels.rooms.special.WeakFloorRoom;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
+import com.quasistellar.hollowdungeon.sprites.HeroSprite;
 import com.quasistellar.hollowdungeon.sprites.MobSprite;
+import com.quasistellar.hollowdungeon.ui.Icons;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndOptions;
 import com.quasistellar.hollowdungeon.Badges;
@@ -41,6 +43,7 @@ import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.messages.Messages;
+import com.quasistellar.hollowdungeon.windows.WndTitledMessage;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
@@ -56,18 +59,7 @@ public class Chasm {
 			@Override
 			public void call() {
 				GameScene.show(
-						new WndOptions( Messages.get(Chasm.class, "chasm"),
-								Messages.get(Chasm.class, "jump"),
-								Messages.get(Chasm.class, "yes"),
-								Messages.get(Chasm.class, "no") ) {
-							@Override
-							protected void onSelect( int index ) {
-								if (index == 0) {
-									jumpConfirmed = true;
-									hero.resume();
-								}
-							}
-						}
+						new WndTitledMessage(HeroSprite.avatar(hero.heroClass, 1), Messages.get(Chasm.class, "chasm"), Messages.get(Chasm.class, "jump"))
 				);
 			}
 		});

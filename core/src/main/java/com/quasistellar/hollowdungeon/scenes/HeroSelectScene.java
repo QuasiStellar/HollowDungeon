@@ -24,6 +24,8 @@ package com.quasistellar.hollowdungeon.scenes;
 import com.quasistellar.hollowdungeon.journal.Journal;
 import com.quasistellar.hollowdungeon.windows.WndChallenges;
 import com.quasistellar.hollowdungeon.windows.WndMessage;
+import com.quasistellar.hollowdungeon.windows.WndRealtime;
+import com.quasistellar.hollowdungeon.windows.WndSettings;
 import com.quasistellar.hollowdungeon.windows.WndStartGame;
 import com.quasistellar.hollowdungeon.windows.WndTabbed;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
@@ -118,16 +120,7 @@ public class HeroSelectScene extends PixelScene {
 
 				if (GamesInProgress.selectedClass == null) return;
 
-				Dungeon.hero = null;
-				ActionIndicator.action = null;
-				InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-
-				if (HDSettings.intro()) {
-					HDSettings.intro( false );
-					Game.switchScene( IntroScene.class );
-				} else {
-					Game.switchScene( InterlevelScene.class );
-				}
+				HollowDungeon.scene().addToFront(new WndRealtime());
 			}
 		};
 		startBtn.icon(Icons.get(Icons.ENTER));

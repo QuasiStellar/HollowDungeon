@@ -288,8 +288,8 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
         }
     }
 
-    protected boolean canAttack(com.quasistellar.hollowdungeon.actors.Char enemy) {
-        return com.quasistellar.hollowdungeon.Dungeon.level.adjacent(pos, enemy.pos);
+    protected boolean canAttack(Char enemy) {
+        return Dungeon.level.adjacent(pos, enemy.pos);
     }
 
     protected boolean getCloser(int target) {
@@ -452,7 +452,7 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
         return delay;
     }
 
-    protected boolean doAttack(com.quasistellar.hollowdungeon.actors.Char enemy) {
+    protected boolean doAttack(Char enemy) {
 
         if (sprite != null && (sprite.visible || enemy.sprite.visible)) {
             sprite.attack(enemy.pos);
@@ -552,9 +552,8 @@ public abstract class Mob extends com.quasistellar.hollowdungeon.actors.Char {
     }
 
     protected Object loot = null;
-    protected float lootChance = 0;
+    protected float lootChance = 1;
 
-    @SuppressWarnings("unchecked")
     protected com.quasistellar.hollowdungeon.items.Item createLoot() {
         com.quasistellar.hollowdungeon.items.Item item;
         if (loot instanceof com.quasistellar.hollowdungeon.items.Generator.Category) {

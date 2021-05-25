@@ -33,7 +33,7 @@ import com.watabou.utils.Random;
 public class MagicWellRoom extends SpecialRoom {
 
 	private static final Class<?>[] WATERS =
-		{WaterOfAwareness.class, WaterOfHealth.class};
+		{WaterOfHealth.class};
 	
 	public Class<?extends WellWater> overrideWater = null;
 	

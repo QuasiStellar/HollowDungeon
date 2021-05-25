@@ -21,6 +21,7 @@
 
 package com.quasistellar.hollowdungeon.actors.mobs;
 
+import com.quasistellar.hollowdungeon.items.Geo;
 import com.quasistellar.hollowdungeon.sprites.SwarmSprite;
 
 public class Vengefly extends Mob {
@@ -33,6 +34,6 @@ public class Vengefly extends Mob {
         baseSpeed = 2;
         flying = true;
 
-
+        loot = new Geo(3);
     }
 }

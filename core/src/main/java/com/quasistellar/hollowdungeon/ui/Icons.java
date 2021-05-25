@@ -83,7 +83,13 @@ public enum Icons {
 	CHARLIE,
 	CUBE_CODE,
 	PURIGRO,
-	ARCNOR;
+	ARCNOR,
+	FID,
+
+	SEARCH,
+	FOCUS,
+	CREST;
+
 
 	public Image get() {
 		return get( this );
@@ -234,9 +240,22 @@ public enum Icons {
 			break;
 		case CUBE_CODE:
 			icon.frame( icon.texture.uvRect( 101, 39, 128, 69 ) );
-			icon.scale.set(com.quasistellar.hollowdungeon.scenes.PixelScene.align(0.49f));
+			icon.scale.set(PixelScene.align(0.49f));
+			break;
+		case FID:
+			icon.frame( icon.texture.uvRect( 0, 128, 32, 160 ) );
+			icon.scale.set(PixelScene.align(0.49f));
 			break;
 
+		case SEARCH:
+			icon.frame( icon.texture.uvRect( 64, 80, 80, 96 ) );
+			break;
+		case FOCUS:
+			icon.frame( icon.texture.uvRect( 80, 80, 96, 96 ) );
+			break;
+		case CREST:
+			icon.frame( icon.texture.uvRect( 96, 16, 109, 32 ) );
+			break;
 		}
 		return icon;
 	}

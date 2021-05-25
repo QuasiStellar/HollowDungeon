@@ -41,10 +41,10 @@ public class Bestiary {
 		switch(location){
 
 			default:
-				//3x whusk, 1x vengefly
+				//2x whusk, 1x vengefly, 1x aspid
 				return new ArrayList<>(Arrays.asList(
-						WanderingHusk.class, WanderingHusk.class, WanderingHusk.class,
-						Vengefly.class));
+						WanderingHusk.class, WanderingHusk.class,
+						Vengefly.class, Aspid.class));
 		}
 		
 	}

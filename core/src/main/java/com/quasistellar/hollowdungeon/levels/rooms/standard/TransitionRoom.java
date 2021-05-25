@@ -50,6 +50,14 @@ public class TransitionRoom extends StandardRoom {
 
 		level.transition = level.pointToCell(random( 3 ));
 		Painter.set( level, level.transition, Terrain.UNLOCKED_EXIT );
+		Painter.set( level, level.transition + 1, Terrain.CHASM );
+		Painter.set( level, level.transition - 1, Terrain.CHASM );
+		Painter.set( level, level.transition + level.width(), Terrain.CHASM );
+		Painter.set( level, level.transition - level.width(), Terrain.CHASM );
+		Painter.set( level, level.transition + level.width() + 1, Terrain.CHASM );
+		Painter.set( level, level.transition + level.width() - 1, Terrain.CHASM );
+		Painter.set( level, level.transition - level.width() + 1, Terrain.CHASM );
+		Painter.set( level, level.transition - level.width() - 1, Terrain.CHASM );
 	}
 	
 }

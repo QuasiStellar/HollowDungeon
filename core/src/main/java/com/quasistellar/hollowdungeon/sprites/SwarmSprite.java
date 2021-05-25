@@ -47,9 +47,4 @@ public class SwarmSprite extends MobSprite {
 		
 		play( idle );
 	}
-	
-	@Override
-	public int blood() {
-		return 0xFF8BA077;
-	}
 }

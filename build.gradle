@@ -16,14 +16,14 @@ allprojects {
         appName = 'Hollow Dungeon'
         appPackageName = 'com.quasistellar.hollowdungeon'
 
-        appVersionCode = 3
-        appVersionName = '0.1c'
+        appVersionCode = 5
+        appVersionName = '0.3'
 
         appJavaCompatibility = JavaVersion.VERSION_1_8
 
-        appAndroidCompileSDK = 29
+        appAndroidCompileSDK = 30
         appAndroidMinSDK = 9
-        appAndroidTargetSDK = 29
+        appAndroidTargetSDK = 30
 
         gdxVersion = '1.9.10'
     }

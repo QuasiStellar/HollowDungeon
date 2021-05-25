@@ -1,6 +1,7 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
@@ -10,6 +11,7 @@ import com.quasistellar.hollowdungeon.mechanics.ConeAOE;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.CellSelector;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
+import com.watabou.input.GameAction;
 import com.watabou.utils.Callback;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class HowlingWraiths extends Skill {
 
             final int targetCell = cell;
             final Hero hero = Dungeon.hero;
+
+            GameScene.unpause = false;
 
             hero.sprite.idle();
             hero.sprite.zap(targetCell);
@@ -103,12 +107,17 @@ public class HowlingWraiths extends Skill {
 
     @Override
     public boolean visible() {
-        return Dungeon.hero.MP >= 33;
+        return super.visible() && Dungeon.hero.MP >= 33;
     }
 
     @Override
     public int icon() {
         return Skill.HOWLING_WRAITHS;
+    }
+
+    @Override
+    public GameAction action() {
+        return HDAction.HOWLING_WRAITHS;
     }
 
     @Override

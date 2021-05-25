@@ -97,6 +97,17 @@ public class Belongings implements Iterable<com.quasistellar.hollowdungeon.items
 		
 		return false;
 	}
+
+	public Item getSimilar( Item similar ){
+
+		for (Item item : this) {
+			if (similar != item && similar.isSimilar(item)) {
+				return item;
+			}
+		}
+
+		return null;
+	}
 	
 	public ArrayList<com.quasistellar.hollowdungeon.items.Item> getAllSimilar(com.quasistellar.hollowdungeon.items.Item similar ){
 		ArrayList<com.quasistellar.hollowdungeon.items.Item> result = new ArrayList<>();

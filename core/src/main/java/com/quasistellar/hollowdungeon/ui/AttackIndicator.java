@@ -22,6 +22,12 @@
 package com.quasistellar.hollowdungeon.ui;
 
 import com.quasistellar.hollowdungeon.actors.Char;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight1;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight2;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight3;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnightMaggot1;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnightMaggot2;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnightMaggot3;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.Dungeon;
@@ -76,6 +82,15 @@ public class AttackIndicator extends Tag {
 		if (sprite != null) {
 			sprite.x = x + (width - sprite.width()) / 2 + 1;
 			sprite.y = y + (height - sprite.height()) / 2;
+			// FIXIT: bicycle
+			if (lastTarget instanceof FalseKnight1 ||
+					lastTarget instanceof FalseKnight2 ||
+					lastTarget instanceof FalseKnight3 ||
+					lastTarget instanceof FalseKnightMaggot1 ||
+					lastTarget instanceof FalseKnightMaggot2 ||
+					lastTarget instanceof FalseKnightMaggot3) {
+				sprite.x += 300;
+			}
 			PixelScene.align(sprite);
 		}
 	}

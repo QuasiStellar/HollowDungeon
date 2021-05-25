@@ -48,6 +48,7 @@ public class Speck extends Image {
 	public static final int BUBBLE      = 12;
 	public static final int STEAM       = 13;
 	public static final int COIN        = 14;
+	public static final int PIXEL       = 15;
 	
 	public static final int DISCOVER    = 101;
 	public static final int EVOKE       = 102;
@@ -68,6 +69,7 @@ public class Speck extends Image {
 	public static final int STORM       = 117;
 	public static final int INFERNO     = 118;
 	public static final int BLIZZARD    = 119;
+	public static final int INFECTION   = 120;
 	
 	private static final int SIZE = 7;
 	
@@ -107,6 +109,9 @@ public class Speck extends Image {
 			break;
 		case RATTLE:
 			frame( film.get( BONE ) );
+			break;
+		case INFECTION:
+			frame( film.get( PIXEL ) );
 			break;
 		case JET:
 		case TOXIC:
@@ -226,8 +231,17 @@ public class Speck extends Image {
 			lifespan = 0.5f;
 			speed.set( 0, -100 );
 			acc.set( 0, -2 * speed.y / lifespan );
-			angle = Random.Float( 360 );
-			angularSpeed = 360;
+			angle = 90;//Random.Float( 360 );
+			angularSpeed = 0;//360;
+			break;
+
+		case INFECTION:
+			lifespan = 0.3f;
+			speed.set( 0, -200 );
+			acc.set( 0, -2 * speed.y / lifespan );
+			angle = 90;//Random.Float( 360 );
+			angularSpeed = 0;//360;
+			color(1, 0.55f, 0);
 			break;
 			
 		case WOOL:
@@ -423,6 +437,7 @@ public class Speck extends Image {
 				
 			case BONE:
 			case RATTLE:
+			case INFECTION:
 				am = p < 0.9f ? 1 : (1 - p) * 10;
 				break;
 				

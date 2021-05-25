@@ -30,6 +30,7 @@ import com.quasistellar.hollowdungeon.skills.Skill;
 import com.quasistellar.hollowdungeon.windows.WndInfoSkill;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
+import com.watabou.input.GameAction;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 
@@ -127,6 +128,15 @@ public class SpellIndicator extends VerticalTag {
 	@Override
 	protected void onClick() {
 		skill.act();
+	}
+
+	@Override
+	public GameAction keyAction() {
+		if (skill.visible()) {
+			return this.skill.action();
+		} else {
+			return super.keyAction();
+		}
 	}
 
 	@Override

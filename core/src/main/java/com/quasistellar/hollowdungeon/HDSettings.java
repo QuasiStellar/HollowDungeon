@@ -62,7 +62,7 @@ public class HDSettings extends GameSettings {
 	}
 	
 	public static boolean fullscreen() {
-		return getBoolean( KEY_FULLSCREEN, false );
+		return getBoolean( KEY_FULLSCREEN, true );
 	}
 	
 	public static void landscape( boolean value ){
@@ -155,17 +155,44 @@ public class HDSettings extends GameSettings {
 	}
 	
 	//Game State
-	
+
+	public static final String KEY_REALTIME     = "realtime";
+	public static final String KEY_SKILLS     = "skills";
+	public static final String KEY_DELAY        = "delay";
 	public static final String KEY_LAST_CLASS	= "last_class";
 	public static final String KEY_CHALLENGES	= "challenges";
-	public static final String KEY_INTRO		= "intro";
-	
-	public static void intro( boolean value ) {
-		put( KEY_INTRO, value );
+	public static final String KEY_FOCUS		= "focus";
+
+	public static void realtime( boolean value ) {
+		put( KEY_REALTIME, value );
+	}
+
+	public static boolean realtime() {
+		return getBoolean( KEY_REALTIME, false );
+	}
+
+	public static void skills( boolean value ) {
+		put( KEY_SKILLS, value );
+	}
+
+	public static boolean skills() {
+		return getBoolean( KEY_SKILLS, false );
+	}
+
+	public static void delay( int value ) {
+		put( KEY_DELAY, value );
+	}
+
+	public static int delay() {
+		return getInt( KEY_DELAY, 3, 1, 10 );
+	}
+
+	public static void focus( boolean value ) {
+		put( KEY_FOCUS, value );
 	}
 	
-	public static boolean intro() {
-		return getBoolean( KEY_INTRO, true );
+	public static boolean focus() {
+		return getBoolean( KEY_FOCUS, false );
 	}
 	
 	public static void lastClass( int value ) {

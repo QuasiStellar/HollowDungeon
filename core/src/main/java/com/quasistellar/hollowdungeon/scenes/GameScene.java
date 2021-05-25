@@ -97,8 +97,7 @@ public class GameScene extends PixelScene {
 	static GameScene scene;
 
 	public static float time = 0;
-
-	private static final float DELAY = 1.5f;
+	public static boolean unpause = true;
 
 	private SkinnedBlock water;
 	private DungeonTerrainTilemap tiles;
@@ -547,16 +546,20 @@ public class GameScene extends PixelScene {
 			return;
 		}
 
-		time += Game.elapsed;
-		if (time >= DELAY) {
+		if (HDSettings.realtime()) {
+			if (unpause) {
+				time += Game.elapsed;
+				if (time >= (float)HDSettings.delay() / 2) {
 
-			GameScene.layoutSkillTags();
+					GameScene.layoutSkillTags();
 
-			Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 1);
+					Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 1);
 
-			GameScene.time = 0;
+					GameScene.time = 0;
 
-			Dungeon.hero.rest(false);
+					Dungeon.hero.rest(false);
+				}
+			}
 		}
 
 		super.update();

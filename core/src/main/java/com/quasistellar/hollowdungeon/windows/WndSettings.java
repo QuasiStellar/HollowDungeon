@@ -326,7 +326,6 @@ public class WndSettings extends WndTabbed {
 				add(btnKeyBindings);
 			}
 		}
-
 	}
 
 	private class AudioTab extends Group {

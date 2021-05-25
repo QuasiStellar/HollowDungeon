@@ -44,8 +44,8 @@ public class WaterOfAwareness extends WellWater {
 	@Override
 	protected boolean affectHero( Hero hero ) {
 		
-		Sample.INSTANCE.play( Assets.Sounds.DRINK );
-		emitter.parent.add( new com.quasistellar.hollowdungeon.effects.Identification( hero.sprite.center() ) );
+		//Sample.INSTANCE.play( Assets.Sounds.DRINK );
+		//emitter.parent.add( new com.quasistellar.hollowdungeon.effects.Identification( hero.sprite.center() ) );
 
 		for (int i = 0; i < Dungeon.level.length(); i++) {
 			
@@ -65,7 +65,7 @@ public class WaterOfAwareness extends WellWater {
 
 		com.quasistellar.hollowdungeon.Dungeon.hero.interrupt();
 	
-		GLog.p( Messages.get(this, "procced") );
+		//GLog.p( Messages.get(this, "procced") );
 		
 		return true;
 	}

@@ -21,18 +21,48 @@
 
 package com.quasistellar.hollowdungeon.levels.painters;
 
+import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.actors.mobs.npcs.Cornifer;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
+import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
+import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
 
-public class SewerPainter extends RegularPainter {
+public class HallownestPainter extends RegularPainter {
 	
 	@Override
 	protected void decorate(Level level, ArrayList<Room> rooms) {
-		
+
+		if (Dungeon.location.equals("Forgotten Crossroads 2"))
+			for (Room r : rooms) {
+				if (r instanceof EntranceRoom) {
+					Cornifer npc = new Cornifer();
+					boolean validPos;
+					//Do not spawn wandmaker on the entrance, a trap, or in front of a door.
+					do {
+						validPos = true;
+						npc.pos = level.pointToCell(r.random());
+						if (level.trueDistance( npc.pos, level.entrance ) <= 1){
+							validPos = false;
+						}
+						for (Point door : r.connected.values()){
+							if (level.trueDistance( npc.pos, level.pointToCell( door ) ) <= 1){
+								validPos = false;
+							}
+						}
+						if (level.traps.get(npc.pos) != null){
+							validPos = false;
+						}
+					} while (!validPos);
+					level.mobs.add( npc );
+					break;
+				}
+			}
+
 		int[] map = level.map;
 		int w = level.width();
 		int l = level.length();

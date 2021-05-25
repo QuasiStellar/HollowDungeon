@@ -1,6 +1,8 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
+import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
@@ -13,6 +15,7 @@ import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.ui.HpIndicator;
 import com.quasistellar.hollowdungeon.utils.GLog;
+import com.watabou.input.GameAction;
 import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 
@@ -30,6 +33,7 @@ public class Focus extends Skill {
         }
         int effect = Math.min( Dungeon.hero.HT - Dungeon.hero.HP, 1 );
         if (effect > 0) {
+            HDSettings.focus(true);
             Dungeon.hero.HP += effect;
             Dungeon.hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
             Dungeon.hero.sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "value", effect) );
@@ -54,6 +58,11 @@ public class Focus extends Skill {
     @Override
     public int icon() {
         return Skill.FOCUS;
+    }
+
+    @Override
+    public GameAction action() {
+        return HDAction.FOCUS;
     }
 
     @Override

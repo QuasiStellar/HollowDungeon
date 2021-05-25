@@ -22,6 +22,9 @@
 package com.quasistellar.hollowdungeon.actors;
 
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight1;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight2;
+import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight3;
 import com.quasistellar.hollowdungeon.levels.Terrain;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.Assets;
@@ -300,7 +303,7 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 				enemy.sprite.showStatus( CharSprite.NEUTRAL, defense );
 
 				//TODO enemy.defenseSound? currently miss plays for monks/crab even when the parry
-				Sample.INSTANCE.play(Assets.Sounds.MISS);
+				Sample.INSTANCE.play(Assets.Sounds.HIT_PARRY);
 			}
 			
 			return false;
@@ -312,8 +315,7 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 	public static int INFINITE_EVASION = 1_000_000;
 
 	public static boolean hit( Char attacker, Char defender, boolean magic ) {
-
-		return true;
+		return (!(attacker instanceof FalseKnight1) && !(attacker instanceof FalseKnight2) && !(attacker instanceof FalseKnight3)) || !(Dungeon.level.distance(attacker.pos, defender.pos) >= 3);
 	}
 
 	public String defenseVerb() {
@@ -422,13 +424,14 @@ public abstract class Char extends com.quasistellar.hollowdungeon.actors.Actor {
 
 		shielded -= dmg;
 		HP -= dmg;
-		
-		if (sprite != null) {
-			sprite.showStatus(HP > HT / 2 ?
-							CharSprite.WARNING :
-							CharSprite.NEGATIVE,
-					Integer.toString(dmg + shielded));
-		}
+
+		// FIXME: uncomment for dmg visuals
+//		if (sprite != null) {
+//			sprite.showStatus(HP > HT / 2 ?
+//							CharSprite.WARNING :
+//							CharSprite.NEGATIVE,
+//					Integer.toString(dmg + shielded));
+//		}
 
 		if (HP < 0) HP = 0;
 

@@ -80,7 +80,7 @@ public class WndGame extends Window {
 					HollowDungeon.switchScene(HeroSelectScene.class);
 				}
 			} );
-			btnStart.textColor(Window.TITLE_COLOR);
+			btnStart.textColor(Window.GREEN_COLOR);
 			
 //			addButton( new RedButton( Messages.get(this, "rankings") ) {
 //				@Override

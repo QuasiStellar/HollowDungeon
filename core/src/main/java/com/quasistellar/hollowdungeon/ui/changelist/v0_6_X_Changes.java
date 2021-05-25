@@ -98,7 +98,7 @@ public class v0_6_X_Changes {
 		changes.hardlight( CharSprite.WARNING );
 		changeInfos.add(changes);
 		
-		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.STYLUS, null), "Glyph Changes",
+		changes.addButton( new com.quasistellar.hollowdungeon.ui.changelist.ChangeButton(new com.quasistellar.hollowdungeon.sprites.ItemSprite(ItemSpriteSheet.MAP, null), "Glyph Changes",
 				"Glyphs were originally designed with the intention that taking no glyph should be a valid option. Now with augmenting armor, glyphs can be more about added bonuses, somewhat like enchantments. Several glyphs have been adjusted:\n\n" +
 				"_-_ Entanglement now only roots if you stand still.\n\n" +
 				"_-_ Potential no longer self-damages and grants charge more consistently.\n\n" +

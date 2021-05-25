@@ -1,6 +1,7 @@
 package com.quasistellar.hollowdungeon.skills;
 
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.HDAction;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
@@ -10,7 +11,9 @@ import com.quasistellar.hollowdungeon.effects.particles.SmallSoulParticle;
 import com.quasistellar.hollowdungeon.effects.particles.SoulParticle;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.messages.Messages;
+import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.utils.GLog;
+import com.watabou.input.GameAction;
 import com.watabou.utils.PathFinder;
 
 public class DesolateDive extends Skill {
@@ -26,6 +29,7 @@ public class DesolateDive extends Skill {
             return;
         }
         inProcess = true;
+        GameScene.unpause = false;
         Dungeon.hero.busy();
         Dungeon.hero.sprite.jump(Dungeon.hero.pos, Dungeon.hero.pos, () -> {
             CellEmitter.get(Dungeon.hero.pos).burst(SoulParticle.FACTORY, 15);
@@ -76,12 +80,17 @@ public class DesolateDive extends Skill {
 
     @Override
     public boolean visible() {
-        return Dungeon.hero.MP >= 33;
+        return super.visible() && Dungeon.hero.MP >= 33;
     }
 
     @Override
     public int icon() {
         return Skill.DESOLATE_DIVE;
+    }
+
+    @Override
+    public GameAction action() {
+        return HDAction.DESOLATE_DIVE;
     }
 
     @Override
