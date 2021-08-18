@@ -53,7 +53,7 @@ public class KingspassLevel extends Level {
 	@Override
 	protected boolean build() {
 		
-		setSize(32, 32);
+		setSize(SIZE, SIZE);
 
 		map = MAP_PASS.clone();
 
