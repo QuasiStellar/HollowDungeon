@@ -26,11 +26,11 @@ public class Focus extends Skill {
 
     @Override
     public void act() {
-        Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
-        if (delay == null) {
-            GLog.w(Messages.get(this, "delay"));
-            return;
-        }
+//        Buff delay = Dungeon.hero.buff(Utils.OneTurnDelay.class);
+//        if (delay == null) {
+//            GLog.w(Messages.get(this, "delay"));
+//            return;
+//        }
         int effect = Math.min( Dungeon.hero.HT - Dungeon.hero.HP, 1 );
         if (effect > 0) {
             HDSettings.focus(true);
@@ -38,7 +38,7 @@ public class Focus extends Skill {
             Dungeon.hero.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
             Dungeon.hero.sprite.showStatus( CharSprite.POSITIVE, Messages.get(this, "value", effect) );
             HpIndicator.refreshHero();
-            Dungeon.hero.spendAndNext(1);
+            Dungeon.hero.spendAndNext(2);
             Dungeon.hero.loseMana(manaCost());
         } else {
             GLog.i( Messages.get(this, "already_full") );
@@ -52,7 +52,7 @@ public class Focus extends Skill {
 
     @Override
     public boolean visible() {
-        return Dungeon.hero.MP >= 33 && Dungeon.hero.buff(Utils.OneTurnDelay.class) != null;
+        return Dungeon.hero.MP >= 33;// && Dungeon.hero.buff(Utils.OneTurnDelay.class) != null;
     }
 
     @Override
