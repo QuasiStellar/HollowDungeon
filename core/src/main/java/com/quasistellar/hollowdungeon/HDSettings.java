@@ -171,7 +171,7 @@ public class HDSettings extends GameSettings {
 	}
 
 	public static boolean realtime() {
-		return getBoolean( KEY_REALTIME, false );
+		return getBoolean( KEY_REALTIME, true );
 	}
 
 	public static void skills( boolean value ) {
