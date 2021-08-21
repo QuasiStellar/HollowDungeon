@@ -3,7 +3,10 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2020 Evan Debenham
+ * Copyright (C) 2014-2019 Evan Debenham
+ *
+ * Hollow Dungeon
+ * Copyright (C) 2020-2021 Pierre Schrodinger
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
