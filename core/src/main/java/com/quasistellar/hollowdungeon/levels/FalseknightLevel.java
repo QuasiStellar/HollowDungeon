@@ -178,7 +178,21 @@ public class FalseknightLevel extends Level {
 
 	@Override
 	protected void createMobs() {
+		WanderingHusk husk1 = new WanderingHusk();
+		husk1.pos = 12 * 20 + 7;
+		mobs.add(husk1);
 
+		WanderingHusk husk2 = new WanderingHusk();
+		husk2.pos = 7 * 20 + 12;
+		mobs.add(husk2);
+
+		Vengefly fly1 = new Vengefly();
+		fly1.pos = 6 * 20 + 8;
+		mobs.add(fly1);
+
+		Vengefly fly2 = new Vengefly();
+		fly2.pos = 14 * 20 + 11;
+		mobs.add(fly2);
 	}
 
 	public Actor respawner() {
