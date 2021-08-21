@@ -187,7 +187,7 @@ public class HDSettings extends GameSettings {
 	}
 
 	public static int delay() {
-		return getInt( KEY_DELAY, 3, 1, 10 );
+		return getInt( KEY_DELAY, 2, 1, 10 );
 	}
 
 	public static void focus( boolean value ) {
