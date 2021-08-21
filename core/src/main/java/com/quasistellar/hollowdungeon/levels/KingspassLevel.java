@@ -30,6 +30,7 @@ import com.quasistellar.hollowdungeon.actors.mobs.WanderingHusk;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.Elderbug;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletFocus;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletSearch;
+import com.quasistellar.hollowdungeon.items.Geo;
 
 public class KingspassLevel extends Level {
 
@@ -111,6 +112,9 @@ public class KingspassLevel extends Level {
 
 	@Override
 	protected void createItems() {
+		drop(new Geo(10), 6 * 32 + 29);
+		drop(new Geo(10), 8 * 32 + 30);
+		drop(new Geo(10), 12 * 32 + 29);
 	}
 	
 	@Override
@@ -136,14 +140,14 @@ public class KingspassLevel extends Level {
 			W,W,W,W,W,e,e,e,e,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,
 			W,W,W,W,W,e,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,e,e,e,W,W,W,W,W,W,W,
 			W,W,W,W,W,R,W,C,C,C,C,C,C,W,W,W,W,W,W,W,e,e,e,e,e,e,W,W,W,W,W,W,
-			W,W,W,W,W,C,C,C,e,e,e,e,C,C,W,W,W,W,W,e,e,e,e,e,e,e,W,W,W,W,W,W,
-			W,W,W,W,W,C,e,e,e,e,e,e,e,C,W,W,W,W,W,e,e,e,e,e,e,e,e,W,W,W,W,W,
-			W,W,W,W,C,C,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,W,W,W,
-			W,W,W,W,C,C,C,e,e,e,e,e,C,C,W,W,W,W,W,e,e,e,e,e,e,e,e,W,W,W,W,W,
-			W,W,W,W,W,C,C,C,C,C,C,C,C,W,W,W,W,W,W,e,e,e,e,e,e,e,W,W,W,W,W,W,
-			W,W,W,W,W,W,W,W,C,C,C,W,W,W,W,W,W,W,W,W,e,e,e,e,e,W,W,W,W,W,W,W,
-			W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,e,W,W,W,W,W,W,W,W,W,
-			W,W,W,W,W,W,W,e,W,W,W,W,W,W,W,W,W,W,W,W,W,e,e,W,W,W,W,W,W,W,W,W,
+			W,W,W,W,W,C,C,C,e,e,e,e,C,C,W,W,W,W,W,e,e,e,e,e,e,e,W,W,W,e,W,W,
+			W,W,W,W,W,C,e,e,e,e,e,e,e,C,W,W,W,W,W,e,e,e,e,e,e,e,e,W,e,e,e,W,
+			W,W,W,W,C,C,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,R,e,e,e,W,
+			W,W,W,W,C,C,C,e,e,e,e,e,C,C,W,W,W,W,W,e,e,e,e,e,e,e,e,W,W,e,e,W,
+			W,W,W,W,W,C,C,C,C,C,C,C,C,W,W,W,W,W,W,e,e,e,e,e,e,e,W,W,W,R,W,W,
+			W,W,W,W,W,W,W,W,C,C,C,W,W,W,W,W,W,W,W,W,e,e,e,e,e,W,W,W,e,e,W,W,
+			W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,e,W,W,W,W,W,e,e,e,W,
+			W,W,W,W,W,W,W,e,W,W,W,W,W,W,W,W,W,W,W,W,W,e,e,W,W,W,W,W,W,e,W,W,
 			W,W,W,e,W,W,W,e,W,W,W,W,W,W,W,e,e,e,W,W,W,D,W,W,W,W,W,W,W,W,W,W,
 			W,W,W,e,W,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,W,W,W,W,W,W,W,W,
 			W,W,W,e,e,e,e,e,W,W,W,W,W,W,e,e,e,e,e,e,e,e,e,W,W,W,W,W,W,W,W,W,
