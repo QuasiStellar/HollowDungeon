@@ -29,7 +29,6 @@ public class DesolateDive extends Skill {
             return;
         }
         inProcess = true;
-        GameScene.unpause = false;
         Dungeon.hero.busy();
         Dungeon.hero.sprite.jump(Dungeon.hero.pos, Dungeon.hero.pos, () -> {
             CellEmitter.get(Dungeon.hero.pos).burst(SoulParticle.FACTORY, 15);

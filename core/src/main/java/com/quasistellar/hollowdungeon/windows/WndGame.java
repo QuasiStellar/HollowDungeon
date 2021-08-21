@@ -47,6 +47,8 @@ public class WndGame extends Window {
 	public WndGame() {
 		
 		super();
+
+		GameScene.timerPaused = true;
 		
 		addButton( new RedButton( Messages.get(this, "settings") ) {
 			@Override
@@ -127,6 +129,12 @@ public class WndGame extends Window {
 		} );
 		
 		resize( WIDTH, pos );
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		GameScene.timerPaused = false;
 	}
 	
 	private void addButton( RedButton btn ) {

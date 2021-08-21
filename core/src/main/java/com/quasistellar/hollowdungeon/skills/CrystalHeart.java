@@ -33,7 +33,6 @@ public class CrystalHeart extends Skill {
 
         @Override
         public void onSelect( Integer target ) {
-            GameScene.unpause = false;
             if (target != null && target != Dungeon.hero.pos) {
                 Ballistica route = new Ballistica(Dungeon.hero.pos, target, Ballistica.MAGIC_BOLT);
                 int cell = route.collisionPos;

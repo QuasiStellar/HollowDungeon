@@ -38,7 +38,6 @@ public class DreamNail extends Skill {
                     || Dungeon.hero.isCharmedBy( enemy )){
                 GLog.w( Messages.get(DreamNail.class, "bad_target") );
             } else {
-                GameScene.unpause = false;
                 Dungeon.hero.sprite.attack(cell, () -> doAttack(enemy));
             }
         }

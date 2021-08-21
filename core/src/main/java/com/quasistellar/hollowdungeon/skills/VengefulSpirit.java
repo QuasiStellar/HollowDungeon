@@ -37,8 +37,6 @@ public class VengefulSpirit extends Skill {
             final int targetCell = cell;
             final Hero hero = Dungeon.hero;
 
-            GameScene.unpause = false;
-
             hero.sprite.idle();
             hero.sprite.zap(targetCell);
             hero.busy();

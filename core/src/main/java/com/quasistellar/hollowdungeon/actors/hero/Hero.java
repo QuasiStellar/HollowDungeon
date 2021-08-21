@@ -290,6 +290,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			bubble.processTime(time);
 			return;
 		}
+
+		if (time > 0) {
+			GameScene.resetTimer();
+		}
 		
 		super.spend(time);
 	}
@@ -382,15 +386,13 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				actResult = false;
 			}
 		}
-
-		GameScene.time = 0;
-		GameScene.unpause = true;
 		
 		return actResult;
 	}
 	
 	public void busy() {
 		ready = false;
+		GameScene.timerPaused=true;
 	}
 	
 	private void ready() {

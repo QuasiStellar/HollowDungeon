@@ -21,7 +21,6 @@ public class MonarchWings extends Skill {
             GLog.w(Messages.get(this, "delay"));
             return;
         }
-        GameScene.unpause = false;
         GameScene.selectCell( leaper );
     }
 

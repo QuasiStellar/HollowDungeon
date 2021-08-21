@@ -24,6 +24,7 @@ package com.quasistellar.hollowdungeon.scenes;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
+import com.quasistellar.hollowdungeon.effects.CircleArc;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
 import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.sprites.DiscardedItemSprite;
@@ -96,9 +97,6 @@ public class GameScene extends PixelScene {
 
 	static GameScene scene;
 
-	public static float time = 0;
-	public static boolean unpause = true;
-
 	private SkinnedBlock water;
 	private DungeonTerrainTilemap tiles;
 	private GridTileMap visualGrid;
@@ -114,7 +112,8 @@ public class GameScene extends PixelScene {
 	private GameLog log;
 	
 	private BusyIndicator busy;
-	private com.quasistellar.hollowdungeon.effects.CircleArc counter;
+	private CircleArc counter;
+	private CircleArc timeCounter;
 	
 	private static com.quasistellar.hollowdungeon.scenes.CellSelector cellSelector;
 	
@@ -163,6 +162,9 @@ public class GameScene extends PixelScene {
 	private boolean vengefulSpiritLastEnabled = false;
 	private boolean desolateDiveLastEnabled   = false;
 	private boolean howlingWraithsLastEnabled = false;
+
+	public static boolean timerPaused = true;
+	private static double timer = 10;
 
 	@Override
 	public void create() {
@@ -393,6 +395,11 @@ public class GameScene extends PixelScene {
 		counter.color( 0x808080, true );
 		counter.camera = uiCamera;
 		counter.show(this, busy.center(), 0f);
+
+		timeCounter = new CircleArc((int) Math.floor(10), 4.25f);
+		timeCounter.color( 0xFFFFFF, true );
+		timeCounter.camera = uiCamera;
+		timeCounter.show(this, busy.center(), 0f);
 		
 		switch (InterlevelScene.mode) {
 //		case RESURRECT:
@@ -482,6 +489,11 @@ public class GameScene extends PixelScene {
 		
 		fadeIn();
 
+		timer += 5;
+	}
+
+	public static void resetTimer() {
+		timer = HDSettings.delay();
 	}
 	
 	public void destroy() {
@@ -539,30 +551,31 @@ public class GameScene extends PixelScene {
 	//sometimes UI changes can be prompted by the actor thread.
 	// We queue any removed element destruction, rather than destroying them in the actor thread.
 	private ArrayList<Gizmo> toDestroy = new ArrayList<>();
-	
+
+	//the actor thread processes at a maximum of 60 times a second
+	//this caps the speed of resting for higher refresh rate displays
+	private float notifyDelay = 1/60f;
+
 	@Override
 	public synchronized void update() {
 		if (Dungeon.hero == null || scene == null) {
 			return;
 		}
 
-		if (HDSettings.realtime()) {
-			if (unpause) {
-				time += Game.elapsed;
-				if (time >= (float)HDSettings.delay() / 2) {
-
-					GameScene.layoutSkillTags();
-
-					Buff.prolong(Dungeon.hero, Utils.OneTurnDelay.class, 1);
-
-					GameScene.time = 0;
-
-					Dungeon.hero.rest(false);
-				}
-			}
-		}
-
 		super.update();
+
+		if (notifyDelay > 0) notifyDelay -= Game.elapsed;
+		if (!timerPaused && HDSettings.realtime() && Dungeon.hero.ready) {
+			timeCounter.visible=true;
+			timer -= Game.elapsed;
+			timeCounter.setSweep((1f - (float)(timer / HDSettings.delay())) % 1f);
+			if (timer <= 0 && Dungeon.hero.isAlive()) {
+				Dungeon.hero.rest(false);
+				resetTimer();
+			}
+		} else {
+			timeCounter.visible=false;
+		}
 		
 		if (!freezeEmitters) water.offset( 0, -5 * Game.elapsed );
 
@@ -1256,6 +1269,9 @@ public class GameScene extends PixelScene {
 		selectCell( defaultCellListener );
 		QuickSlotButton.cancel();
 		if (scene != null && scene.toolbar != null) scene.toolbar.examining = false;
+		if(Dungeon.hero.ready) {
+			timerPaused = false;
+		}
 	}
 	
 	public static void checkKeyHold(){
