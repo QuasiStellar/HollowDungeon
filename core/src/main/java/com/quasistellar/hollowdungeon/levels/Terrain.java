@@ -60,6 +60,8 @@ public class Terrain {
 	public static final int ALCHEMY			= 28;
 
 	public static final int WATER		    = 29;
+
+	public static final int BENCH		    = 31;
 	
 	public static final int PASSABLE		= 0x01;
 	public static final int LOS_BLOCKING	= 0x02;
@@ -106,6 +108,7 @@ public class Terrain {
 		flags[BOOKSHELF]	= flags[BARRICADE];
 		flags[ALCHEMY]		= SOLID;
 
+		flags[BENCH]		= AVOID;
 	}
 
 	public static int discover( int terr ) {

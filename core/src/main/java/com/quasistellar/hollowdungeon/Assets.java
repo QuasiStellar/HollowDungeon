@@ -262,6 +262,7 @@ public class Assets {
 		public static final String MAGGOT	= "sprites/maggot.png";
 		public static final String RATKING	= "sprites/ratking.png";
 		public static final String BEE      = "sprites/bee.png";
+		public static final String SHADE    = "sprites/shade.png";
 		public static final String MIMIC    = "sprites/mimic.png";
 		public static final String ROT_LASH = "sprites/rot_lasher.png";
 		public static final String ROT_HEART= "sprites/rot_heart.png";

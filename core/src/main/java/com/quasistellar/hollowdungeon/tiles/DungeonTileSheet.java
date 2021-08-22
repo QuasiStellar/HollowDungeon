@@ -69,6 +69,7 @@ public class DungeonTileSheet {
 	public static final int WELL            = GROUND +18;
 	public static final int EMPTY_WELL      = GROUND +19;
 	public static final int PEDESTAL        = GROUND +20;
+	public static final int BENCH           = GROUND +21;
 
 
 
@@ -137,6 +138,7 @@ public class DungeonTileSheet {
 		chasmStitcheable.put( Terrain.BOOKSHELF,    CHASM_FLOOR );
 		chasmStitcheable.put( Terrain.BARRICADE,    CHASM_FLOOR );
 		chasmStitcheable.put( Terrain.PEDESTAL,     CHASM_FLOOR );
+		chasmStitcheable.put( Terrain.BENCH,        CHASM_FLOOR );
 
 		//special floor
 		chasmStitcheable.put( Terrain.EMPTY_SP,     CHASM_FLOOR_SP );
@@ -354,6 +356,7 @@ public class DungeonTileSheet {
 		directVisuals.put(Terrain.EXIT,             EXIT);
 		directVisuals.put(Terrain.EMBERS,           EMBERS);
 		directVisuals.put(Terrain.PEDESTAL,         PEDESTAL);
+		directVisuals.put(Terrain.BENCH,            BENCH);
 		directVisuals.put(Terrain.EMPTY_SP,         FLOOR_SP);
 
 		directVisuals.put(Terrain.SECRET_TRAP,      directVisuals.get(Terrain.EMPTY));

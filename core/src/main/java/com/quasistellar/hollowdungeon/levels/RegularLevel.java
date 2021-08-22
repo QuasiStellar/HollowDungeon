@@ -38,6 +38,7 @@ import com.quasistellar.hollowdungeon.levels.painters.Painter;
 import com.quasistellar.hollowdungeon.levels.rooms.Room;
 import com.quasistellar.hollowdungeon.levels.rooms.special.PitRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
+import com.quasistellar.hollowdungeon.levels.rooms.standard.BenchRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.ExitRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.StandardRoom;
@@ -114,6 +115,10 @@ public abstract class RegularLevel extends Level {
 			if (s instanceof PitRoom) specials++;
 			initRooms.add(s);
 		}
+
+		if (Dungeon.location.equals("Forgotten Crossroads 4")) {
+			initRooms.add(new BenchRoom());
+		}
 		
 		//int secrets = SecretRoom.secretsForFloor(Dungeon.depth);
 //		for (int i = 0; i < secrets; i++)
@@ -164,8 +169,7 @@ public abstract class RegularLevel extends Level {
 	
 	@Override
 	protected void createMobs() {
-		//on floor 1, 8 pre-set mobs are created so the player can get level 2.
-		int mobsToSpawn = Dungeon.location.equals("King's Pass") ? 8 : nMobs();
+		int mobsToSpawn = nMobs();
 
 		ArrayList<Room> stdRooms = new ArrayList<>();
 		for (Room room : rooms) {

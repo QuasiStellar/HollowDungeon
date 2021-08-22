@@ -300,6 +300,11 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 			health.killAndErase();
 		}
 	}
+
+	public void die(Callback callback) {
+		animCallback = callback;
+		die();
+	}
 	
 	public Emitter emitter() {
 		Emitter emitter = GameScene.emitter();

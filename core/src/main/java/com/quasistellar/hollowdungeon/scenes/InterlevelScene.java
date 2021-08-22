@@ -25,6 +25,7 @@
 package com.quasistellar.hollowdungeon.scenes;
 
 import com.quasistellar.hollowdungeon.actors.blobs.WaterOfAwareness;
+import com.quasistellar.hollowdungeon.actors.mobs.Shade;
 import com.quasistellar.hollowdungeon.items.FCMap;
 import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndError;
@@ -333,6 +334,7 @@ public class InterlevelScene extends PixelScene {
 		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
 			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
 		}
+		removeOldShades();
 	}
 
 	private void transit() throws IOException {
@@ -352,6 +354,7 @@ public class InterlevelScene extends PixelScene {
 		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
 			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
 		}
+		removeOldShades();
 	}
 	
 	private void ascend() throws IOException {
@@ -372,6 +375,7 @@ public class InterlevelScene extends PixelScene {
 		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
 			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
 		}
+		removeOldShades();
 	}
 	
 	private void returnTo() throws IOException {
@@ -386,6 +390,7 @@ public class InterlevelScene extends PixelScene {
 		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
 			WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
 		}
+		removeOldShades();
 	}
 	
 	private void restore() throws IOException {
@@ -402,6 +407,7 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.changeConnections(Dungeon.location);
 			Dungeon.switchLevel( level, Dungeon.hero.pos );
 		}
+		removeOldShades();
 	}
 	
 	private void resurrect() throws IOException {
@@ -415,7 +421,15 @@ public class InterlevelScene extends PixelScene {
 //			Dungeon.switchLevel( level, level.entrance );
 //		} else {
 			Dungeon.hero.resurrect( -1 );
-			Dungeon.resetLevel();
+			Dungeon.saveAll();
+			Dungeon.location = returnLocation;
+			Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
+			Dungeon.changeConnections(Dungeon.location);
+			Dungeon.switchLevel( level, returnPos );
+			if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
+				WaterOfAwareness.affectHeroAnyway(new WaterOfAwareness());
+			}
+			removeOldShades();
 //		}
 	}
 
@@ -429,6 +443,16 @@ public class InterlevelScene extends PixelScene {
 		Level level = Dungeon.newLevel();
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.entrance );
+		removeOldShades();
+	}
+
+	private void removeOldShades() {
+		for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+			if (mob instanceof Shade && mob.id() != Dungeon.hero.shadeID) {
+				Dungeon.level.mobs.remove(mob);
+				Actor.remove(mob);
+			}
+		}
 	}
 	
 	@Override

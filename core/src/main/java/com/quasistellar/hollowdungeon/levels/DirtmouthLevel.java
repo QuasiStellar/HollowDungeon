@@ -117,6 +117,7 @@ public class DirtmouthLevel extends Level {
 	private static final int Q = Terrain.EXIT;
 	private static final int E = Terrain.ENTRANCE;
 	private static final int S = Terrain.STATUE;
+	private static final int B = Terrain.BENCH;
 
 	private static final int[] MAP_TOWN =
 	{       W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,
@@ -139,7 +140,7 @@ public class DirtmouthLevel extends Level {
 			W,W,W,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,W,W,W,e,e,e,e,e,e,e,W,W,W,W,W,W,W,W,
 			W,W,W,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,e,W,W,e,e,e,e,e,e,e,W,W,W,W,W,W,W,
 			W,W,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,L,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,e,e,e,W,W,e,e,e,e,e,e,e,e,W,W,W,W,W,
-			W,W,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,L,e,e,e,e,e,e,e,W,e,e,e,e,e,e,e,e,W,W,W,W,W,
+			W,W,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,B,e,e,e,e,L,e,e,e,e,e,e,e,W,e,e,e,e,e,e,e,e,W,W,W,W,W,
 			W,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,e,e,e,e,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,e,e,e,W,W,e,e,e,e,e,e,e,e,e,W,W,W,W,
 			W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,e,e,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,e,W,W,e,e,e,e,e,e,e,e,e,e,W,W,W,W,
 			W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,e,e,W,W,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,W,W,W,W,W,e,e,e,e,e,e,e,e,e,e,e,W,W,W,W,

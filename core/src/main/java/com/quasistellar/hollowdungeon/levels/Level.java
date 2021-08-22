@@ -24,6 +24,7 @@
 
 package com.quasistellar.hollowdungeon.levels;
 
+import com.quasistellar.hollowdungeon.levels.features.Bench;
 import com.quasistellar.hollowdungeon.plants.Plant;
 import com.quasistellar.hollowdungeon.plants.Swiftthistle;
 import com.quasistellar.hollowdungeon.sprites.ItemSprite;
@@ -852,29 +853,33 @@ public abstract class Level implements Bundlable {
 		Trap trap = null;
 		
 		switch (map[cell]) {
-		
+
 		case Terrain.SECRET_TRAP:
 			if (hard) {
 				trap = traps.get( cell );
 				GLog.i(Messages.get(Level.class, "hidden_trap", trap.name));
 			}
 			break;
-			
+
 		case Terrain.TRAP:
 			trap = traps.get( cell );
 			break;
-			
+
 		case Terrain.HIGH_GRASS:
 		case Terrain.FURROWED_GRASS:
 			HighGrass.trample( this, cell);
 			break;
-			
+
 		case Terrain.WELL:
 			WellWater.affectCell( cell );
 			break;
-			
+
 		case Terrain.DOOR:
 			Door.enter( cell );
+			break;
+
+		case Terrain.BENCH:
+			Bench.sit( cell );
 			break;
 		}
 
@@ -1091,6 +1096,8 @@ public abstract class Level implements Bundlable {
 				return Messages.get(Level.class, "locked_door_name");
 			case Terrain.PEDESTAL:
 				return Messages.get(Level.class, "pedestal_name");
+			case Terrain.BENCH:
+				return Messages.get(Level.class, "bench_name");
 			case Terrain.BARRICADE:
 				return Messages.get(Level.class, "barricade_name");
 			case Terrain.HIGH_GRASS:
@@ -1138,6 +1145,8 @@ public abstract class Level implements Bundlable {
 				return Messages.get(Level.class, "high_grass_desc");
 			case Terrain.LOCKED_DOOR:
 				return Messages.get(Level.class, "locked_door_desc");
+			case Terrain.BENCH:
+				return Messages.get(Level.class, "bench_desc");
 			case Terrain.LOCKED_EXIT:
 				return Messages.get(Level.class, "locked_exit_desc");
 			case Terrain.BARRICADE:

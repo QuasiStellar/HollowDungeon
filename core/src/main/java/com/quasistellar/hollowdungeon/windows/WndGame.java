@@ -72,29 +72,29 @@ public class WndGame extends Window {
 			} );
 		}
 
-		// Restart
-		if (Dungeon.hero == null || !Dungeon.hero.isAlive()) {
-			
-			RedButton btnStart;
-			addButton( btnStart = new RedButton( Messages.get(this, "start") ) {
-				@Override
-				protected void onClick() {
-					InterlevelScene.noStory = true;
-					GamesInProgress.selectedClass = Dungeon.hero.heroClass;
-					GamesInProgress.curSlot = GamesInProgress.firstEmpty();
-					HollowDungeon.switchScene(HeroSelectScene.class);
-				}
-			} );
-			btnStart.textColor(Window.GREEN_COLOR);
-			
-//			addButton( new RedButton( Messages.get(this, "rankings") ) {
+//		// Restart
+//		if (Dungeon.hero == null || !Dungeon.hero.isAlive()) {
+//
+//			RedButton btnStart;
+//			addButton( btnStart = new RedButton( Messages.get(this, "start") ) {
 //				@Override
 //				protected void onClick() {
-//					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-//					Game.switchScene( RankingsScene.class );
+//					InterlevelScene.noStory = true;
+//					GamesInProgress.selectedClass = Dungeon.hero.heroClass;
+//					GamesInProgress.curSlot = GamesInProgress.firstEmpty();
+//					HollowDungeon.switchScene(HeroSelectScene.class);
 //				}
 //			} );
-		}
+//			btnStart.textColor(Window.GREEN_COLOR);
+//
+////			addButton( new RedButton( Messages.get(this, "rankings") ) {
+////				@Override
+////				protected void onClick() {
+////					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
+////					Game.switchScene( RankingsScene.class );
+////				}
+////			} );
+//		}
 
 		addButtons(
 				// Main menu

@@ -36,9 +36,11 @@ import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight1;
 import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight2;
 import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight3;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
+import com.quasistellar.hollowdungeon.actors.mobs.Shade;
 import com.quasistellar.hollowdungeon.actors.mobs.Vengefly;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.CheckedCell;
+import com.quasistellar.hollowdungeon.levels.KingspassLevel;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
@@ -135,6 +137,11 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public int dreamgatePos;
 	public String dreamgateLocation = "";
 
+	public int benchPos = 233;
+	public String benchLocation = "King's Pass";
+
+	public int shadeID;
+
 	public int lastFloor = 0;
 	
 	private ArrayList<com.quasistellar.hollowdungeon.actors.mobs.Mob> visibleEnemies;
@@ -174,6 +181,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	private static final String MANA		= "MP";
 	private static final String DREAMGATE_POS= "dreamgatePos";
 	private static final String DREAMGATE_LOCATION		= "dreamgateLocation";
+	private static final String BENCH_POS   = "benchPos";
+	private static final String BENCH_LOCATION		    = "benchLocation";
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -189,6 +198,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		bundle.put( DREAMGATE_POS, dreamgatePos );
 		bundle.put( DREAMGATE_LOCATION, dreamgateLocation );
+
+		bundle.put( BENCH_POS, benchPos );
+		bundle.put( BENCH_LOCATION, benchLocation );
 
 		belongings.storeInBundle( bundle );
 	}
@@ -206,6 +218,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		dreamgatePos = bundle.getInt( DREAMGATE_POS );
 		dreamgateLocation = bundle.getString( DREAMGATE_LOCATION );
+
+		benchPos = bundle.getInt( BENCH_POS );
+		benchLocation = bundle.getString( BENCH_LOCATION );
 		
 		belongings.restoreFromBundle( bundle );
 	}
@@ -1119,8 +1134,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			}
 		}
 		
-		com.quasistellar.hollowdungeon.actors.Actor.fixTime();
-		super.die( cause );
+//		com.quasistellar.hollowdungeon.actors.Actor.fixTime();
+//		super.die( cause );
 
 		if (ankh == null) {
 			
@@ -1131,10 +1146,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	public static void reallyDie( Object cause ) {
 		
-		int length = com.quasistellar.hollowdungeon.Dungeon.level.length();
-		int[] map = com.quasistellar.hollowdungeon.Dungeon.level.map;
-		boolean[] visited = com.quasistellar.hollowdungeon.Dungeon.level.visited;
-		boolean[] discoverable = com.quasistellar.hollowdungeon.Dungeon.level.discoverable;
+//		int length = com.quasistellar.hollowdungeon.Dungeon.level.length();
+//		int[] map = com.quasistellar.hollowdungeon.Dungeon.level.map;
+//		boolean[] visited = com.quasistellar.hollowdungeon.Dungeon.level.visited;
+//		boolean[] discoverable = com.quasistellar.hollowdungeon.Dungeon.level.discoverable;
 		
 //		for (int i=0; i < length; i++) {
 //
@@ -1149,23 +1164,23 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 //			}
 //		}
 		
-		com.quasistellar.hollowdungeon.Dungeon.observe();
-		GameScene.updateFog();
+//		com.quasistellar.hollowdungeon.Dungeon.observe();
+//		GameScene.updateFog();
 				
-		com.quasistellar.hollowdungeon.Dungeon.hero.belongings.identify();
+//		com.quasistellar.hollowdungeon.Dungeon.hero.belongings.identify();
 
-		int pos = com.quasistellar.hollowdungeon.Dungeon.hero.pos;
-
-		ArrayList<Integer> passable = new ArrayList<>();
-		for (Integer ofs : PathFinder.NEIGHBOURS8) {
-			int cell = pos + ofs;
-			if ((com.quasistellar.hollowdungeon.Dungeon.level.passable[cell] || com.quasistellar.hollowdungeon.Dungeon.level.avoid[cell]) && com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( cell ) == null) {
-				passable.add( cell );
-			}
-		}
-		Collections.shuffle( passable );
-
-		GameScene.gameOver();
+//		int pos = com.quasistellar.hollowdungeon.Dungeon.hero.pos;
+//
+//		ArrayList<Integer> passable = new ArrayList<>();
+//		for (Integer ofs : PathFinder.NEIGHBOURS8) {
+//			int cell = pos + ofs;
+//			if ((com.quasistellar.hollowdungeon.Dungeon.level.passable[cell] || com.quasistellar.hollowdungeon.Dungeon.level.avoid[cell]) && com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( cell ) == null) {
+//				passable.add( cell );
+//			}
+//		}
+//		Collections.shuffle( passable );
+//
+//		GameScene.gameOver();
 
 		if (!HDSettings.focus()) {
 			Game.runOnRenderThread(new Callback() {
@@ -1178,11 +1193,34 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			});
 		}
 
-		if (cause instanceof Hero.Doom) {
-			((Hero.Doom)cause).onDeath();
-		}
+		Dungeon.hero.sprite.die(new Callback() {
+			@Override
+			public void call() {
+				for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+					if (mob instanceof Shade) {
+						Dungeon.level.mobs.remove(mob);
+						Actor.remove(mob);
+					}
+				}
+				Shade s = new Shade();
+				s.pos = Dungeon.hero.pos;
+				s.geo = Dungeon.geo;
+				Dungeon.geo = 0;
+				s.state = s.SLEEPING;
+				GameScene.add(s);
+				Dungeon.hero.shadeID = s.id();
+				InterlevelScene.mode = InterlevelScene.Mode.RESURRECT;
+				InterlevelScene.returnLocation = Dungeon.hero.benchLocation;
+				InterlevelScene.returnPos = Dungeon.hero.benchPos;
+				Game.switchScene( InterlevelScene.class );
+			}
+		});
+
+//		if (cause instanceof Hero.Doom) {
+//			((Hero.Doom)cause).onDeath();
+//		}
 		
-		com.quasistellar.hollowdungeon.Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
+//		com.quasistellar.hollowdungeon.Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
 	}
 
 	@Override
@@ -1403,7 +1441,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public void resurrect( int resetLevel ) {
 		
 		HP = HT;
-		com.quasistellar.hollowdungeon.Dungeon.geo = 0;
+		MP = 0;
 		
 		//belongings.resurrect( resetLevel );
 

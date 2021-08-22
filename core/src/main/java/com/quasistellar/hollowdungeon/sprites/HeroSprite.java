@@ -74,7 +74,7 @@ public class HeroSprite extends CharSprite {
 		run.frames( film, 2, 3, 4, 5, 6, 7 );
 
 		die = new Animation( 10, false );
-		die.frames( film, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 );
+		die.frames( film, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 19, 19, 19, 19, 19, 19 );
 
 		attack = new Animation( 15, false );
 		attack.frames( film, 20, 21, 22, 0 );
@@ -115,6 +115,11 @@ public class HeroSprite extends CharSprite {
 	public void jump( int from, int to, Callback callback ) {
 		super.jump( from, to, callback );
 		play( fly );
+	}
+
+	@Override
+	public void die() {
+		play( die );
 	}
 
 	public void read() {

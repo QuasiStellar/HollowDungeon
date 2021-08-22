@@ -48,6 +48,7 @@ import com.quasistellar.hollowdungeon.actors.mobs.Mob;
 import com.quasistellar.hollowdungeon.levels.rooms.secret.SecretRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.special.SpecialRoom;
 import com.quasistellar.hollowdungeon.mechanics.ShadowCaster;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.FileUtils;
@@ -55,6 +56,7 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Dungeon {
