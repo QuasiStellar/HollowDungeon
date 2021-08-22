@@ -30,7 +30,9 @@ import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.levels.Terrain;
+import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
+import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 
 public class Bench {
@@ -41,5 +43,6 @@ public class Bench {
 		Dungeon.hero.benchPos = pos;
 		Dungeon.levelsToNotReset.clear();
 		Dungeon.levelsToNotReset.add(Dungeon.location);
+		GLog.p(Messages.get(Bench.class, "sit"));
 	}
 }
