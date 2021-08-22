@@ -42,7 +42,7 @@ import com.watabou.utils.FileUtils;
 
 public class WelcomeScene extends com.quasistellar.hollowdungeon.scenes.PixelScene {
 
-	private static int LATEST_UPDATE = HollowDungeon.v0_3;
+	private static int LATEST_UPDATE = HollowDungeon.v0_4;
 
 	@Override
 	public void create() {

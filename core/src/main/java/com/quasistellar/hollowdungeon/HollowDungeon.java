@@ -38,6 +38,7 @@ public class HollowDungeon extends Game {
 	public static final int v0_0  = 1;
 	public static final int v0_2  = 4;
 	public static final int v0_3  = 5;
+	public static final int v0_4  = 6;
 	
 	public HollowDungeon(PlatformSupport platform ) {
 		super( sceneClass == null ? WelcomeScene.class : sceneClass, platform );
