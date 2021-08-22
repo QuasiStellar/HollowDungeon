@@ -24,6 +24,7 @@
 
 package com.quasistellar.hollowdungeon.actors.mobs;
 
+import com.quasistellar.hollowdungeon.Badges;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.ToxicGas;
 import com.quasistellar.hollowdungeon.actors.buffs.Amok;
@@ -77,6 +78,7 @@ public class FalseKnightMaggot3 extends Mob {
         super.die(cause);
         Dungeon.level.unseal();
         ((FalseknightLevel)Dungeon.level).progress();
+        Badges.validateBossSlain();
         GameScene.bossSlain();
         Dungeon.level.drop( new CityCrest(), pos ).sprite.drop();
     }
