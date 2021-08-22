@@ -50,6 +50,11 @@ public class Shade extends Mob {
         }
     }
 
+    @Override
+    public boolean reset() {
+        return true;
+    }
+
     private static final String GEO     = "geo";
 
     @Override

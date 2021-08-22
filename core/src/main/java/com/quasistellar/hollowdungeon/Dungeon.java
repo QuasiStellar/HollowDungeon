@@ -56,6 +56,7 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -146,6 +147,8 @@ public class Dungeon {
 	public static String transitionDestination;
 	
 	public static HashSet<Integer> chapters;
+
+	public static ArrayList<String> levelsToNotReset = new ArrayList<>();
 
 	public static int version;
 

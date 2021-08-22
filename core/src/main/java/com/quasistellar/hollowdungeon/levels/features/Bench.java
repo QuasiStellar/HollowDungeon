@@ -38,6 +38,8 @@ public class Bench {
 	public static void sit( int pos ) {
 		Dungeon.hero.HP = Dungeon.hero.HT;
 		Dungeon.hero.benchLocation = Dungeon.location;
-		Dungeon.hero.benchPos = Dungeon.hero.pos;
+		Dungeon.hero.benchPos = pos;
+		Dungeon.levelsToNotReset.clear();
+		Dungeon.levelsToNotReset.add(Dungeon.location);
 	}
 }
