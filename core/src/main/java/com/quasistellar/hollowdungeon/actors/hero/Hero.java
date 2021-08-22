@@ -1209,6 +1209,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				s.state = s.SLEEPING;
 				GameScene.add(s);
 				Dungeon.hero.shadeID = s.id();
+				if (Dungeon.bossLocations.contains(Dungeon.location)) {
+					Dungeon.levelsToRebuild.add(Dungeon.location);
+				}
 				InterlevelScene.mode = InterlevelScene.Mode.RESURRECT;
 				InterlevelScene.returnLocation = Dungeon.hero.benchLocation;
 				InterlevelScene.returnPos = Dungeon.hero.benchPos;

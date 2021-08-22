@@ -322,10 +322,14 @@ public class InterlevelScene extends PixelScene {
 
 		Level level;
 		Dungeon.location = Dungeon.exitDestination;
-		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-		} catch (IOException e) {
+		if (Dungeon.levelsToRebuild.contains(Dungeon.location)) {
 			level = Dungeon.newLevel();
+		} else {
+			try {
+				level = Dungeon.loadLevel( GamesInProgress.curSlot );
+			} catch (IOException e) {
+				level = Dungeon.newLevel();
+			}
 		}
 		Dungeon.changeConnections(Dungeon.location);
 		// FIXME: magical number
@@ -344,10 +348,15 @@ public class InterlevelScene extends PixelScene {
 
 		Level level;
 		Dungeon.location = Dungeon.transitionDestination;
-		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-		} catch (IOException e) {
+		if (Dungeon.levelsToRebuild.contains(Dungeon.location)) {
 			level = Dungeon.newLevel();
+			Dungeon.levelsToRebuild.remove(Dungeon.location);
+		} else {
+			try {
+				level = Dungeon.loadLevel(GamesInProgress.curSlot);
+			} catch (IOException e) {
+				level = Dungeon.newLevel();
+			}
 		}
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.transition );
@@ -366,10 +375,15 @@ public class InterlevelScene extends PixelScene {
 		Dungeon.location = Dungeon.entranceDestination;
 
 		Level level;
-		try {
-			level = Dungeon.loadLevel( GamesInProgress.curSlot );
-		} catch (IOException e) {
+		if (Dungeon.levelsToRebuild.contains(Dungeon.location)) {
 			level = Dungeon.newLevel();
+			Dungeon.levelsToRebuild.remove(Dungeon.location);
+		} else {
+			try {
+				level = Dungeon.loadLevel(GamesInProgress.curSlot);
+			} catch (IOException e) {
+				level = Dungeon.newLevel();
+			}
 		}
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, level.exit );
@@ -386,7 +400,13 @@ public class InterlevelScene extends PixelScene {
 
 		Dungeon.saveAll();
 		Dungeon.location = returnLocation;
-		Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
+		Level level;
+		if (Dungeon.levelsToRebuild.contains(Dungeon.location)) {
+			level = Dungeon.newLevel();
+			Dungeon.levelsToRebuild.remove(Dungeon.location);
+		} else {
+			level = Dungeon.loadLevel(GamesInProgress.curSlot);
+		}
 		Dungeon.changeConnections(Dungeon.location);
 		Dungeon.switchLevel( level, returnPos );
 		if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {
@@ -427,7 +447,13 @@ public class InterlevelScene extends PixelScene {
 			Dungeon.hero.resurrect( -1 );
 			Dungeon.saveAll();
 			Dungeon.location = returnLocation;
-			Level level = Dungeon.loadLevel( GamesInProgress.curSlot );
+			Level level;
+			if (Dungeon.levelsToRebuild.contains(Dungeon.location)) {
+				level = Dungeon.newLevel();
+				Dungeon.levelsToRebuild.remove(Dungeon.location);
+			} else {
+				level = Dungeon.loadLevel(GamesInProgress.curSlot);
+			}
 			Dungeon.changeConnections(Dungeon.location);
 			Dungeon.switchLevel( level, returnPos );
 			if (Dungeon.hero.belongings.getSimilar(new FCMap()) != null) {

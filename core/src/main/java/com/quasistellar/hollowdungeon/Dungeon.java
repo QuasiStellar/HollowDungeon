@@ -149,6 +149,11 @@ public class Dungeon {
 	public static HashSet<Integer> chapters;
 
 	public static ArrayList<String> levelsToNotReset = new ArrayList<>();
+	public static ArrayList<String> levelsToRebuild = new ArrayList<>();
+
+	public static ArrayList<String> bossLocations = new ArrayList<String>() {{
+		add("False Knight Arena");
+	}};
 
 	public static int version;
 
