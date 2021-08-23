@@ -90,7 +90,7 @@ public class WndRealtime extends Window {
         delaySlider.setRect(0, realtimeCheck.bottom() + GAP_TINY, WIDTH, SLIDER_HEIGHT);
         add(delaySlider);
 
-        RenderedTextBlock skillDesc = PixelScene.renderTextBlock(Messages.get(this, "skill_desc"), 7);
+        RenderedTextBlock skillDesc = PixelScene.renderTextBlock(Messages.get(this, "skill_desc"), 7, WIDTH);
         skillDesc.setPos(width/2f, delaySlider.bottom() + GAP_SML);
         add(skillDesc);
 
@@ -106,13 +106,13 @@ public class WndRealtime extends Window {
         skillCheck.checked(HDSettings.skills());
         add(skillCheck);
 
-        RenderedTextBlock skipDesc = PixelScene.renderTextBlock(Messages.get(this, "skip"), 7);
+        RenderedTextBlock skipDesc = PixelScene.renderTextBlock(Messages.get(this, "skip"), 7, WIDTH);
         skipDesc.setPos(width/2f, skillCheck.top() + skillCheck.height() + GAP_SML);
         add(skipDesc);
 
         RenderedTextBlock hornetDesc = null;
         if (heroClass == HeroClass.HORNET) {
-            hornetDesc = PixelScene.renderTextBlock(Messages.get(this, "hornet"), 7);
+            hornetDesc = PixelScene.renderTextBlock(Messages.get(this, "hornet"), 7, WIDTH);
             hornetDesc.hardlight(0xFF0000);
             hornetDesc.setPos(width/2f, skipDesc.top() + skipDesc.height() + GAP_SML);
             add(hornetDesc);

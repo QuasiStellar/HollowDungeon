@@ -173,6 +173,12 @@ public class PixelScene extends Scene {
 		return result;
 	}
 
+	public static RenderedTextBlock renderTextBlock(String text, int size, int maxWidth ){
+		RenderedTextBlock result = new RenderedTextBlock( text, size*defaultZoom, maxWidth);
+		result.zoom(1/(float)defaultZoom);
+		return result;
+	}
+
 	/**
 	 * These methods align UI elements to device pixels.
 	 * e.g. if we have a scale of 3x then valid positions are #.0, #.33, #.67

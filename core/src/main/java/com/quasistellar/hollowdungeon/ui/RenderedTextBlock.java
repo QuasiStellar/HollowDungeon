@@ -65,6 +65,13 @@ public class RenderedTextBlock extends Component {
 		text(text);
 	}
 
+	public RenderedTextBlock(String text, int size, int maxWidth){
+		this.size = size;
+		this.maxWidth = maxWidth;
+		multiline = true;
+		text(text);
+	}
+
 	public void text(String text){
 		this.text = text;
 
