@@ -1134,7 +1134,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			}
 		}
 		
-//		com.quasistellar.hollowdungeon.actors.Actor.fixTime();
+//		Actor.fixTime();
 //		super.die( cause );
 
 		if (ankh == null) {
@@ -1145,42 +1145,6 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	}
 	
 	public static void reallyDie( Object cause ) {
-		
-//		int length = com.quasistellar.hollowdungeon.Dungeon.level.length();
-//		int[] map = com.quasistellar.hollowdungeon.Dungeon.level.map;
-//		boolean[] visited = com.quasistellar.hollowdungeon.Dungeon.level.visited;
-//		boolean[] discoverable = com.quasistellar.hollowdungeon.Dungeon.level.discoverable;
-		
-//		for (int i=0; i < length; i++) {
-//
-//			int terr = map[i];
-//
-//			if (discoverable[i]) {
-//
-//				visited[i] = true;
-//				if ((Terrain.flags[terr] & Terrain.SECRET) != 0) {
-//					com.quasistellar.hollowdungeon.Dungeon.level.discover( i );
-//				}
-//			}
-//		}
-		
-//		com.quasistellar.hollowdungeon.Dungeon.observe();
-//		GameScene.updateFog();
-				
-//		com.quasistellar.hollowdungeon.Dungeon.hero.belongings.identify();
-
-//		int pos = com.quasistellar.hollowdungeon.Dungeon.hero.pos;
-//
-//		ArrayList<Integer> passable = new ArrayList<>();
-//		for (Integer ofs : PathFinder.NEIGHBOURS8) {
-//			int cell = pos + ofs;
-//			if ((com.quasistellar.hollowdungeon.Dungeon.level.passable[cell] || com.quasistellar.hollowdungeon.Dungeon.level.avoid[cell]) && com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( cell ) == null) {
-//				passable.add( cell );
-//			}
-//		}
-//		Collections.shuffle( passable );
-//
-//		GameScene.gameOver();
 
 		if (!HDSettings.focus()) {
 			Game.runOnRenderThread(new Callback() {
@@ -1193,44 +1157,53 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			});
 		}
 
-		Dungeon.hero.sprite.die(new Callback() {
-			@Override
-			public void call() {
-				for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
-					if (mob instanceof Shade) {
-						Dungeon.level.mobs.remove(mob);
-						Actor.remove(mob);
+		switch (Dungeon.hero.heroClass) {
+			case KNIGHT:
+				Dungeon.hero.sprite.die(new Callback() {
+					@Override
+					public void call() {
+						for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+							if (mob instanceof Shade) {
+								Dungeon.level.mobs.remove(mob);
+								Actor.remove(mob);
+							}
+						}
+						if (Dungeon.bossLocations.contains(Dungeon.location)) {
+							Dungeon.levelsToRebuild.add(Dungeon.location);
+							Dungeon.bossShadeLocation = Dungeon.location;
+							Dungeon.bossShadeGeo = Dungeon.geo;
+							Dungeon.geo = 0;
+							Dungeon.hero.shadeID = 0;
+						} else {
+							Dungeon.bossShadeLocation = null;
+							Dungeon.bossShadeGeo = 0;
+							Shade s = new Shade();
+							s.pos = Dungeon.hero.pos;
+							s.geo = Dungeon.geo;
+							Dungeon.geo = 0;
+							s.state = s.SLEEPING;
+							GameScene.add(s);
+							Dungeon.hero.shadeID = s.id();
+						}
+						InterlevelScene.mode = InterlevelScene.Mode.RESURRECT;
+						InterlevelScene.returnLocation = Dungeon.hero.benchLocation;
+						InterlevelScene.returnPos = Dungeon.hero.benchPos;
+						Game.switchScene( InterlevelScene.class );
 					}
-				}
-				if (Dungeon.bossLocations.contains(Dungeon.location)) {
-					Dungeon.levelsToRebuild.add(Dungeon.location);
-					Dungeon.bossShadeLocation = Dungeon.location;
-					Dungeon.bossShadeGeo = Dungeon.geo;
-					Dungeon.geo = 0;
-					Dungeon.hero.shadeID = 0;
-				} else {
-					Dungeon.bossShadeLocation = null;
-					Dungeon.bossShadeGeo = 0;
-					Shade s = new Shade();
-					s.pos = Dungeon.hero.pos;
-					s.geo = Dungeon.geo;
-					Dungeon.geo = 0;
-					s.state = s.SLEEPING;
-					GameScene.add(s);
-					Dungeon.hero.shadeID = s.id();
-				}
-				InterlevelScene.mode = InterlevelScene.Mode.RESURRECT;
-				InterlevelScene.returnLocation = Dungeon.hero.benchLocation;
-				InterlevelScene.returnPos = Dungeon.hero.benchPos;
-				Game.switchScene( InterlevelScene.class );
-			}
-		});
+				});
+				break;
 
-//		if (cause instanceof Hero.Doom) {
-//			((Hero.Doom)cause).onDeath();
-//		}
-		
-//		com.quasistellar.hollowdungeon.Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
+			case HORNET:
+				Actor.fixTime();
+				Dungeon.hero.destroy();
+				Dungeon.hero.sprite.die();
+				GameScene.gameOver();
+				if (cause instanceof Hero.Doom) {
+					((Hero.Doom)cause).onDeath();
+				}
+				Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
+				break;
+		}
 	}
 
 	@Override
