@@ -172,7 +172,7 @@ public class TitleScene extends PixelScene {
 		align(btnPlay);
 		btnAbout.setRect((w - 96) / 2f, btnPlay.bottom() + 10, 96, 16);
 
-		BitmapText version = new BitmapText( "DEMO-3", pixelFont); //FIXME
+		BitmapText version = new BitmapText( "DEMO-4", pixelFont); //FIXME
 		version.measure();
 		version.hardlight( 0x888888 );
 		version.x = w - version.width() - 4;
