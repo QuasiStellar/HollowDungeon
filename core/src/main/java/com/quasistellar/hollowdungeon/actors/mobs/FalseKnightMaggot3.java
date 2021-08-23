@@ -79,6 +79,8 @@ public class FalseKnightMaggot3 extends Mob {
         Dungeon.level.unseal();
         ((FalseknightLevel)Dungeon.level).progress();
         Badges.validateBossSlain();
+        Dungeon.bossLocations.remove("False Knight Arena");
+        Dungeon.levelsToRebuild.remove("False Knight Arena");
         GameScene.bossSlain();
         Dungeon.level.drop( new CityCrest(), pos ).sprite.drop();
     }
