@@ -1143,9 +1143,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 		}
 	}
-	
-	public static void reallyDie( Object cause ) {
 
+	private static void showFocusText() {
 		if (!HDSettings.focus()) {
 			Game.runOnRenderThread(new Callback() {
 				@Override
@@ -1156,7 +1155,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				}
 			});
 		}
-
+	}
+	
+	public static void reallyDie( Object cause ) {
 		switch (Dungeon.hero.heroClass) {
 			case KNIGHT:
 				Dungeon.hero.sprite.die(new Callback() {
@@ -1194,6 +1195,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				break;
 
 			case HORNET:
+				showFocusText();
 				Actor.fixTime();
 				Dungeon.hero.destroy();
 				Dungeon.hero.sprite.die();

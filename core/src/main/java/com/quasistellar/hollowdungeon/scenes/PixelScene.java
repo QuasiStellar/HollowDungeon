@@ -44,6 +44,7 @@ import com.watabou.noosa.Scene;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.ui.Component;
 import com.watabou.utils.BitmapCache;
+import com.watabou.utils.GameMath;
 import com.watabou.utils.Reflection;
 
 import java.util.ArrayList;
@@ -90,13 +91,7 @@ public class PixelScene extends Scene {
 		defaultZoom = HDSettings.scale();
 
 		if (defaultZoom < Math.ceil( Game.density * 2 ) || defaultZoom > maxDefaultZoom){
-			defaultZoom = (int)Math.ceil( Game.density * 2 ); //TODO: !!!
-			while ((
-				Game.width / defaultZoom < minWidth ||
-				Game.height / defaultZoom < minHeight
-			) && defaultZoom > 1) {
-				defaultZoom--;
-			}
+			defaultZoom = (int) GameMath.gate(3, (int)Math.ceil( Game.density * 2.5 ), maxDefaultZoom);
 		}
 
 		minZoom = 1;
