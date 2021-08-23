@@ -1202,15 +1202,22 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 						Actor.remove(mob);
 					}
 				}
-				Shade s = new Shade();
-				s.pos = Dungeon.hero.pos;
-				s.geo = Dungeon.geo;
-				Dungeon.geo = 0;
-				s.state = s.SLEEPING;
-				GameScene.add(s);
-				Dungeon.hero.shadeID = s.id();
 				if (Dungeon.bossLocations.contains(Dungeon.location)) {
 					Dungeon.levelsToRebuild.add(Dungeon.location);
+					Dungeon.bossShadeLocation = Dungeon.location;
+					Dungeon.bossShadeGeo = Dungeon.geo;
+					Dungeon.geo = 0;
+					Dungeon.hero.shadeID = 0;
+				} else {
+					Dungeon.bossShadeLocation = null;
+					Dungeon.bossShadeGeo = 0;
+					Shade s = new Shade();
+					s.pos = Dungeon.hero.pos;
+					s.geo = Dungeon.geo;
+					Dungeon.geo = 0;
+					s.state = s.SLEEPING;
+					GameScene.add(s);
+					Dungeon.hero.shadeID = s.id();
 				}
 				InterlevelScene.mode = InterlevelScene.Mode.RESURRECT;
 				InterlevelScene.returnLocation = Dungeon.hero.benchLocation;

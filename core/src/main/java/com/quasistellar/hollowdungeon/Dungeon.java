@@ -57,6 +57,7 @@ import com.watabou.utils.Random;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -142,18 +143,19 @@ public class Dungeon {
 	public static String location;
 	public static int geo;
 
+	public static int bossShadeGeo;
+	public static String bossShadeLocation;
+
 	public static String entranceDestination;
 	public static String exitDestination;
 	public static String transitionDestination;
 	
 	public static HashSet<Integer> chapters;
 
-	public static ArrayList<String> levelsToNotReset = new ArrayList<>();
-	public static ArrayList<String> levelsToRebuild = new ArrayList<>();
+	public static ArrayList<String> levelsToNotReset;
+	public static ArrayList<String> levelsToRebuild;
 
-	public static ArrayList<String> bossLocations = new ArrayList<String>() {{
-		add("False Knight Arena");
-	}};
+	public static ArrayList<String> bossLocations;
 
 	public static int version;
 
@@ -182,16 +184,26 @@ public class Dungeon {
 		quickslot.reset();
 		QuickSlotButton.reset();
 		
-		location = "King's Pass";
-		exitDestination = "King's Pass";
-//		location = "False Knight Arena";
-//		exitDestination = "False Knight Arena";
+//		location = "King's Pass";
+//		exitDestination = "King's Pass";
+		location = "False Knight Arena";
+		exitDestination = "False Knight Arena";
 		geo = 0;
+
+		bossShadeGeo = 0;
+		bossShadeLocation = null;
 
 		for (LimitedDrops a : LimitedDrops.values())
 			a.count = 0;
 		
 		chapters = new HashSet<>();
+
+		levelsToNotReset = new ArrayList<>();
+		levelsToRebuild = new ArrayList<>();
+
+		bossLocations = new ArrayList<String>() {{
+			add("False Knight Arena");
+		}};
 
 		Generator.reset();
 		hero = new Hero();
@@ -1091,6 +1103,12 @@ public class Dungeon {
 	private static final String CHAPTERS	= "chapters";
 	private static final String QUESTS		= "quests";
 	private static final String BADGES		= "badges";
+	private static final String BOSSSHADEGEO		= "boss_shade_geo";
+	private static final String BOSSSHADELOCATION	= "boss_shade_location";
+	private static final String LEVELSTONOTRESET	= "levels_to_not_reset";
+	private static final String LEVELSTOREBUILD	    = "levels_to_rebuild";
+	private static final String BOSSSLOCATIONS	    = "boss_locations";
+
 	
 	public static void saveGame( int save ) {
 		try {
@@ -1111,11 +1129,32 @@ public class Dungeon {
 			bundle.put ( LIMDROPS, limDrops );
 			
 			int count = 0;
-			int ids[] = new int[chapters.size()];
+			int[] ids = new int[chapters.size()];
 			for (Integer id : chapters) {
 				ids[count++] = id;
 			}
 			bundle.put( CHAPTERS, ids );
+
+			count = 0;
+			String[] sts = new String[levelsToNotReset.size()];
+			for (String st : levelsToNotReset) {
+				sts[count++] = st;
+			}
+			bundle.put( LEVELSTONOTRESET, sts );
+
+			count = 0;
+			sts = new String[levelsToRebuild.size()];
+			for (String st : levelsToRebuild) {
+				sts[count++] = st;
+			}
+			bundle.put( LEVELSTOREBUILD, sts );
+
+			count = 0;
+			sts = new String[bossLocations.size()];
+			for (String st : bossLocations) {
+				sts[count++] = st;
+			}
+			bundle.put( BOSSSLOCATIONS, sts );
 			
 			Bundle quests = new Bundle();
 			bundle.put( QUESTS, quests );
@@ -1132,6 +1171,8 @@ public class Dungeon {
 			Bundle badges = new Bundle();
 			com.quasistellar.hollowdungeon.Badges.saveLocal( badges );
 			bundle.put( BADGES, badges );
+			bundle.put( BOSSSHADEGEO, bossShadeGeo );
+			bundle.put( BOSSSHADELOCATION, bossShadeLocation );
 			
 			FileUtils.bundleToFile( GamesInProgress.gameFile(save), bundle);
 			
@@ -1194,6 +1235,24 @@ public class Dungeon {
 					chapters.add( id );
 				}
 			}
+
+			levelsToNotReset = new ArrayList<>();
+			String[] sts = bundle.getStringArray( LEVELSTONOTRESET );
+			if (sts != null) {
+				levelsToNotReset.addAll(Arrays.asList(sts));
+			}
+
+			levelsToRebuild = new ArrayList<>();
+			sts = bundle.getStringArray( LEVELSTOREBUILD );
+			if (sts != null) {
+				levelsToRebuild.addAll(Arrays.asList(sts));
+			}
+
+			bossLocations = new ArrayList<>();
+			sts = bundle.getStringArray( BOSSSLOCATIONS );
+			if (sts != null) {
+				bossLocations.addAll(Arrays.asList(sts));
+			}
 			
 			Bundle quests = bundle.getBundle( QUESTS );
 			if (!quests.isNull()) {
@@ -1220,6 +1279,9 @@ public class Dungeon {
 		
 		geo = bundle.getInt( GOLD );
 		location = bundle.getString( LOCATION );
+
+		bossShadeGeo = bundle.getInt( BOSSSHADEGEO );
+		bossShadeLocation = bundle.getString( BOSSSHADELOCATION );
 		
 		Statistics.restoreFromBundle( bundle );
 		com.quasistellar.hollowdungeon.items.Generator.restoreFromBundle( bundle );

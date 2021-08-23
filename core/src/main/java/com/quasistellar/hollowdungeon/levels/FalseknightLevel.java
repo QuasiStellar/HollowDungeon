@@ -31,6 +31,7 @@ import com.quasistellar.hollowdungeon.actors.Char;
 import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight1;
 import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight3;
 import com.quasistellar.hollowdungeon.actors.mobs.Mob;
+import com.quasistellar.hollowdungeon.actors.mobs.Shade;
 import com.quasistellar.hollowdungeon.actors.mobs.Vengefly;
 import com.quasistellar.hollowdungeon.actors.mobs.WanderingHusk;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletFocus;
@@ -38,6 +39,8 @@ import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletSearch;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.watabou.noosa.audio.Music;
 import com.watabou.utils.Bundle;
+
+import java.util.Objects;
 
 public class FalseknightLevel extends Level {
 
@@ -109,7 +112,9 @@ public class FalseknightLevel extends Level {
 		entrance = 42;
 		exit = 357;
 		transition = 0;
-		
+
+		bossShadePos = 209;
+
 		return true;
 	}
 
@@ -193,6 +198,17 @@ public class FalseknightLevel extends Level {
 		Vengefly fly2 = new Vengefly();
 		fly2.pos = 14 * 20 + 11;
 		mobs.add(fly2);
+
+		if (Dungeon.bossShadeLocation != null && Dungeon.bossShadeLocation.equals("False Knight Arena")) {
+			Shade s = new Shade();
+			s.pos = bossShadePos;
+			s.geo = Dungeon.bossShadeGeo;
+			s.state = s.SLEEPING;
+			mobs.add(s);
+			Dungeon.hero.shadeID = s.id();
+			Dungeon.bossShadeLocation = null;
+			Dungeon.bossShadeGeo = 0;
+		}
 	}
 
 	public Actor respawner() {

@@ -115,6 +115,8 @@ public abstract class Level implements Bundlable {
 	public int exit;
 	public int transition;
 
+	public int bossShadePos;
+
 	//when a boss level has become locked.
 	public boolean locked = false;
 	
