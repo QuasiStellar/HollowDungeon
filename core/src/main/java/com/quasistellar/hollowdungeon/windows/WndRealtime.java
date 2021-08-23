@@ -26,6 +26,7 @@ package com.quasistellar.hollowdungeon.windows;
 
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.actors.hero.HeroClass;
 import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.InterlevelScene;
@@ -54,7 +55,7 @@ public class WndRealtime extends Window {
     private static final int GAP_SML 		= 6;
     private static final int GAP_LRG 		= 18;
 
-    public WndRealtime() {
+    public WndRealtime(HeroClass heroClass) {
 
         super();
 
@@ -109,6 +110,14 @@ public class WndRealtime extends Window {
         skipDesc.setPos(width/2f, skillCheck.top() + skillCheck.height() + GAP_SML);
         add(skipDesc);
 
+        RenderedTextBlock hornetDesc = null;
+        if (heroClass == HeroClass.HORNET) {
+            hornetDesc = PixelScene.renderTextBlock(Messages.get(this, "hornet"), 7);
+            hornetDesc.hardlight(0xFF0000);
+            hornetDesc.setPos(width/2f, skipDesc.top() + skipDesc.height() + GAP_SML);
+            add(hornetDesc);
+        }
+
         RedButton btnStart = new RedButton( Messages.get(this, "start") ) {
             @Override
             protected void onClick() {
@@ -124,7 +133,7 @@ public class WndRealtime extends Window {
 //                }
             }
         };
-        btnStart.setRect( 0, skipDesc.bottom() + GAP, WIDTH, BTN_HEIGHT );
+        btnStart.setRect( 0, heroClass == HeroClass.HORNET ? hornetDesc.bottom() + GAP : skipDesc.bottom() + GAP, WIDTH, BTN_HEIGHT );
         add( btnStart );
 
         resize(WIDTH, (int)btnStart.bottom());

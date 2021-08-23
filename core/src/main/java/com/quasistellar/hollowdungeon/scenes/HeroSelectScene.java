@@ -123,7 +123,7 @@ public class HeroSelectScene extends PixelScene {
 
 				if (GamesInProgress.selectedClass == null) return;
 
-				HollowDungeon.scene().addToFront(new WndRealtime());
+				HollowDungeon.scene().addToFront(new WndRealtime(GamesInProgress.selectedClass));
 			}
 		};
 		startBtn.icon(Icons.get(Icons.ENTER));
