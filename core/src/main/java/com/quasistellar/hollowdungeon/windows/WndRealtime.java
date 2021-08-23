@@ -58,24 +58,13 @@ public class WndRealtime extends Window {
 
         super();
 
-        RenderedTextBlock skillDesc = PixelScene.renderTextBlock(Messages.get(this, "skill_desc"), 7);
-        skillDesc.setPos(width/2f, GAP);
-        add(skillDesc);
-
-        CheckBox skillCheck = new CheckBox(Messages.get(this, "skill")){
-            @Override
-            protected void onClick() {
-                super.onClick();
-                HDSettings.skills(checked());
-            }
-        };
-
-        skillCheck.setRect(0, skillDesc.bottom() + GAP, WIDTH, BTN_HEIGHT);
-        skillCheck.checked(HDSettings.skills());
-        add(skillCheck);
+        RenderedTextBlock wndTitle = PixelScene.renderTextBlock(Messages.get(this, "title"), 12);
+        wndTitle.setPos((WIDTH-wndTitle.width())/2f, GAP_TINY);
+        PixelScene.align(wndTitle);
+        add(wndTitle);
 
         RenderedTextBlock realtimeDesc = PixelScene.renderTextBlock(Messages.get(this, "realtime_desc"), 7);
-        realtimeDesc.setPos(width/2f, skillCheck.bottom() + GAP);
+        realtimeDesc.setPos(width/2f, wndTitle.bottom() + GAP_SML);
         add(realtimeDesc);
 
         CheckBox realtimeCheck = new CheckBox(Messages.get(this, "realtime")){
@@ -100,8 +89,24 @@ public class WndRealtime extends Window {
         delaySlider.setRect(0, realtimeCheck.bottom() + GAP_TINY, WIDTH, SLIDER_HEIGHT);
         add(delaySlider);
 
+        RenderedTextBlock skillDesc = PixelScene.renderTextBlock(Messages.get(this, "skill_desc"), 7);
+        skillDesc.setPos(width/2f, delaySlider.bottom() + GAP_SML);
+        add(skillDesc);
+
+        CheckBox skillCheck = new CheckBox(Messages.get(this, "skill")){
+            @Override
+            protected void onClick() {
+                super.onClick();
+                HDSettings.skills(checked());
+            }
+        };
+
+        skillCheck.setRect(0, skillDesc.bottom() + GAP, WIDTH, BTN_HEIGHT);
+        skillCheck.checked(HDSettings.skills());
+        add(skillCheck);
+
         RenderedTextBlock skipDesc = PixelScene.renderTextBlock(Messages.get(this, "skip"), 7);
-        skipDesc.setPos(width/2f, delaySlider.top() + delaySlider.height() + GAP);
+        skipDesc.setPos(width/2f, skillCheck.top() + skillCheck.height() + GAP_SML);
         add(skipDesc);
 
         RedButton btnStart = new RedButton( Messages.get(this, "start") ) {
