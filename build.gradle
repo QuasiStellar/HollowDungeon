@@ -16,8 +16,8 @@ allprojects {
         appName = 'Hollow Dungeon'
         appPackageName = 'com.quasistellar.hollowdungeon'
 
-        appVersionCode = 5
-        appVersionName = '0.3'
+        appVersionCode = 6
+        appVersionName = '0.4'
 
         appJavaCompatibility = JavaVersion.VERSION_1_8
 
