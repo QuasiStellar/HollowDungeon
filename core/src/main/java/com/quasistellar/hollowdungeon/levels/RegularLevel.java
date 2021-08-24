@@ -43,14 +43,6 @@ import com.quasistellar.hollowdungeon.levels.rooms.standard.EntranceRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.ExitRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.StandardRoom;
 import com.quasistellar.hollowdungeon.levels.rooms.standard.TransitionRoom;
-import com.quasistellar.hollowdungeon.levels.traps.BlazingTrap;
-import com.quasistellar.hollowdungeon.levels.traps.BurningTrap;
-import com.quasistellar.hollowdungeon.levels.traps.ChillingTrap;
-import com.quasistellar.hollowdungeon.levels.traps.DisintegrationTrap;
-import com.quasistellar.hollowdungeon.levels.traps.ExplosiveTrap;
-import com.quasistellar.hollowdungeon.levels.traps.FrostTrap;
-import com.quasistellar.hollowdungeon.levels.traps.Trap;
-import com.quasistellar.hollowdungeon.levels.traps.WornDartTrap;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -145,15 +137,15 @@ public abstract class RegularLevel extends Level {
 	protected abstract Painter painter();
 	
 	protected int nTraps() {
-		return Random.NormalIntRange( 2, 3 );
+		return 0;
 	}
 	
 	protected Class<?>[] trapClasses(){
-		return new Class<?>[]{WornDartTrap.class};
+		return new Class<?>[]{};
 	}
 
 	protected float[] trapChances() {
-		return new float[]{1};
+		return new float[]{};
 	}
 	
 	@Override
@@ -397,16 +389,16 @@ public abstract class RegularLevel extends Level {
 						&& heaps.get(pos) == null
 						&& findMob(pos) == null) {
 					
-					Trap t = traps.get(pos);
+//					Trap t = traps.get(pos);
 					
 					//items cannot spawn on traps which destroy items
-					if (t == null ||
-							! (t instanceof BurningTrap || t instanceof BlazingTrap
-							|| t instanceof ChillingTrap || t instanceof FrostTrap
-							|| t instanceof ExplosiveTrap || t instanceof DisintegrationTrap)) {
-						
-						return pos;
-					}
+//					if (t == null ||
+//							! (t instanceof BurningTrap || t instanceof BlazingTrap
+//							|| t instanceof ChillingTrap || t instanceof FrostTrap
+//							|| t instanceof ExplosiveTrap || t instanceof DisintegrationTrap)) {
+//
+//						return pos;
+//					}
 				}
 			}
 		}
