@@ -156,6 +156,11 @@ public class FalseknightLevel extends Level {
 			fk1.pos = 189; //in the middle of the fight room
 			GameScene.add(fk1);
 			fk1.notice();
+			for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+				if (mob instanceof WanderingHusk || mob instanceof Vengefly) {
+					mob.damage(mob.HP, this);
+				}
+			}
 			Game.runOnRenderThread(new Callback() {
 				@Override
 				public void call() {
