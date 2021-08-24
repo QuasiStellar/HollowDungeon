@@ -157,6 +157,8 @@ public class Dungeon {
 
 	public static ArrayList<String> bossLocations;
 
+	public static ArrayList<String> mappedLocations;
+
 	public static int version;
 
 	public static long seed;
@@ -184,10 +186,10 @@ public class Dungeon {
 		quickslot.reset();
 		QuickSlotButton.reset();
 		
-		location = "King's Pass";
-		exitDestination = "King's Pass";
-//		location = "False Knight Arena";
-//		exitDestination = "False Knight Arena";
+//		location = "King's Pass";
+//		exitDestination = "King's Pass";
+		location = "False Knight Arena";
+		exitDestination = "False Knight Arena";
 		geo = 0;
 
 		bossShadeGeo = 0;
@@ -204,6 +206,8 @@ public class Dungeon {
 		bossLocations = new ArrayList<String>() {{
 			add("False Knight Arena");
 		}};
+
+		mappedLocations = new ArrayList<>();
 
 		Generator.reset();
 		hero = new Hero();
@@ -1108,6 +1112,7 @@ public class Dungeon {
 	private static final String LEVELSTONOTRESET	= "levels_to_not_reset";
 	private static final String LEVELSTOREBUILD	    = "levels_to_rebuild";
 	private static final String BOSSSLOCATIONS	    = "boss_locations";
+	private static final String MAPPEDLOCATIONS	    = "mapped_locations";
 
 	
 	public static void saveGame( int save ) {
@@ -1155,6 +1160,13 @@ public class Dungeon {
 				sts[count++] = st;
 			}
 			bundle.put( BOSSSLOCATIONS, sts );
+
+			count = 0;
+			sts = new String[mappedLocations.size()];
+			for (String st : mappedLocations) {
+				sts[count++] = st;
+			}
+			bundle.put( MAPPEDLOCATIONS, sts );
 			
 			Bundle quests = new Bundle();
 			bundle.put( QUESTS, quests );
@@ -1252,6 +1264,12 @@ public class Dungeon {
 			sts = bundle.getStringArray( BOSSSLOCATIONS );
 			if (sts != null) {
 				bossLocations.addAll(Arrays.asList(sts));
+			}
+
+			mappedLocations = new ArrayList<>();
+			sts = bundle.getStringArray( MAPPEDLOCATIONS );
+			if (sts != null) {
+				mappedLocations.addAll(Arrays.asList(sts));
 			}
 			
 			Bundle quests = bundle.getBundle( QUESTS );
@@ -1365,6 +1383,14 @@ public class Dungeon {
 		for (int i = t; i <= b; i++) {
 			BArray.or( level.visited, level.heroFOV, pos, width, level.visited );
 			pos+=level.width();
+		}
+
+		if (!mappedLocations.contains(location)) {
+			if (level.needUpdateFog != null) {
+				level.needUpdateFog = BArray.and(BArray.not(level.heroFOV, null), BArray.or(level.visited, level.needUpdateFog, null), null);
+			} else
+				level.needUpdateFog = BArray.and(level.visited, BArray.not(level.heroFOV, null), null);
+			level.visited = level.heroFOV;
 		}
 	
 		GameScene.updateFog(l, t, width, height);

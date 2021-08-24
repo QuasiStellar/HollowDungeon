@@ -24,6 +24,7 @@
 
 package com.quasistellar.hollowdungeon.levels;
 
+import com.badlogic.gdx.Gdx;
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.actors.Actor;
@@ -37,8 +38,12 @@ import com.quasistellar.hollowdungeon.actors.mobs.WanderingHusk;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletFocus;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletSearch;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
+import com.quasistellar.hollowdungeon.windows.WndTradeItem;
+import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.Callback;
 
 import java.util.Objects;
 
@@ -151,7 +156,12 @@ public class FalseknightLevel extends Level {
 			fk1.pos = 189; //in the middle of the fight room
 			GameScene.add(fk1);
 			fk1.notice();
-			Music.INSTANCE.play( Assets.Music.SURFACE, true );
+			Game.runOnRenderThread(new Callback() {
+				@Override
+				public void call() {
+					Music.INSTANCE.play( Assets.Music.SURFACE, false );
+				}
+			});
 
 			state = State.FIGHT;
 		} else if (state == State.FIGHT) {

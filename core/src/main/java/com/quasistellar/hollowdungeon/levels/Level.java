@@ -96,6 +96,7 @@ public abstract class Level implements Bundlable {
 	public boolean[] mapped;
 	public boolean[] discoverable;
 
+	public boolean[] needUpdateFog;
 	public int viewDistance = 8;
 	
 	public boolean[] heroFOV;

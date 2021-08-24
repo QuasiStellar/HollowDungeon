@@ -325,6 +325,7 @@ public class Badges {
 		
 		if (badge != null) {
 			local.add( badge );
+			displayBadge( badge );
 			
 			if (badge == Badge.BOSS_SLAIN_1) {
 				switch (Dungeon.hero.heroClass) {
@@ -336,7 +337,6 @@ public class Badges {
 					break;
 				}
 				local.add( badge );
-				displayBadge( badge );
 				if (!global.contains( badge )) {
 					global.add( badge );
 					saveNeeded = true;

@@ -174,11 +174,13 @@ public class FogOfWar extends Image {
 	private boolean[] mapped;
 	private int brightness;
 	
-	private void updateTexture( boolean[] visible, boolean[] visited, boolean[] mapped ) {
+	private void updateTexture( boolean[] visible, boolean[] visited, boolean[] mapped, boolean[] needFill ) {
 		this.visible = visible;
 		this.visited = visited;
 		this.mapped = mapped;
 		this.brightness = HDSettings.brightness() + 1;
+
+		if (needFill==null)needFill=new boolean[visible.length];
 
 		moveToUpdating();
 		
@@ -205,8 +207,9 @@ public class FogOfWar extends Image {
 							|| (!visible[cell] && !visited[cell] && !mapped[cell])) {
 						//we skip filling cells here if it isn't a full update
 						// because they must already be dark
-						if (fullUpdate)
-							fillCell(fog, j, i, FOG_COLORS[INVISIBLE][brightness]);
+						if (fullUpdate || (needFill[cell] && !Dungeon.mappedLocations.contains(Dungeon.location)))
+							needFill[cell]=false;
+						fillCell(fog, j, i, FOG_COLORS[INVISIBLE][brightness]);
 						cell++;
 						continue;
 					}
@@ -326,7 +329,7 @@ public class FogOfWar extends Image {
 	public void draw() {
 
 		if (!toUpdate.isEmpty()){
-			updateTexture(Dungeon.level.heroFOV, Dungeon.level.visited, Dungeon.level.mapped);
+			updateTexture(Dungeon.level.heroFOV, Dungeon.level.visited, Dungeon.level.mapped, Dungeon.level.needUpdateFog);
 		}
 
 		super.draw();

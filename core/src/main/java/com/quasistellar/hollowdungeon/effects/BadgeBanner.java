@@ -52,25 +52,29 @@ public class BadgeBanner extends Image {
 	private static BadgeBanner current;
 	
 	private BadgeBanner( int index ) {
-		
-		super( Assets.Interfaces.BADGES );
-		
+
+		super(Assets.Interfaces.BADGES);
+
 		if (atlas == null) {
-			atlas = new TextureFilm( texture, 16, 16 );
+			atlas = new TextureFilm(texture, 16, 16);
 		}
-		
+
+		setup(index);
+	}
+
+	public void setup( int index ){
 		this.index = index;
-		
-		frame( atlas.get( index ) );
-		origin.set( width / 2, height / 2 );
-		
-		alpha( 0 );
-		scale.set( 2 * DEFAULT_SCALE );
-		
+
+		frame(atlas.get(index));
+		origin.set(width / 2, height / 2);
+
+		alpha(0);
+		scale.set(2 * DEFAULT_SCALE);
+
 		state = State.FADE_IN;
 		time = FADE_IN_TIME;
-		
-		Sample.INSTANCE.play( Assets.Sounds.BADGE );
+
+		Sample.INSTANCE.play(Assets.Sounds.BADGE);
 	}
 	
 	@Override
@@ -278,7 +282,7 @@ public class BadgeBanner extends Image {
 	
 	public static BadgeBanner show( int image ) {
 		if (current != null) {
-			current.killAndErase();
+			current.setup(image);
 		}
 		return (current = new BadgeBanner( image ));
 	}

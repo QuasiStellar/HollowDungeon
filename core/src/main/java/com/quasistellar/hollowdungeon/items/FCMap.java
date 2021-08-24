@@ -24,6 +24,7 @@
 
 package com.quasistellar.hollowdungeon.items;
 
+import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.messages.Messages;
@@ -38,6 +39,18 @@ public class FCMap extends Item {
 	{
 		image = ItemSpriteSheet.MAP;
 		stackable = true;
+	}
+
+	@Override
+	public boolean doPickUp(Hero hero) {
+		Dungeon.mappedLocations.add("King's Pass");
+		Dungeon.mappedLocations.add("Dirtmouth");
+		Dungeon.mappedLocations.add("Forgotten Crossroads 1");
+		Dungeon.mappedLocations.add("Forgotten Crossroads 2");
+		Dungeon.mappedLocations.add("Forgotten Crossroads 3");
+		Dungeon.mappedLocations.add("Forgotten Crossroads 4");
+		Dungeon.mappedLocations.add("False Knight Arena");
+		return true;
 	}
 
 	@Override
