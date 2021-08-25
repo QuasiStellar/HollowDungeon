@@ -185,10 +185,10 @@ public class Dungeon {
 		quickslot.reset();
 		QuickSlotButton.reset();
 		
-//		location = "King's Pass";
-//		exitDestination = "King's Pass";
-		location = "False Knight Arena";
-		exitDestination = "False Knight Arena";
+		location = "King's Pass";
+		exitDestination = "King's Pass";
+//		location = "False Knight Arena";
+//		exitDestination = "False Knight Arena";
 		geo = 0;
 
 		bossShadeGeo = 0;
