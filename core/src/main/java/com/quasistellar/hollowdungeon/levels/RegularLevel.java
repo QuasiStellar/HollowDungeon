@@ -397,7 +397,7 @@ public abstract class RegularLevel extends Level {
 //							|| t instanceof ChillingTrap || t instanceof FrostTrap
 //							|| t instanceof ExplosiveTrap || t instanceof DisintegrationTrap)) {
 //
-//						return pos;
+						return pos;
 //					}
 				}
 			}
