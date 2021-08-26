@@ -26,12 +26,22 @@ package com.quasistellar.hollowdungeon.actors.hero;
 
 import com.quasistellar.hollowdungeon.Assets;
 import com.quasistellar.hollowdungeon.Dungeon;
+import com.quasistellar.hollowdungeon.GamesInProgress;
 import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.actors.blobs.Alchemy;
+import com.quasistellar.hollowdungeon.actors.buffs.Amok;
+import com.quasistellar.hollowdungeon.actors.buffs.Awareness;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
+import com.quasistellar.hollowdungeon.actors.buffs.Drowsy;
 import com.quasistellar.hollowdungeon.actors.buffs.FlavourBuff;
+import com.quasistellar.hollowdungeon.actors.buffs.Foresight;
+import com.quasistellar.hollowdungeon.actors.buffs.Fury;
 import com.quasistellar.hollowdungeon.actors.buffs.Invisibility;
+import com.quasistellar.hollowdungeon.actors.buffs.MindVision;
+import com.quasistellar.hollowdungeon.actors.buffs.Momentum;
+import com.quasistellar.hollowdungeon.actors.buffs.Paralysis;
+import com.quasistellar.hollowdungeon.actors.buffs.Vertigo;
 import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight1;
 import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight2;
 import com.quasistellar.hollowdungeon.actors.mobs.FalseKnight3;
@@ -40,6 +50,10 @@ import com.quasistellar.hollowdungeon.actors.mobs.Shade;
 import com.quasistellar.hollowdungeon.actors.mobs.Vengefly;
 import com.quasistellar.hollowdungeon.effects.CellEmitter;
 import com.quasistellar.hollowdungeon.effects.CheckedCell;
+import com.quasistellar.hollowdungeon.items.Ankh;
+import com.quasistellar.hollowdungeon.items.Dewdrop;
+import com.quasistellar.hollowdungeon.items.Heap;
+import com.quasistellar.hollowdungeon.items.Item;
 import com.quasistellar.hollowdungeon.levels.KingspassLevel;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
@@ -93,7 +107,7 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
+public class Hero extends Char {
 
 	{
 		actPriority = Actor.HERO_PRIO;
@@ -111,7 +125,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public HeroAction curAction = null;
 	public HeroAction lastAction = null;
 
-	private com.quasistellar.hollowdungeon.actors.Char enemy;
+	private Char enemy;
 	
 	public boolean resting = false;
 	
@@ -144,11 +158,11 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 	public int lastFloor = 0;
 	
-	private ArrayList<com.quasistellar.hollowdungeon.actors.mobs.Mob> visibleEnemies;
+	private ArrayList<Mob> visibleEnemies;
 
 	//This list is maintained so that some logic checks can be skipped
 	// for enemies we know we aren't seeing normally, resultign in better performance
-	public ArrayList<com.quasistellar.hollowdungeon.actors.mobs.Mob> mindVisionEnemies = new ArrayList<>();
+	public ArrayList<Mob> mindVisionEnemies = new ArrayList<>();
 
 	public Hero() {
 		super();
@@ -225,7 +239,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		belongings.restoreFromBundle( bundle );
 	}
 	
-	public static void preview(com.quasistellar.hollowdungeon.GamesInProgress.Info info, Bundle bundle ) {
+	public static void preview(GamesInProgress.Info info, Bundle bundle ) {
 		info.hp = bundle.getInt( Char.TAG_HP );
 		info.ht = bundle.getInt( Char.TAG_HT );
 		info.mp = bundle.getInt( MANA );
@@ -260,7 +274,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	@Override
 	public int damageRoll() {
 		int dmg = 5;
-		return buff( com.quasistellar.hollowdungeon.actors.buffs.Fury.class ) != null ? (int)(dmg * 1.5f) : dmg;
+		return buff( Fury.class ) != null ? (int)(dmg * 1.5f) : dmg;
 	}
 	
 	@Override
@@ -268,7 +282,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		float speed = super.speed();
 		
-		com.quasistellar.hollowdungeon.actors.buffs.Momentum momentum = buff(com.quasistellar.hollowdungeon.actors.buffs.Momentum.class);
+		Momentum momentum = buff(Momentum.class);
 		if (momentum != null){
 			((HeroSprite)sprite).sprint( 1f + 0.05f*momentum.stacks());
 			speed *= momentum.speedMultiplier();
@@ -278,13 +292,13 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		
 	}
 
-	public boolean canAttack(com.quasistellar.hollowdungeon.actors.Char enemy){
+	public boolean canAttack(Char enemy){
 		if (enemy == null || pos == enemy.pos) {
 			return false;
 		}
 
 		//can always attack adjacent enemies
-		if (com.quasistellar.hollowdungeon.Dungeon.level.adjacent(pos, enemy.pos)) {
+		if (Dungeon.level.adjacent(pos, enemy.pos)) {
 			return true;
 		}
 
@@ -303,7 +317,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public void spend( float time ) {
 		justMoved = false;
 		
-		com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble bubble = buff(com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble.class);
+		Swiftthistle.TimeBubble bubble = buff(Swiftthistle.TimeBubble.class);
 		if (bubble != null){
 			bubble.processTime(time);
 			return;
@@ -326,15 +340,15 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	public boolean act() {
 
 		//calls to dungeon.observe will also update hero's local FOV.
-		fieldOfView = com.quasistellar.hollowdungeon.Dungeon.level.heroFOV;
+		fieldOfView = Dungeon.level.heroFOV;
 		
 		if (!ready) {
 			//do a full observe (including fog update) if not resting.
-			if (!resting || buff(com.quasistellar.hollowdungeon.actors.buffs.MindVision.class) != null || buff(com.quasistellar.hollowdungeon.actors.buffs.Awareness.class) != null) {
-				com.quasistellar.hollowdungeon.Dungeon.observe();
+			if (!resting || buff(MindVision.class) != null || buff(Awareness.class) != null) {
+				Dungeon.observe();
 			} else {
 				//otherwise just directly re-calculate FOV
-				com.quasistellar.hollowdungeon.Dungeon.level.updateFieldOfView(this, fieldOfView);
+				Dungeon.level.updateFieldOfView(this, fieldOfView);
 			}
 		}
 		
@@ -345,7 +359,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 			curAction = null;
 			
-			spendAndNext( com.quasistellar.hollowdungeon.actors.Actor.TICK );
+			spendAndNext( Actor.TICK );
 			return false;
 		}
 		
@@ -454,7 +468,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	private boolean actInteract( HeroAction.Interact action ) {
 		
-		com.quasistellar.hollowdungeon.actors.Char ch = action.ch;
+		Char ch = action.ch;
 
 		if (ch.canInteract(this)) {
 			
@@ -482,8 +496,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 			ready();
 			
-			com.quasistellar.hollowdungeon.items.Heap heap = com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( dst );
-			if (heap != null && heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.FOR_SALE && heap.size() == 1) {
+			Heap heap = Dungeon.level.heaps.get( dst );
+			if (heap != null && heap.type == Heap.Type.FOR_SALE && heap.size() == 1) {
 				Game.runOnRenderThread(new Callback() {
 					@Override
 					public void call() {
@@ -506,17 +520,17 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 	private boolean actAlchemy( HeroAction.Alchemy action ) {
 		int dst = action.dst;
-		if (com.quasistellar.hollowdungeon.Dungeon.level.distance(dst, pos) <= 1) {
+		if (Dungeon.level.distance(dst, pos) <= 1) {
 
 			ready();
 			
-			com.quasistellar.hollowdungeon.actors.blobs.Alchemy alch = (com.quasistellar.hollowdungeon.actors.blobs.Alchemy) com.quasistellar.hollowdungeon.Dungeon.level.blobs.get(Alchemy.class);
+			Alchemy alch = (Alchemy) Dungeon.level.blobs.get(Alchemy.class);
 			//TODO logic for a well having dried up?
 			if (alch != null) {
 				alch.alchPos = dst;
 				AlchemyScene.setProvider( alch );
 			}
-			HollowDungeon.switchScene(com.quasistellar.hollowdungeon.scenes.AlchemyScene.class);
+			HollowDungeon.switchScene(AlchemyScene.class);
 			return false;
 
 		} else if (getCloser( dst )) {
@@ -533,20 +547,20 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		int dst = action.dst;
 		if (pos == dst) {
 			
-			com.quasistellar.hollowdungeon.items.Heap heap = com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( pos );
+			Heap heap = Dungeon.level.heaps.get( pos );
 			if (heap != null) {
-				com.quasistellar.hollowdungeon.items.Item item = heap.peek();
+				Item item = heap.peek();
 				if (item.doPickUp( this )) {
 					heap.pickUp();
 
-					if (item instanceof com.quasistellar.hollowdungeon.items.Dewdrop || item instanceof Key) {
+					if (item instanceof Dewdrop || item instanceof Key) {
 						//Do Nothing
 					}
 					
 					curAction = null;
 				} else {
 
-					if (item instanceof com.quasistellar.hollowdungeon.items.Dewdrop || item instanceof Key) {
+					if (item instanceof Dewdrop || item instanceof Key) {
 						//Do Nothing
 					} else {
 						//TODO temporary until 0.8.0a, when all languages will get this phrase
@@ -577,13 +591,13 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	private boolean actOpenChest( HeroAction.OpenChest action ) {
 		int dst = action.dst;
-		if (com.quasistellar.hollowdungeon.Dungeon.level.adjacent( pos, dst ) || pos == dst) {
+		if (Dungeon.level.adjacent( pos, dst ) || pos == dst) {
 			
-			com.quasistellar.hollowdungeon.items.Heap heap = com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( dst );
-			if (heap != null && (heap.type != com.quasistellar.hollowdungeon.items.Heap.Type.HEAP && heap.type != com.quasistellar.hollowdungeon.items.Heap.Type.FOR_SALE)) {
+			Heap heap = Dungeon.level.heaps.get( dst );
+			if (heap != null && (heap.type != Heap.Type.HEAP && heap.type != Heap.Type.FOR_SALE)) {
 				
-				if ((heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.LOCKED_CHEST && Notes.keyCount(new GoldenKey(Dungeon.location)) < 1)
-					|| (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.CRYSTAL_CHEST && Notes.keyCount(new CrystalKey(Dungeon.location)) < 1)){
+				if ((heap.type == Heap.Type.LOCKED_CHEST && Notes.keyCount(new GoldenKey(Dungeon.location)) < 1)
+					|| (heap.type == Heap.Type.CRYSTAL_CHEST && Notes.keyCount(new CrystalKey(Dungeon.location)) < 1)){
 
 						GLog.w( Messages.get(this, "locked_chest") );
 						ready();
@@ -593,14 +607,14 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				
 				switch (heap.type) {
 				case TOMB:
-					Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.TOMB );
+					Sample.INSTANCE.play( Assets.Sounds.TOMB );
 					Camera.main.shake( 1, 0.5f );
 					break;
 				case SKELETON:
 				case REMAINS:
 					break;
 				default:
-					Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.UNLOCK );
+					Sample.INSTANCE.play( Assets.Sounds.UNLOCK );
 				}
 				
 				sprite.operate( dst );
@@ -623,10 +637,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	
 	private boolean actUnlock( HeroAction.Unlock action ) {
 		int doorCell = action.dst;
-		if (com.quasistellar.hollowdungeon.Dungeon.level.adjacent( pos, doorCell )) {
+		if (Dungeon.level.adjacent( pos, doorCell )) {
 			
 			boolean hasKey = false;
-			int door = com.quasistellar.hollowdungeon.Dungeon.level.map[doorCell];
+			int door = Dungeon.level.map[doorCell];
 			
 			if (door == Terrain.LOCKED_DOOR
 					&& Notes.keyCount(new IronKey(Dungeon.location)) > 0) {
@@ -644,7 +658,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				
 				sprite.operate( doorCell );
 				
-				Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.UNLOCK );
+				Sample.INSTANCE.play( Assets.Sounds.UNLOCK );
 				
 			} else {
 				GLog.w( Messages.get(this, "locked_door") );
@@ -672,15 +686,15 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			return false;
 		//there can be multiple exit tiles, so descend on any of them
 		//TODO this is slightly brittle, it assumes there are no disjointed sets of exit tiles
-		} else if ((com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.EXIT)) {
+		} else if ((Dungeon.level.map[pos] == Terrain.EXIT)) {
 			
 			curAction = null;
 
-			com.quasistellar.hollowdungeon.actors.buffs.Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble.class);
+			Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 			if (buff != null) buff.detach();
 			
 			InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-			Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
+			Game.switchScene( InterlevelScene.class );
 
 			return false;
 
@@ -703,15 +717,15 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			return false;
 			//there can be multiple exit tiles, so descend on any of them
 			//TODO this is slightly brittle, it assumes there are no disjointed sets of exit tiles
-		} else if ((com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.UNLOCKED_EXIT)) {
+		} else if ((Dungeon.level.map[pos] == Terrain.UNLOCKED_EXIT)) {
 
 			curAction = null;
 
-			com.quasistellar.hollowdungeon.actors.buffs.Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(com.quasistellar.hollowdungeon.plants.Swiftthistle.TimeBubble.class);
+			Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 			if (buff != null) buff.detach();
 
 			InterlevelScene.mode = InterlevelScene.Mode.TRANSIT;
-			Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
+			Game.switchScene( InterlevelScene.class );
 
 			return false;
 
@@ -735,11 +749,11 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			return false;
 		//there can be multiple entrance tiles, so descend on any of them
 		//TODO this is slightly brittle, it assumes there are no disjointed sets of entrance tiles
-		} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.ENTRANCE) {
+		} else if (Dungeon.level.map[pos] == Terrain.ENTRANCE) {
 			
-//			if (com.quasistellar.hollowdungeon.Dungeon.depth == 1) {
+//			if (Dungeon.depth == 1) {
 //
-//				if (belongings.getItem( com.quasistellar.hollowdungeon.items.Amulet.class ) == null) {
+//				if (belongings.getItem( Amulet.class ) == null) {
 //					Game.runOnRenderThread(new Callback() {
 //						@Override
 //						public void call() {
@@ -748,9 +762,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 //					});
 //					ready();
 //				} else {
-//					com.quasistellar.hollowdungeon.Badges.silentValidateHappyEnd();
-//					com.quasistellar.hollowdungeon.Dungeon.win( com.quasistellar.hollowdungeon.items.Amulet.class );
-//					com.quasistellar.hollowdungeon.Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
+//					Badges.silentValidateHappyEnd();
+//					Dungeon.win( Amulet.class );
+//					Dungeon.deleteGame( GamesInProgress.curSlot, true );
 //					Game.switchScene( SurfaceScene.class );
 //				}
 //
@@ -758,11 +772,11 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				
 				curAction = null;
 
-				Buff buff = com.quasistellar.hollowdungeon.Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
+				Buff buff = Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 				if (buff != null) buff.detach();
 
 				InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
-				Game.switchScene( com.quasistellar.hollowdungeon.scenes.InterlevelScene.class );
+				Game.switchScene( InterlevelScene.class );
 //			}
 
 			return false;
@@ -801,7 +815,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		}
 	}
 
-	public com.quasistellar.hollowdungeon.actors.Char enemy(){
+	public Char enemy(){
 		return enemy;
 	}
 	
@@ -828,8 +842,8 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			resting = false;
 		}
 
-		if (this.buff(com.quasistellar.hollowdungeon.actors.buffs.Drowsy.class) != null){
-			com.quasistellar.hollowdungeon.actors.buffs.Buff.detach(this, com.quasistellar.hollowdungeon.actors.buffs.Drowsy.class);
+		if (this.buff(Drowsy.class) != null){
+			Buff.detach(this, Drowsy.class);
 			GLog.w( Messages.get(this, "pain_resist") );
 		}
 
@@ -850,9 +864,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			flashIntensity = Math.min(1/3f, flashIntensity); //cap intensity at 1/3
 			if (isAlive()) {
 				if (flashIntensity >= 1/6f) {
-					Sample.INSTANCE.play(com.quasistellar.hollowdungeon.Assets.Sounds.HEALTH_CRITICAL, 1/3f + flashIntensity * 2f);
+					Sample.INSTANCE.play(Assets.Sounds.HEALTH_CRITICAL, 1/3f + flashIntensity * 2f);
 				} else {
-					Sample.INSTANCE.play(com.quasistellar.hollowdungeon.Assets.Sounds.HEALTH_WARN, 1/3f + flashIntensity * 4f);
+					Sample.INSTANCE.play(Assets.Sounds.HEALTH_WARN, 1/3f + flashIntensity * 4f);
 				}
 			}
 		}
@@ -861,12 +875,12 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	}
 	
 	public void checkVisibleMobs() {
-		ArrayList<com.quasistellar.hollowdungeon.actors.mobs.Mob> visible = new ArrayList<>();
+		ArrayList<Mob> visible = new ArrayList<>();
 
 		boolean newMob = false;
 
-		com.quasistellar.hollowdungeon.actors.mobs.Mob target = null;
-		for (com.quasistellar.hollowdungeon.actors.mobs.Mob m : com.quasistellar.hollowdungeon.Dungeon.level.mobs.toArray(new com.quasistellar.hollowdungeon.actors.mobs.Mob[0])) {
+		Mob target = null;
+		for (Mob m : Dungeon.level.mobs.toArray(new Mob[0])) {
 			if (fieldOfView[ m.pos ] && m.alignment == Alignment.ENEMY) {
 				visible.add(m);
 				if (!visibleEnemies.contains( m )) {
@@ -883,17 +897,17 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			}
 		}
 
-		com.quasistellar.hollowdungeon.actors.Char lastTarget = QuickSlotButton.lastTarget;
+		Char lastTarget = QuickSlotButton.lastTarget;
 		if (target != null && (lastTarget == null ||
 							!lastTarget.isAlive() ||
 							(fieldOfView.length > lastTarget.pos && !fieldOfView[lastTarget.pos]))){
-			com.quasistellar.hollowdungeon.ui.QuickSlotButton.target(target);
+			QuickSlotButton.target(target);
 		}
 		
 		if (newMob) {
 			interrupt();
 			if (resting){
-				com.quasistellar.hollowdungeon.Dungeon.observe();
+				Dungeon.observe();
 				resting = false;
 			}
 		}
@@ -905,7 +919,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		return visibleEnemies.size();
 	}
 	
-	public com.quasistellar.hollowdungeon.actors.mobs.Mob visibleEnemy(int index ) {
+	public Mob visibleEnemy(int index ) {
 		return visibleEnemies.get(index % visibleEnemies.size());
 	}
 	
@@ -927,26 +941,26 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		
 		int step = -1;
 		
-		if (com.quasistellar.hollowdungeon.Dungeon.level.adjacent( pos, target )) {
+		if (Dungeon.level.adjacent( pos, target )) {
 
 			path = null;
 
 			if (Actor.findChar( target ) == null) {
-				if (com.quasistellar.hollowdungeon.Dungeon.level.pit[target] && !flying && !com.quasistellar.hollowdungeon.Dungeon.level.solid[target]) {
+				if (Dungeon.level.pit[target] && !flying && !Dungeon.level.solid[target]) {
 					if (!Chasm.jumpConfirmed){
 						Chasm.heroJump(this);
 						interrupt();
 					} else {
-						com.quasistellar.hollowdungeon.levels.features.Chasm.heroFall(target);
+						Chasm.heroFall(target);
 					}
 					return false;
 				}
-				if (com.quasistellar.hollowdungeon.Dungeon.level.passable[target] || com.quasistellar.hollowdungeon.Dungeon.level.avoid[target]) {
+				if (Dungeon.level.passable[target] || Dungeon.level.avoid[target]) {
 					step = target;
 				}
 				if (walkingToVisibleTrapInFog
-						&& com.quasistellar.hollowdungeon.Dungeon.level.traps.get(target) != null
-						&& com.quasistellar.hollowdungeon.Dungeon.level.traps.get(target).visible){
+						&& Dungeon.level.traps.get(target) != null
+						&& Dungeon.level.traps.get(target).visible){
 					return false;
 				}
 			}
@@ -954,28 +968,28 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		} else {
 
 			boolean newPath = false;
-			if (path == null || path.isEmpty() || !com.quasistellar.hollowdungeon.Dungeon.level.adjacent(pos, path.getFirst()))
+			if (path == null || path.isEmpty() || !Dungeon.level.adjacent(pos, path.getFirst()))
 				newPath = true;
 			else if (path.getLast() != target)
 				newPath = true;
 			else {
-				if (!com.quasistellar.hollowdungeon.Dungeon.level.passable[path.get(0)] || Actor.findChar(path.get(0)) != null) {
+				if (!Dungeon.level.passable[path.get(0)] || Actor.findChar(path.get(0)) != null) {
 					newPath = true;
 				}
 			}
 
 			if (newPath) {
 
-				int len = com.quasistellar.hollowdungeon.Dungeon.level.length();
-				boolean[] p = com.quasistellar.hollowdungeon.Dungeon.level.passable;
-				boolean[] v = com.quasistellar.hollowdungeon.Dungeon.level.visited;
-				boolean[] m = com.quasistellar.hollowdungeon.Dungeon.level.mapped;
+				int len = Dungeon.level.length();
+				boolean[] p = Dungeon.level.passable;
+				boolean[] v = Dungeon.level.visited;
+				boolean[] m = Dungeon.level.mapped;
 				boolean[] passable = new boolean[len];
 				for (int i = 0; i < len; i++) {
 					passable[i] = p[i] && (v[i] || m[i]);
 				}
 
-				PathFinder.Path newpath = com.quasistellar.hollowdungeon.Dungeon.findPath(this, target, passable, fieldOfView, true);
+				PathFinder.Path newpath = Dungeon.findPath(this, target, passable, fieldOfView, true);
 				if (newpath != null && path != null && newpath.size() > 2*path.size()){
 					path = null;
 				} else {
@@ -1016,26 +1030,26 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			return false;
 		}
 		
-		com.quasistellar.hollowdungeon.actors.Char ch;
-		com.quasistellar.hollowdungeon.items.Heap heap;
+		Char ch;
+		Heap heap;
 		
-		if (com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.ALCHEMY && cell != pos) {
+		if (Dungeon.level.map[cell] == Terrain.ALCHEMY && cell != pos) {
 			
 			curAction = new HeroAction.Alchemy( cell );
 			
 		} else if (fieldOfView[cell] && (ch = Actor.findChar( cell )) instanceof Mob) {
 
-			if (ch.alignment != Alignment.ENEMY && ch.buff(com.quasistellar.hollowdungeon.actors.buffs.Amok.class) == null) {
+			if (ch.alignment != Alignment.ENEMY && ch.buff(Amok.class) == null) {
 				curAction = new HeroAction.Interact( ch );
 			} else {
 				curAction = new HeroAction.Attack( ch );
 			}
 
-		} else if ((heap = com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( cell )) != null
+		} else if ((heap = Dungeon.level.heaps.get( cell )) != null
 				//moving to an item doesn't auto-pickup when enemies are near...
 				&& (visibleEnemies.size() == 0 || cell == pos ||
 				//...but only for standard heaps, chests and similar open as normal.
-				(heap.type != com.quasistellar.hollowdungeon.items.Heap.Type.HEAP && heap.type != com.quasistellar.hollowdungeon.items.Heap.Type.FOR_SALE))) {
+				(heap.type != Heap.Type.HEAP && heap.type != Heap.Type.FOR_SALE))) {
 
 			switch (heap.type) {
 			case HEAP:
@@ -1050,26 +1064,26 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				curAction = new HeroAction.OpenChest( cell );
 			}
 			
-		} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.LOCKED_DOOR || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.LOCKED_EXIT) {
+		} else if (Dungeon.level.map[cell] == Terrain.LOCKED_DOOR || Dungeon.level.map[cell] == Terrain.LOCKED_EXIT) {
 			
 			curAction = new HeroAction.Unlock( cell );
 			
-		} else if ((cell == com.quasistellar.hollowdungeon.Dungeon.level.exit || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.EXIT)) {
+		} else if ((cell == Dungeon.level.exit || Dungeon.level.map[cell] == Terrain.EXIT)) {
 			
 			curAction = new HeroAction.Descend( cell );
 			
-		} else if (cell == com.quasistellar.hollowdungeon.Dungeon.level.entrance || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.ENTRANCE) {
+		} else if (cell == Dungeon.level.entrance || Dungeon.level.map[cell] == Terrain.ENTRANCE) {
 			
 			curAction = new HeroAction.Ascend( cell );
 			
-		} else if (cell == Dungeon.level.transition || com.quasistellar.hollowdungeon.Dungeon.level.map[cell] == Terrain.UNLOCKED_EXIT) {
+		} else if (cell == Dungeon.level.transition || Dungeon.level.map[cell] == Terrain.UNLOCKED_EXIT) {
 
 			curAction = new HeroAction.Transit( cell );
 
 		} else  {
 			
-			if (!com.quasistellar.hollowdungeon.Dungeon.level.visited[cell] && !com.quasistellar.hollowdungeon.Dungeon.level.mapped[cell]
-					&& com.quasistellar.hollowdungeon.Dungeon.level.traps.get(cell) != null && com.quasistellar.hollowdungeon.Dungeon.level.traps.get(cell).visible) {
+			if (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell]
+					&& Dungeon.level.traps.get(cell) != null && Dungeon.level.traps.get(cell).visible) {
 				walkingToVisibleTrapInFog = true;
 			} else {
 				walkingToVisibleTrapInFog = false;
@@ -1102,7 +1116,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				GLog.w(msg);
 			}
 
-			if (buff instanceof com.quasistellar.hollowdungeon.actors.buffs.Paralysis || buff instanceof com.quasistellar.hollowdungeon.actors.buffs.Vertigo) {
+			if (buff instanceof Paralysis || buff instanceof Vertigo) {
 				interrupt();
 			}
 
@@ -1112,10 +1126,10 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	}
 	
 	@Override
-	public void remove( com.quasistellar.hollowdungeon.actors.buffs.Buff buff ) {
+	public void remove( Buff buff ) {
 		super.remove( buff );
 
-		com.quasistellar.hollowdungeon.ui.BuffIndicator.refreshHero();
+		BuffIndicator.refreshHero();
 	}
 	
 	@Override
@@ -1123,13 +1137,13 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		
 		curAction = null;
 
-		com.quasistellar.hollowdungeon.items.Ankh ankh = null;
+		Ankh ankh = null;
 
 		//look for ankhs in player inventory, prioritize ones which are blessed.
-		for (com.quasistellar.hollowdungeon.items.Item item : belongings){
-			if (item instanceof com.quasistellar.hollowdungeon.items.Ankh) {
-				if (ankh == null || ((com.quasistellar.hollowdungeon.items.Ankh) item).isBlessed()) {
-					ankh = (com.quasistellar.hollowdungeon.items.Ankh) item;
+		for (Item item : belongings){
+			if (item instanceof Ankh) {
+				if (ankh == null || ((Ankh) item).isBlessed()) {
+					ankh = (Ankh) item;
 				}
 			}
 		}
@@ -1203,32 +1217,32 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				if (cause instanceof Hero.Doom) {
 					((Hero.Doom)cause).onDeath();
 				}
-				Dungeon.deleteGame( com.quasistellar.hollowdungeon.GamesInProgress.curSlot, true );
+				Dungeon.deleteGame( GamesInProgress.curSlot, true );
 				break;
 		}
 	}
 
 	@Override
 	public void move( int step ) {
-		boolean wasHighGrass = com.quasistellar.hollowdungeon.Dungeon.level.map[step] == Terrain.HIGH_GRASS;
+		boolean wasHighGrass = Dungeon.level.map[step] == Terrain.HIGH_GRASS;
 
 		super.move( step );
 		
 		if (!flying) {
-			if (com.quasistellar.hollowdungeon.Dungeon.level.water[pos]) {
-				Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.WATER, 1, Random.Float( 0.8f, 1.25f ) );
-			} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.EMPTY_SP) {
-				Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.STURDY, 1, Random.Float( 0.96f, 1.05f ) );
-			} else if (com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.GRASS
-					|| com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.EMBERS
-					|| com.quasistellar.hollowdungeon.Dungeon.level.map[pos] == Terrain.FURROWED_GRASS){
+			if (Dungeon.level.water[pos]) {
+				Sample.INSTANCE.play( Assets.Sounds.WATER, 1, Random.Float( 0.8f, 1.25f ) );
+			} else if (Dungeon.level.map[pos] == Terrain.EMPTY_SP) {
+				Sample.INSTANCE.play( Assets.Sounds.STURDY, 1, Random.Float( 0.96f, 1.05f ) );
+			} else if (Dungeon.level.map[pos] == Terrain.GRASS
+					|| Dungeon.level.map[pos] == Terrain.EMBERS
+					|| Dungeon.level.map[pos] == Terrain.FURROWED_GRASS){
 				if (step == pos && wasHighGrass) {
-					Sample.INSTANCE.play(com.quasistellar.hollowdungeon.Assets.Sounds.TRAMPLE, 1, Random.Float( 0.96f, 1.05f ) );
+					Sample.INSTANCE.play(Assets.Sounds.TRAMPLE, 1, Random.Float( 0.96f, 1.05f ) );
 				} else {
-					Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.GRASS, 1, Random.Float( 0.96f, 1.05f ) );
+					Sample.INSTANCE.play( Assets.Sounds.GRASS, 1, Random.Float( 0.96f, 1.05f ) );
 				}
 			} else {
-				Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.STEP, 1, Random.Float( 0.96f, 1.05f ) );
+				Sample.INSTANCE.play( Assets.Sounds.STEP, 1, Random.Float( 0.96f, 1.05f ) );
 			}
 		}
 	}
@@ -1236,7 +1250,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 	@Override
 	public void onAttackComplete() {
 		
-		com.quasistellar.hollowdungeon.ui.AttackIndicator.target(enemy);
+		AttackIndicator.target(enemy);
 		
 		boolean hit = attack( enemy );
 
@@ -1275,9 +1289,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 		if (curAction instanceof HeroAction.Unlock) {
 
 			int doorCell = ((HeroAction.Unlock)curAction).dst;
-			int door = com.quasistellar.hollowdungeon.Dungeon.level.map[doorCell];
+			int door = Dungeon.level.map[doorCell];
 			
-			if (com.quasistellar.hollowdungeon.Dungeon.level.distance(pos, doorCell) <= 1) {
+			if (Dungeon.level.distance(pos, doorCell) <= 1) {
 				boolean hasKey = true;
 				if (door == Terrain.LOCKED_DOOR) {
 					hasKey = Notes.remove(new IronKey(Dungeon.location));
@@ -1288,7 +1302,7 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 				}
 				
 				if (hasKey) {
-					com.quasistellar.hollowdungeon.levels.Level.set(doorCell, door == Terrain.LOCKED_DOOR ? Terrain.DOOR : Terrain.UNLOCKED_EXIT);
+					Level.set(doorCell, door == Terrain.LOCKED_DOOR ? Terrain.DOOR : Terrain.UNLOCKED_EXIT);
 					GameScene.updateMap(doorCell);
 					spend(Key.TIME_TO_UNLOCK);
 				}
@@ -1296,16 +1310,16 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 			
 		} else if (curAction instanceof HeroAction.OpenChest) {
 			
-			com.quasistellar.hollowdungeon.items.Heap heap = com.quasistellar.hollowdungeon.Dungeon.level.heaps.get( ((HeroAction.OpenChest)curAction).dst );
+			Heap heap = Dungeon.level.heaps.get( ((HeroAction.OpenChest)curAction).dst );
 			
-			if (com.quasistellar.hollowdungeon.Dungeon.level.distance(pos, heap.pos) <= 1){
+			if (Dungeon.level.distance(pos, heap.pos) <= 1){
 				boolean hasKey = true;
-				if (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.SKELETON || heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.REMAINS) {
-					Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.BONES );
-				} else if (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.LOCKED_CHEST){
+				if (heap.type == Heap.Type.SKELETON || heap.type == Heap.Type.REMAINS) {
+					Sample.INSTANCE.play( Assets.Sounds.BONES );
+				} else if (heap.type == Heap.Type.LOCKED_CHEST){
 					hasKey = Notes.remove(new GoldenKey(Dungeon.location));
-				} else if (heap.type == com.quasistellar.hollowdungeon.items.Heap.Type.CRYSTAL_CHEST){
-					hasKey = com.quasistellar.hollowdungeon.journal.Notes.remove(new CrystalKey(Dungeon.location));
+				} else if (heap.type == Heap.Type.CRYSTAL_CHEST){
+					hasKey = Notes.remove(new CrystalKey(Dungeon.location));
 				}
 				
 				if (hasKey) {
@@ -1328,31 +1342,31 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		int distance = heroClass == HeroClass.HORNET ? 2 : 1;
 		
-		boolean foresight = buff(com.quasistellar.hollowdungeon.actors.buffs.Foresight.class) != null;
+		boolean foresight = buff(Foresight.class) != null;
 		
 		if (foresight) distance++;
 		
-		int cx = pos % com.quasistellar.hollowdungeon.Dungeon.level.width();
-		int cy = pos / com.quasistellar.hollowdungeon.Dungeon.level.width();
+		int cx = pos % Dungeon.level.width();
+		int cy = pos / Dungeon.level.width();
 		int ax = cx - distance;
 		if (ax < 0) {
 			ax = 0;
 		}
 		int bx = cx + distance;
-		if (bx >= com.quasistellar.hollowdungeon.Dungeon.level.width()) {
-			bx = com.quasistellar.hollowdungeon.Dungeon.level.width() - 1;
+		if (bx >= Dungeon.level.width()) {
+			bx = Dungeon.level.width() - 1;
 		}
 		int ay = cy - distance;
 		if (ay < 0) {
 			ay = 0;
 		}
 		int by = cy + distance;
-		if (by >= com.quasistellar.hollowdungeon.Dungeon.level.height()) {
-			by = com.quasistellar.hollowdungeon.Dungeon.level.height() - 1;
+		if (by >= Dungeon.level.height()) {
+			by = Dungeon.level.height() - 1;
 		}
 		
 		for (int y = ay; y <= by; y++) {
-			for (int x = ax, p = ax + y * com.quasistellar.hollowdungeon.Dungeon.level.width(); x <= bx; x++, p++) {
+			for (int x = ax, p = ax + y * Dungeon.level.width(); x <= bx; x++, p++) {
 				
 				if (fieldOfView[p] && p != pos) {
 					
@@ -1360,9 +1374,9 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 						GameScene.effectOverFog(new CheckedCell(p, pos));
 					}
 					
-					if (com.quasistellar.hollowdungeon.Dungeon.level.secret[p]){
+					if (Dungeon.level.secret[p]){
 						
-						Trap trap = com.quasistellar.hollowdungeon.Dungeon.level.traps.get( p );
+						Trap trap = Dungeon.level.traps.get( p );
 						float chance;
 
 						//searches aided by foresight always succeed, even if trap isn't searchable
@@ -1391,13 +1405,13 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 						
 						if (Random.Float() < chance) {
 						
-							int oldValue = com.quasistellar.hollowdungeon.Dungeon.level.map[p];
+							int oldValue = Dungeon.level.map[p];
 							
-							com.quasistellar.hollowdungeon.scenes.GameScene.discoverTile( p, oldValue );
+							GameScene.discoverTile( p, oldValue );
 							
-							com.quasistellar.hollowdungeon.Dungeon.level.discover( p );
+							Dungeon.level.discover( p );
 
-							CellEmitter.get( p ).start( Speck.factory( com.quasistellar.hollowdungeon.effects.Speck.DISCOVER ), 0.1f, 4 );
+							CellEmitter.get( p ).start( Speck.factory( Speck.DISCOVER ), 0.1f, 4 );
 							
 							smthFound = true;
 						}
@@ -1408,15 +1422,15 @@ public class Hero extends com.quasistellar.hollowdungeon.actors.Char {
 
 		
 		if (intentional) {
-			sprite.showStatus( com.quasistellar.hollowdungeon.sprites.CharSprite.DEFAULT, Messages.get(this, "search") );
+			sprite.showStatus( CharSprite.DEFAULT, Messages.get(this, "search") );
 			sprite.operate( pos );
 			spendAndNext(TIME_TO_SEARCH);
 			
 		}
 		
 		if (smthFound) {
-			com.quasistellar.hollowdungeon.utils.GLog.w( Messages.get(this, "noticed_smth") );
-			Sample.INSTANCE.play( com.quasistellar.hollowdungeon.Assets.Sounds.SECRET );
+			GLog.w( Messages.get(this, "noticed_smth") );
+			Sample.INSTANCE.play( Assets.Sounds.SECRET );
 			interrupt();
 		}
 		
