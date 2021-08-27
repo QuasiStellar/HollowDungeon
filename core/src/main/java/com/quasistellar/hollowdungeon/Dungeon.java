@@ -1378,7 +1378,7 @@ public class Dungeon {
 		int height = b - t + 1;
 		
 		int pos = l + t * level.width();
-	
+
 		for (int i = t; i <= b; i++) {
 			BArray.or( level.visited, level.heroFOV, pos, width, level.visited );
 			pos+=level.width();
@@ -1413,7 +1413,7 @@ public class Dungeon {
 			}
 		}
 
-		com.quasistellar.hollowdungeon.scenes.GameScene.afterObserve();
+		GameScene.afterObserve();
 	}
 
 	//we store this to avoid having to re-allocate the array with each pathfind
