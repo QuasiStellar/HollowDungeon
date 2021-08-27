@@ -27,10 +27,12 @@ package com.quasistellar.hollowdungeon.items;
 import com.quasistellar.hollowdungeon.Dungeon;
 import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
+import com.quasistellar.hollowdungeon.actors.mobs.npcs.Cornifer;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.sprites.ItemSpriteSheet;
 import com.quasistellar.hollowdungeon.tiles.FogOfWar;
+import com.quasistellar.hollowdungeon.utils.GLog;
 import com.quasistellar.hollowdungeon.windows.WndOptions;
 import com.watabou.noosa.Game;
 import com.watabou.utils.DeviceCompat;
@@ -52,6 +54,7 @@ public class FCMap extends Item {
 		Dungeon.mappedLocations.add("Forgotten Crossroads 4");
 		Dungeon.mappedLocations.add("False Knight Arena");
 		Dungeon.level.needUpdateFog = null;
+		GLog.p(Messages.get(this, "added"));
 		return true;
 	}
 
