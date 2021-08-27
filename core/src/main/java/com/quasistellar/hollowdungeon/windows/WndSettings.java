@@ -36,7 +36,6 @@ import com.quasistellar.hollowdungeon.ui.OptionSlider;
 import com.quasistellar.hollowdungeon.ui.RedButton;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.Toolbar;
-import com.quasistellar.hollowdungeon.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Sample;
@@ -121,7 +120,6 @@ public class WndSettings extends WndTabbed {
 				protected void onChange() {
 					if (getSelectedValue() != HDSettings.scale()) {
 						HDSettings.scale(getSelectedValue());
-						GLog.p(Float.toString(Game.density));
 						HollowDungeon.seamlessResetScene();
 					}
 				}
