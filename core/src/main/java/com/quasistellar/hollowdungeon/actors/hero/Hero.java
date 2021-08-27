@@ -54,7 +54,6 @@ import com.quasistellar.hollowdungeon.items.Ankh;
 import com.quasistellar.hollowdungeon.items.Dewdrop;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.items.Item;
-import com.quasistellar.hollowdungeon.levels.KingspassLevel;
 import com.quasistellar.hollowdungeon.levels.traps.Trap;
 import com.quasistellar.hollowdungeon.mechanics.Ballistica;
 import com.quasistellar.hollowdungeon.mechanics.Utils;
@@ -105,7 +104,6 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Hero extends Char {
 

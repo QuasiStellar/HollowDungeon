@@ -27,7 +27,7 @@ package com.quasistellar.hollowdungeon;
 import com.quasistellar.hollowdungeon.items.Ankh;
 import com.quasistellar.hollowdungeon.items.Heap;
 import com.quasistellar.hollowdungeon.levels.FalseknightLevel;
-import com.quasistellar.hollowdungeon.levels.KingspassLevel;
+import com.quasistellar.hollowdungeon.levels.KingsPassLevel;
 import com.quasistellar.hollowdungeon.levels.Level;
 import com.quasistellar.hollowdungeon.actors.Actor;
 import com.quasistellar.hollowdungeon.actors.Char;
@@ -57,7 +57,6 @@ import com.watabou.utils.Random;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 
 public class Dungeon {
@@ -225,7 +224,7 @@ public class Dungeon {
 		Level level;
 		switch (location) {
 			case "King's Pass":
-				level = new KingspassLevel();
+				level = new KingsPassLevel();
 				break;
 			case "Dirtmouth":
 				level = new DirtmouthLevel();

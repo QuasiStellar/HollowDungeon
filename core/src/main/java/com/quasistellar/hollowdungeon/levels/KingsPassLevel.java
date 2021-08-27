@@ -35,7 +35,7 @@ import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletFocus;
 import com.quasistellar.hollowdungeon.actors.mobs.npcs.TabletSearch;
 import com.quasistellar.hollowdungeon.items.Geo;
 
-public class KingspassLevel extends Level {
+public class KingsPassLevel extends Level {
 
 	private static final int SIZE = 32;
 	
@@ -75,7 +75,7 @@ public class KingspassLevel extends Level {
 		cleanWalls();
 		
 		entrance = 71;
-		exit = 891;
+		exit = 894;
 		transition = 0;
 		
 		return true;
