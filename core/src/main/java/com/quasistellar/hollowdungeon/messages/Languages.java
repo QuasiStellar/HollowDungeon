@@ -1,3 +1,27 @@
+/*
+ * Pixel Dungeon
+ * Copyright (C) 2012-2015 Oleg Dolya
+ *
+ * Shattered Pixel Dungeon
+ * Copyright (C) 2014-2019 Evan Debenham
+ *
+ * Hollow Dungeon
+ * Copyright (C) 2020-2021 Pierre Schrodinger
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
+
 package com.quasistellar.hollowdungeon.messages;
 
 import java.util.Locale;
@@ -5,7 +29,7 @@ import java.util.Locale;
 public enum Languages {
 	ENGLISH("english",      "",   Status.REVIEWED,   null, null),
 //	KOREAN("한국어",         "ko", Status.UNREVIEWED, new String[]{"Cocoa", "Flameblast12", "GameConqueror", "Korean2017"}, new String[]{"WondarRabb1t", "ddojin0115", "eeeei", "hancyel", "linterpreteur", "lsiebnie"}),
-	CHINESE("中文",         "zh", Status.UNREVIEWED, new String[]{"Jinkeloid(zdx00793)", "endlesssolitude","JDSA Ling"}, new String[]{"931451545", "Fishbone", "HoofBumpBlurryface", "Lery", "Lyn_0401", "ShatteredFlameBlast", "hmdzl001", "tempest102"}),
+CHINESE("中文",         "zh", Status.UNREVIEWED, new String[]{"Jinkeloid(zdx00793)", "endlesssolitude","JDSALing","Nxhy","小狐狸-九尾天狐"}, new String[]{"931451545", "Fishbone", "HoofBumpBlurryface", "Lery", "Lyn_0401", "ShatteredFlameBlast", "hmdzl001", "tempest102"}),
 //	RUSSIAN("русский",      "ru", Status.UNREVIEWED, new String[]{"ConsideredHamster", "Inevielle", "apxwn", "yarikonline" }, new String[]{"AttHawk46", "BlueberryShortcake", "HerrGotlieb", "HoloTheWise", "Ilbko", "JleHuBbluKoT", "MrXantar", "Originalej0name", "Raymundo", "Shamahan", "kirusyaga", "perefrazz", "roman.yagodin", "un_logic", "Вoвa"}),
 //	GERMAN("deutsch",       "de", Status.UNREVIEWED, new String[]{"Dallukas", "KrystalCroft", "Wuzzy", "Zap0", "apxwn", "bernhardreiter", "davedude"}, new String[]{"Abracadabra", "Ceeee", "DarkPixel", "ErichME", "Faquarl", "LenzB", "Ordoviz", "Sarius", "SirEddi", "Sorpl3x", "ThunfischGott", "Topicranger", "azrdev", "carrageen", "gekko303", "johannes.schobel", "karoshi42", "koryphea", "luciocarreras", "niemand", "oragothen", "spixi"}),
 //	SPANISH("español",      "es", Status.UNREVIEWED, new String[]{"Kiroto", "Kohru", "airman12", "grayscales"}, new String[]{"AdventurerKilly", "Alesxanderk", "CorvosUtopy", "Dewstend", "Dyrran", "Fervoreking", "Illyatwo2", "JPCHZ", "LastCry", "STKmonoqui", "alfongad", "benzarr410", "chepe567.jc", "ctrijueque", "damc0616", "dhg121", "javifs", "jonismack1", "magmax", "tres.14159"}),
