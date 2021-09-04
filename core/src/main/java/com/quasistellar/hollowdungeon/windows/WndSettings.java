@@ -25,6 +25,7 @@
 package com.quasistellar.hollowdungeon.windows;
 
 import com.quasistellar.hollowdungeon.Assets;
+import com.quasistellar.hollowdungeon.Chrome;
 import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Languages;
@@ -33,6 +34,7 @@ import com.quasistellar.hollowdungeon.scenes.GameScene;
 import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.scenes.TitleScene;
 import com.quasistellar.hollowdungeon.services.updates.Updates;
+import com.quasistellar.hollowdungeon.sprites.CharSprite;
 import com.quasistellar.hollowdungeon.ui.CheckBox;
 import com.quasistellar.hollowdungeon.ui.GameLog;
 import com.quasistellar.hollowdungeon.ui.Icons;
@@ -40,6 +42,7 @@ import com.quasistellar.hollowdungeon.ui.OptionSlider;
 import com.quasistellar.hollowdungeon.ui.RedButton;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.Toolbar;
+import com.quasistellar.hollowdungeon.ui.Window;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
@@ -65,11 +68,11 @@ public class WndSettings extends WndTabbed {
 	private static final int BTN_HEIGHT	    = 18;
 	private static final float GAP          = 2;
 
-	private final DisplayTab  display;
-	private final UITab       ui;
-	private final DataTab     data;
-	private final AudioTab    audio;
-	private final LangsTab    langs;
+	private DisplayTab  display;
+	private UITab       ui;
+	private DataTab     data;
+	private AudioTab    audio;
+	private LangsTab    langs;
 
 	public static int last_index = 0;
 
@@ -139,7 +142,7 @@ public class WndSettings extends WndTabbed {
 		langs = new LangsTab();
 		langs.setSize(width, 0);
 		height = Math.max(height, langs.height());
-		add(langs);
+		add( langs );
 
 
 		IconTab langsTab = new IconTab(Icons.get(Icons.LANGS)){
@@ -153,12 +156,20 @@ public class WndSettings extends WndTabbed {
 			@Override
 			protected void createChildren() {
 				super.createChildren();
+				switch(Messages.lang().status()){
+					case INCOMPLETE:
+						icon.hardlight(1.5f, 0, 0);
+						break;
+					case UNREVIEWED:
+						icon.hardlight(1.5f, 0.75f, 0f);
+						break;
+				}
 			}
 
 		};
-		add(langsTab);
+		add( langsTab );
 
-		resize(width, (int) Math.ceil(height));
+		resize(width, (int)Math.ceil(height));
 
 		layoutTabs();
 
@@ -170,16 +181,16 @@ public class WndSettings extends WndTabbed {
 	public void hide() {
 		super.hide();
 		//resets generators because there's no need to retain chars for languages not selected
-		if (HollowDungeon.scene().getClass() != TitleScene.class) {
-			HollowDungeon.seamlessResetScene(new Game.SceneChangeCallback() {
-				@Override
-				public void beforeCreate() {
-					Game.platform.resetGenerators();
-				}
-				@Override
-				public void afterCreate() {}
-			});
-		}
+		HollowDungeon.seamlessResetScene(new Game.SceneChangeCallback() {
+			@Override
+			public void beforeCreate() {
+				Game.platform.resetGenerators();
+			}
+			@Override
+			public void afterCreate() {
+				//do nothing
+			}
+		});
 	}
 
 	private static class DisplayTab extends Component {
@@ -202,7 +213,7 @@ public class WndSettings extends WndTabbed {
 			sep1 = new ColorBlock(1, 1, 0xFF000000);
 			add(sep1);
 
-			if ((int) Math.ceil(2 * Game.density) < PixelScene.maxDefaultZoom) {
+			if ((int)Math.ceil(2* Game.density) < PixelScene.maxDefaultZoom) {
 				optScale = new OptionSlider(Messages.get(this, "scale"),
 						(int)Math.ceil(2* Game.density)+ "X",
 						PixelScene.maxDefaultZoom + "X",
@@ -227,7 +238,7 @@ public class WndSettings extends WndTabbed {
 						super.onClick();
 						if (checked()) {
 							checked(!checked());
-							HollowDungeon.scene().add(new WndOptions(Icons.get(Icons.DISPLAY),
+							HollowDungeon.scene().add(new WndOptions(
 									Messages.get(DisplayTab.class, "saver"),
 									Messages.get(DisplayTab.class, "saver_desc"),
 									Messages.get(DisplayTab.class, "okay"),
@@ -488,14 +499,13 @@ public class WndSettings extends WndTabbed {
 			btnCentered.setRect(btnGrouped.right()+ GAP, btnSplit.top(), btnWidth, 16);
 
 			if (width > 200) {
-				chkFlipToolbar.setRect(0, btnGrouped.bottom() + GAP, width / 2 - 1, BTN_HEIGHT);
+				chkFlipToolbar.setRect(0, btnGrouped.bottom() + GAP, width/2 - 1, BTN_HEIGHT);
 				chkFlipTags.setRect(chkFlipToolbar.right() + GAP, chkFlipToolbar.top(), width/2 -1, BTN_HEIGHT);
 				sep2.size(width, 1);
 				sep2.y = chkFlipTags.bottom() + 2;
-				chkFullscreen.setRect(0, sep2.y + 1 + GAP, width / 2 - 1, BTN_HEIGHT);
+				chkFullscreen.setRect(0, sep2.y + 1 + GAP, width/2 - 1, BTN_HEIGHT);
 				chkFont.setRect(chkFullscreen.right() + GAP, chkFullscreen.top(), width/2 - 1, BTN_HEIGHT);
-			}
-			else {
+			} else {
 				chkFlipToolbar.setRect(0, btnGrouped.bottom() + GAP, width, BTN_HEIGHT);
 				chkFlipTags.setRect(0, chkFlipToolbar.bottom() + GAP, width, BTN_HEIGHT);
 				sep2.size(width, 1);
@@ -520,6 +530,7 @@ public class WndSettings extends WndTabbed {
 
 		RenderedTextBlock title;
 		ColorBlock sep1;
+		CheckBox chkNews;
 		CheckBox chkUpdates;
 		CheckBox chkWifi;
 
@@ -531,6 +542,16 @@ public class WndSettings extends WndTabbed {
 
 			sep1 = new ColorBlock(1, 1, 0xFF000000);
 			add(sep1);
+
+			chkNews = new CheckBox(Messages.get(this, "news")){
+				@Override
+				protected void onClick() {
+					super.onClick();
+					HDSettings.news(checked());
+				}
+			};
+			chkNews.checked(HDSettings.news());
+			add(chkNews);
 
 			chkUpdates = new CheckBox(Messages.get(this, "updates")){
 				@Override
@@ -562,7 +583,13 @@ public class WndSettings extends WndTabbed {
 			sep1.size(width, 1);
 			sep1.y = title.bottom() + 2*GAP;
 
-			chkUpdates.setRect(0, sep1.y + 1 + GAP, width, BTN_HEIGHT);
+			if (width > 200){
+				chkNews.setRect(0, sep1.y + 1 + GAP, width/2-1, BTN_HEIGHT);
+				chkUpdates.setRect(chkNews.right() + GAP, chkNews.top(), width/2-1, BTN_HEIGHT);
+			} else {
+				chkNews.setRect(0, sep1.y + 1 + GAP, width, BTN_HEIGHT);
+				chkUpdates.setRect(0, chkNews.bottom()+ GAP, width, BTN_HEIGHT);
+			}
 
 			float pos = chkUpdates.bottom();
 			if (chkWifi != null){
@@ -651,7 +678,7 @@ public class WndSettings extends WndTabbed {
 		protected void layout() {
 			title.setPos((width - title.width())/2, y + GAP);
 			sep1.size(width, 1);
-			sep1.y = title.bottom() + 2 * GAP;
+			sep1.y = title.bottom() + 2*GAP;
 
 			optMusic.setRect(0, sep1.y + 1 + GAP, width, SLIDER_HEIGHT);
 			chkMusicMute.setRect(0, optMusic.bottom() + GAP, width, BTN_HEIGHT);
@@ -667,14 +694,22 @@ public class WndSettings extends WndTabbed {
 
 	}
 
-	private static class LangsTab extends Component {
+	private static class LangsTab extends Component{
 
-		final static int COLS_P = 1;
-		final static int COLS_L = 2;
+		final static int COLS_P = 3;
+		final static int COLS_L = 4;
+
+		final static int BTN_HEIGHT = 11;
 
 		RenderedTextBlock title;
 		ColorBlock sep1;
+		RenderedTextBlock txtLangName;
+		RenderedTextBlock txtLangInfo;
+		ColorBlock sep2;
 		RedButton[] lanBtns;
+		ColorBlock sep3;
+		RenderedTextBlock txtTranifex;
+		RedButton btnCredits;
 
 		@Override
 		protected void createChildren() {
@@ -694,10 +729,28 @@ public class WndSettings extends WndTabbed {
 
 			final Languages currLang = Messages.lang();
 
+			txtLangName = PixelScene.renderTextBlock( Messages.titleCase(currLang.nativeName()) , 9 );
+			if (currLang.status() == Languages.Status.REVIEWED) txtLangName.hardlight(TITLE_COLOR);
+			else if (currLang.status() == Languages.Status.UNREVIEWED) txtLangName.hardlight(CharSprite.WARNING);
+			else if (currLang.status() == Languages.Status.INCOMPLETE) txtLangName.hardlight(CharSprite.NEGATIVE);
+			add(txtLangName);
+
+			txtLangInfo = PixelScene.renderTextBlock(6);
+			if (currLang == Languages.ENGLISH) txtLangInfo.text("This is the source language, written by the developer.");
+			else if (currLang.status() == Languages.Status.REVIEWED) txtLangInfo.text(Messages.get(this, "completed"));
+			else if (currLang.status() == Languages.Status.UNREVIEWED) txtLangInfo.text(Messages.get(this, "unreviewed"));
+			else if (currLang.status() == Languages.Status.INCOMPLETE) txtLangInfo.text(Messages.get(this, "unfinished"));
+			if (currLang.status() == Languages.Status.UNREVIEWED) txtLangInfo.setHightlighting(true, CharSprite.WARNING);
+			else if (currLang.status() == Languages.Status.INCOMPLETE) txtLangInfo.setHightlighting(true, CharSprite.NEGATIVE);
+			add(txtLangInfo);
+
+			sep2 = new ColorBlock(1, 1, 0xFF000000);
+			add(sep2);
+
 			lanBtns = new RedButton[langs.size()];
 			for (int i = 0; i < langs.size(); i++){
 				final int langIndex = i;
-				RedButton btn = new RedButton(Messages.titleCase(langs.get(i).nativeName())) {
+				RedButton btn = new RedButton(Messages.titleCase(langs.get(i).nativeName()), 8){
 					@Override
 					protected void onClick() {
 						super.onClick();
@@ -710,39 +763,160 @@ public class WndSettings extends WndTabbed {
 								Game.platform.resetGenerators();
 							}
 							@Override
-							public void afterCreate() {}
+							public void afterCreate() {
+								//do nothing
+							}
 						});
 					}
 				};
 				if (currLang == langs.get(i)){
 					btn.textColor(TITLE_COLOR);
+				} else {
+					switch (langs.get(i).status()) {
+						case INCOMPLETE:
+							btn.textColor(0x888888);
+							break;
+						case UNREVIEWED:
+							btn.textColor(0xBBBBBB);
+							break;
+					}
 				}
 				lanBtns[i] = btn;
 				add(btn);
+			}
+
+			sep3 = new ColorBlock(1, 1, 0xFF000000);
+			add(sep3);
+
+			txtTranifex = PixelScene.renderTextBlock(6);
+			txtTranifex.text(Messages.get(this, "transifex"));
+			add(txtTranifex);
+
+			if (currLang != Languages.ENGLISH) {
+				String credText = Messages.titleCase(Messages.get(this, "credits"));
+				btnCredits = new RedButton(credText, credText.length() > 9 ? 6 : 9) {
+					@Override
+					protected void onClick() {
+						super.onClick();
+						String creds = "";
+						String creds2 = "";
+						String[] reviewers = currLang.reviewers();
+						String[] translators = currLang.translators();
+
+						ArrayList<String> total = new ArrayList<>();
+						total.addAll(Arrays.asList(reviewers));
+						total.addAll(Arrays.asList(reviewers));
+						total.addAll(Arrays.asList(translators));
+						int translatorIdx = reviewers.length;
+
+						//we have 2 columns in wide mode
+						boolean wide = (2 * reviewers.length + translators.length) > (PixelScene.landscape() ? 15 : 30);
+
+						int i;
+						if (reviewers.length > 0) {
+							creds += Messages.titleCase(Messages.get(LangsTab.this, "reviewers"));
+							creds2 += "";
+							boolean col2 = false;
+							for (i = 0; i < total.size(); i++) {
+								if (i == translatorIdx){
+									creds += "\n\n" + Messages.titleCase(Messages.get(LangsTab.this, "translators"));
+									creds2 += "\n\n";
+									if (col2) creds2 += "\n";
+									col2 = false;
+								}
+								if (wide && col2) {
+									creds2 += "\n-" + total.get(i);
+								} else {
+									creds += "\n-" + total.get(i);
+								}
+								col2 = !col2 && wide;
+							}
+						}
+
+						Window credits = new Window(0, 0, 0, Chrome.get(Chrome.Type.TOAST));
+
+						int w = wide ? 125 : 60;
+
+						RenderedTextBlock title = PixelScene.renderTextBlock(6);
+						title.text(Messages.titleCase(Messages.get(LangsTab.this, "credits")), w);
+						title.hardlight(SHPX_COLOR);
+						title.setPos((w - title.width()) / 2, 0);
+						credits.add(title);
+
+						RenderedTextBlock text = PixelScene.renderTextBlock(5);
+						text.setHightlighting(false);
+						text.text(creds, 65);
+						text.setPos(0, title.bottom() + 2);
+						credits.add(text);
+
+						if (wide) {
+							RenderedTextBlock rightColumn = PixelScene.renderTextBlock(5);
+							rightColumn.setHightlighting(false);
+							rightColumn.text(creds2, 65);
+							rightColumn.setPos(65, title.bottom() + 6);
+							credits.add(rightColumn);
+						}
+
+						credits.resize(w, (int) text.bottom() + 2);
+						HollowDungeon.scene().addToFront(credits);
+					}
+				};
+				add(btnCredits);
 			}
 
 		}
 
 		@Override
 		protected void layout() {
-			title.setPos((width - title.width()) / 2, y + GAP);
+			title.setPos((width - title.width())/2, y + GAP);
 			sep1.size(width, 1);
-			sep1.y = title.bottom() + 2 * GAP;
-			y = sep1.y + GAP + 1;
+			sep1.y = title.bottom() + 2*GAP;
+
+			txtLangName.setPos( (width - txtLangName.width())/2f, sep1.y + 1 + GAP );
+			PixelScene.align(txtLangName);
+
+			txtLangInfo.setPos(0, txtLangName.bottom() + 2*GAP);
+			txtLangInfo.maxWidth((int)width);
+
+			y = txtLangInfo.bottom() + GAP;
+			int x = 0;
+
+			sep2.size(width, 1);
+			sep2.y = y;
+			y += 2;
 
 			int cols = PixelScene.landscape() ? COLS_L : COLS_P;
-			float btnWidth = width / cols - 1;
-			for (RedButton btn : lanBtns) {
+			int btnWidth = (int)Math.floor((width - (cols-1)) / cols);
+			for (RedButton btn : lanBtns){
 				btn.setRect(x, y, btnWidth, BTN_HEIGHT);
 				btn.setPos(x, y);
-				x += btnWidth + GAP;
-				if (x + btnWidth > width) {
+				x += btnWidth+1;
+				if (x + btnWidth > width){
 					x = 0;
-					y += BTN_HEIGHT + GAP;
+					y += BTN_HEIGHT+1;
 				}
 			}
-			if (x > 0) {
-				y += BTN_HEIGHT + GAP;
+			if (x > 0){
+				y += BTN_HEIGHT+1;
+			}
+
+			sep3.size(width, 1);
+			sep3.y = y;
+			y += 2;
+
+			if (btnCredits != null){
+				btnCredits.setSize(btnCredits.reqWidth() + 2, 16);
+				btnCredits.setPos(width - btnCredits.width(), y);
+
+				txtTranifex.setPos(0, y);
+				txtTranifex.maxWidth((int)btnCredits.left());
+
+				height = Math.max(btnCredits.bottom(), txtTranifex.bottom());
+			} else {
+				txtTranifex.setPos(0, y);
+				txtTranifex.maxWidth((int)width);
+
+				height = txtTranifex.bottom();
 			}
 
 		}

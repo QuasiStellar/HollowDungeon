@@ -24,3 +24,5 @@ The HP in the third stage rose to 105
 3.Chinese localization
 
 # The above modifications are not involved in this contribution project
+
+# Chinese localization, add crash log recorder, add field missing detector. Dedicated to the author of Hollow Dungeon.

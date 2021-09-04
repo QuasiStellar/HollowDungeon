@@ -74,7 +74,4 @@ public class DeviceCompat {
 		Gdx.app.log( tag, message );
 	}
 
-	public static boolean hasHardKeyboard(){
-		return Gdx.input.isPeripheralAvailable(Input.Peripheral.HardwareKeyboard);
-	}
 }
