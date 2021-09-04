@@ -18,10 +18,9 @@ In the first stage,
 the blood volume increased significantly from 40 to 180HP.
 Attack speed increased in the second stage, 75 HP
 The HP in the third stage rose to 105
-====================
-2.Shade is 60 drops of blood
-====================
-3.Chinese localization
-===============================
 
-#The above modifications are not involved in this contribution project
+2.Shade is 60 drops of blood
+
+3.Chinese localization
+
+# The above modifications are not involved in this contribution project
