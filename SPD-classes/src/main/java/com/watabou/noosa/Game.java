@@ -3,10 +3,10 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2019 Evan Debenham
+ * Copyright (C) 2014-2021 Evan Debenham
  *
- * Hollow Dungeon
- * Copyright (C) 2020-2021 Pierre Schrodinger
+ * Magic Ling Pixel Dungeon
+ * Copyright (C) 2021 AnsdoShip Studio
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,8 +33,8 @@ import com.watabou.glscripts.Script;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Blending;
 import com.watabou.glwrap.Vertexbuffer;
-import com.watabou.input.GameAction;
 import com.watabou.input.InputHandler;
+import com.watabou.input.PointerEvent;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
@@ -86,14 +86,13 @@ public class Game implements ApplicationListener {
 		sceneClass = c;
 		
 		instance = this;
-		this.platform = platform;
+		Game.platform = platform;
 	}
-	
-	private boolean paused;
-	
-	public boolean isPaused(){
-		return paused;
-	}
+
+	//FIXME this is a temporary workaround to improve start times on android (first frame is 'cheated' and only renders a black screen)
+	//this is partly to improve stats on google play, and partly to try and diagnose what the cause of slow loading times is
+	//ultimately once the cause is found it should be fixed and this should no longer be needed
+	private boolean justResumed = true;
 	
 	@Override
 	public void create() {
@@ -144,6 +143,18 @@ public class Game implements ApplicationListener {
 	
 	@Override
 	public void render() {
+		//prevents weird rare cases where the app is running twice
+		if (instance != this){
+			finish();
+			return;
+		}
+
+		if (justResumed){
+			Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);
+			justResumed = false;
+			return;
+		}
+
 		NoosaScript.get().resetCamera();
 		NoosaScriptNoLighting.get().resetCamera();
 		Gdx.gl.glDisable(Gdx.gl.GL_SCISSOR_TEST);
@@ -157,7 +168,7 @@ public class Game implements ApplicationListener {
 	
 	@Override
 	public void pause() {
-		paused = true;
+		PointerEvent.clearPointerEvents();
 		
 		if (scene != null) {
 			scene.onPause();
@@ -168,7 +179,7 @@ public class Game implements ApplicationListener {
 	
 	@Override
 	public void resume() {
-		paused = false;
+		justResumed = true;
 	}
 	
 	public void finish(){
@@ -176,7 +187,7 @@ public class Game implements ApplicationListener {
 		
 	}
 	
-	public void destroy(){
+	public void destroy() {
 		if (scene != null) {
 			scene.destroy();
 			scene = null;
@@ -193,7 +204,7 @@ public class Game implements ApplicationListener {
 	}
 	
 	public static void resetScene() {
-		switchScene( instance.sceneClass );
+		switchScene(sceneClass);
 	}
 
 	public static void switchScene(Class<? extends Scene> c) {
@@ -201,7 +212,7 @@ public class Game implements ApplicationListener {
 	}
 	
 	public static void switchScene(Class<? extends Scene> c, SceneChangeCallback callback) {
-		instance.sceneClass = c;
+		sceneClass = c;
 		instance.requestedReset = true;
 		instance.onChange = callback;
 	}
@@ -254,7 +265,8 @@ public class Game implements ApplicationListener {
 		Game.realTime = TimeUtils.millis();
 
 		inputHandler.processAllEvents();
-		
+
+		Sample.INSTANCE.update();
 		scene.update();
 		Camera.updateAll();
 	}
@@ -272,7 +284,7 @@ public class Game implements ApplicationListener {
 		}
 	}
 	
-	protected void logException( Throwable tr ){
+	protected void logException(Throwable tr){
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		tr.printStackTrace(pw);

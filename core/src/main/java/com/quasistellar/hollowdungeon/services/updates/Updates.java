@@ -24,6 +24,8 @@
 
 package com.quasistellar.hollowdungeon.services.updates;
 
+import java.util.Date;
+
 public class Updates {
 
 	public static UpdateService service;
@@ -68,5 +70,9 @@ public class Updates {
 	public static AvailableUpdateData updateData(){
 		return updateData;
 	}
-
+	private static Date lastCheck = null;
+	public static void clearUpdate(){
+		updateData = null;
+		lastCheck = null;
+	}
 }

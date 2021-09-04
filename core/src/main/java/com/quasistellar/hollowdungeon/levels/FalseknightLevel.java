@@ -164,7 +164,7 @@ public class FalseknightLevel extends Level {
 			Game.runOnRenderThread(new Callback() {
 				@Override
 				public void call() {
-					Music.INSTANCE.play( Assets.Music.SURFACE, false );
+					Music.INSTANCE.play( Assets.Music.SURFACE, true );
 				}
 			});
 

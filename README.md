@@ -1,25 +1,24 @@
-# Hollow Dungeon
+[**简体中文**](https://github.com/AnsdoShip/MagicLingPixelDungeon/blob/master/README-zh_CN.md)
+# Magic Ling Pixel Dungeon
 
-Based on Shattered Pixel Dungeon by 00-Evan (https://github.com/00-Evan/shattered-pixel-dungeon).
+[**Discord server (coming soon)**]()
 
-# Chinese localization
-Dedicated to the author QuasiStellar
+* A **ROGUELIKE RPG**, with randomly generated dungeon! Based on [**Shattered Pixel Dungeon**](https://github.com/00-Evan/shattered-pixel-dungeon) **v0.9.3c**, by [**ShatteredPixel**](http://www.shatteredpixel.com).
 
-# Author Blog
-https://quasistellar-o.itch.io/hollow-dungeon
+* Currently compiles for **Android** platform. It is available from [**GitHub**](https://github.com/AnsdoShip/MagicLingPixelDungeon/releases).
 
-# Notes for branch version:
+* If you like this game, please consider [**buy us a coffee**](https://ko-fi.com/Tianscar)!
 
-1.Note that the fake knight is 
-different from the original version,
-it has been strengthened:
-details as follows:
-In the first stage, 
-the blood volume increased significantly from 40 to 180HP.
-Attack speed increased in the second stage, 75 HP
-The HP in the third stage rose to 105
-====================
-2.Shade is 60 drops of blood
-====================
-3.Chinese localization
-===============================
+# Producers
+
+* **Design**</br>
+JDSA Ling
+* **Code**</br>
+JDSA Ling & Tianscar
+* **Music**</br>
+Prohonor
+* **Graphics**</br>
+JDSA Ling, Tianscar, Daniel_Clan, REN, 冷群怪 & 奈亚子
+
+# License
+* [**GPL-3.0**](https://github.com/AnsdoShip/MagicLingPixelDungeon/blob/master/LICENSE.txt) © **AnsdoShip Studio**
