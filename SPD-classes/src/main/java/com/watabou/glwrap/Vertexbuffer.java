@@ -3,10 +3,10 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2019 Evan Debenham
+ * Copyright (C) 2014-2021 Evan Debenham
  *
- * Hollow Dungeon
- * Copyright (C) 2020-2021 Pierre Schrodinger
+ * Magic Ling Pixel Dungeon
+ * Copyright (C) 2021 AnsdoShip Studio
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ package com.watabou.glwrap;
 
 import com.badlogic.gdx.Gdx;
 
+import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
@@ -77,7 +78,7 @@ public class Vertexbuffer {
 	public void updateGLData(){
 		if (updateStart == -1) return;
 
-		vertices.position(updateStart);
+		((Buffer)vertices).position(updateStart);
 		bind();
 
 		if (updateStart == 0 && updateEnd == vertices.limit()){

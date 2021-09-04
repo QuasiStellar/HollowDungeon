@@ -3,10 +3,10 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2019 Evan Debenham
+ * Copyright (C) 2014-2021 Evan Debenham
  *
- * Hollow Dungeon
- * Copyright (C) 2020-2021 Pierre Schrodinger
+ * Magic Ling Pixel Dungeon
+ * Copyright (C) 2021 AnsdoShip Studio
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,10 @@ public class DeviceCompat {
 	public static boolean isDesktop(){
 		return Gdx.app.getType() == Application.ApplicationType.Desktop;
 	}
+
+	public static boolean hasHardKeyboard(){
+		return Gdx.input.isPeripheralAvailable(Input.Peripheral.HardwareKeyboard);
+	}
 	
 	public static boolean legacyDevice(){
 		switch (Gdx.app.getType()){
@@ -57,13 +61,13 @@ public class DeviceCompat {
 				return false;
 		}
 	}
-	
+
 	public static boolean isDebug(){
-		return Game.version.contains("INDEV");
+		return Game.version.toUpperCase().contains("INDEV");
 	}
 	
 	public static void openURI( String URI ){
-		Gdx.net.openURI( URI );
+		Game.platform.openURI(URI);
 	}
 	
 	public static void log( String tag, String message ){
