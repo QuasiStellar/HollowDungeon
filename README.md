@@ -8,7 +8,7 @@ Dedicated to the author QuasiStellar
 # Author Blog
 https://quasistellar-o.itch.io/hollow-dungeon
 
-# Notes for branch version:
+# Chinese localization version:
 
 1.Note that the fake knight is 
 different from the original version,
