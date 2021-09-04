@@ -7,3 +7,16 @@ Dedicated to the author QuasiStellar
 
 # Author Blog
 https://quasistellar-o.itch.io/hollow-dungeon
+
+# Notes for branch version:
+Note the branch version:
+1. Note that the fake knight is different from the original version, it has been strengthened:
+details as follows:
+In the first stage, the blood volume increased significantly from 40 to 180.
+Attack speed increased in the second stage, 75 HP
+The HP in the third stage rose to 105
+====================
+2.Shade is 60 drops of blood
+====================
+3.Chinese localization
+===============================
