@@ -46,16 +46,16 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.utils.DeviceCompat;
 
 public class TitleScene extends PixelScene {
-	
+
 	@Override
 	public void create() {
-		
+
 		super.create();
 
 		Music.INSTANCE.play( Assets.Music.THEME, true );
 
 		uiCamera.visible = false;
-		
+
 		int w = Camera.main.width;
 		int h = Camera.main.height;
 
@@ -94,7 +94,7 @@ public class TitleScene extends PixelScene {
 			fadeRight.angle = 180;
 			add(fadeRight);
 		}
-		
+
 		Image title = BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON );
 		add( title );
 
@@ -130,7 +130,7 @@ public class TitleScene extends PixelScene {
 //		signs.x = title.x + (title.width() - signs.width())/2f;
 //		signs.y = title.y;
 //		add( signs );
-		
+
 		IconButton btnPlay = new IconButton(){
 			@Override
 			protected void onClick() {
@@ -142,7 +142,7 @@ public class TitleScene extends PixelScene {
 					HollowDungeon.switchNoFade( StartScene.class );
 				}
 			}
-			
+
 			@Override
 			protected boolean onLongClick() {
 				//making it easier to start runs quickly while debugging
@@ -178,13 +178,13 @@ public class TitleScene extends PixelScene {
 		version.x = w - version.width() - 4;
 		version.y = h - version.height() - 2;
 		add( version );
-		
+
 		int pos = 2;
-		
+
 		PrefsButton btnPrefs = new PrefsButton();
 		btnPrefs.setRect( pos, 0, 16, 20 );
 		add( btnPrefs );
-		
+
 		pos += btnPrefs.width();
 
 		DiscordButton btnDiscord = new DiscordButton();
@@ -201,22 +201,22 @@ public class TitleScene extends PixelScene {
 
 		fadeIn();
 	}
-	
+
 	private void placeTorch( float x, float y ) {
 		com.quasistellar.hollowdungeon.effects.Fireball fb = new Fireball();
 		fb.setPos( x, y );
 		add( fb );
 	}
-	
+
 	private static class TitleButton extends StyledButton {
-		
+
 		public TitleButton( String label ){
 			this(label, 9);
 		}
-		
+
 		public TitleButton( String label, int size ){
 			super(Chrome.Type.GREY_BUTTON_TR, label, size);
 		}
-		
+
 	}
 }

@@ -24,6 +24,8 @@
 
 package com.quasistellar.hollowdungeon.utils;
 
+import com.quasistellar.hollowdungeon.HDSettings;
+import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.messages.Messages;
 import com.watabou.utils.DeviceCompat;
 import com.watabou.utils.Signal;
@@ -31,43 +33,84 @@ import com.watabou.utils.Signal;
 public class GLog {
 
 	public static final String TAG = "GAME";
-	
+
 	public static final String POSITIVE		= "++ ";
+	public static final String DEBUG   		= "[DEBUG]: ";
 	public static final String NEGATIVE		= "-- ";
 	public static final String WARNING		= "** ";
 	public static final String HIGHLIGHT	= "@@ ";
 
 	public static final String NEW_LINE	    = "\n";
-	
+
 	public static Signal<String> update = new Signal<>();
 
 	public static void newLine(){
 		update.dispatch( NEW_LINE );
 	}
-	
+
 	public static void i( String text, Object... args ) {
-		
+
 		if (args.length > 0) {
 			text = Messages.format( text, args );
 		}
-		
+
 		DeviceCompat.log( TAG, text );
 		update.dispatch( text );
 	}
-	
+
 	public static void p( String text, Object... args ) {
 		i( POSITIVE + text, args );
 	}
-	
+
 	public static void n( String text, Object... args ) {
 		i( NEGATIVE + text, args );
 	}
-	
+
 	public static void w( String text, Object... args ) {
 		i( WARNING + text, args );
 	}
-	
+
 	public static void h( String text, Object... args ) {
 		i( HIGHLIGHT + text, args );
+	}
+
+	public static void info(String text, Object... args ) {
+
+		if (args.length > 0) {
+			text = Messages.format( text, args );
+		}
+
+		DeviceCompat.log( TAG, text );
+		update.dispatch( text );
+	}
+
+	public static void positive(String text, Object... args ) {
+		info( POSITIVE + text, args );
+	}
+
+	public static void negative(String text, Object... args ) {
+		info( NEGATIVE + text, args );
+	}
+
+	public static void warning(String text, Object... args ) {
+		info( WARNING + text, args );
+	}
+
+	public static void highlight(String text, Object... args ) {
+		info( HIGHLIGHT + text, args );
+	}
+
+	public static void debug(String text, Object... args ) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+		StringBuilder addToLog = new StringBuilder(DEBUG + text);
+		addToLog.append("\n" + "Trace:\n");
+		for (StackTraceElement element : trace) {
+			addToLog.append(element.toString()).append("\n");
+		}
+		HollowDungeon.appendLog(addToLog.toString());
+
+		if (HDSettings.debugReport()) {
+			info(DEBUG + text, args);
+		}
 	}
 }

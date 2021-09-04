@@ -36,7 +36,8 @@ public class BannerSprites {
 		SELECT_YOUR_HERO,
 		PIXEL_DUNGEON_SIGNS,
 		START_GAME,
-		ABOUT
+		ABOUT,
+		SWORD
 	}
 
 	public static Image get( Type type ) {
@@ -62,6 +63,9 @@ public class BannerSprites {
 				break;
 			case ABOUT:
 				icon.frame( icon.texture.uvRect( 0, 319, 96, 335 ) );
+				break;
+			case SWORD:
+				icon.frame( icon.texture.uvRect( 0, 181	, 160, 206 ) );
 				break;
 		}
 		return icon;

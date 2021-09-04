@@ -49,7 +49,7 @@ public class HDSettings extends GameSettings {
 	}
 	
 	//Graphics
-	
+	public static final String KEY_UPDATES	= "updates";
 	public static final String KEY_FULLSCREEN	= "fullscreen";
 	public static final String KEY_LANDSCAPE	= "landscape";
 	public static final String KEY_POWER_SAVER 	= "power_saver";
@@ -310,4 +310,23 @@ public class HDSettings extends GameSettings {
 		return getBoolean( KEY_WINDOW_MAXIMIZED, false );
 	}
 
+	public static void updates(boolean value){
+		put(KEY_UPDATES, value);
+	}
+	public static final String KEY_WIFI     = "wifi";
+	public static boolean WiFi(){
+		return getBoolean(KEY_WIFI, true);
+	}
+
+	public static void WiFi(boolean value){
+		put(KEY_WIFI, value);
+	}
+
+	public static boolean updates(){
+		return getBoolean(KEY_UPDATES, true);
+	}
+	private static final String DEBUG_REPORT  = "debug_report";
+	public static boolean debugReport() {
+		return getBoolean(DEBUG_REPORT,false);
+	}
 }

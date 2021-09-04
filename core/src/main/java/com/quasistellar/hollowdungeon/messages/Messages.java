@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.quasistellar.hollowdungeon.HDSettings;
 import com.quasistellar.hollowdungeon.HollowDungeon;
 import com.quasistellar.hollowdungeon.Assets;
+import com.quasistellar.hollowdungeon.utils.GLog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,9 +67,8 @@ public class Messages {
 			Assets.Messages.MISC,
 			Assets.Messages.PLANTS,
 			Assets.Messages.SCENES,
-			Assets.Messages.SKILLS,
 			Assets.Messages.UI,
-			com.quasistellar.hollowdungeon.Assets.Messages.WINDOWS
+			Assets.Messages.WINDOWS
 	};
 
 	static{
@@ -102,10 +102,15 @@ public class Messages {
 		return get(o.getClass(), k, args);
 	}
 
-	public static String get(Class c, String k, Object...args){
+	public static String get(Class c, String k, Object...args) {
+		return get(c, k, null, args);
+	}
+
+	private static String get(Class c, String k, String baseName, Object...args){
 		String key;
 		if (c != null){
-			key = c.getName().replace("com.quasistellar.hollowdungeon.", "");
+			key = c.getName();
+			key = key.replace("com.quasistellar.hollowdungeon.", "");
 			key += "." + k;
 		} else
 			key = k;
@@ -114,14 +119,20 @@ public class Messages {
 		if (value != null){
 			if (args.length > 0) return format(value, args);
 			else return value;
-		} else {
+		}  else {
+			//Use baseName so the missing string is clear what exactly needs replacing. Otherwise, it just says java.lang.Object.[key]
+			if (baseName == null) {
+				baseName = key;
+			}
 			//this is so child classes can inherit properties from their parents.
 			//in cases where text is commonly grabbed as a utility from classes that aren't mean to be instantiated
 			//(e.g. flavourbuff.dispTurns()) using .class directly is probably smarter to prevent unnecessary recursive calls.
 			if (c != null && c.getSuperclass() != null){
-				return get(c.getSuperclass(), k, args);
+				return get(c.getSuperclass(), k, baseName, args);
 			} else {
-				return "!!!NO TEXT FOUND!!!";
+				String name = "Ms: "+baseName;
+				GLog.debug(name);
+				return name;
 			}
 		}
 	}
@@ -153,9 +164,11 @@ public class Messages {
 		}
 	}
 
-	public static String capitalize( String str ){
-		if (str.length() == 0)  return str;
-		else                    return Character.toTitleCase( str.charAt( 0 ) ) + str.substring( 1 );
+	public static String capitalize(String str) {
+		if (str.length() == 0) {
+			return str;
+		}
+		return Character.toTitleCase(str.charAt(0)) + str.substring(1);
 	}
 
 	//Words which should not be capitalized in title case, mostly prepositions which appear ingame

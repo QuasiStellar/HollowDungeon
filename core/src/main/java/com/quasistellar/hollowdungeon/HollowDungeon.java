@@ -43,8 +43,13 @@ public class HollowDungeon extends Game {
 	public HollowDungeon(PlatformSupport platform ) {
 		super( sceneClass == null ? WelcomeScene.class : sceneClass, platform );
 	}
-	
-	@Override
+
+	private static String log = "";
+	public static void appendLog(String string) {
+		log += "\n\n" + string;
+	}
+
+    @Override
 	public void create() {
 		super.create();
 

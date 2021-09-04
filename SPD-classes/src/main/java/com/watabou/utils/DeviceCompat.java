@@ -26,6 +26,7 @@ package com.watabou.utils;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.watabou.noosa.Game;
 
 //TODO migrate to platformSupport class
@@ -69,4 +70,7 @@ public class DeviceCompat {
 		Gdx.app.log( tag, message );
 	}
 
+	public static boolean hasHardKeyboard(){
+		return Gdx.input.isPeripheralAvailable(Input.Peripheral.HardwareKeyboard);
+	}
 }
