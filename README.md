@@ -10,8 +10,8 @@ https://quasistellar-o.itch.io/hollow-dungeon
 
 # Notes for branch version:
 
-====================
-1.Note that the fake knight is different from the original version,
+1.Note that the fake knight is 
+different from the original version,
 it has been strengthened:
 details as follows:
 In the first stage, 
