@@ -23,3 +23,5 @@ The HP in the third stage rose to 105
 ====================
 3.Chinese localization
 ===============================
+
+#The above modifications are not involved in this contribution project
