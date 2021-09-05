@@ -3,10 +3,10 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2019 Evan Debenham
+ * Copyright (C) 2014-2021 Evan Debenham
  *
- * Hollow Dungeon
- * Copyright (C) 2020-2021 Pierre Schrodinger
+ * Magic Ling Pixel Dungeon
+ * Copyright (C) 2021 AnsdoShip Studio
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -66,14 +66,10 @@ public class NoosaScriptNoLighting extends NoosaScript {
 		//fragment shader
 		//preprocessor directives let us define precision on GLES platforms, and ignore it elsewhere
 		"#ifdef GL_ES\n" +
-		"  #define LOW lowp\n" +
-		"  #define MED mediump\n" +
-		"#else\n" +
-		"  #define LOW\n" +
-		"  #define MED\n" +
+		"  precision mediump float;\n" +
 		"#endif\n" +
-		"varying MED vec2 vUV;\n" +
-		"uniform LOW sampler2D uTex;\n" +
+		"varying vec2 vUV;\n" +
+		"uniform sampler2D uTex;\n" +
 		"void main() {\n" +
 		"  gl_FragColor = texture2D( uTex, vUV );\n" +
 		"}\n";

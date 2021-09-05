@@ -3,10 +3,10 @@
  * Copyright (C) 2012-2015 Oleg Dolya
  *
  * Shattered Pixel Dungeon
- * Copyright (C) 2014-2019 Evan Debenham
+ * Copyright (C) 2014-2021 Evan Debenham
  *
- * Hollow Dungeon
- * Copyright (C) 2020-2021 Pierre Schrodinger
+ * Magic Ling Pixel Dungeon
+ * Copyright (C) 2021 AnsdoShip Studio
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,13 +28,14 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class PathFinder {
-	
+
 	public static int[] distance;
 	private static int[] maxVal;
 	
 	private static boolean[] goals;
 	private static int[] queue;
-	
+	public static int[] NEIGHBOURS24;
+	public static int[] NEIGHBOURS25;
 	private static int size = 0;
 	private static int width = 0;
 
@@ -46,8 +47,6 @@ public class PathFinder {
 	public static int[] NEIGHBOURS4;
 	public static int[] NEIGHBOURS8;
 	public static int[] NEIGHBOURS9;
-	public static int[] NEIGHBOURS24;
-	public static int[] NEIGHBOURS25;
 
 	//similar to their equivalent neighbour arrays, but the order is clockwise.
 	//Useful for some logic functions, but is slower due to lack of array-access order.

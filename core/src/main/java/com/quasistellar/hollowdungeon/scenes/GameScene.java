@@ -24,6 +24,7 @@
 
 package com.quasistellar.hollowdungeon.scenes;
 
+import com.quasistellar.hollowdungeon.BGMPlayer;
 import com.quasistellar.hollowdungeon.actors.buffs.Buff;
 import com.quasistellar.hollowdungeon.actors.hero.Hero;
 import com.quasistellar.hollowdungeon.effects.BannerSprites;
@@ -98,7 +99,8 @@ import java.util.Locale;
 
 public class GameScene extends PixelScene {
 
-	static GameScene scene;
+    public static boolean freezeEmitters;
+    static GameScene scene;
 
 	private SkinnedBlock water;
 	private DungeonTerrainTilemap tiles;
@@ -176,8 +178,8 @@ public class GameScene extends PixelScene {
 			HollowDungeon.switchNoFade(TitleScene.class);
 			return;
 		}
-		
-		Music.INSTANCE.mute();
+
+		BGMPlayer.playBGMWithDepth();
 
 		HDSettings.lastClass(Dungeon.hero.heroClass.ordinal());
 		
@@ -413,26 +415,26 @@ public class GameScene extends PixelScene {
 //			ScrollOfTeleportation.appear(  Dungeon.hero, Dungeon.hero.pos );
 //			break;
 		case DESCEND:
-//			switch (Dungeon.depth) {
-//			case 1:
-//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_SEWERS );
-//				break;
-//			case 6:
-//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_PRISON );
-//				break;
-//			case 11:
-//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CAVES );
-//				break;
-//			case 16:
-//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CITY );
-//				break;
-//			case 21:
-//				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_HALLS );
-//				break;
-//			}
-//			if (Dungeon.hero.isAlive()) {
-//				Badges.validateNoKilling();
-//			}
+			switch (Dungeon.depth) {
+			case 1:
+				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_SEWERS );
+				break;
+			case 6:
+				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_PRISON );
+				break;
+			case 11:
+				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CAVES );
+				break;
+			case 16:
+				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_CITY );
+				break;
+			case 21:
+				com.quasistellar.hollowdungeon.windows.WndStory.showChapter( com.quasistellar.hollowdungeon.windows.WndStory.ID_HALLS );
+				break;
+			}
+			if (Dungeon.hero.isAlive()) {
+				Badges.validateNoKilling();
+			}
 			break;
 		default:
 		}

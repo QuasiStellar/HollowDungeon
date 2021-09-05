@@ -40,14 +40,14 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class DesktopPlatformSupport extends PlatformSupport {
-	
+
 	@Override
 	public void updateDisplaySize() {
 		if (!HDSettings.fullscreen()) {
 			HDSettings.windowResolution( new Point( Game.width, Game.height ) );
 		}
 	}
-	
+
 	@Override
 	public void updateSystemUI() {
 		Gdx.app.postRunnable( new Runnable() {
@@ -62,7 +62,7 @@ public class DesktopPlatformSupport extends PlatformSupport {
 			}
 		} );
 	}
-	
+
 	@Override
 	public boolean connectedToUnmeteredNetwork() {
 		return true; //no easy way to check this in desktop, just assume user doesn't care
@@ -81,21 +81,21 @@ public class DesktopPlatformSupport extends PlatformSupport {
 			callback.onSelect(true, result.replace("\r\n", "").replace("\n", ""));
 		}
 	}
-	
+
 	private int pageSize;
 	private PixmapPacker packer;
 	private boolean systemfont;
-	
+
 	//custom pixel font, for use with Latin and Cyrillic languages
 	private static FreeTypeFontGenerator basicFontGenerator;
 	private static HashMap<Integer, BitmapFont> basicFonts = new HashMap<>();
-	
+
 	//droid sans fallback, for asian fonts
 	private static FreeTypeFontGenerator asianFontGenerator;
 	private static HashMap<Integer, BitmapFont> asianFonts = new HashMap<>();
-	
+
 	private static HashMap<FreeTypeFontGenerator, HashMap<Integer, BitmapFont>> fonts;
-	
+
 	@Override
 	public void setupFontGenerators(int pageSize, boolean systemfont) {
 		//don't bother doing anything if nothing has changed
@@ -104,7 +104,7 @@ public class DesktopPlatformSupport extends PlatformSupport {
 		}
 		this.pageSize = pageSize;
 		this.systemfont = systemfont;
-		
+
 		if (fonts != null){
 			for (FreeTypeFontGenerator generator : fonts.keySet()){
 				for (BitmapFont f : fonts.get(generator).values()){
@@ -129,13 +129,13 @@ public class DesktopPlatformSupport extends PlatformSupport {
 			basicFontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/pixel_font.ttf"));
 			asianFontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/droid_sans.ttf"));
 		}
-		
+
 		fonts.put(basicFontGenerator, basicFonts);
 		fonts.put(asianFontGenerator, asianFonts);
-		
+
 		packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 1, false);
 	}
-	
+
 	@Override
 	public void resetGenerators() {
 		if (fonts != null) {
@@ -157,11 +157,11 @@ public class DesktopPlatformSupport extends PlatformSupport {
 		}
 		setupFontGenerators(pageSize, systemfont);
 	}
-	
+
 	private static Pattern asianMatcher = Pattern.compile("\\p{InHangul_Syllables}|" +
 			"\\p{InCJK_Unified_Ideographs}|\\p{InCJK_Symbols_and_Punctuation}|\\p{InHalfwidth_and_Fullwidth_Forms}|" +
 			"\\p{InHiragana}|\\p{InKatakana}");
-	
+
 	private static FreeTypeFontGenerator getGeneratorForString( String input ){
 		if (asianMatcher.matcher(input).find()){
 			return asianFontGenerator;
@@ -169,16 +169,16 @@ public class DesktopPlatformSupport extends PlatformSupport {
 			return basicFontGenerator;
 		}
 	}
-	
-	
+
+
 	@Override
 	public BitmapFont getFont(int size, String text) {
 		FreeTypeFontGenerator generator = getGeneratorForString(text);
-		
+
 		if (generator == null){
 			return null;
 		}
-		
+
 		if (!fonts.get(generator).containsKey(size)) {
 			FreeTypeFontGenerator.FreeTypeFontParameter parameters = new FreeTypeFontGenerator.FreeTypeFontParameter();
 			parameters.size = size;
@@ -196,7 +196,7 @@ public class DesktopPlatformSupport extends PlatformSupport {
 				parameters.characters = "�";
 			}
 			parameters.packer = packer;
-			
+
 			try {
 				BitmapFont font = generator.generateFont(parameters);
 				font.getData().missingGlyph = font.getData().getGlyph('�');
@@ -206,10 +206,10 @@ public class DesktopPlatformSupport extends PlatformSupport {
 				return null;
 			}
 		}
-		
+
 		return fonts.get(generator).get(size);
 	}
-	
+
 	//splits on newlines, underscores, and chinese/japaneses characters
 	private Pattern regularsplitter = Pattern.compile(
 			"(?<=\n)|(?=\n)|(?<=_)|(?=_)|" +
@@ -217,7 +217,7 @@ public class DesktopPlatformSupport extends PlatformSupport {
 					"(?<=\\p{InKatakana})|(?=\\p{InKatakana})|" +
 					"(?<=\\p{InCJK_Unified_Ideographs})|(?=\\p{InCJK_Unified_Ideographs})|" +
 					"(?<=\\p{InCJK_Symbols_and_Punctuation})|(?=\\p{InCJK_Symbols_and_Punctuation})");
-	
+
 	//additionally splits on words, so that each word can be arranged individually
 	private Pattern regularsplitterMultiline = Pattern.compile(
 			"(?<= )|(?= )|(?<=\n)|(?=\n)|(?<=_)|(?=_)|" +
@@ -225,7 +225,7 @@ public class DesktopPlatformSupport extends PlatformSupport {
 					"(?<=\\p{InKatakana})|(?=\\p{InKatakana})|" +
 					"(?<=\\p{InCJK_Unified_Ideographs})|(?=\\p{InCJK_Unified_Ideographs})|" +
 					"(?<=\\p{InCJK_Symbols_and_Punctuation})|(?=\\p{InCJK_Symbols_and_Punctuation})");
-	
+
 	@Override
 	public String[] splitforTextBlock(String text, boolean multiline) {
 		if (multiline) {
@@ -234,5 +234,5 @@ public class DesktopPlatformSupport extends PlatformSupport {
 			return regularsplitter.split(text);
 		}
 	}
-	
+
 }

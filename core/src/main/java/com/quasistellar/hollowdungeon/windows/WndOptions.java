@@ -28,6 +28,7 @@ import com.quasistellar.hollowdungeon.scenes.PixelScene;
 import com.quasistellar.hollowdungeon.ui.RedButton;
 import com.quasistellar.hollowdungeon.ui.RenderedTextBlock;
 import com.quasistellar.hollowdungeon.ui.Window;
+import com.watabou.noosa.Image;
 
 public class WndOptions extends Window {
 
@@ -72,6 +73,9 @@ public class WndOptions extends Window {
 		
 		resize( width, (int)pos );
 	}
-	
-	protected void onSelect( int index ) {}
+
+    public WndOptions(Image image, String saver, String saver_desc, String okay, String cancel) {
+    }
+
+    protected void onSelect( int index ) {}
 }

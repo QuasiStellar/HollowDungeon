@@ -33,18 +33,18 @@ import java.util.ArrayList;
 public class Group extends Gizmo {
 
 	protected ArrayList<Gizmo> members;
-	
+
 	// Accessing it is a little faster,
 	// than calling members.getSize()
 	public int length;
 
 	public static boolean freezeEmitters = false;
-	
+
 	public Group() {
 		members = new ArrayList<>();
 		length = 0;
 	}
-	
+
 	@Override
 	public synchronized void destroy() {
 		super.destroy();
@@ -54,14 +54,14 @@ public class Group extends Gizmo {
 				g.destroy();
 			}
 		}
-		
+
 		if (members != null) {
 			members.clear();
 			members = null;
 		}
 		length = 0;
 	}
-	
+
 	@Override
 	public synchronized void update() {
 		for (int i=0; i < length; i++) {
@@ -74,7 +74,7 @@ public class Group extends Gizmo {
 			}
 		}
 	}
-	
+
 	@Override
 	public synchronized void draw() {
 		for (int i=0; i < length; i++) {
@@ -84,7 +84,7 @@ public class Group extends Gizmo {
 			}
 		}
 	}
-	
+
 	@Override
 	public synchronized void kill() {
 		// A killed group keeps all its members,
@@ -95,24 +95,24 @@ public class Group extends Gizmo {
 				g.kill();
 			}
 		}
-		
+
 		super.kill();
 	}
-	
+
 	public synchronized int indexOf( Gizmo g ) {
 		return members.indexOf( g );
 	}
-	
+
 	public synchronized Gizmo add( Gizmo g ) {
-		
+
 		if (g.parent == this) {
 			return g;
 		}
-		
+
 		if (g.parent != null) {
 			g.parent.remove( g );
 		}
-		
+
 		// Trying to find an empty space for a new member
 		for (int i=0; i < length; i++) {
 			if (members.get( i ) == null) {
@@ -121,13 +121,13 @@ public class Group extends Gizmo {
 				return g;
 			}
 		}
-		
+
 		members.add( g );
 		g.parent = this;
 		length++;
 		return g;
 	}
-	
+
 	public synchronized Gizmo addToFront( Gizmo g){
 
 		if (g.parent == this) {
@@ -157,53 +157,53 @@ public class Group extends Gizmo {
 		length++;
 		return g;
 	}
-	
+
 	public synchronized Gizmo addToBack( Gizmo g ) {
-		
+
 		if (g.parent == this) {
 			sendToBack( g );
 			return g;
 		}
-		
+
 		if (g.parent != null) {
 			g.parent.remove( g );
 		}
-		
+
 		if (members.get( 0 ) == null) {
 			members.set( 0, g );
 			g.parent = this;
 			return g;
 		}
-		
+
 		members.add( 0, g );
 		g.parent = this;
 		length++;
 		return g;
 	}
-	
+
 	public synchronized Gizmo recycle( Class<? extends Gizmo> c ) {
 
 		Gizmo g = getFirstAvailable( c );
 		if (g != null) {
-			
+
 			return g;
-			
+
 		} else if (c == null) {
-			
+
 			return null;
-			
+
 		} else {
-			
+
 			g = Reflection.newInstance(c);
 			if (g != null) {
 				return add(g);
 			}
-			
+
 		}
-		
+
 		return null;
 	}
-	
+
 	// Fast removal - replacing with null
 	public synchronized Gizmo erase( Gizmo g ) {
 		int index = members.indexOf( g );
@@ -216,7 +216,7 @@ public class Group extends Gizmo {
 			return null;
 		}
 	}
-	
+
 	// Real removal
 	public synchronized Gizmo remove( Gizmo g ) {
 		if (members.remove( g )) {
@@ -227,7 +227,7 @@ public class Group extends Gizmo {
 			return null;
 		}
 	}
-	
+
 	public synchronized Gizmo replace( Gizmo oldOne, Gizmo newOne ) {
 		int index = members.indexOf( oldOne );
 		if (index != -1) {
@@ -239,47 +239,47 @@ public class Group extends Gizmo {
 			return null;
 		}
 	}
-	
+
 	public synchronized Gizmo getFirstAvailable( Class<? extends Gizmo> c ) {
-		
+
 		for (int i=0; i < length; i++) {
 			Gizmo g = members.get( i );
 			if (g != null && !g.exists && ((c == null) || g.getClass() == c)) {
 				return g;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public synchronized int countLiving() {
-		
+
 		int count = 0;
-		
+
 		for (int i=0; i < length; i++) {
 			Gizmo g = members.get( i );
 			if (g != null && g.exists && g.alive) {
 				count++;
 			}
 		}
-		
+
 		return count;
 	}
-	
+
 	public synchronized int countDead() {
-		
+
 		int count = 0;
-		
+
 		for (int i=0; i < length; i++) {
 			Gizmo g = members.get( i );
 			if (g != null && !g.alive) {
 				count++;
 			}
 		}
-		
+
 		return count;
 	}
-	
+
 	public synchronized Gizmo random() {
 		if (length > 0) {
 			return members.get( Random.Int(length) );
@@ -287,7 +287,7 @@ public class Group extends Gizmo {
 			return null;
 		}
 	}
-	
+
 	public synchronized void clear() {
 		for (int i=0; i < length; i++) {
 			Gizmo g = members.get( i );
@@ -298,7 +298,7 @@ public class Group extends Gizmo {
 		members.clear();
 		length = 0;
 	}
-	
+
 	public synchronized Gizmo bringToFront( Gizmo g ) {
 		if (members.contains( g )) {
 			members.remove( g );
@@ -308,7 +308,7 @@ public class Group extends Gizmo {
 			return null;
 		}
 	}
-	
+
 	public synchronized Gizmo sendToBack( Gizmo g ) {
 		if (members.contains( g )) {
 			members.remove( g );
