@@ -1,12 +1,10 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        //FIXME the version of R8 coming with gradle plugin 4.0.0 causes serious problems
-        //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
@@ -16,14 +14,14 @@ allprojects {
         appName = 'Hollow Dungeon'
         appPackageName = 'com.quasistellar.hollowdungeon'
 
-        appVersionCode = 6
-        appVersionName = '0.4'
+        appVersionCode = 7
+        appVersionName = '0.4.1'
 
         appJavaCompatibility = JavaVersion.VERSION_1_8
 
-        appAndroidCompileSDK = 30
-        appAndroidMinSDK = 9
-        appAndroidTargetSDK = 30
+        appAndroidCompileSDK = 33
+        appAndroidMinSDK = 19
+        appAndroidTargetSDK = 33
 
         gdxVersion = '1.9.10'
     }
@@ -31,7 +29,7 @@ allprojects {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
 }

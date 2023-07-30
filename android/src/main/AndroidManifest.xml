@@ -28,7 +28,8 @@
 		android:backupAgent="com.quasistellar.hollowdungeon.android.AndroidBackupHandler">
 		<activity
 			android:label="${appName}"
-			android:name="com.quasistellar.hollowdungeon.android.AndroidLauncher">
+			android:name="com.quasistellar.hollowdungeon.android.AndroidLauncher"
+			android:exported="true">
 			<intent-filter >
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
